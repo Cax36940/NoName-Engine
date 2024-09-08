@@ -1,0 +1,6 @@
+.vs*
+*.obj
+*.exe
+bin/
+obj/
+x64/
