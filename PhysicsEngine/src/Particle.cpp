@@ -8,6 +8,11 @@ Particle::Particle(Vector3& pos, Vector3& vel, Vector3& acc, float weight)
 	, weight(weight)
 {}
 
+Vector3 Particle::get_position() const
+{
+	return position;
+}
+
 void Particle::update(float delta)
 {
 	velocity = velocity + acceleration * delta;

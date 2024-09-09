@@ -2,6 +2,8 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+
+
 	particle = Particle(
 		Vector3(0, 700, 0),
 		Vector3(100, -150, 0),
@@ -13,6 +15,14 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
+	Particle static_particle = Particle(
+		particle.get_position(),
+		Vector3(0, 0, 0),
+		Vector3(0, 0, 0),
+		1
+	);
+	trail.push_back(static_particle);
+
 	auto time = std::chrono::high_resolution_clock::now();
 	auto delta = std::chrono::duration_cast<std::chrono::milliseconds>(time - timeLastFrame).count();
 	particle.update(delta / 1000.);
@@ -21,6 +31,10 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+	for each (Particle sp in trail)
+	{
+		sp.draw();
+	}
 	particle.draw();
 }
 

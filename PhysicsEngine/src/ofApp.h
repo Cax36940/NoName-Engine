@@ -24,6 +24,7 @@ public:
 
 private:
 	Particle particle;
+	std::vector<Particle> trail;
 
 	std::chrono::steady_clock::time_point timeLastFrame;
 };
