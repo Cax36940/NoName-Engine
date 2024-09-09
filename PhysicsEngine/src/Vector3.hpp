@@ -1,3 +1,5 @@
+#include <glm/vec3.hpp>
+
 class Vector3 {
 
 public:
@@ -39,6 +41,11 @@ public:
      * @brief Constructor from coordinates
      */
     Vector3(const float x, const float y, const float z);
+
+    /**
+     * @brief Converter from Vector3 to glm::vec3
+     */
+    glm::vec3 to_glm_vec3(const Vector3& vector);
 
     /**
      * @brief Equal operator

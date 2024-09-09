@@ -3,6 +3,11 @@
 
 Vector3::Vector3(const float x, const float y, const float z) : x(x), y(y), z(z) {}
 
+glm::vec3 Vector3::to_glm_vec3(const Vector3& vector)
+{
+    return glm::vec3(vector.x, vector.y, vector.z);
+}
+
 bool Vector3::operator==(const Vector3& vector)
 {
     return (this->x == vector.x) && (this->y == vector.y) && (this->z == vector.z);
