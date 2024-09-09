@@ -2,17 +2,26 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-
+	particle = Particle(
+		Vector3(0, 700, 0),
+		Vector3(100, -150, 0),
+		Vector3(0, 45, 0),
+		1
+	);
+	timeLastFrame = std::chrono::high_resolution_clock::now();
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-
+	auto time = std::chrono::high_resolution_clock::now();
+	auto delta = std::chrono::duration_cast<std::chrono::milliseconds>(time - timeLastFrame).count();
+	particle.update(delta / 1000.);
+	timeLastFrame = time;
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-
+	particle.draw();
 }
 
 //--------------------------------------------------------------
