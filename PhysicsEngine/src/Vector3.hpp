@@ -1,4 +1,4 @@
-#include <glm/vec3.hpp>
+#include <of3dGraphics.h>
 
 class Vector3 {
 

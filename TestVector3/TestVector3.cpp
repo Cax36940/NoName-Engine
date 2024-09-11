@@ -167,5 +167,97 @@ namespace TestVector3
 			Assert::AreEqual(sqrtf(77.0f), Vector3::norm(test_vector_c));
 		}
 
+		TEST_METHOD(InvNorm)
+		{
+			Vector3 test_vector_a(1.0f, 2.0f, 3.0f);
+			Assert::AreEqual(1.0f/sqrtf(14.0f), Vector3::inv_norm(test_vector_a));
+
+			Vector3 test_vector_b(0.0f, 0.0f, 0.0f);
+			Assert::AreEqual(0.0f, Vector3::inv_norm(test_vector_b));
+
+			Vector3 test_vector_c(-4.0f, -5.0f, -6.0f);
+			Assert::AreEqual(1.0f/sqrtf(77.0f), Vector3::inv_norm(test_vector_c));
+		}
+
+		TEST_METHOD(Normalize)
+		{
+			Vector3 test_vector_a(1.0f, 2.0f, 3.0f);
+			test_vector_a = Vector3::normalize(test_vector_a);
+			Assert::AreEqual(1.0f / sqrtf(14.0f), test_vector_a.x);
+			Assert::AreEqual(2.0f / sqrtf(14.0f), test_vector_a.y);
+			Assert::AreEqual(3.0f / sqrtf(14.0f), test_vector_a.z);
+
+			Vector3 test_vector_b(0.0f, 0.0f, 0.0f);
+			test_vector_b = Vector3::normalize(test_vector_b);
+			Assert::AreEqual(0.0f, test_vector_b.x);
+			Assert::AreEqual(0.0f, test_vector_b.y);
+			Assert::AreEqual(0.0f, test_vector_b.z);
+
+			Vector3 test_vector_c(-4.0f, -5.0f, -6.0f);
+			test_vector_c = Vector3::normalize(test_vector_c);
+			Assert::AreEqual(-4.0f * (1 / sqrtf(77.0f)), test_vector_c.x);
+			Assert::AreEqual(-5.0f * (1 / sqrtf(77.0f)), test_vector_c.y);
+			Assert::AreEqual(-6.0f * (1 / sqrtf(77.0f)), test_vector_c.z);
+		}
+
+		TEST_METHOD(Conv)
+		{
+			Vector3 test_vector(1.0f, 2.0f, 3.0f);
+
+			Vector3 test_conv_vector_a(4.0f, 5.0f, 6.0f);
+			test_conv_vector_a = Vector3::conv(test_vector, test_conv_vector_a);
+			Assert::AreEqual(4.0f, test_conv_vector_a.x);
+			Assert::AreEqual(10.0f, test_conv_vector_a.y);
+			Assert::AreEqual(18.0f, test_conv_vector_a.z);
+
+			Vector3 test_conv_vector_b(0.0f, 0.0f, 0.0f);
+			test_conv_vector_b = Vector3::conv(test_vector, test_conv_vector_b);
+			Assert::AreEqual(0.0f, test_conv_vector_b.x);
+			Assert::AreEqual(0.0f, test_conv_vector_b.y);
+			Assert::AreEqual(0.0f, test_conv_vector_b.z);
+
+			Vector3 test_conv_vector_c(-1.0f, -2.0f, -3.0f);
+			test_conv_vector_c = Vector3::conv(test_vector, test_conv_vector_c);
+			Assert::AreEqual(-1.0f, test_conv_vector_c.x);
+			Assert::AreEqual(-4.0f, test_conv_vector_c.y);
+			Assert::AreEqual(-9.0f, test_conv_vector_c.z);
+		}
+
+		TEST_METHOD(Dot)
+		{
+			Vector3 test_vector(1.0f, 2.0f, 3.0f);
+
+			Vector3 test_dot_vector_a(4.0f, 5.0f, 6.0f);
+			Assert::AreEqual(32.0f, Vector3::dot(test_vector, test_dot_vector_a));
+
+			Vector3 test_dot_vector_b(0.0f, 0.0f, 0.0f);
+			Assert::AreEqual(0.0f, Vector3::dot(test_vector, test_dot_vector_b));
+
+			Vector3 test_dot_vector_c(-1.0f, -2.0f, -3.0f);
+			Assert::AreEqual(-14.0f, Vector3::dot(test_vector, test_dot_vector_c));
+		}
+
+		TEST_METHOD(Cross)
+		{
+			Vector3 test_vector(1.0f, 2.0f, 3.0f);
+
+			Vector3 test_cross_vector_a(4.0f, 5.0f, 6.0f);
+			test_cross_vector_a = Vector3::cross(test_vector, test_cross_vector_a);
+			Assert::AreEqual(-3.0f, test_cross_vector_a.x);
+			Assert::AreEqual(6.0f, test_cross_vector_a.y);
+			Assert::AreEqual(-3.0f, test_cross_vector_a.z);
+
+			Vector3 test_cross_vector_b(0.0f, 0.0f, 0.0f);
+			test_cross_vector_b = Vector3::cross(test_vector, test_cross_vector_b);
+			Assert::AreEqual(0.0f, test_cross_vector_b.x);
+			Assert::AreEqual(0.0f, test_cross_vector_b.y);
+			Assert::AreEqual(0.0f, test_cross_vector_b.z);
+
+			Vector3 test_cross_vector_c(-1.0f, -2.0f, -3.0f);
+			test_cross_vector_c = Vector3::cross(test_vector, test_cross_vector_c);
+			Assert::AreEqual(0.0f, test_cross_vector_c.x);
+			Assert::AreEqual(0.0f, test_cross_vector_c.y);
+			Assert::AreEqual(0.0f, test_cross_vector_c.z);
+		}
 	};
 }
