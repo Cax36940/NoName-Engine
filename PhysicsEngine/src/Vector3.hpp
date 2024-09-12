@@ -40,7 +40,7 @@ public:
     /**
      * @brief Constructor from coordinates
      */
-    Vector3(const float x, const float y, const float z);
+    Vector3(const float& x, const float& y, const float& z);
 
     /**
      * @brief Converter from Vector3 to glm::vec3
@@ -57,20 +57,20 @@ public:
      * @brief Scalar multiplication on the right
      * @param alpha the scalar
      */
-    Vector3 operator*(const float alpha) const;
+    Vector3 operator*(const float& alpha) const;
 
     /**
      * @brief Scalar multiplication assignment
      * @param alpha the scalar
      */
-    Vector3& operator*=(const float alpha);
+    Vector3& operator*=(const float& alpha);
 
     /**
      * @brief Scalar multiplication on the left
      * @param alpha the scalar
      * @param vector the vector
      */
-    friend Vector3 operator*(const float alpha, const Vector3& vector);
+    friend Vector3 operator*(const float& alpha, const Vector3& vector);
 
     /**
      * @brief Vector addition (return new vector)
