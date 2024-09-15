@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-#include "Particle.hpp"
+#include "TrailParticle.hpp"
 #include <chrono>
 
 class ofApp : public ofBaseApp{
@@ -23,8 +23,7 @@ public:
 	void gotMessage(ofMessage msg);
 
 private:
-	Particle particle;
-	std::vector<Particle> trail;
+	TrailParticle particle;
 
 	std::chrono::steady_clock::time_point timeLastFrame;
 };
