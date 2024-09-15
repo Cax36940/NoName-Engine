@@ -4,10 +4,14 @@ class TrailParticle : public Particle
 {
 private:
 	std::vector<Particle> trail;
+	int space;
+	int space_counter = 0;
 
 public:
 	TrailParticle() = default;
 	TrailParticle(Vector3& pos, Vector3& vel, Vector3& acc, float weight);
+
+	void set_space(float s);
 
 	void update(float delta);
 	void draw();
