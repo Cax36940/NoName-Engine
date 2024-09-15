@@ -6,11 +6,18 @@ Particle::Particle(Vector3& pos, Vector3& vel, Vector3& acc, float weight)
 	, velocity(vel)
 	, acceleration(acc)
 	, weight(weight)
-{}
+{
+	this->size = 5;
+}
 
 Vector3 Particle::get_position() const
 {
 	return position;
+}
+
+void Particle::set_size(float s)
+{
+	this->size = s;
 }
 
 void Particle::update(float delta)
@@ -22,5 +29,5 @@ void Particle::update(float delta)
 void Particle::draw()
 {
 	glm::vec3 pos = glm::vec3(position.x, position.y, position.z);
-	ofDrawSphere(pos, 5);
+	ofDrawSphere(pos, this->size);
 }
