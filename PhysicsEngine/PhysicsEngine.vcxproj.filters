@@ -22,7 +22,7 @@
     <ClInclude Include="src\Vector3.hpp" />
     <ClInclude Include="src\Particle.hpp" />
     <ClInclude Include="src\TrailParticle.hpp" />
-    <ClInclude Include="src\FireBall.h" />
+    <ClInclude Include="src\FireBall.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

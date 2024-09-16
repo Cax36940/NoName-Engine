@@ -1,3 +1,4 @@
+#pragma once
 #include "Particle.hpp"
 
 class TrailParticle : public Particle

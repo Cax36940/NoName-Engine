@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "TrailParticle.hpp"
 #include <chrono>
+#include "FireBall.hpp"
 
 class ofApp : public ofBaseApp{
 public:
@@ -23,7 +24,7 @@ public:
 	void gotMessage(ofMessage msg);
 
 private:
-	TrailParticle particle;
+	FireBall particle;
 
 	std::chrono::steady_clock::time_point timeLastFrame;
 };

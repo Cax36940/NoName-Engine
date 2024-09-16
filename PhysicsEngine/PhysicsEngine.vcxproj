@@ -112,7 +112,7 @@
     <ClCompile Include="src\Vector3.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\FireBall.h" />
+    <ClInclude Include="src\FireBall.hpp" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\Particle.hpp" />
     <ClInclude Include="src\TrailParticle.hpp" />
