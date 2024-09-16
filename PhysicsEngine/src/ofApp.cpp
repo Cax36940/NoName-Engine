@@ -2,11 +2,8 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-	particle = TrailParticle(
-		Vector3(0, 700, 0),
-		Vector3(100, -150, 0),
-		Vector3(0, 45, 0),
-		1
+	particle = FireBall(
+		Vector3(0, 700, 0)
 	);
 	particle.set_body_size(10);
 	particle.set_space(25);
