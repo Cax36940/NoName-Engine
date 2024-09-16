@@ -1,3 +1,5 @@
+#pragma once
+
 #include <of3dGraphics.h>
 
 class Vector3 {

@@ -8,7 +8,7 @@ void ofApp::setup(){
 		Vector3(0, 45, 0),
 		1
 	);
-	particle.set_size(20);
+	particle.set_body_size(10);
 	particle.set_space(25);
 	timeLastFrame = std::chrono::high_resolution_clock::now();
 }
