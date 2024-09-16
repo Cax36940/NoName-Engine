@@ -3,7 +3,7 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-
+/*
 	backgroundPicture.load("images/bg_picture.png");
 	myfont.load("calibri", 20);
 
@@ -26,8 +26,14 @@ void ofApp::setup(){
     particles.push_back(particle1);
 	particles.push_back(particle2);
 	particles.push_back(fireBall);
-
+*/
 	
+	fireball = FireBall(
+		Vector3(0, 700, 0),
+		Vector3(0, 45, 0)
+	);
+	particle = TrailParticle(&fireball);
+	timeLastFrame = std::chrono::high_resolution_clock::now();
 }
 
 //--------------------------------------------------------------
