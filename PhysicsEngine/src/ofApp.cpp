@@ -5,7 +5,7 @@ void ofApp::setup(){
 	particle = FireBall(
 		Vector3(0, 700, 0)
 	);
-	particle.set_size(20);
+	particle.set_body_size(10);
 	particle.set_space(25);
 	timeLastFrame = std::chrono::high_resolution_clock::now();
 }

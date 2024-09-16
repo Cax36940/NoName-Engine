@@ -1,9 +1,18 @@
 #include "TrailParticle.hpp"
 
 TrailParticle::TrailParticle(Vector3& pos, Vector3& vel, Vector3& acc, float weight)
-	: Particle(pos, vel, acc, weight)
+	: TrailParticle(Particle(pos, vel, acc, weight))
+{}
+
+TrailParticle::TrailParticle(Particle& p)
+	: particle(p)
 {
 	this->space = 0;
+}
+
+void TrailParticle::set_body_size(float s)
+{
+	this->particle.set_size(s);
 }
 
 void TrailParticle::set_space(float s)
@@ -15,28 +24,25 @@ void TrailParticle::update(float delta)
 {
 	if (this->space == this->space_counter)
 	{
-		Particle static_particle = Particle(
-			Particle::get_position(),
-			Vector3(0, 0, 0),
-			Vector3(0, 0, 0),
-			1
+		Sphere trail_dot = Sphere(
+			particle.get_position(),
+			3
 		);
-		static_particle.set_size(3);
-		trail.push_back(static_particle);
+		trail.push_back(trail_dot);
 		this->space_counter = 0;
 	}
 	else {
 		this->space_counter++;
 	}
 
-	Particle::update(delta);
+	particle.update(delta);
 }
 
 void TrailParticle::draw()
 {
-	for each (Particle sp in trail)
+	for each (Sphere dot in trail)
 	{
-		sp.draw();
+		dot.draw();
 	}
-	Particle::draw();
+	particle.draw();
 }
