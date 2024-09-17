@@ -7,7 +7,7 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 
-	// backgroundPicture.load("images/bg_picture.png");
+	backgroundPicture.load("images/bg_picture.png");
 	myfont.load("calibri", 20);
 
 	// Reserve space for the particles
@@ -35,7 +35,7 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-	// backgroundPicture.draw(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
+	backgroundPicture.draw(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 	ofSetColor(255);
 	myfont.drawString("Launch a missile with the space bar\nUse left and right arrow to change the missile", 30,40);
 	
