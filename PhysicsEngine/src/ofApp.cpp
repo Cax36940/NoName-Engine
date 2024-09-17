@@ -35,8 +35,8 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-	backgroundPicture.draw(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 	ofSetColor(255);
+	backgroundPicture.draw(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 	myfont.drawString("Launch a missile with the space bar\nUse left and right arrow to change the missile", 30,40);
 	
 	// Draw corner box
