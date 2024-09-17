@@ -1,23 +1,23 @@
 #include "TrailParticle.hpp"
 
 
-TrailParticle::TrailParticle(DefaultParticle* p)
+TrailParticle::TrailParticle(const DefaultParticle& p)
 	: particle(p)
 {
 	this->space = 10;
 }
 
-void TrailParticle::set_space(float s)
+void TrailParticle::set_space(const float& s)
 {
 	this->space = s;
 }
 
-void TrailParticle::update(float delta)
+void TrailParticle::update(const float& delta)
 {
 	if (this->space == this->space_counter)
 	{
 		Sphere trail_dot = Sphere(
-			particle->sprite
+			particle.sprite
 		);
 		trail_dot.set_size(3);
 		trail.push_back(trail_dot);
@@ -27,19 +27,20 @@ void TrailParticle::update(float delta)
 		this->space_counter++;
 	}
 
-	particle->update(delta);
+	particle.update(delta);
 }
 
 void TrailParticle::draw()
 {
-	for each (Sphere dot in trail)
+	for (const Sphere& dot : trail)
 	{
 		dot.draw();
 	}
-	particle->draw();
+	particle.draw();
 }
 
-void TrailParticle::drawSingleParticle()
+void TrailParticle::clearTrail()
 {
-	particle.drawSingleParticle();
+	this->trail.clear();
 }
+

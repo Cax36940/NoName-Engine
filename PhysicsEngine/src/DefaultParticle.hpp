@@ -14,5 +14,5 @@ public:
 
 	virtual void draw();
 
-	void update(float delta);
+	void update(const float& delta);
 };

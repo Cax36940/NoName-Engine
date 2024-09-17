@@ -1,38 +1,23 @@
 #pragma once
 #include "ofApp.h"
+#include "ParticleFactory.hpp"
+
+#define GRAVITY_VECTOR Vector3(0,45,0)
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-/*
-	backgroundPicture.load("images/bg_picture.png");
+
+	// backgroundPicture.load("images/bg_picture.png");
 	myfont.load("calibri", 20);
 
-	//Initialize different types of particles
-	fireBall = FireBall(
-		Vector3(0, 700, 0)
-	);
-	fireBall.set_body_size(25);
-	fireBall.set_space(5);
+	// Reserve space for the particles
+	particles.reserve(PARTICLE_TYPE_COUNT);
 
-	particle1 = TrailParticle(Vector3(0,700,0),Vector3(200,-150,0),Vector3(0,45,0),1);
-	particle1.set_body_size(10);
-	particle1.set_space(25);
+	// Adding one particle of each type to the list
+	for (int i = 0; i < PARTICLE_TYPE_COUNT; i++) {
+		particles.push_back(ParticleFactory::createParticle((ParticleType)i, Vector3(WINDOW_WIDTH - 50, 50, 0), Vector3(0, 0, 0)));
+	}
 
-	particle2 = TrailParticle(Vector3(0, 700, 0), Vector3(100, -150, 0), Vector3(0, 45, 0), 1);
-	particle2.set_body_size(20);
-	particle2.set_space(15);
-
-	//Adding the particles to the list
-    particles.push_back(particle1);
-	particles.push_back(particle2);
-	particles.push_back(fireBall);
-*/
-	
-	fireball = FireBall(
-		Vector3(0, 700, 0),
-		Vector3(0, 45, 0)
-	);
-	particle = TrailParticle(&fireball);
 	timeLastFrame = std::chrono::high_resolution_clock::now();
 }
 
@@ -42,27 +27,36 @@ void ofApp::update(){
 	if (isPlaying) {
 		auto time = std::chrono::high_resolution_clock::now();
 		auto delta = std::chrono::duration_cast<std::chrono::milliseconds>(time - timeLastFrame).count();
-		particle.update(delta / 1000.);
 		timeLastFrame = time;
+
+		trail_particle.update(delta / 1000.);
 	}
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-	backgroundPicture.draw(0, 0, 1024, 768);
+	// backgroundPicture.draw(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
+	ofSetColor(255);
 	myfont.drawString("Launch a missile with the space bar\nUse left and right arrow to change the missile", 30,40);
 	
-	particles[particlesIndex].drawSingleParticle();
-	
+	// Draw corner box
+	ofDrawRectangle(WINDOW_WIDTH - 100,   0,   5, 100);
+	ofDrawRectangle(WINDOW_WIDTH - 100,   0, 100,   5);
+	ofDrawRectangle(WINDOW_WIDTH - 100, 100, 100,   5);
+	ofDrawRectangle(WINDOW_WIDTH -   5,   0,   5, 100);
+
+	// Start point
+	ofDrawRectangle(45, WINDOW_HEIGHT - 45, 10, 10);
+
+	particles[particlesIndex].draw();
 
 	if (isPlaying) {
-		particle.draw();
+		trail_particle.draw();
 	}
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-	std::cout << particlesIndex<<endl;
 	// Space key to restart the game
 	if (key == ' ') {
 		if (!isPlaying) {
@@ -143,18 +137,8 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
 
 void ofApp::launchNewParticle() {
 
-	//Rereate the projectiles when hitting space key
-	fireBall = FireBall(
-		Vector3(0, 700, 0)
-	);
-
-	particle1 = TrailParticle(Vector3(0, 700, 0), Vector3(100, -150, 0), Vector3(0, 45, 0), 1);
-
-	particle2 = TrailParticle(Vector3(0, 700, 0), Vector3(100, -150, 0), Vector3(0, 45, 0), 1);
-
-
-	particle = particles[particlesIndex]; //update choice of missile
+	trail_particle = TrailParticle(ParticleFactory::createParticle((ParticleType)particlesIndex, Vector3(50, WINDOW_HEIGHT - 50, 0), GRAVITY_VECTOR));
 
 	timeLastFrame = std::chrono::high_resolution_clock::now();
-	isPlaying = 1; //lauch the projectile when it's ready
+	isPlaying = true; //lauch the projectile when it's ready
 }

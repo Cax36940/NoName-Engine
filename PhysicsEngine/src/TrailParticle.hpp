@@ -6,19 +6,19 @@
 class TrailParticle
 {
 private:
-	DefaultParticle *particle;
+	DefaultParticle particle;
 	std::vector<Sphere> trail;
 	int space;
-	int space_counter = 0;
+	int space_counter;
 
 public:
 	TrailParticle() = default;
-	TrailParticle(DefaultParticle* particle);
+	TrailParticle(const DefaultParticle& particle);
 
-	void set_space(float s);
+	void set_space(const float& s);
 
-	void update(float delta);
+	void update(const float& delta);
 	void draw();
-	void drawSingleParticle();
+	void clearTrail();
 	
 };

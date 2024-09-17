@@ -12,9 +12,9 @@ private:
 
 public:
 	Particle() = default;
-	Particle(Vector3& pos, Vector3& vel, Vector3& acc, float weight);
+	Particle(const Vector3& pos, const Vector3& vel, const Vector3& acc, const float& weight);
 
 	Vector3 get_position() const;
 
-	void update(float delta);
+	void update(const float& delta);
 };

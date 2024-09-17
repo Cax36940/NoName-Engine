@@ -5,18 +5,16 @@ void Sphere::set_position(const Vector3& pos) {
 	position = pos;
 }
 
-void Sphere::set_size(float new_size) {
+void Sphere::set_size(const float& new_size) {
 	size = new_size;
 }
 
-void Sphere::set_color(float r, float g, float b) {
+void Sphere::set_color(const float& r, const float& g, const float& b) {
 	color = glm::vec3(r, g, b);
 }
 
-void Sphere::draw()
+void Sphere::draw() const
 {
-
-	glm::vec3 pos = glm::vec3(position.x, position.y, position.z);
 	ofSetColor(color.r, color.g, color.b);
-	ofDrawSphere(pos, this->size);
+	ofDrawSphere(glm::vec3(position.x, position.y, position.z), this->size);
 }
