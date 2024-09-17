@@ -21,10 +21,21 @@ public:
 	void mouseExited(int x, int y);
 	void windowResized(int w, int h);
 	void dragEvent(ofDragInfo dragInfo);
+	void launchNewParticle();
 	void gotMessage(ofMessage msg);
 
 private:
-	FireBall particle;
+	FireBall fireBall;
+	TrailParticle particle1;
+	TrailParticle particle2;
+	TrailParticle particle;
+	std::vector<TrailParticle> particles;
+	bool isPlaying = 0;
+	int particlesIndex=0;
 
 	std::chrono::steady_clock::time_point timeLastFrame;
+
+	ofImage backgroundPicture;
+
+	ofTrueTypeFont myfont;
 };

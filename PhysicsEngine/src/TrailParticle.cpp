@@ -46,3 +46,8 @@ void TrailParticle::draw()
 	}
 	particle.draw();
 }
+
+void TrailParticle::drawSingleParticle()
+{
+	particle.drawSingleParticle();
+}

@@ -22,4 +22,5 @@ public:
 
 	void update(float delta);
 	void draw();
+	void drawSingleParticle();
 };

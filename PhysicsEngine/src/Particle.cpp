@@ -31,3 +31,9 @@ void Particle::draw()
 	glm::vec3 pos = glm::vec3(position.x, position.y, position.z);
 	ofDrawSphere(pos, this->size);
 }
+
+void Particle::drawSingleParticle()
+{
+	glm::vec3 pos = glm::vec3(800, 50, 0);
+	ofDrawSphere(pos, this->size);
+}
