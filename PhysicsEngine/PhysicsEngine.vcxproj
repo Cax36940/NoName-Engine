@@ -104,7 +104,8 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\FireBall.cpp" />
+    <ClCompile Include="src\ParticleFactory.cpp" />
+    <ClCompile Include="src\DefaultParticle.cpp" />
     <ClCompile Include="src\Sphere.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
@@ -113,7 +114,8 @@
     <ClCompile Include="src\Vector3.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\FireBall.hpp" />
+    <ClInclude Include="src\ParticleFactory.hpp" />
+    <ClInclude Include="src\DefaultParticle.hpp" />
     <ClInclude Include="src\Sphere.hpp" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\Particle.hpp" />

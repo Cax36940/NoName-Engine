@@ -1,26 +1,24 @@
 #pragma once
 #include "Vector3.hpp"
 #include "Sphere.hpp"
-#include "Particle.hpp"
+#include "DefaultParticle.hpp"
 
 class TrailParticle
 {
 private:
-	Particle particle;
+	DefaultParticle particle;
 	std::vector<Sphere> trail;
 	int space;
-	int space_counter = 0;
+	int space_counter;
 
 public:
 	TrailParticle() = default;
-	TrailParticle(Vector3& pos, Vector3& vel, Vector3& acc, float weight);
-	TrailParticle(Particle& particle);
+	TrailParticle(const DefaultParticle& particle);
 
-	void set_body_size(float s);
-	void set_space(float s);
+	void set_space(const float& s);
 
-	void update(float delta);
+	void update(const float& delta);
 	void draw();
-	void drawSingleParticle();
+	void clearTrail();
 	
 };

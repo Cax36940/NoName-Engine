@@ -8,8 +8,9 @@
     <ClCompile Include="src\Particle.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="src\TrailParticle.cpp" />
-    <ClCompile Include="src\FireBall.cpp" />
+    <ClCompile Include="src\ParticleFactory.cpp" />
     <ClCompile Include="src\Sphere.cpp" />
+    <ClCompile Include="src\DefaultParticle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -23,8 +24,9 @@
     <ClInclude Include="src\Vector3.hpp" />
     <ClInclude Include="src\Particle.hpp" />
     <ClInclude Include="src\TrailParticle.hpp" />
-    <ClInclude Include="src\FireBall.hpp" />
+    <ClInclude Include="src\ParticleFactory.hpp" />
     <ClInclude Include="src\Sphere.hpp" />
+    <ClInclude Include="src\DefaultParticle.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />
