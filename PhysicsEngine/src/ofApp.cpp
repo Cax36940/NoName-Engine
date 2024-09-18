@@ -6,24 +6,24 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-
 	backgroundPicture.load("images/bg_picture.png");
 	myfont.load("calibri", 20);
 
 	// Reserve space for the particles
 	particles.reserve(PARTICLE_TYPE_COUNT);
 
-	// Adding one particle of each type to the list
+	// Adding one static particle of each type to the list to display them
 	for (int i = 0; i < PARTICLE_TYPE_COUNT; i++) {
-		particles.push_back(ParticleFactory::createParticle((ParticleType)i, Vector3(WINDOW_WIDTH - 50, 50, 0), Vector3(0, 0, 0)));
+		particles.push_back(
+			ParticleFactory::createParticle(
+				(ParticleType)i, 
+				Vector3(WINDOW_WIDTH - 50, 50, 0), 
+				Vector3(0, 0, 0)));
 	}
-
-	timeLastFrame = std::chrono::high_resolution_clock::now();
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-
 	if (isPlaying) {
 		auto time = std::chrono::high_resolution_clock::now();
 		auto delta = std::chrono::duration_cast<std::chrono::milliseconds>(time - timeLastFrame).count();
@@ -62,26 +62,16 @@ void ofApp::keyPressed(int key){
 		if (!isPlaying) {
 			launchNewParticle();
 		}
-		else {
-			isPlaying = !isPlaying;
-		}
+		isPlaying = !isPlaying;
 	}
 	// Arrows to change the type of projectile
 	else if (key == OF_KEY_RIGHT) {
-		if (particlesIndex < particles.size()-1) {
-			particlesIndex+=1;
-		}
-		else {
-			particlesIndex=0;
-		}
+		particlesIndex = ++particlesIndex % PARTICLE_TYPE_COUNT;
+		isPlaying = false;
 	}
 	else if (key == OF_KEY_LEFT) {
-		if (particlesIndex > 0) {
-			particlesIndex-=1;
-		}
-		else {
-			particlesIndex = particles.size()-1;
-		}
+		particlesIndex = (--particlesIndex + PARTICLE_TYPE_COUNT) % PARTICLE_TYPE_COUNT;
+		isPlaying = false;
 	}
 }
 
@@ -137,8 +127,11 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
 
 void ofApp::launchNewParticle() {
 
-	trail_particle = TrailParticle(ParticleFactory::createParticle((ParticleType)particlesIndex, Vector3(50, WINDOW_HEIGHT - 50, 0), GRAVITY_VECTOR));
+	trail_particle = TrailParticle(
+		ParticleFactory::createParticle(
+			(ParticleType)particlesIndex, 
+			Vector3(50, WINDOW_HEIGHT - 50, 0), 
+			GRAVITY_VECTOR));
 
 	timeLastFrame = std::chrono::high_resolution_clock::now();
-	isPlaying = true; //lauch the projectile when it's ready
 }

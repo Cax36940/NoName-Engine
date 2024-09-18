@@ -29,14 +29,17 @@ public:
 
 private:
 
-	TrailParticle trail_particle;
-	std::vector<DefaultParticle> particles;
+	std::chrono::steady_clock::time_point timeLastFrame;
 	bool isPlaying = false;
+
+	// Moving particle
+	TrailParticle trail_particle;
+
+	// Static display particles
+	std::vector<DefaultParticle> particles;
 	int particlesIndex = 0;
 
-	std::chrono::steady_clock::time_point timeLastFrame;
-
+	// Setup elements
 	ofImage backgroundPicture;
-
 	ofTrueTypeFont myfont;
 };
