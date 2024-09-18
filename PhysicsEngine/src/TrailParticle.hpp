@@ -1,5 +1,4 @@
 #pragma once
-#include "Vector3.hpp"
 #include "Sphere.hpp"
 #include "DefaultParticle.hpp"
 
@@ -20,5 +19,4 @@ public:
 	void update(const float& delta);
 	void draw();
 	void clearTrail();
-	
 };

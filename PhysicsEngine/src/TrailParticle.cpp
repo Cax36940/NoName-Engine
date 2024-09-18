@@ -5,6 +5,7 @@ TrailParticle::TrailParticle(const DefaultParticle& p)
 	: particle(p)
 {
 	this->space = 10;
+	this->space_counter = 0;
 }
 
 void TrailParticle::set_space(const float& s)
