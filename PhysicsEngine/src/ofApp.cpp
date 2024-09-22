@@ -26,7 +26,7 @@ void ofApp::setup(){
 void ofApp::update(){
 	if (isPlaying) {
 		auto time = std::chrono::high_resolution_clock::now();
-		auto delta = std::chrono::duration_cast<std::chrono::milliseconds>(time - timeLastFrame).count();
+		auto delta = std::chrono::duration_cast<std::chrono::milliseconds>(time - timeLastFrame).count(); //durée de calcul d'une frame
 		timeLastFrame = time;
 
 		trail_particle.update(delta / 1000.);
@@ -35,6 +35,7 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+	ofSetupScreenOrtho(WINDOW_WIDTH, WINDOW_HEIGHT, -1000, 1000);
 	ofSetColor(255);
 	backgroundPicture.draw(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 	myfont.drawString("Launch a missile with the space bar\nUse left and right arrow to change the missile", 30,40);
@@ -132,6 +133,10 @@ void ofApp::launchNewParticle() {
 			(ParticleType)particlesIndex, 
 			Vector3(50, WINDOW_HEIGHT - 50, 0), 
 			GRAVITY_VECTOR));
+	
+	if ((ParticleType)particlesIndex == LASER) {
+		trail_particle.set_space(0);
+	}
 
 	timeLastFrame = std::chrono::high_resolution_clock::now();
 }

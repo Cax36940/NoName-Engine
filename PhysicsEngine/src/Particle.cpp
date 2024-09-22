@@ -15,6 +15,6 @@ Vector3 Particle::get_position() const
 void Particle::update(const float& delta)
 {
 	velocity = velocity + acceleration * delta;
-	position = position + velocity * delta;
+	position = position + velocity * delta; //intégration d'Euler
 }
 

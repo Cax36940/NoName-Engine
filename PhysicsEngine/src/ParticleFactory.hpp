@@ -5,6 +5,7 @@ enum ParticleType {
 	FIREBALL,
 	TENNISBALL,
 	GOLFBALL,
+	LASER,
 	PARTICLE_TYPE_COUNT
 };
 
