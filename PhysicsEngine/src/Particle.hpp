@@ -8,11 +8,11 @@ private:
 	Vector3 position;
 	Vector3 velocity;
 	Vector3 acceleration;
-	float weight;
+	float inv_mass;
 
 public:
 	Particle() = default;
-	Particle(const Vector3& pos, const Vector3& vel, const Vector3& acc, const float& weight);
+	Particle(const Vector3& pos, const Vector3& vel, const Vector3& acc, const float& mass);
 
 	Vector3 get_position() const;
 

@@ -1,11 +1,11 @@
 #include "Particle.hpp"
 #include <of3dGraphics.h>
 
-Particle::Particle(const Vector3& pos, const Vector3& vel, const Vector3& acc, const float& weight)
+Particle::Particle(const Vector3& pos, const Vector3& vel, const Vector3& acc, const float& mass)
 	: position(pos)
 	, velocity(vel)
 	, acceleration(acc)
-	, weight(weight) {}
+	, inv_mass(1 / mass) {}
 
 Vector3 Particle::get_position() const
 {
