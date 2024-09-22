@@ -1,6 +1,6 @@
 Equipe Zelda :
 
-Héléna Barbillon
-Alban Bernard
-Kévin Herman
-Camille Ordronneau
+Héléna Barbillon    BARH03050200
+Alban Bernard       BERA
+Kévin Herman        HERK
+Camille Ordronneau  ORDC14070200
