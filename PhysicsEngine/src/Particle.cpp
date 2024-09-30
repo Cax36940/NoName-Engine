@@ -18,3 +18,13 @@ void Particle::update(const float& delta)
 	position = position + velocity * delta; //intégration d'Euler
 }
 
+void Particle::add_force(const Vector3 &force)
+{
+	accum_force += force;
+}
+
+void Particle::clear_accum()
+{
+	accum_force = Vector3(0,0,0);
+}
+

@@ -10,6 +10,9 @@ private:
 	Vector3 acceleration;
 	float inv_mass;
 
+	// forces résultantes (d'Alembert)
+	Vector3 accum_force;
+
 public:
 	Particle() = default;
 	Particle(const Vector3& pos, const Vector3& vel, const Vector3& acc, const float& mass);
@@ -17,4 +20,8 @@ public:
 	Vector3 get_position() const;
 
 	void update(const float& delta);
+
+
+	void add_force(const Vector3 &force);
+	void clear_accum();
 };
