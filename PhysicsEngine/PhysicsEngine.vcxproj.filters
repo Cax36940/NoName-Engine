@@ -11,6 +11,8 @@
     <ClCompile Include="src\ParticleFactory.cpp" />
     <ClCompile Include="src\Sphere.cpp" />
     <ClCompile Include="src\DefaultParticle.cpp" />
+    <ClCompile Include="src\ParticleForceGenerator.cpp" />
+    <ClCompile Include="src\ParticleForceRegistry.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -27,6 +29,8 @@
     <ClInclude Include="src\ParticleFactory.hpp" />
     <ClInclude Include="src\Sphere.hpp" />
     <ClInclude Include="src\DefaultParticle.hpp" />
+    <ClInclude Include="src\ParticleForceGenerator.h" />
+    <ClInclude Include="src\ParticleForceRegistry.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

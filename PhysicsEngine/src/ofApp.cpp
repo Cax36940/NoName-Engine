@@ -2,35 +2,25 @@
 #include "ofApp.h"
 #include "ParticleFactory.hpp"
 
-#define GRAVITY_VECTOR Vector3(0,45,0)
+
 
 //--------------------------------------------------------------
 void ofApp::setup(){
 	backgroundPicture.load("images/bg_picture.png");
 	myfont.load("calibri", 20);
 
-	// Reserve space for the particles
-	particles.reserve(PARTICLE_TYPE_COUNT);
 
-	// Adding one static particle of each type to the list to display them
-	for (int i = 0; i < PARTICLE_TYPE_COUNT; i++) {
-		particles.push_back(
-			ParticleFactory::createParticle(
-				(ParticleType)i, 
-				Vector3(WINDOW_WIDTH - 50, 50, 0), 
-				Vector3(0, 0, 0)));
-	}
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	if (isPlaying) {
-		auto time = std::chrono::high_resolution_clock::now();
-		auto delta = std::chrono::duration_cast<std::chrono::milliseconds>(time - timeLastFrame).count(); //durée de calcul d'une frame
-		timeLastFrame = time;
+	
+	auto time = std::chrono::high_resolution_clock::now();
+	auto delta = std::chrono::duration_cast<std::chrono::milliseconds>(time - timeLastFrame).count(); //durée de calcul d'une frame
+	timeLastFrame = time;
 
-		trail_particle.update(delta / 1000.);
-	}
+		
+	
 }
 
 //--------------------------------------------------------------
@@ -38,42 +28,12 @@ void ofApp::draw(){
 	ofSetupScreenOrtho(WINDOW_WIDTH, WINDOW_HEIGHT, -1000, 1000);
 	ofSetColor(255);
 	backgroundPicture.draw(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
-	myfont.drawString("Launch a missile with the space bar\nUse left and right arrow to change the missile", 30,40);
-	
-	// Draw corner box
-	ofDrawRectangle(WINDOW_WIDTH - 100,   0,   5, 100);
-	ofDrawRectangle(WINDOW_WIDTH - 100,   0, 100,   5);
-	ofDrawRectangle(WINDOW_WIDTH - 100, 100, 100,   5);
-	ofDrawRectangle(WINDOW_WIDTH -   5,   0,   5, 100);
 
-	// Start point
-	ofDrawRectangle(45, WINDOW_HEIGHT - 45, 10, 10);
-
-	particles[particlesIndex].draw();
-
-	if (isPlaying) {
-		trail_particle.draw();
-	}
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-	// Space key to restart the game
-	if (key == ' ') {
-		if (!isPlaying) {
-			launchNewParticle();
-		}
-		isPlaying = !isPlaying;
-	}
-	// Arrows to change the type of projectile
-	else if (key == OF_KEY_RIGHT) {
-		particlesIndex = ++particlesIndex % PARTICLE_TYPE_COUNT;
-		isPlaying = false;
-	}
-	else if (key == OF_KEY_LEFT) {
-		particlesIndex = (--particlesIndex + PARTICLE_TYPE_COUNT) % PARTICLE_TYPE_COUNT;
-		isPlaying = false;
-	}
+	
 }
 
 //--------------------------------------------------------------
@@ -126,17 +86,3 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
 
 }
 
-void ofApp::launchNewParticle() {
-
-	trail_particle = TrailParticle(
-		ParticleFactory::createParticle(
-			(ParticleType)particlesIndex, 
-			Vector3(50, WINDOW_HEIGHT - 50, 0), 
-			GRAVITY_VECTOR));
-	
-	if ((ParticleType)particlesIndex == LASER) {
-		trail_particle.set_space(0);
-	}
-
-	timeLastFrame = std::chrono::high_resolution_clock::now();
-}
