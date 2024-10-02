@@ -105,7 +105,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\ParticleForceRegistry.cpp" />
-    <ClCompile Include="src\ParticleForceGenerator.cpp" />
     <ClCompile Include="src\ParticleFactory.cpp" />
     <ClCompile Include="src\DefaultParticle.cpp" />
     <ClCompile Include="src\Sphere.cpp" />
