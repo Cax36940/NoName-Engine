@@ -15,9 +15,9 @@ void PhysicsComponentRegistry::remove(PhysicsComponent* physic_component)
 	}
 }
 
-void PhysicsComponentRegistry::updatePhysics()
+void PhysicsComponentRegistry::registerAllPhysics()
 {
 	for (PhysicsComponent* physics_component : registry) {
-		physics_component->ApplyPhysics();
+		physics_component->registerPhysics();
 	}
 }

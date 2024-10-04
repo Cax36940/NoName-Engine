@@ -105,6 +105,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Component\Physics\DoubleSpringComponent.cpp" />
+    <ClCompile Include="src\Component\Physics\SimpleSpringComponent.cpp" />
     <ClCompile Include="src\ParticleFactory.cpp" />
     <ClCompile Include="src\DefaultParticle.cpp" />
     <ClCompile Include="src\ParticleForceGenerator.cpp" />
@@ -121,6 +122,7 @@
     <ClInclude Include="src\Component\Physics\DoubleSpringComponent.hpp" />
     <ClInclude Include="src\Component\Physics\PhysicsComponent.hpp" />
     <ClInclude Include="src\Component\Physics\PhysicsComponent.cpp" />
+    <ClInclude Include="src\Component\Physics\SimpleSpringComponent.hpp" />
     <ClInclude Include="src\ParticleFactory.hpp" />
     <ClInclude Include="src\DefaultParticle.hpp" />
     <ClInclude Include="src\ParticleForceGenerator.h" />

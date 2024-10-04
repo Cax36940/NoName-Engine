@@ -7,6 +7,6 @@ protected:
 	~PhysicsComponent();
 
 public:
-	virtual void RegisterPhysics() = 0;
+	virtual void registerPhysics() = 0;
 
 };
