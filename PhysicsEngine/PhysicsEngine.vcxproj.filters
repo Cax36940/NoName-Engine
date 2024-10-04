@@ -16,6 +16,7 @@
     <ClCompile Include="src\ParticleForceRegistry.cpp" />
     <ClCompile Include="src\System\PhysicsComponentRegistry.cpp" />
     <ClCompile Include="src\Component\Physics\DoubleSpringComponent.cpp" />
+    <ClCompile Include="src\Component\Physics\SimpleSpringComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -38,6 +39,7 @@
     <ClInclude Include="src\Component\Physics\PhysicsComponent.hpp" />
     <ClInclude Include="src\System\PhysicsComponentRegistry.hpp" />
     <ClInclude Include="src\Component\Physics\DoubleSpringComponent.hpp" />
+    <ClInclude Include="src\Component\Physics\SimpleSpringComponent.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

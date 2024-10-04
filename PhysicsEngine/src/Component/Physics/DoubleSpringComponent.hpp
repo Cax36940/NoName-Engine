@@ -9,5 +9,5 @@ class DoubleSpringComponent : PhysicsComponent {
 
 	DoubleSpringComponent(Particle* first, Particle* second);
 
-	void RegisterPhysics() override;
+	void registerPhysics() override;
 };

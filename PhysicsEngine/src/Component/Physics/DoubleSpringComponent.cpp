@@ -1,6 +1,8 @@
 #include "DoubleSpringComponent.hpp"
 
-void DoubleSpringComponent::RegisterPhysics()
+DoubleSpringComponent::DoubleSpringComponent(Particle* first, Particle* second) : first(first), second(second) {}
+
+void DoubleSpringComponent::registerPhysics()
 {
 	// SpringForce.updateForce(first, delta)
 	// SpringForce.updateForce(second, delta)
