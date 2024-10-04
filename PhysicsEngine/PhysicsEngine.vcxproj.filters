@@ -11,6 +11,10 @@
     <ClCompile Include="src\ParticleFactory.cpp" />
     <ClCompile Include="src\Sphere.cpp" />
     <ClCompile Include="src\DefaultParticle.cpp" />
+    <ClCompile Include="src\ParticleForceGenerator.cpp" />
+    <ClCompile Include="src\ParticleForceRegistry.cpp" />
+    <ClCompile Include="src\System\PhysicsComponentRegistry.cpp" />
+    <ClCompile Include="src\Component\Physics\DoubleSpringComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -27,6 +31,12 @@
     <ClInclude Include="src\ParticleFactory.hpp" />
     <ClInclude Include="src\Sphere.hpp" />
     <ClInclude Include="src\DefaultParticle.hpp" />
+    <ClInclude Include="src\ParticleForceGenerator.h" />
+    <ClInclude Include="src\ParticleForceRegistry.h" />
+    <ClInclude Include="src\Component\Physics\PhysicsComponent.cpp" />
+    <ClInclude Include="src\Component\Physics\PhysicsComponent.hpp" />
+    <ClInclude Include="src\System\PhysicsComponentRegistry.hpp" />
+    <ClInclude Include="src\Component\Physics\DoubleSpringComponent.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />
