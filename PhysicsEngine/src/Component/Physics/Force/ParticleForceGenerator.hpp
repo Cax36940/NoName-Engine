@@ -1,5 +1,5 @@
 #pragma once
-#include "Particle.hpp"
+#include "Component/Particle.hpp"
 
 // interface (pas de .cpp)
 class ParticleForceGenerator

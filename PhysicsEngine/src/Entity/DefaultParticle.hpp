@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Particle.hpp"
-#include "Sphere.hpp"
+#include "Component/Particle.hpp"
+#include "Component/Graphics/Sphere.hpp"
 
 class DefaultParticle {
 public:
@@ -11,8 +11,6 @@ public:
 	DefaultParticle() = default;
 
 	DefaultParticle(const Particle& particle, const Sphere& sphere) : particle(particle), sprite(sphere) {}
-
-	virtual void draw();
 
 	void update(const float& delta);
 };

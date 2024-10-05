@@ -1,6 +1,5 @@
 #include "ParticleFactory.hpp"
 
-
 static struct ParticleArgs {
 	Vector3 velocity;
 	float mass;

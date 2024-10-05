@@ -61,7 +61,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <ObjectFileName>$(IntDir)\Build\%(RelativeDir)\$(Configuration)\</ObjectFileName>
@@ -84,7 +84,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <ObjectFileName>$(IntDir)\Build\%(RelativeDir)\$(Configuration)\</ObjectFileName>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -104,26 +104,38 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\ParticleForceRegistry.cpp" />
-    <ClCompile Include="src\ParticleFactory.cpp" />
-    <ClCompile Include="src\DefaultParticle.cpp" />
-    <ClCompile Include="src\Sphere.cpp" />
+    <ClCompile Include="src\Component\Physics\DoubleSpringComponent.cpp" />
+    <ClCompile Include="src\Component\Physics\SimpleSpringComponent.cpp" />
+    <ClCompile Include="src\Component\Physics\Force\DefaultSpringForce.cpp" />
+    <ClCompile Include="src\Entity\ParticleFactory.cpp" />
+    <ClCompile Include="src\Entity\DefaultParticle.cpp" />
+    <ClCompile Include="src\System\GraphicsComponentRegistry.cpp" />
+    <ClCompile Include="src\System\ParticleForceRegistry.cpp" />
+    <ClCompile Include="src\Component\Graphics\Sphere.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
-    <ClCompile Include="src\Particle.cpp" />
-    <ClCompile Include="src\TrailParticle.cpp" />
-    <ClCompile Include="src\Vector3.cpp" />
+    <ClCompile Include="src\Component\Particle.cpp" />
+    <ClCompile Include="src\System\PhysicsComponentRegistry.cpp" />
+    <ClCompile Include="src\Entity\TrailParticle.cpp" />
+    <ClCompile Include="src\Component\Vector3.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\ParticleForceRegistry.h" />
-    <ClInclude Include="src\ParticleForceGenerator.h" />
-    <ClInclude Include="src\ParticleFactory.hpp" />
-    <ClInclude Include="src\DefaultParticle.hpp" />
-    <ClInclude Include="src\Sphere.hpp" />
+    <ClInclude Include="src\Component\Graphics\GraphicsComponent.hpp" />
+    <ClInclude Include="src\Component\Physics\DoubleSpringComponent.hpp" />
+    <ClInclude Include="src\Component\Physics\PhysicsComponent.hpp" />
+    <ClInclude Include="src\Component\Physics\SimpleSpringComponent.hpp" />
+    <ClInclude Include="src\Entity\ParticleFactory.hpp" />
+    <ClInclude Include="src\Entity\DefaultParticle.hpp" />
+    <ClInclude Include="src\Component\Physics\Force\ParticleForceGenerator.hpp" />
+    <ClInclude Include="src\System\GraphicsComponentRegistry.hpp" />
+    <ClInclude Include="src\System\ParticleForceRegistry.hpp" />
+    <ClInclude Include="src\Component\Graphics\Sphere.hpp" />
     <ClInclude Include="src\ofApp.h" />
-    <ClInclude Include="src\Particle.hpp" />
-    <ClInclude Include="src\TrailParticle.hpp" />
-    <ClInclude Include="src\Vector3.hpp" />
+    <ClInclude Include="src\Component\Particle.hpp" />
+    <ClInclude Include="src\Component\Physics\Force\DefaultSpringForce.hpp" />
+    <ClInclude Include="src\System\PhysicsComponentRegistry.hpp" />
+    <ClInclude Include="src\Entity\TrailParticle.hpp" />
+    <ClInclude Include="src\Component\Vector3.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">
