@@ -3,7 +3,7 @@
 
 #include <cmath>
 
-#include "Vector3.hpp"
+#include "Component/Vector3.hpp"
 
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;

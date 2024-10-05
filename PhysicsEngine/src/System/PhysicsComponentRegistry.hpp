@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
-#include "../Component/Physics/PhysicsComponent.hpp"
+
+class PhysicsComponent;
 
 class PhysicsComponentRegistry {
 private:	

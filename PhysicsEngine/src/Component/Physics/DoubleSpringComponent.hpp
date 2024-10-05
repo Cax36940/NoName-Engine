@@ -1,12 +1,13 @@
 #pragma once
-#include "../../Particle.hpp"
+#include "Component/Particle.hpp"
 #include "PhysicsComponent.hpp"
 
-class DoubleSpringComponent : PhysicsComponent {
+class DoubleSpringComponent : public PhysicsComponent {
+private:	
 	Particle* first;
 	Particle* second;
 	// SpringForce
-
+public:
 	DoubleSpringComponent(Particle* first, Particle* second);
 
 	void registerPhysics() override;

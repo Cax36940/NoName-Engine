@@ -1,5 +1,5 @@
 #pragma once
-#include "Sphere.hpp"
+#include "Component/Graphics/Sphere.hpp"
 #include "DefaultParticle.hpp"
 
 class TrailParticle
@@ -17,6 +17,5 @@ public:
 	void set_space(const float& s);
 
 	void update(const float& delta);
-	void draw();
 	void clearTrail();
 };

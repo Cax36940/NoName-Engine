@@ -1,8 +1,10 @@
 #pragma once
 
-#include "Vector3.hpp"
+#include "Component/Graphics/GraphicsComponent.hpp"
+#include "Component/Vector3.hpp"
 
-class Sphere
+
+class Sphere : public GraphicsComponent
 {
 private:
 	Vector3 position;
@@ -17,5 +19,5 @@ public:
 	void set_size(const float& new_size);
 	void set_color(const float& r, const float& g, const float& b);
 
-	void draw() const;
+	void draw() override;
 };

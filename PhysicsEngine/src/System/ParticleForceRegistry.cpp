@@ -1,4 +1,4 @@
-#include "ParticleForceRegistry.h"
+#include "ParticleForceRegistry.hpp"
 
 void ParticleForceRegistry::add(Particle* particle, ParticleForceGenerator* fg)
 {

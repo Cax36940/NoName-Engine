@@ -1,12 +1,13 @@
 #pragma once
+#include "System/PhysicsComponentRegistry.hpp"
 
+// Abstract class for Component producing forces
 class PhysicsComponent {
 
-protected:
-	PhysicsComponent();
-	~PhysicsComponent();
-
 public:
-	virtual void registerPhysics() = 0;
+	PhysicsComponent() { PhysicsComponentRegistry::add(this); };
+	PhysicsComponent(const PhysicsComponent&) { PhysicsComponentRegistry::add(this); };
+	~PhysicsComponent() { PhysicsComponentRegistry::remove(this); };
 
+	virtual void registerPhysics() = 0;
 };

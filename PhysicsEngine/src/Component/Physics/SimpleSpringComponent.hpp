@@ -1,8 +1,8 @@
 #pragma once
-#include "../../Particle.hpp"
+#include "Component/Particle.hpp"
 #include "PhysicsComponent.hpp"
 
-class SimpleSpringComponent : PhysicsComponent {
+class SimpleSpringComponent : public PhysicsComponent {
 	Vector3 fixed_point;
 	Particle* particle;
 	// SpringForce
