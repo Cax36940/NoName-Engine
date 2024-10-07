@@ -13,7 +13,7 @@ void ofApp::setup(){
 
 	particle = ParticleFactory::createParticle(
 		ParticleType::STATIC, 
-		Vector3(50, 50, 0), 
+		Vector3(WINDOW_WIDTH/2, WINDOW_HEIGHT/2, 0), 
 		Vector3(0, 0, 0));
 	
 }
@@ -55,17 +55,27 @@ void ofApp::mouseMoved(int x, int y ){
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
-
+	if (drag_particle) {
+		particle.particle.set_position(Vector3(x, y, 0));
+	}
 }
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-
+	//Vérifier si je clique sur la particle (à généraliser après)
+	Vector3 pos_souris = Vector3(x, y, 0);
+	Vector3 pos_particle = particle.particle.get_position();
+	int rayon = particle.sprite.get_size();
+	
+	Vector3 distance = pos_souris - pos_particle;
+	if (distance.norm(distance) < rayon) {
+		drag_particle = true;
+	}	
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
-
+	drag_particle = false;
 }
 
 //--------------------------------------------------------------

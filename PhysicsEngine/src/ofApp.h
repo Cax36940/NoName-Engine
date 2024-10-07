@@ -31,6 +31,8 @@ private:
 	std::chrono::steady_clock::time_point timeLastFrame;
 	bool isPlaying = false;
 
+	bool drag_particle = false;
+
 	DefaultParticle particle;
 
 	// Setup elements
