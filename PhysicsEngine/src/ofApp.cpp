@@ -1,6 +1,8 @@
 #pragma once
 #include "ofApp.h"
-#include "ParticleFactory.hpp"
+#include "System/GraphicsComponentRegistry.hpp"
+#include "System/PhysicsComponentRegistry.hpp"
+#include "Entity/ParticleFactory.hpp"
 
 
 
@@ -9,7 +11,11 @@ void ofApp::setup(){
 	backgroundPicture.load("images/bg_picture.png");
 	myfont.load("calibri", 20);
 
-
+	particle = ParticleFactory::createParticle(
+		ParticleType::STATIC, 
+		Vector3(50, 50, 0), 
+		Vector3(0, 0, 0));
+	
 }
 
 //--------------------------------------------------------------
@@ -18,6 +24,9 @@ void ofApp::update(){
 	auto time = std::chrono::high_resolution_clock::now();
 	auto delta = std::chrono::duration_cast<std::chrono::milliseconds>(time - timeLastFrame).count(); //durée de calcul d'une frame
 	timeLastFrame = time;
+
+	PhysicsComponentRegistry::registerAllPhysics();
+	particle.update(delta);
 }
 
 //--------------------------------------------------------------
@@ -26,6 +35,7 @@ void ofApp::draw(){
 	ofSetColor(255);
 	backgroundPicture.draw(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 
+	GraphicsComponentRegistry::drawAll();
 }
 
 //--------------------------------------------------------------

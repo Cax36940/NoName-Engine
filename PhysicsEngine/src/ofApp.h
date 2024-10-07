@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-#include "TrailParticle.hpp"
+#include "Entity/DefaultParticle.hpp"
 #include <chrono>
 
 #define WINDOW_WIDTH	1280
@@ -24,7 +24,6 @@ public:
 	void mouseExited(int x, int y);
 	void windowResized(int w, int h);
 	void dragEvent(ofDragInfo dragInfo);
-	void launchNewParticle();
 	void gotMessage(ofMessage msg);
 
 private:
@@ -32,7 +31,7 @@ private:
 	std::chrono::steady_clock::time_point timeLastFrame;
 	bool isPlaying = false;
 
-
+	DefaultParticle particle;
 
 	// Setup elements
 	ofImage backgroundPicture;
