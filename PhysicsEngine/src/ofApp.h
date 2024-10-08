@@ -31,7 +31,8 @@ private:
 	std::chrono::steady_clock::time_point timeLastFrame;
 	bool isPlaying = false;
 
-	DefaultParticle particle;
+	DefaultParticle p1;
+	DefaultParticle p2;
 
 	// Setup elements
 	ofImage backgroundPicture;

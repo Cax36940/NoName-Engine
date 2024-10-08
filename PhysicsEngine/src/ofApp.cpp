@@ -11,11 +11,17 @@ void ofApp::setup(){
 	backgroundPicture.load("images/bg_picture.png");
 	myfont.load("calibri", 20);
 
-	particle = ParticleFactory::createParticle(
-		ParticleType::STATIC, 
-		Vector3(50, 50, 0), 
-		Vector3(0, 0, 0));
-	
+	p1 = DefaultParticle(
+		Particle(Vector3(10, WINDOW_HEIGHT / 2, 0), Vector3(0.3, 0, 0), Vector3(0, 0, 0), 200),
+		Sphere(Vector3(0, WINDOW_HEIGHT / 2, 0), 10, glm::vec3(255, 0, 0))
+	);
+
+	p2 = DefaultParticle(
+		Particle(Vector3(WINDOW_WIDTH - 10, WINDOW_HEIGHT / 2, 0), Vector3(-0.3, 0, 0), Vector3(0, 0, 0), 200),
+		Sphere(Vector3(WINDOW_WIDTH, WINDOW_HEIGHT / 2, 0), 10, glm::vec3(0, 0, 255))
+	);
+
+	timeLastFrame = std::chrono::high_resolution_clock::now();
 }
 
 //--------------------------------------------------------------
@@ -25,8 +31,9 @@ void ofApp::update(){
 	auto delta = std::chrono::duration_cast<std::chrono::milliseconds>(time - timeLastFrame).count(); //durée de calcul d'une frame
 	timeLastFrame = time;
 
-	PhysicsComponentRegistry::registerAllPhysics();
-	particle.update(delta);
+	p1.update(delta);
+	p2.update(delta);
+	CollidersComponentRegistry::checkCollisions();
 }
 
 //--------------------------------------------------------------

@@ -13,6 +13,16 @@ void Sphere::set_color(const float& r, const float& g, const float& b) {
 	color = glm::vec3(r, g, b);
 }
 
+Vector3 Sphere::get_position() const
+{
+	return position;
+}
+
+float Sphere::get_size() const
+{
+	return size;
+}
+
 void Sphere::draw()
 {
 	if (!visible) {

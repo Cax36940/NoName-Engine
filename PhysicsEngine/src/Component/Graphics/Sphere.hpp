@@ -19,5 +19,8 @@ public:
 	void set_size(const float& new_size);
 	void set_color(const float& r, const float& g, const float& b);
 
+	Vector3 get_position() const;
+	float get_size() const;
+
 	void draw() override;
 };
