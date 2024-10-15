@@ -46,7 +46,7 @@ public:
     /**
      * @brief Converter from Vector3 to glm::vec3
      */
-    glm::vec3 to_glm_vec3(const Vector3& vector);
+    static glm::vec3 to_glm_vec3(const Vector3& vector);
 
     /**
      * @brief Equal operator
