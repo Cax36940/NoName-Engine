@@ -106,6 +106,7 @@
   <ItemGroup>
     <ClCompile Include="src\Component\Physics\Collider\SphereCollider.cpp" />
     <ClCompile Include="src\Component\Physics\DoubleSpringComponent.cpp" />
+    <ClCompile Include="src\Component\Physics\Force\GravityForce.cpp" />
     <ClCompile Include="src\Component\Physics\SimpleSpringComponent.cpp" />
     <ClCompile Include="src\Component\Physics\Force\DefaultSpringForce.cpp" />
     <ClCompile Include="src\Entity\ParticleFactory.cpp" />
@@ -125,6 +126,7 @@
     <ClInclude Include="src\Component\Graphics\GraphicsComponent.hpp" />
     <ClInclude Include="src\Component\Physics\Collider\SphereCollider.hpp" />
     <ClInclude Include="src\Component\Physics\DoubleSpringComponent.hpp" />
+    <ClInclude Include="src\Component\Physics\Force\GravityForce.hpp" />
     <ClInclude Include="src\Component\Physics\PhysicsComponent.hpp" />
     <ClInclude Include="src\Component\Physics\SimpleSpringComponent.hpp" />
     <ClInclude Include="src\Entity\ParticleFactory.hpp" />

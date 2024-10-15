@@ -15,4 +15,8 @@ public:
 	DefaultParticle(const Particle& particle, const Sphere& sphere);
 
 	void update(const float& delta);
+
+	Particle* get_physical_particle() {
+		return &particle;
+	}
 };

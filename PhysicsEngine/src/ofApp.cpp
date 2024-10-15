@@ -2,6 +2,8 @@
 #include "ofApp.h"
 #include "System/GraphicsComponentRegistry.hpp"
 #include "System/PhysicsComponentRegistry.hpp"
+#include "System/CollidersComponentRegistry.hpp"
+#include "System/ParticleForceRegistry.hpp"
 #include "Entity/ParticleFactory.hpp"
 
 
@@ -15,18 +17,33 @@ void ofApp::setup(){
 		ParticleType::STATIC, 
 		Vector3(WINDOW_WIDTH/2, WINDOW_HEIGHT/2, 0), 
 		Vector3(0, 0, 0));
+
+	gravity = GravityForce(-0.1);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	
+	// Calc deltaTime
 	auto time = std::chrono::high_resolution_clock::now();
 	auto delta = std::chrono::duration_cast<std::chrono::milliseconds>(time - timeLastFrame).count(); //durée de calcul d'une frame
 	timeLastFrame = time;
 
-	p1.update(delta);
-	p2.update(delta);
-	CollidersComponentRegistry::checkCollisions();
+	// Adding forces
+	ParticleForceRegistry::add(particle.get_physical_particle(), &gravity);
+
+	// Checking collisions
+	//CollidersComponentRegistry::checkCollisions();
+
+	// Applying forces
+	ParticleForceRegistry::updateForces(delta);
+	particle.get_physical_particle()->apply_forces_euler();
+
+	// Updating every object
+	particle.update(delta);
+
+	// Clear for next update
+	particle.get_physical_particle()->clear_accum();
+	ParticleForceRegistry::clear();
 }
 
 //--------------------------------------------------------------

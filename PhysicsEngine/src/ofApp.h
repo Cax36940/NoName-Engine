@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "Entity/DefaultParticle.hpp"
+#include "Component/Physics/Force/GravityForce.hpp"
 #include <chrono>
 
 #define WINDOW_WIDTH	1280
@@ -34,6 +35,7 @@ private:
 	bool drag_particle = false;
 
 	DefaultParticle particle;
+	GravityForce gravity;
 
 	// Setup elements
 	ofImage backgroundPicture;

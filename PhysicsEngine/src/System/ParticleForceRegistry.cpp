@@ -1,5 +1,7 @@
 #include "ParticleForceRegistry.hpp"
 
+std::vector<ParticleForceRegistry::ParticleForceRegistration> ParticleForceRegistry::registry;
+
 void ParticleForceRegistry::add(Particle* particle, ParticleForceGenerator* fg)
 {
 	ParticleForceRegistration pfr;
