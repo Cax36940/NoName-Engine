@@ -18,7 +18,9 @@ void ofApp::setup(){
 		Vector3(WINDOW_WIDTH/2, WINDOW_HEIGHT/2, 0), 
 		Vector3(0, 0, 0));
 
-	gravity = GravityForce(-0.1);
+	gravity = GravityForce(0.001);
+
+	timeLastFrame = std::chrono::high_resolution_clock::now();
 }
 
 //--------------------------------------------------------------
@@ -29,7 +31,10 @@ void ofApp::update(){
 	timeLastFrame = time;
 
 	// Adding forces
-	ParticleForceRegistry::add(particle.get_physical_particle(), &gravity);
+	if (!drag_particle)
+	{
+		ParticleForceRegistry::add(particle.get_physical_particle(), &gravity);
+	}
 
 	// Checking collisions
 	//CollidersComponentRegistry::checkCollisions();

@@ -24,6 +24,10 @@ void Particle::update(const float& delta)
 {
 	velocity = velocity + acceleration * delta;
 	position = position + velocity * delta; //intégration d'Euler
+	if (position.y >= 700)
+	{
+		position.y = 700;
+	}
 }
 
 void Particle::add_force(const Vector3 &force)
