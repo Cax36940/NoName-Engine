@@ -1,10 +1,10 @@
 #pragma once
 #include "ofApp.h"
 #include "System/GraphicsComponentRegistry.hpp"
+#include "System/ParticleForceRegistry.hpp"
 #include "System/PhysicsComponentRegistry.hpp"
+
 #include "Entity/ParticleFactory.hpp"
-
-
 
 //--------------------------------------------------------------
 void ofApp::setup(){
@@ -13,8 +13,10 @@ void ofApp::setup(){
 
 	particle = ParticleFactory::createParticle(
 		ParticleType::STATIC, 
-		Vector3(500, 50, 0), 
-		Vector3(0, 40, 0));
+		Vector3(500, 200, 0), 
+		Vector3(0, 0, 0));
+
+	spring = SimpleSpring(&particle.particle, 1, 100, Vector3(500, 50, 0), 5, glm::vec3(0.5,0.5,0.5));
 
 	timeLastFrame = std::chrono::high_resolution_clock::now();
 }
@@ -27,7 +29,9 @@ void ofApp::update(){
 	timeLastFrame = time;
 
 	PhysicsComponentRegistry::registerAllPhysics();
+	ParticleForceRegistry::updateForces(delta);
 	particle.update(delta);
+	spring.update(delta);
 }
 
 //--------------------------------------------------------------

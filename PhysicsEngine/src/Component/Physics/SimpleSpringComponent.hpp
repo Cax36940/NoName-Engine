@@ -4,12 +4,21 @@
 #include "PhysicsComponent.hpp"
 
 class SimpleSpringComponent : public PhysicsComponent {
+private :
 	Particle* particle;
 	DefaultSpringForce spring_force;
 
-	SimpleSpringComponent(Particle* particle, const float stiffness, const float default_length, const Vector3& fixed_point);
+public :
+	SimpleSpringComponent() = default;
+	SimpleSpringComponent(const SimpleSpringComponent&) = default;
+	SimpleSpringComponent& operator=(const SimpleSpringComponent&) = default;
+
+	SimpleSpringComponent(Particle* particle, const float& stiffness, const float& default_length, const Vector3& fixed_point);
 
 	void changeFixedPoint(const Vector3& new_fixed_point);
+
+	Vector3 get_origin() const;
+	Particle& get_particle() const;
 
 	void registerPhysics() override;
 };

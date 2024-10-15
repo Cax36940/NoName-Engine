@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "Entity/DefaultParticle.hpp"
+#include "Entity/SimpleSpring.hpp"
 #include <chrono>
 
 #define WINDOW_WIDTH	1280
@@ -31,7 +32,7 @@ private:
 	std::chrono::steady_clock::time_point timeLastFrame;
 
 	DefaultParticle particle;
-
+	SimpleSpring spring;
 	// Setup elements
 	ofImage backgroundPicture;
 	ofTrueTypeFont myfont;

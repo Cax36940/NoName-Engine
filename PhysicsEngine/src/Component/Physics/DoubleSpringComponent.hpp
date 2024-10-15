@@ -11,7 +11,11 @@ private:
 	DefaultSpringForce second_force;
 
 public:
-	DoubleSpringComponent(Particle* first, Particle* second, const float stiffness, const float default_length);
+	DoubleSpringComponent() = default;
+	DoubleSpringComponent(const DoubleSpringComponent&) = default;
+	DoubleSpringComponent& operator=(const DoubleSpringComponent&) = default;
+
+	DoubleSpringComponent(Particle* first, Particle* second, const float& stiffness, const float& default_length);
 
 	void registerPhysics() override;
 };

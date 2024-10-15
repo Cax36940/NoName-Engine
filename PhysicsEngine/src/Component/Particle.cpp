@@ -15,8 +15,10 @@ Vector3 Particle::get_position() const
 
 void Particle::update(const float& delta)
 {
+	acceleration = accum_force;
 	velocity = velocity + acceleration * delta;
 	position = position + velocity * delta; //intégration d'Euler
+	clear_accum();
 }
 
 void Particle::add_force(const Vector3 &force)

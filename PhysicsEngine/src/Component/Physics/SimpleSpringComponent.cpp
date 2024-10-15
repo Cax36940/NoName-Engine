@@ -1,7 +1,15 @@
 #include "SimpleSpringComponent.hpp"
 #include "System/ParticleForceRegistry.hpp"
 
-SimpleSpringComponent::SimpleSpringComponent(Particle* particle, const float stiffness, const float default_length, const Vector3& fixed_point) : particle(particle), spring_force(stiffness, default_length, fixed_point){}
+SimpleSpringComponent::SimpleSpringComponent(Particle* particle, const float& stiffness, const float& default_length, const Vector3& fixed_point) : particle(particle), spring_force(stiffness, default_length, fixed_point){}
+
+Vector3 SimpleSpringComponent::get_origin() const {
+	return spring_force.getOrigin();
+}
+
+Particle& SimpleSpringComponent::get_particle() const {
+	return *particle;
+}
 
 void SimpleSpringComponent::changeFixedPoint(const Vector3& new_fixed_point)
 {
