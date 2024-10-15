@@ -104,11 +104,13 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Component\Physics\Collider\SphereCollider.cpp" />
     <ClCompile Include="src\Component\Physics\DoubleSpringComponent.cpp" />
     <ClCompile Include="src\Component\Physics\SimpleSpringComponent.cpp" />
     <ClCompile Include="src\Component\Physics\Force\DefaultSpringForce.cpp" />
     <ClCompile Include="src\Entity\ParticleFactory.cpp" />
     <ClCompile Include="src\Entity\DefaultParticle.cpp" />
+    <ClCompile Include="src\System\CollidersComponentRegistry.cpp" />
     <ClCompile Include="src\System\GraphicsComponentRegistry.cpp" />
     <ClCompile Include="src\System\ParticleForceRegistry.cpp" />
     <ClCompile Include="src\Component\Graphics\Sphere.cpp" />
@@ -121,12 +123,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Component\Graphics\GraphicsComponent.hpp" />
+    <ClInclude Include="src\Component\Physics\Collider\SphereCollider.hpp" />
     <ClInclude Include="src\Component\Physics\DoubleSpringComponent.hpp" />
     <ClInclude Include="src\Component\Physics\PhysicsComponent.hpp" />
     <ClInclude Include="src\Component\Physics\SimpleSpringComponent.hpp" />
     <ClInclude Include="src\Entity\ParticleFactory.hpp" />
     <ClInclude Include="src\Entity\DefaultParticle.hpp" />
     <ClInclude Include="src\Component\Physics\Force\ParticleForceGenerator.hpp" />
+    <ClInclude Include="src\System\CollidersComponentRegistry.hpp" />
     <ClInclude Include="src\System\GraphicsComponentRegistry.hpp" />
     <ClInclude Include="src\System\ParticleForceRegistry.hpp" />
     <ClInclude Include="src\Component\Graphics\Sphere.hpp" />

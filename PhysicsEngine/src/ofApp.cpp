@@ -15,18 +15,18 @@ void ofApp::setup(){
 		ParticleType::STATIC, 
 		Vector3(WINDOW_WIDTH/2, WINDOW_HEIGHT/2, 0), 
 		Vector3(0, 0, 0));
-	
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
 	
 	auto time = std::chrono::high_resolution_clock::now();
-	auto delta = std::chrono::duration_cast<std::chrono::milliseconds>(time - timeLastFrame).count(); //durée de calcul d'une frame
+	auto delta = std::chrono::duration_cast<std::chrono::milliseconds>(time - timeLastFrame).count(); //durÃ©e de calcul d'une frame
 	timeLastFrame = time;
 
-	PhysicsComponentRegistry::registerAllPhysics();
-	particle.update(delta);
+	p1.update(delta);
+	p2.update(delta);
+	CollidersComponentRegistry::checkCollisions();
 }
 
 //--------------------------------------------------------------
@@ -62,7 +62,7 @@ void ofApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-	//Vérifier si je clique sur la particle (à généraliser après)
+	//VÃ©rifier si je clique sur la particle (Ã  gÃ©nÃ©raliser aprÃ¨s)
 	Vector3 pos_souris = Vector3(x, y, 0);
 	Vector3 pos_particle = particle.particle.get_position();
 	int rayon = particle.sprite.get_size();
