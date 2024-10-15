@@ -13,16 +13,17 @@ void ofApp::setup(){
 
 	particle = ParticleFactory::createParticle(
 		ParticleType::STATIC, 
-		Vector3(50, 50, 0), 
-		Vector3(0, 0, 0));
-	
+		Vector3(500, 50, 0), 
+		Vector3(0, 40, 0));
+
+	timeLastFrame = std::chrono::high_resolution_clock::now();
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
 	
 	auto time = std::chrono::high_resolution_clock::now();
-	auto delta = std::chrono::duration_cast<std::chrono::milliseconds>(time - timeLastFrame).count(); //dur�e de calcul d'une frame
+	auto delta = std::chrono::duration_cast<std::chrono::milliseconds>(time - timeLastFrame).count() / 1000.; //dur�e de calcul d'une frame
 	timeLastFrame = time;
 
 	PhysicsComponentRegistry::registerAllPhysics();
