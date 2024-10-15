@@ -24,4 +24,6 @@ public:
 
 	void add_force(const Vector3 &force);
 	void clear_accum();
+
+	void set_position(Vector3 pos);
 };

@@ -15,12 +15,12 @@ void Sphere::set_color(const float& r, const float& g, const float& b) {
 
 Vector3 Sphere::get_position() const
 {
-	return position;
+	return this->position;
 }
 
-float Sphere::get_size() const
+float Sphere::get_size()
 {
-	return size;
+	return this->size;
 }
 
 void Sphere::draw()

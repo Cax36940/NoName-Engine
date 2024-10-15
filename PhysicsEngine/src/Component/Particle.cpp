@@ -29,3 +29,8 @@ void Particle::clear_accum()
 	accum_force = Vector3(0,0,0);
 }
 
+void Particle::set_position(Vector3 pos)
+{
+	this->position = pos;
+}
+
