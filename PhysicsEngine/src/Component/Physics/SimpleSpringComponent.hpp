@@ -1,13 +1,15 @@
 #pragma once
 #include "Component/Particle.hpp"
+#include "Component/Physics/Force/DefaultSpringForce.hpp"
 #include "PhysicsComponent.hpp"
 
 class SimpleSpringComponent : public PhysicsComponent {
-	Vector3 fixed_point;
 	Particle* particle;
-	// SpringForce
+	DefaultSpringForce spring_force;
 
-	SimpleSpringComponent(Vector3 fixed_point, Particle* particle);
+	SimpleSpringComponent(Particle* particle, const float stiffness, const float default_length, const Vector3& fixed_point);
+
+	void changeFixedPoint(const Vector3& new_fixed_point);
 
 	void registerPhysics() override;
 };

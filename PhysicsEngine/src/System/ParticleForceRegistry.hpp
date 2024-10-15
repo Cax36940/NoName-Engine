@@ -10,11 +10,13 @@ private:
 		Particle* particle;
 		ParticleForceGenerator* fg;
 	};
-	std::vector<ParticleForceRegistration> registry;
-	void clear(); //supp le registre, pas les forces
+
+	static std::vector<ParticleForceRegistration> registry;
+
 public:
-	void add(Particle* particle, ParticleForceGenerator* fg);
-	void remove(Particle* particle, ParticleForceGenerator* fg);
-	void updateForces(float duration);
+	static void add(Particle* particle, ParticleForceGenerator* fg);
+	static void remove(Particle* particle, ParticleForceGenerator* fg);
+	static void clear(); //supp le registre, pas les forces
+	static void updateForces(float duration);
 };
 
