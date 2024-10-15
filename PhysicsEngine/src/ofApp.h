@@ -29,7 +29,6 @@ public:
 private:
 
 	std::chrono::steady_clock::time_point timeLastFrame;
-	bool isPlaying = false;
 
 	DefaultParticle particle;
 

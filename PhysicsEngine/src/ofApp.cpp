@@ -22,7 +22,7 @@ void ofApp::setup(){
 void ofApp::update(){
 	
 	auto time = std::chrono::high_resolution_clock::now();
-	auto delta = std::chrono::duration_cast<std::chrono::milliseconds>(time - timeLastFrame).count(); //durée de calcul d'une frame
+	auto delta = std::chrono::duration_cast<std::chrono::milliseconds>(time - timeLastFrame).count(); //durï¿½e de calcul d'une frame
 	timeLastFrame = time;
 
 	PhysicsComponentRegistry::registerAllPhysics();
