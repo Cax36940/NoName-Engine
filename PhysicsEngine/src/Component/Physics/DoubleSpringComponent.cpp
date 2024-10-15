@@ -1,9 +1,13 @@
 #include "DoubleSpringComponent.hpp"
 
-DoubleSpringComponent::DoubleSpringComponent(Particle* first, Particle* second) : first(first), second(second) {}
+DoubleSpringComponent::DoubleSpringComponent(Particle* first, Particle* second, const float stiffness, const float default_length) : 
+	first(first), 
+	second(second),
+	first_force(stiffness, default_length),
+	second_force(stiffness, default_length){}
 
 void DoubleSpringComponent::registerPhysics()
 {
-	// SpringForce.updateForce(first, delta)
-	// SpringForce.updateForce(second, delta)
+	first_force.setOrigin(second->get_position());
+	second_force.setOrigin(first->get_position());
 }

@@ -3,11 +3,7 @@
 class ParticleRegistry
 {
 private:
-
-	typedef std::vector<Particle*> Registry;
-
-	static Registry registry;
-
+	static std::vector<Particle*> registry;
 public:
 	static void add(Particle* particle);
 	static void remove(Particle* particle);
