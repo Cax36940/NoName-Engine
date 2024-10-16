@@ -40,14 +40,14 @@ void ofApp::update(){
 	timeLastFrame = time;
 
 	// Register forces from physics components
-	PhysicsComponentRegistry::registerAllPhysics();
+	PhysicsComponentRegistry::register_all_physics();
 
 	// Checking collisions
 	//CollidersComponentRegistry::checkCollisions();
 
 	// Applying forces
 	ParticleForceRegistry::add(particle.get_physical_particle(), &gravity);
-	ParticleForceRegistry::updateForces(delta);
+	ParticleForceRegistry::update_forces(delta);
 
 	// Update mouse control on particle
 	if (drag_particle)
@@ -71,7 +71,7 @@ void ofApp::draw(){
 	ofSetColor(255);
 	backgroundPicture.draw(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 
-	GraphicsComponentRegistry::drawAll();
+	GraphicsComponentRegistry::draw_all();
 }
 
 //--------------------------------------------------------------

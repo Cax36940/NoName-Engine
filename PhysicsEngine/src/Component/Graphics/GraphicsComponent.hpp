@@ -11,8 +11,8 @@ public:
 	GraphicsComponent(const GraphicsComponent&) { GraphicsComponentRegistry::add(this); };
 	~GraphicsComponent(){ GraphicsComponentRegistry::remove(this); };
 	
-	void SetVisible(bool visible_value) { visible = visible_value; };
-	bool IsVisible() const { return visible; };
+	void set_visible(bool visible_value) { visible = visible_value; };
+	bool is_visible() const { return visible; };
 	virtual void draw() = 0;
 
 };

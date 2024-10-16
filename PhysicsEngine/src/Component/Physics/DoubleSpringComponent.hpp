@@ -17,5 +17,5 @@ public:
 
 	DoubleSpringComponent(Particle* first, Particle* second, const float& stiffness, const float& default_length);
 
-	void registerPhysics() override;
+	void register_physics() override;
 };

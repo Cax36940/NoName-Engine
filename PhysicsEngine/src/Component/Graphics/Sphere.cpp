@@ -15,12 +15,12 @@ void Sphere::set_color(const float& r, const float& g, const float& b) {
 
 Vector3 Sphere::get_position() const
 {
-	return this->position;
+	return position;
 }
 
-float Sphere::get_size()
+float Sphere::get_size() const
 {
-	return this->size;
+	return size;
 }
 
 void Sphere::draw()
@@ -29,5 +29,5 @@ void Sphere::draw()
 		return;
 	}
 	ofSetColor(color.r, color.g, color.b);
-	ofDrawSphere(glm::vec3(position.x, position.y, position.z), this->size);
+	ofDrawSphere(glm::vec3(position.x, position.y, position.z), size);
 }

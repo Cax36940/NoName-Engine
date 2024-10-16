@@ -9,5 +9,5 @@ private:
 public:
 	static void add(GraphicsComponent* graphics_component);
 	static void remove(GraphicsComponent* graphics_component);
-	static void drawAll();
+	static void draw_all();
 };

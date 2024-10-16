@@ -11,6 +11,8 @@ public:
 	SphereCollider collider;
 
 	DefaultParticle() = default;
+	DefaultParticle(const DefaultParticle&) = default;
+	DefaultParticle& operator=(const DefaultParticle&) = default;
 
 	DefaultParticle(const Particle& particle, const Sphere& sphere);
 

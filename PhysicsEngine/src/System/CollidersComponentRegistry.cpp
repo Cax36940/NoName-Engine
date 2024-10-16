@@ -20,7 +20,7 @@ void CollidersComponentRegistry::remove(SphereCollider* collider)
 	}
 }
 
-void CollidersComponentRegistry::checkCollisions()
+void CollidersComponentRegistry::check_collisions()
 {
 	// Check only sphere collisions
 	for (auto i = registry.begin(); i != registry.end(); i++) {

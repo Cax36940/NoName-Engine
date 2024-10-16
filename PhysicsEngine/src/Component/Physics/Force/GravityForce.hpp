@@ -7,8 +7,11 @@ private:
 	float gravity;
 
 public:
-	GravityForce();
-	GravityForce(float gravity_strength);
+	GravityForce() : gravity(0.0) {}
+	GravityForce(const GravityForce&) = default;
+	GravityForce& operator=(const GravityForce&) = default;
 
-	void updateForce(Particle* particle, float duration) override;
+	GravityForce::GravityForce(float gravity_strength) : gravity(gravity_strength) {}
+
+	void update_force(Particle* particle, float duration) override;
 };

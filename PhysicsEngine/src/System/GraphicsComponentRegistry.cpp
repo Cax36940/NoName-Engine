@@ -18,7 +18,7 @@ void GraphicsComponentRegistry::remove(GraphicsComponent* graphics_component)
 	}
 }
 
-void GraphicsComponentRegistry::drawAll()
+void GraphicsComponentRegistry::draw_all()
 {
 	for (GraphicsComponent* graphics_component : registry) {
 		graphics_component->draw();

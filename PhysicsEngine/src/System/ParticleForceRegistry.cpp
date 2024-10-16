@@ -29,10 +29,10 @@ void ParticleForceRegistry::clear()
 	registry.clear();
 }
 
-void ParticleForceRegistry::updateForces(float duration)
+void ParticleForceRegistry::update_forces(float duration)
 {
 	for (ParticleForceRegistration pfr : registry) {
-		pfr.fg->updateForce(pfr.particle, duration);
+		pfr.fg->update_force(pfr.particle, duration);
 	}
 	clear();
 }

@@ -8,7 +8,10 @@ private:
 	float size;
 
 public:
-	SphereCollider() { CollidersComponentRegistry::add(this); };
+	SphereCollider() : position(0,0,0), size(0) { CollidersComponentRegistry::add(this); }
+	SphereCollider(const SphereCollider& collider) : position(collider.get_position()), size(collider.get_size()) { CollidersComponentRegistry::add(this); }
+	SphereCollider& operator=(const SphereCollider&) = default;
+
 	SphereCollider(const Vector3& pos, const float& size);
 	~SphereCollider() { CollidersComponentRegistry::remove(this); };
 

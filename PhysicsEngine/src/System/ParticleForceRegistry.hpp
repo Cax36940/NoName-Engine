@@ -17,6 +17,6 @@ public:
 	static void add(Particle* particle, ParticleForceGenerator* fg);
 	static void remove(Particle* particle, ParticleForceGenerator* fg);
 	static void clear(); //supp le registre, pas les forces
-	static void updateForces(float duration);
+	static void update_forces(float duration);
 };
 

@@ -9,5 +9,5 @@ private:
 public:
 	static void add(SphereCollider* collider);
 	static void remove(SphereCollider* collider);
-	static void checkCollisions();
+	static void check_collisions();
 };

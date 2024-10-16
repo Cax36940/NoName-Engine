@@ -1,7 +1,6 @@
 #include <ofGraphics.h>
 #include "SpringSprite.hpp"
 
-
 void SpringSprite::set_width(const float& new_width) {
 	width = new_width;
 }

@@ -7,10 +7,10 @@ DoubleSpringComponent::DoubleSpringComponent(Particle* first, Particle* second, 
 	first_force(stiffness, default_length),
 	second_force(stiffness, default_length){}
 
-void DoubleSpringComponent::registerPhysics()
+void DoubleSpringComponent::register_physics()
 {
-	first_force.setOrigin(second->get_position());
-	second_force.setOrigin(first->get_position());
+	first_force.set_origin(second->get_position());
+	second_force.set_origin(first->get_position());
 	ParticleForceRegistry::add(first, (ParticleForceGenerator*)&first_force);
 	ParticleForceRegistry::add(second, (ParticleForceGenerator*)&second_force);
 }

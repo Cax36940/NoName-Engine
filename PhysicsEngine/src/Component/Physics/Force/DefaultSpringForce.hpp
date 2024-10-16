@@ -13,7 +13,8 @@ public:
 
 	DefaultSpringForce(const float& stiffness, const float& default_length);
 	DefaultSpringForce(const float& stiffness, const float& default_length, const Vector3& origin);
-	void setOrigin(const Vector3& new_origin);
-	Vector3 getOrigin() const;
-	void updateForce(Particle* particle, float duration) override;
+
+	void set_origin(const Vector3& new_origin);
+	Vector3 get_origin() const;
+	void update_force(Particle* particle, float duration) override;
 };

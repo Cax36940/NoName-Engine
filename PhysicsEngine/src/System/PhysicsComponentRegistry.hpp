@@ -9,5 +9,5 @@ private:
 public :
 	static void add(PhysicsComponent* physics_component);
 	static void remove(PhysicsComponent* physics_component);
-	static void registerAllPhysics();
+	static void register_all_physics();
 };

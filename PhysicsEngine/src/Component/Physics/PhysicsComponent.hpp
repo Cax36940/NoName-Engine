@@ -9,5 +9,5 @@ public:
 	PhysicsComponent(const PhysicsComponent&) { PhysicsComponentRegistry::add(this); };
 	~PhysicsComponent() { PhysicsComponentRegistry::remove(this); };
 
-	virtual void registerPhysics() = 0;
+	virtual void register_physics() = 0;
 };

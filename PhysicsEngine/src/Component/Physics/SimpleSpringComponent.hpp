@@ -15,10 +15,10 @@ public :
 
 	SimpleSpringComponent(Particle* particle, const float& stiffness, const float& default_length, const Vector3& fixed_point);
 
-	void changeFixedPoint(const Vector3& new_fixed_point);
+	void change_fixed_point(const Vector3& new_fixed_point);
 
 	Vector3 get_origin() const;
 	Particle& get_particle() const;
 
-	void registerPhysics() override;
+	void register_physics() override;
 };

@@ -12,6 +12,8 @@ private:
 
 public:
 	TrailParticle() = default;
+	TrailParticle(const TrailParticle&) = default;
+	TrailParticle& operator=(const TrailParticle&) = default;
 	TrailParticle(const DefaultParticle& particle);
 
 	void set_space(const float& s);
