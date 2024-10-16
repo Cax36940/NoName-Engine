@@ -18,6 +18,10 @@ public:
 	void set_position(const Vector3& pos);
 	void set_size(const float& new_size);
 	void set_color(const float& r, const float& g, const float& b);
+	float get_size();
+
+	Vector3 get_position() const;
+	float get_size() const;
 
 	void draw() override;
 };

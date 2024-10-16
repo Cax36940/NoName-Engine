@@ -19,6 +19,9 @@
     <ClCompile Include="src\System\GraphicsComponentRegistry.cpp" />
     <ClCompile Include="src\Component\Graphics\SpringSprite.cpp" />
     <ClCompile Include="src\Entity\SimpleSpring.cpp" />
+    <ClCompile Include="src\Component\Physics\Collider\SphereCollider.cpp" />
+    <ClCompile Include="src\System\CollidersComponentRegistry.cpp" />
+    <ClCompile Include="src\Component\Physics\Force\GravityForce.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -48,6 +51,9 @@
     <ClInclude Include="src\System\GraphicsComponentRegistry.hpp" />
     <ClInclude Include="src\Component\Graphics\SpringSprite.hpp" />
     <ClInclude Include="src\Entity\SimpleSpring.hpp" />
+    <ClInclude Include="src\Component\Physics\Collider\SphereCollider.hpp" />
+    <ClInclude Include="src\System\CollidersComponentRegistry.hpp" />
+    <ClInclude Include="src\Component\Physics\Force\GravityForce.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

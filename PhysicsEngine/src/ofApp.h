@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "Entity/DefaultParticle.hpp"
 #include "Entity/SimpleSpring.hpp"
+#include "Component/Physics/Force/GravityForce.hpp"
 #include <chrono>
 
 #define WINDOW_WIDTH	1280
@@ -31,8 +32,14 @@ private:
 
 	std::chrono::steady_clock::time_point timeLastFrame;
 
+	int mouse_x;
+	int mouse_y;
+	DefaultParticle* drag_particle;
+
 	DefaultParticle particle;
 	SimpleSpring spring;
+	GravityForce gravity;
+
 	// Setup elements
 	ofImage backgroundPicture;
 	ofTrueTypeFont myfont;
