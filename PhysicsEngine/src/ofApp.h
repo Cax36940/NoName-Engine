@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-#include "TrailParticle.hpp"
+#include "Entity/TrailParticle.hpp"
 #include <chrono>
 
 #define WINDOW_WIDTH	1280

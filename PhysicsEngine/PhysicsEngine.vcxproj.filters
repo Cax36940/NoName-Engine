@@ -17,6 +17,8 @@
     <ClCompile Include="src\Component\Physics\SimpleSpringComponent.cpp" />
     <ClCompile Include="src\Component\Physics\Force\DefaultSpringForce.cpp" />
     <ClCompile Include="src\System\GraphicsComponentRegistry.cpp" />
+    <ClCompile Include="Spring.cpp" />
+    <ClCompile Include="src\Component\Matrix3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -44,6 +46,8 @@
     </ClInclude>
     <ClInclude Include="src\Component\Graphics\GraphicsComponent.hpp" />
     <ClInclude Include="src\System\GraphicsComponentRegistry.hpp" />
+    <ClInclude Include="Spring.h" />
+    <ClInclude Include="src\Component\Matrix3.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />
