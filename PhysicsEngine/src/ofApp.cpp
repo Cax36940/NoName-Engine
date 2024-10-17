@@ -22,32 +22,40 @@ void ofApp::setup(){
 
 
 	// Initialize scene entities
-	particle = ParticleFactory::createParticle(
-		ParticleType::STATIC, 
-		Vector3(WINDOW_WIDTH/2, 200, 0), 
-		Vector3(0, 0, 0));
+	p1 = DefaultParticle(
+		Particle(Vector3(400, WINDOW_HEIGHT / 2, 0), Vector3(100, 0, 0), Vector3(0, 0, 0), 200),
+		Sphere(Vector3(0, WINDOW_HEIGHT / 2, 0), 10, glm::vec3(255, 0, 0))
+	);
 
-	spring = SimpleSpring(&particle.particle, 10, 100, Vector3(WINDOW_WIDTH/2, 100, 0), 5, glm::vec3(0.5,0.5,0.5));
-
-	gravity = GravityForce(10);
+	p2 = DefaultParticle(
+		Particle(Vector3(WINDOW_WIDTH - 400, WINDOW_HEIGHT / 2, 0), Vector3(-100, 0, 0), Vector3(0, 0, 0), 200),
+		Sphere(Vector3(WINDOW_WIDTH, WINDOW_HEIGHT / 2, 0), 10, glm::vec3(0, 0, 255))
+	);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
+	if (!time_init) {
+		time_init = true;
+		timeLastFrame = std::chrono::high_resolution_clock::now();
+		return;
+	}
+
 	// Calc deltaTime
 	auto time = std::chrono::high_resolution_clock::now();
 	auto delta = std::chrono::duration_cast<std::chrono::milliseconds>(time - timeLastFrame).count() / 1000.; //durée de calcul d'une frame
 	timeLastFrame = time;
 
 	// Register forces from physics components
-	PhysicsComponentRegistry::register_all_physics();
+	//PhysicsComponentRegistry::register_all_physics();
 
 	// Checking collisions
-	//CollidersComponentRegistry::checkCollisions();
+	CollidersComponentRegistry::check_collisions();
+	CollidersComponentRegistry::solve_collisions();
 
 	// Applying forces
-	ParticleForceRegistry::add(particle.get_physical_particle(), &gravity);
-	ParticleForceRegistry::update_forces(delta);
+	//ParticleForceRegistry::add(particle.get_physical_particle(), &gravity);
+	//ParticleForceRegistry::update_forces(delta);
 
 	// Update mouse control on particle
 	if (drag_particle)
@@ -58,11 +66,11 @@ void ofApp::update(){
 	}
 
 	// Updating every object
-	particle.update(delta);
-	spring.update(delta);
+	p1.update(delta);
+	p2.update(delta);
 
 	// Clear for next update
-	ParticleForceRegistry::clear();
+	//ParticleForceRegistry::clear();
 }
 
 //--------------------------------------------------------------
@@ -102,12 +110,12 @@ void ofApp::mousePressed(int x, int y, int button){
 
 	//Vérifier si je clique sur la particle (à généraliser après)
 	const Vector3 pos_souris(x, y, 0);
-	const Vector3& pos_particle = particle.particle.get_position();
-	int rayon = particle.sprite.get_size();
+	const Vector3& pos_particle = p1.particle.get_position();
+	int rayon = p1.sprite.get_size();
 	
 	const Vector3 distance = pos_souris - pos_particle;
 	if (Vector3::norm(distance) < rayon) {
-		drag_particle = &particle;
+		drag_particle = &p1;
 	}	
 }
 

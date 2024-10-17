@@ -30,15 +30,15 @@ public:
 
 private:
 
+	bool time_init = false;
 	std::chrono::steady_clock::time_point timeLastFrame;
 
 	int mouse_x;
 	int mouse_y;
 	DefaultParticle* drag_particle;
 
-	DefaultParticle particle;
-	SimpleSpring spring;
-	GravityForce gravity;
+	DefaultParticle p1;
+	DefaultParticle p2;
 
 	// Setup elements
 	ofImage backgroundPicture;

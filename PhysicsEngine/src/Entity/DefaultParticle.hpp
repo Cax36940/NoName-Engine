@@ -14,7 +14,7 @@ public:
 	DefaultParticle(const DefaultParticle&) = default;
 	DefaultParticle& operator=(const DefaultParticle&) = default;
 
-	DefaultParticle(const Particle& particle, const Sphere& sphere);
+	DefaultParticle(const Particle& _particle, const Sphere& sphere);
 
 	void update(const float& delta);
 
