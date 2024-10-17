@@ -15,6 +15,11 @@ Vector3 Particle::get_position() const
 	return position;
 }
 
+Vector3 Particle::get_velocity() const
+{
+	return velocity;
+}
+
 float Particle::get_mass() const
 {
 	return 1 / inv_mass;
@@ -23,7 +28,6 @@ float Particle::get_mass() const
 void Particle::update(const float& delta)
 {
 	apply_forces_euler();
-	acceleration = accum_force;
 	velocity = velocity + acceleration * delta;
 	position = position + velocity * delta; //int�gration d'Euler
 	if (position.y >= 700)

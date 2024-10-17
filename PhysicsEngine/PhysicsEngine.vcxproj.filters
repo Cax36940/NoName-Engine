@@ -25,6 +25,12 @@
     <ClCompile Include="src\System\ParticleForceRegistry.cpp" />
     <ClCompile Include="src\System\PhysicsComponentRegistry.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
+    <ClCompile Include="src\Component\Physics\BungeeSpringComponent.cpp" />
+    <ClCompile Include="src\Component\Physics\Force\BungeeSpringForce.cpp" />
+    <ClCompile Include="src\Component\Physics\Force\DampedSpringForce.cpp" />
+    <ClCompile Include="src\Component\Physics\DampedDoubleSpringComponent.cpp" />
+    <ClCompile Include="src\Component\Physics\DampedSimpleSpringComponent.cpp" />
+    <ClCompile Include="src\Entity\DampedSimpleSpring.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -58,6 +64,12 @@
     <ClInclude Include="src\System\GraphicsComponentRegistry.hpp" />
     <ClInclude Include="src\System\ParticleForceRegistry.hpp" />
     <ClInclude Include="src\System\PhysicsComponentRegistry.hpp" />
+    <ClInclude Include="src\Component\Physics\BungeeSpringComponent.hpp" />
+    <ClInclude Include="src\Component\Physics\Force\BungeeSpringForce.hpp" />
+    <ClInclude Include="src\Component\Physics\Force\DampedSpringForce.hpp" />
+    <ClInclude Include="src\Component\Physics\DampedDoubleSpringComponent.hpp" />
+    <ClInclude Include="src\Component\Physics\DampedSimpleSpringComponent.hpp" />
+    <ClInclude Include="src\Entity\DampedSimpleSpring.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

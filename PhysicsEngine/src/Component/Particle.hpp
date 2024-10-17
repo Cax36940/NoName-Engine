@@ -20,6 +20,7 @@ public:
 	Particle(const Vector3& pos, const Vector3& vel, const Vector3& acc, const float& mass);
 
 	Vector3 get_position() const;
+	Vector3 get_velocity() const;
 	float get_mass() const;
 
 	void update(const float& delta);

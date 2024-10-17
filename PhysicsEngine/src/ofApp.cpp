@@ -24,17 +24,20 @@ void ofApp::setup(){
 	particle_list.reserve(3);
 
 	// Initialize scene entities
-	particle = ParticleFactory::createSimpleParticle(Vector3(WINDOW_WIDTH/2, 200, 0));
+	particle = ParticleFactory::createSimpleParticle(Vector3(WINDOW_WIDTH/2, 250, 0));
+	particle2 = ParticleFactory::createSimpleParticle(Vector3(WINDOW_WIDTH / 2 + 50, 250, 0));
 
-	particleA = ParticleFactory::createSimpleParticle(Vector3(WINDOW_WIDTH / 2 - 20, 250, 0));
-	particleB = ParticleFactory::createSimpleParticle(Vector3(WINDOW_WIDTH / 2 + 20, 250, 0));
+	particleA = ParticleFactory::createSimpleParticle(Vector3(WINDOW_WIDTH / 2 - 150, 250, 0));
+	particleB = ParticleFactory::createSimpleParticle(Vector3(WINDOW_WIDTH / 2 - 100, 250, 0));
 
 	spring = SimpleSpring(&particle.particle, 10, 100, Vector3(WINDOW_WIDTH/2, 100, 0), 5, glm::vec3(0.5,0.5,0.5));
+	spring2 = DampedSimpleSpring(&particle2.particle, 10, 1, 100, Vector3(WINDOW_WIDTH / 2 + 50, 100, 0), 5, glm::vec3(0.5, 0.5, 0.5));
 	springAB = DoubleSpring(&particleA.particle, &particleB.particle, 1, 40, 5, glm::vec3(0.5, 0.5, 0.5));
 
 	gravity = GravityForce(10);
 
 	particle_list.push_back(&particle);
+	particle_list.push_back(&particle2);
 	particle_list.push_back(&particleA);
 	particle_list.push_back(&particleB);
 }
@@ -54,6 +57,7 @@ void ofApp::update(){
 
 	// Applying forces
 	ParticleForceRegistry::add(particle.get_physical_particle(), &gravity);
+	ParticleForceRegistry::add(particle2.get_physical_particle(), &gravity);
 	ParticleForceRegistry::update_forces(delta);
 
 	// Update mouse control on particle
@@ -66,9 +70,11 @@ void ofApp::update(){
 
 	// Updating every object
 	particle.update(delta);
+	particle2.update(delta);
 	particleA.update(delta);
 	particleB.update(delta);
 	spring.update(delta);
+	spring2.update(delta);
 	springAB.update(delta);
 
 	// Clear for next update

@@ -4,6 +4,7 @@
 #include "Entity/DefaultParticle.hpp"
 #include "Entity/DoubleSpring.hpp"
 #include "Entity/SimpleSpring.hpp"
+#include "Entity/DampedSimpleSpring.hpp"
 #include "Component/Physics/Force/GravityForce.hpp"
 #include <chrono>
 
@@ -40,6 +41,7 @@ private:
 
 
 	DefaultParticle particle;
+	DefaultParticle particle2;
 	DefaultParticle particleA;
 	DefaultParticle particleB;
 
@@ -47,6 +49,7 @@ private:
 
 
 	SimpleSpring spring;
+	DampedSimpleSpring spring2;
 	DoubleSpring springAB;
 
 	GravityForce gravity;
