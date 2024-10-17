@@ -1,7 +1,7 @@
 #include "DampedSimpleSpringComponent.hpp"
 #include "System/ParticleForceRegistry.hpp"
 
-DampedSimpleSpringComponent::DampedSimpleSpringComponent(Particle* particle, const float& stiffness, const float& dampling, const float& default_length, const Vector3& fixed_point) : particle(particle), spring_force(stiffness, dampling, default_length, fixed_point){}
+DampedSimpleSpringComponent::DampedSimpleSpringComponent(Particle* particle, const float& stiffness, const float& damping, const float& default_length, const Vector3& fixed_point) : particle(particle), spring_force(stiffness, damping, default_length, fixed_point){}
 
 Vector3 DampedSimpleSpringComponent::get_origin() const {
 	return spring_force.get_origin();

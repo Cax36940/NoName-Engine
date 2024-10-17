@@ -15,7 +15,7 @@ public:
 	DampedDoubleSpringComponent(const DampedDoubleSpringComponent&) = default;
 	DampedDoubleSpringComponent& operator=(const DampedDoubleSpringComponent&) = default;
 
-	DampedDoubleSpringComponent(Particle* first, Particle* second, const float& stiffness, const float& dampling, const float& default_length);
+	DampedDoubleSpringComponent(Particle* first, Particle* second, const float& stiffness, const float& damping, const float& default_length);
 
 	Vector3 get_first_position() const;
 	Vector3 get_second_position() const;

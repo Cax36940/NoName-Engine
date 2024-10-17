@@ -13,7 +13,7 @@ public :
 	DampedSimpleSpringComponent(const DampedSimpleSpringComponent&) = default;
 	DampedSimpleSpringComponent& operator=(const DampedSimpleSpringComponent&) = default;
 
-	DampedSimpleSpringComponent(Particle* particle, const float& stiffness, const float& dampling, const float& default_length, const Vector3& fixed_point);
+	DampedSimpleSpringComponent(Particle* particle, const float& stiffness, const float& damping, const float& default_length, const Vector3& fixed_point);
 
 	void change_fixed_point(const Vector3& new_fixed_point);
 
