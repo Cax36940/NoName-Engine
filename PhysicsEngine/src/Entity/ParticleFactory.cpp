@@ -19,3 +19,7 @@ DefaultParticle ParticleFactory::createParticle(ParticleType particle_type, cons
 	const ParticleArgs& particle_args = particle_args_list[particle_type];
 	return DefaultParticle(Particle(pos, particle_args.velocity, acc, particle_args.mass), Sphere(pos, particle_args.size, particle_args.color));
 }
+
+DefaultParticle ParticleFactory::createSimpleParticle(const Vector3& pos) {
+	return createParticle(STATIC, pos, Vector3(0,0,0));
+}

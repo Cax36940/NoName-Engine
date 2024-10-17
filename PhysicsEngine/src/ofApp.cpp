@@ -21,17 +21,22 @@ void ofApp::setup(){
 	mouse_x = 0;
 	mouse_y = 0;
 	drag_particle = nullptr;
-
+	particle_list.reserve(3);
 
 	// Initialize scene entities
-	particle = ParticleFactory::createParticle(
-		ParticleType::STATIC, 
-		Vector3(WINDOW_WIDTH/2, 200, 0), 
-		Vector3(0, 0, 0));
+	particle = ParticleFactory::createSimpleParticle(Vector3(WINDOW_WIDTH/2, 200, 0));
+
+	particleA = ParticleFactory::createSimpleParticle(Vector3(WINDOW_WIDTH / 2 - 20, 250, 0));
+	particleB = ParticleFactory::createSimpleParticle(Vector3(WINDOW_WIDTH / 2 + 20, 250, 0));
 
 	spring = SimpleSpring(&particle.particle, 10, 100, Vector3(WINDOW_WIDTH/2, 100, 0), 5, glm::vec3(0.5,0.5,0.5));
+	springAB = DoubleSpring(&particleA.particle, &particleB.particle, 1, 40, 5, glm::vec3(0.5, 0.5, 0.5));
 
 	gravity = GravityForce(10);
+
+	particle_list.push_back(&particle);
+	particle_list.push_back(&particleA);
+	particle_list.push_back(&particleB);
 }
 
 //--------------------------------------------------------------
@@ -61,7 +66,10 @@ void ofApp::update(){
 
 	// Updating every object
 	particle.update(delta);
+	particleA.update(delta);
+	particleB.update(delta);
 	spring.update(delta);
+	springAB.update(delta);
 
 	// Clear for next update
 	ParticleForceRegistry::clear();
@@ -102,15 +110,19 @@ void ofApp::mousePressed(int x, int y, int button){
 	mouse_x = x;
 	mouse_y = y;
 
-	//Vérifier si je clique sur la particle (à généraliser après)
-	const Vector3 pos_souris(x, y, 0);
-	const Vector3& pos_particle = particle.particle.get_position();
-	int rayon = particle.sprite.get_size();
-	
-	const Vector3 distance = pos_souris - pos_particle;
-	if (Vector3::norm(distance) < rayon) {
-		drag_particle = &particle;
-	}	
+	for (DefaultParticle* particle_it : particle_list) {
+
+		const Vector3 pos_souris(x, y, 0);
+		const Vector3& pos_particle = particle_it->particle.get_position();
+		int rayon = particle_it->sprite.get_size();
+
+		const Vector3 distance = pos_souris - pos_particle;
+		if (Vector3::norm(distance) < rayon) {
+			drag_particle = particle_it;
+			return;
+		}
+	}
+	drag_particle = nullptr;
 }
 
 //--------------------------------------------------------------

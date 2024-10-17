@@ -1,5 +1,7 @@
-#include "Matrix3.hpp"
+#define _USE_MATH_DEFINES // Import maths constants
 #include <cmath>
+
+#include "Matrix3.hpp"
 #include "Vector3.hpp"
 
 Matrix3::Matrix3() {
@@ -48,7 +50,7 @@ Vector3 operator*(const Matrix3& matrix, const Vector3& vector)
     float x = vector.x * matrix.x.x + vector.y * matrix.y.x + vector.z * matrix.z.x;
     float y = vector.x * matrix.x.y + vector.y * matrix.y.y + vector.z * matrix.z.y;
     float z = vector.x * matrix.x.z + vector.y * matrix.y.z + vector.z * matrix.z.z;
-    return Vector3();
+    return Vector3(x, y, z);
 }
 
 Matrix3 Matrix3::operator+(const Matrix3& matrix) const {
@@ -135,20 +137,18 @@ Matrix3 Matrix3::inv(const Matrix3& matrix)
 
 Matrix3 Matrix3::get_orthonormal_base(const Vector3& vector)
 {
-    Matrix3 new_base;
-    Vector3 v2 = Vector3(vector.x, -vector.y, vector.z);
+    Vector3 v2 = Vector3(M_PI, M_E, M_SQRT2);
     Vector3 v3;
+    Vector3 u1 = Vector3::normalize(vector);
     Vector3 u2;
     Vector3 u3;
 
-    new_base.x = vector * Vector3::inv_norm(vector);
+    u2 = v2 - Vector3::dot(u1, v2) * u1;
+    u2 = Vector3::normalize(u2);
 
-    u2 = v2 - Vector3::orthogonal_projection(vector, v2);
-    new_base.y = u2 * Vector3::inv_norm(u2);
+    v3 = Vector3::cross(u1, u2);
+    u3 = v3 - Vector3::dot(u1, v3) * u1 - Vector3::dot(u2, v3) * u2;
+    u3 = Vector3::normalize(u3);
 
-    v3 = Vector3::cross(vector, u2);
-    u3 = v3 - Vector3::orthogonal_projection(vector, v3) - Vector3::orthogonal_projection(u2, v3);
-    new_base.z = u3 * Vector3::inv_norm(u3);
-
-    return new_base;
+    return Matrix3(u1, u2, u3);
 }

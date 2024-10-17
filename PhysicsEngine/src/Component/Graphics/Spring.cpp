@@ -22,21 +22,25 @@ void Spring::draw()
 	ofSetColor(color.r, color.g, color.b);
 
 	Vector3 direction = position_b - position_a;
+
 	float length = 10 * TWO_PI;
 
 	Matrix3 pass_matrix = Matrix3::get_orthonormal_base(direction);
 	Vector3 to_draw;
 	ofPolyline line;
+	float elongate = Vector3::norm(direction) / length;
 	float i = 0;
+
 	while (i < length) {
-		float e = Vector3::norm(direction) / length;
+		float e = elongate * i;
 		float f = cos(i) * radius;
 		float g = sin(i) * radius;
 
-		to_draw = pass_matrix * Vector3(e, f, g);
-		
+		to_draw = position_a + pass_matrix * Vector3(e, f, g);
+	
 		line.addVertex(ofVec3f(to_draw.x, to_draw.y, to_draw.z));
-		i += 0.005 * HALF_PI * 0.5;
+		i += 0.05 * HALF_PI * 0.5;
 	}
+	
 	line.draw();
 }

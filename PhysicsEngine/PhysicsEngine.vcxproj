@@ -116,6 +116,7 @@
     <ClCompile Include="src\Component\Physics\Force\DefaultSpringForce.cpp" />
     <ClCompile Include="src\Component\Vector3.cpp" />
     <ClCompile Include="src\Entity\DefaultParticle.cpp" />
+    <ClCompile Include="src\Entity\DoubleSpring.cpp" />
     <ClCompile Include="src\Entity\ParticleFactory.cpp" />
     <ClCompile Include="src\Entity\SimpleSpring.cpp" />
     <ClCompile Include="src\Entity\TrailParticle.cpp" />
@@ -132,7 +133,6 @@
     <ClInclude Include="src\Component\Graphics\Spring.hpp" />
     <ClInclude Include="src\Component\Graphics\SpringSprite.hpp" />
     <ClInclude Include="src\Component\Matrix3.hpp" />
-    <ClInclude Include="src\Component\Matrix3.hpp" />
     <ClInclude Include="src\Component\Particle.hpp" />
     <ClInclude Include="src\Component\Physics\Collider\SphereCollider.hpp" />
     <ClInclude Include="src\Component\Physics\DoubleSpringComponent.hpp" />
@@ -142,6 +142,7 @@
     <ClInclude Include="src\Component\Physics\PhysicsComponent.hpp" />
     <ClInclude Include="src\Component\Physics\SimpleSpringComponent.hpp" />
     <ClInclude Include="src\Component\Vector3.hpp" />
+    <ClInclude Include="src\Entity\DoubleSpring.hpp" />
     <ClInclude Include="src\Entity\DefaultParticle.hpp" />
     <ClInclude Include="src\Entity\ParticleFactory.hpp" />
     <ClInclude Include="src\Entity\SimpleSpring.hpp" />

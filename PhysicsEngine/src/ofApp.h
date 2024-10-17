@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "Entity/DefaultParticle.hpp"
+#include "Entity/DoubleSpring.hpp"
 #include "Entity/SimpleSpring.hpp"
 #include "Component/Physics/Force/GravityForce.hpp"
 #include <chrono>
@@ -35,9 +36,19 @@ private:
 	int mouse_x;
 	int mouse_y;
 	DefaultParticle* drag_particle;
+	std::vector<DefaultParticle*> particle_list;
+
 
 	DefaultParticle particle;
+	DefaultParticle particleA;
+	DefaultParticle particleB;
+
+
+
+
 	SimpleSpring spring;
+	DoubleSpring springAB;
+
 	GravityForce gravity;
 
 	// Setup elements
