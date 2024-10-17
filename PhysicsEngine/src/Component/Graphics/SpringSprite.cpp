@@ -10,8 +10,8 @@ void SpringSprite::set_color(const float& r, const float& g, const float& b) {
 }
 
 void SpringSprite::set_positions(const Vector3& pos1, const Vector3& pos2) {
-	point1 = pos1;
-	point2 = pos2;
+	position_a = pos1;
+	position_b = pos2;
 
 }
 
@@ -22,5 +22,5 @@ void SpringSprite::draw()
 	}
 	ofSetColor(color.r, color.g, color.b);
 	ofSetLineWidth(width);
-	ofDrawLine(Vector3::to_glm_vec3(point1), Vector3::to_glm_vec3(point2));
+	ofDrawLine(Vector3::to_glm_vec3(position_a), Vector3::to_glm_vec3(position_b));
 }

@@ -142,4 +142,10 @@ public:
      */
     static Vector3 cross(const Vector3& vector_u, const Vector3& vector_v);
 
+    /**
+     * @brief Orthogonal projection of one vector on another
+     * @param support_v
+     * @param projected_v
+     */
+    static Vector3 orthogonal_projection(const Vector3& support_v, const Vector3& projected_v);
 };

@@ -4,6 +4,8 @@
 #include "System/GraphicsComponentRegistry.hpp"
 #include "System/ParticleForceRegistry.hpp"
 #include "System/PhysicsComponentRegistry.hpp"
+#include "Entity/ParticleFactory.hpp"
+
 
 #include "Entity/ParticleFactory.hpp"
 
