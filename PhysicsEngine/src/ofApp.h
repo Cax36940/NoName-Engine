@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
+#include "Entity/Blob.hpp"
 #include "Entity/DefaultParticle.hpp"
 #include "Entity/DoubleSpring.hpp"
 #include "Entity/SimpleSpring.hpp"
@@ -40,17 +41,15 @@ private:
 	std::vector<DefaultParticle*> particle_list;
 
 
-	DefaultParticle particle;
+	/*DefaultParticle particle;
 	DefaultParticle particle2;
 	DefaultParticle particleA;
 	DefaultParticle particleB;
 
-
-
-
 	SimpleSpring spring;
 	DampedSimpleSpring spring2;
-	DoubleSpring springAB;
+	DoubleSpring springAB;*/
+	Blob bob;
 
 	GravityForce gravity;
 
