@@ -4,11 +4,13 @@
 #include "System/GraphicsComponentRegistry.hpp"
 #include "System/ParticleForceRegistry.hpp"
 #include "System/PhysicsComponentRegistry.hpp"
+#include "Entity/ParticleFactory.hpp"
+
 
 #include "Entity/ParticleFactory.hpp"
 
 //--------------------------------------------------------------
-void ofApp::setup(){
+void ofApp::setup() {
 
 	// Inititalize environment
 	backgroundPicture.load("images/bg_picture.png");
@@ -19,44 +21,43 @@ void ofApp::setup(){
 	mouse_x = 0;
 	mouse_y = 0;
 	drag_particle = nullptr;
-
+	particle_list.reserve(3);
 
 	// Initialize scene entities
-	p1 = DefaultParticle(
-		Particle(Vector3(50, 10, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), 20),
-		Sphere(Vector3(0, WINDOW_HEIGHT / 2, 0), 10, glm::vec3(255, 0, 0))
-	);
+	particle = ParticleFactory::createSimpleParticle(Vector3(WINDOW_WIDTH / 2, 250, 0));
+	particle2 = ParticleFactory::createSimpleParticle(Vector3(WINDOW_WIDTH / 2 + 50, 250, 0));
 
-	p2 = DefaultParticle(
-		Particle(Vector3(50, WINDOW_HEIGHT - 50, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), 2000),
-		Sphere(Vector3(WINDOW_WIDTH, WINDOW_HEIGHT / 2, 0), 30, glm::vec3(0, 255, 0))
-	);
+	particleA = ParticleFactory::createSimpleParticle(Vector3(WINDOW_WIDTH / 2 - 150, 250, 0));
+	particleB = ParticleFactory::createSimpleParticle(Vector3(WINDOW_WIDTH / 2 - 100, 250, 0));
 
-	gravity = GravityForce(80);
+	spring = SimpleSpring(&particle.particle, 10, 100, Vector3(WINDOW_WIDTH / 2, 100, 0), 5, glm::vec3(0.5, 0.5, 0.5));
+	spring2 = DampedSimpleSpring(&particle2.particle, 10, 1, 100, Vector3(WINDOW_WIDTH / 2 + 50, 100, 0), 5, glm::vec3(0.5, 0.5, 0.5));
+	springAB = DoubleSpring(&particleA.particle, &particleB.particle, 1, 40, 5, glm::vec3(0.5, 0.5, 0.5));
+
+	gravity = GravityForce(10);
+
+	particle_list.push_back(&particle);
+	particle_list.push_back(&particle2);
+	particle_list.push_back(&particleA);
+	particle_list.push_back(&particleB);
 }
 
 //--------------------------------------------------------------
-void ofApp::update(){
-	if (!time_init) {
-		time_init = true;
-		timeLastFrame = std::chrono::high_resolution_clock::now();
-		return;
-	}
-
+void ofApp::update() {
 	// Calc deltaTime
 	auto time = std::chrono::high_resolution_clock::now();
 	auto delta = std::chrono::duration_cast<std::chrono::milliseconds>(time - timeLastFrame).count() / 1000.; //durée de calcul d'une frame
 	timeLastFrame = time;
 
 	// Register forces from physics components
-	//PhysicsComponentRegistry::register_all_physics();
+	PhysicsComponentRegistry::register_all_physics();
 
 	// Checking collisions
-	CollidersComponentRegistry::check_collisions();
-	CollidersComponentRegistry::solve_collisions();
+	//CollidersComponentRegistry::checkCollisions();
 
 	// Applying forces
-	ParticleForceRegistry::add(p1.get_physical_particle(), &gravity);
+	ParticleForceRegistry::add(particle.get_physical_particle(), &gravity);
+	ParticleForceRegistry::add(particle2.get_physical_particle(), &gravity);
 	ParticleForceRegistry::update_forces(delta);
 
 	// Update mouse control on particle
@@ -68,15 +69,20 @@ void ofApp::update(){
 	}
 
 	// Updating every object
-	p1.update(delta);
-	p2.update(delta);
+	particle.update(delta);
+	particle2.update(delta);
+	particleA.update(delta);
+	particleB.update(delta);
+	spring.update(delta);
+	spring2.update(delta);
+	springAB.update(delta);
 
 	// Clear for next update
 	ParticleForceRegistry::clear();
 }
 
 //--------------------------------------------------------------
-void ofApp::draw(){
+void ofApp::draw() {
 	ofSetupScreenOrtho(WINDOW_WIDTH, WINDOW_HEIGHT, -1000, 1000);
 	ofSetColor(255);
 	backgroundPicture.draw(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -85,69 +91,72 @@ void ofApp::draw(){
 }
 
 //--------------------------------------------------------------
-void ofApp::keyPressed(int key){
-	
-}
-
-//--------------------------------------------------------------
-void ofApp::keyReleased(int key){
+void ofApp::keyPressed(int key) {
 
 }
 
 //--------------------------------------------------------------
-void ofApp::mouseMoved(int x, int y ){
+void ofApp::keyReleased(int key) {
 
 }
 
 //--------------------------------------------------------------
-void ofApp::mouseDragged(int x, int y, int button){
+void ofApp::mouseMoved(int x, int y) {
+
+}
+
+//--------------------------------------------------------------
+void ofApp::mouseDragged(int x, int y, int button) {
 	mouse_x = x;
 	mouse_y = y;
 }
 
 //--------------------------------------------------------------
-void ofApp::mousePressed(int x, int y, int button){
+void ofApp::mousePressed(int x, int y, int button) {
 	mouse_x = x;
 	mouse_y = y;
 
-	//Vérifier si je clique sur la particle (à généraliser après)
-	const Vector3 pos_souris(x, y, 0);
-	const Vector3& pos_particle = p1.particle.get_position();
-	int rayon = p1.sprite.get_size();
-	
-	const Vector3 distance = pos_souris - pos_particle;
-	if (Vector3::norm(distance) < rayon) {
-		drag_particle = &p1;
-	}	
-}
+	for (DefaultParticle* particle_it : particle_list) {
 
-//--------------------------------------------------------------
-void ofApp::mouseReleased(int x, int y, int button){
+		const Vector3 pos_souris(x, y, 0);
+		const Vector3& pos_particle = particle_it->particle.get_position();
+		int rayon = particle_it->sprite.get_size();
+
+		const Vector3 distance = pos_souris - pos_particle;
+		if (Vector3::norm(distance) < rayon) {
+			drag_particle = particle_it;
+			return;
+		}
+	}
 	drag_particle = nullptr;
 }
 
 //--------------------------------------------------------------
-void ofApp::mouseEntered(int x, int y){
+void ofApp::mouseReleased(int x, int y, int button) {
+	drag_particle = nullptr;
+}
+
+//--------------------------------------------------------------
+void ofApp::mouseEntered(int x, int y) {
 
 }
 
 //--------------------------------------------------------------
-void ofApp::mouseExited(int x, int y){
+void ofApp::mouseExited(int x, int y) {
 
 }
 
 //--------------------------------------------------------------
-void ofApp::windowResized(int w, int h){
+void ofApp::windowResized(int w, int h) {
 
 }
 
 //--------------------------------------------------------------
-void ofApp::gotMessage(ofMessage msg){
+void ofApp::gotMessage(ofMessage msg) {
 
 }
 
 //--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo){ 
+void ofApp::dragEvent(ofDragInfo dragInfo) {
 
 }
-

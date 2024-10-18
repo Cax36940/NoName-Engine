@@ -2,7 +2,9 @@
 
 #include "ofMain.h"
 #include "Entity/DefaultParticle.hpp"
+#include "Entity/DoubleSpring.hpp"
 #include "Entity/SimpleSpring.hpp"
+#include "Entity/DampedSimpleSpring.hpp"
 #include "Component/Physics/Force/GravityForce.hpp"
 #include <chrono>
 
@@ -30,15 +32,25 @@ public:
 
 private:
 
-	bool time_init = false;
 	std::chrono::steady_clock::time_point timeLastFrame;
 
 	int mouse_x;
 	int mouse_y;
 	DefaultParticle* drag_particle;
+	std::vector<DefaultParticle*> particle_list;
 
-	DefaultParticle p1;
-	DefaultParticle p2;
+
+	DefaultParticle particle;
+	DefaultParticle particle2;
+	DefaultParticle particleA;
+	DefaultParticle particleB;
+
+
+
+
+	SimpleSpring spring;
+	DampedSimpleSpring spring2;
+	DoubleSpring springAB;
 
 	GravityForce gravity;
 
