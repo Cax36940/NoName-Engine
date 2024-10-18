@@ -1,9 +1,9 @@
 #include "DefaultParticle.hpp"
 
-DefaultParticle::DefaultParticle(const Particle& particle, const Sphere& sphere)
-	: particle(particle), sprite(sphere)
+DefaultParticle::DefaultParticle(const Particle& _particle, const Sphere& sphere)
+	: particle(_particle), sprite(sphere)
 {
-	collider = SphereCollider(particle.get_position(), sprite.get_size());
+	collider = SphereCollider(particle.get_position(), sprite.get_size(), &particle);
 }
 
 void DefaultParticle::update(const float& delta) {

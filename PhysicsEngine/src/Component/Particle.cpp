@@ -1,8 +1,6 @@
 #include <of3dGraphics.h>
 #include "Particle.hpp"
 
-#include <iostream>
-
 Particle::Particle(const Vector3& pos, const Vector3& vel, const Vector3& acc, const float& mass)
 	: position(pos)
 	, velocity(vel)
@@ -29,7 +27,7 @@ void Particle::update(const float& delta)
 {
 	apply_forces_euler();
 	velocity = velocity + acceleration * delta;
-	position = position + velocity * delta; //int�gration d'Euler
+	position = position + velocity * delta;
 	if (position.y >= 700)
 	{
 		position.y = 700;

@@ -1,7 +1,7 @@
 #include "SphereCollider.hpp"
 
-SphereCollider::SphereCollider(const Vector3& pos, const float& size)
-	: position(pos), size(size) 
+SphereCollider::SphereCollider(const Vector3& pos, const float& size, Particle* physical_body)
+	: position(pos), size(size), physical_body(physical_body)
 {
 	CollidersComponentRegistry::add(this);
 }

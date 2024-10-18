@@ -10,7 +10,7 @@
 #include "Entity/ParticleFactory.hpp"
 
 //--------------------------------------------------------------
-void ofApp::setup(){
+void ofApp::setup() {
 
 	// Inititalize environment
 	backgroundPicture.load("images/bg_picture.png");
@@ -24,13 +24,13 @@ void ofApp::setup(){
 	particle_list.reserve(3);
 
 	// Initialize scene entities
-	particle = ParticleFactory::createSimpleParticle(Vector3(WINDOW_WIDTH/2, 250, 0));
+	particle = ParticleFactory::createSimpleParticle(Vector3(WINDOW_WIDTH / 2, 250, 0));
 	particle2 = ParticleFactory::createSimpleParticle(Vector3(WINDOW_WIDTH / 2 + 50, 250, 0));
 
 	particleA = ParticleFactory::createSimpleParticle(Vector3(WINDOW_WIDTH / 2 - 150, 250, 0));
 	particleB = ParticleFactory::createSimpleParticle(Vector3(WINDOW_WIDTH / 2 - 100, 250, 0));
 
-	spring = SimpleSpring(&particle.particle, 10, 100, Vector3(WINDOW_WIDTH/2, 100, 0), 5, glm::vec3(0.5,0.5,0.5));
+	spring = SimpleSpring(&particle.particle, 10, 100, Vector3(WINDOW_WIDTH / 2, 100, 0), 5, glm::vec3(0.5, 0.5, 0.5));
 	spring2 = DampedSimpleSpring(&particle2.particle, 10, 1, 100, Vector3(WINDOW_WIDTH / 2 + 50, 100, 0), 5, glm::vec3(0.5, 0.5, 0.5));
 	springAB = DoubleSpring(&particleA.particle, &particleB.particle, 1, 40, 5, glm::vec3(0.5, 0.5, 0.5));
 
@@ -43,7 +43,7 @@ void ofApp::setup(){
 }
 
 //--------------------------------------------------------------
-void ofApp::update(){
+void ofApp::update() {
 	// Calc deltaTime
 	auto time = std::chrono::high_resolution_clock::now();
 	auto delta = std::chrono::duration_cast<std::chrono::milliseconds>(time - timeLastFrame).count() / 1000.; //durée de calcul d'une frame
@@ -82,7 +82,7 @@ void ofApp::update(){
 }
 
 //--------------------------------------------------------------
-void ofApp::draw(){
+void ofApp::draw() {
 	ofSetupScreenOrtho(WINDOW_WIDTH, WINDOW_HEIGHT, -1000, 1000);
 	ofSetColor(255);
 	backgroundPicture.draw(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -91,28 +91,28 @@ void ofApp::draw(){
 }
 
 //--------------------------------------------------------------
-void ofApp::keyPressed(int key){
-	
-}
-
-//--------------------------------------------------------------
-void ofApp::keyReleased(int key){
+void ofApp::keyPressed(int key) {
 
 }
 
 //--------------------------------------------------------------
-void ofApp::mouseMoved(int x, int y ){
+void ofApp::keyReleased(int key) {
 
 }
 
 //--------------------------------------------------------------
-void ofApp::mouseDragged(int x, int y, int button){
+void ofApp::mouseMoved(int x, int y) {
+
+}
+
+//--------------------------------------------------------------
+void ofApp::mouseDragged(int x, int y, int button) {
 	mouse_x = x;
 	mouse_y = y;
 }
 
 //--------------------------------------------------------------
-void ofApp::mousePressed(int x, int y, int button){
+void ofApp::mousePressed(int x, int y, int button) {
 	mouse_x = x;
 	mouse_y = y;
 
@@ -132,32 +132,31 @@ void ofApp::mousePressed(int x, int y, int button){
 }
 
 //--------------------------------------------------------------
-void ofApp::mouseReleased(int x, int y, int button){
+void ofApp::mouseReleased(int x, int y, int button) {
 	drag_particle = nullptr;
 }
 
 //--------------------------------------------------------------
-void ofApp::mouseEntered(int x, int y){
+void ofApp::mouseEntered(int x, int y) {
 
 }
 
 //--------------------------------------------------------------
-void ofApp::mouseExited(int x, int y){
+void ofApp::mouseExited(int x, int y) {
 
 }
 
 //--------------------------------------------------------------
-void ofApp::windowResized(int w, int h){
+void ofApp::windowResized(int w, int h) {
 
 }
 
 //--------------------------------------------------------------
-void ofApp::gotMessage(ofMessage msg){
+void ofApp::gotMessage(ofMessage msg) {
 
 }
 
 //--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo){ 
+void ofApp::dragEvent(ofDragInfo dragInfo) {
 
 }
-
