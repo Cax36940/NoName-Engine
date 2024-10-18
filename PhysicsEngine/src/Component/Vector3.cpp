@@ -85,3 +85,11 @@ Vector3 Vector3::cross(const Vector3& vector_u, const Vector3& vector_v) {
         vector_u.z * vector_v.x - vector_u.x * vector_v.z,
         vector_u.x * vector_v.y - vector_u.y * vector_v.x);
 }
+
+Vector3 Vector3::orthogonal_projection(const Vector3& support_v, const Vector3& projected_v)
+{
+    float support_norm2 = norm2(support_v);
+    Vector3 projection = dot(support_v, projected_v) * support_v * (1 / support_norm2);
+
+    return projection;
+}

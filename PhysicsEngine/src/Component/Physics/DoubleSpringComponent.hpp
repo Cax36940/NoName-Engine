@@ -17,5 +17,8 @@ public:
 
 	DoubleSpringComponent(Particle* first, Particle* second, const float& stiffness, const float& default_length);
 
+	Vector3 get_first_position() const;
+	Vector3 get_second_position() const;
+
 	void register_physics() override;
 };

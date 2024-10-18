@@ -1,3 +1,4 @@
+#pragma once
 #include "ParticleForceGenerator.hpp"
 
 class DefaultSpringForce : ParticleForceGenerator {
