@@ -40,6 +40,8 @@ private:
 	DefaultParticle p1;
 	DefaultParticle p2;
 
+	GravityForce gravity;
+
 	// Setup elements
 	ofImage backgroundPicture;
 	ofTrueTypeFont myfont;

@@ -13,6 +13,7 @@ private:
 		SphereCollider* collider2;
 		float collision_distance;
 		Vector3 col1_to_col2;
+		Vector3 normal;
 	};
 
 	static std::vector<Collision> collisions;

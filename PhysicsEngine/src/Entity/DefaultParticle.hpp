@@ -12,7 +12,12 @@ public:
 
 	DefaultParticle() = default;
 	DefaultParticle(const DefaultParticle&) = default;
-	DefaultParticle& operator=(const DefaultParticle&) = default;
+	DefaultParticle& operator=(const DefaultParticle& dp) {
+		particle = dp.particle;
+		sprite = dp.sprite;
+		collider = SphereCollider(particle.get_position(), dp.collider.get_size(), &particle);
+		return *this;
+	};
 
 	DefaultParticle(const Particle& _particle, const Sphere& sphere);
 

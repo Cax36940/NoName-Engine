@@ -1,6 +1,6 @@
 #pragma once
 #include "System/GraphicsComponentRegistry.hpp"
-#include <iostream>
+
 // Abstract class for Component that can be drawn on the screen
 class GraphicsComponent {
 protected:

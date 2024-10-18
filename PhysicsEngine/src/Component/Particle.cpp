@@ -1,8 +1,6 @@
 #include <of3dGraphics.h>
 #include "Particle.hpp"
 
-#include <iostream>
-
 Particle::Particle(const Vector3& pos, const Vector3& vel, const Vector3& acc, const float& mass)
 	: position(pos)
 	, velocity(vel)
@@ -13,6 +11,11 @@ Particle::Particle(const Vector3& pos, const Vector3& vel, const Vector3& acc, c
 Vector3 Particle::get_position() const
 {
 	return position;
+}
+
+Vector3 Particle::get_velocity() const
+{
+	return velocity;
 }
 
 float Particle::get_mass() const

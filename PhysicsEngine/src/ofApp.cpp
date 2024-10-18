@@ -23,14 +23,16 @@ void ofApp::setup(){
 
 	// Initialize scene entities
 	p1 = DefaultParticle(
-		Particle(Vector3(400, WINDOW_HEIGHT / 2, 0), Vector3(100, 0, 0), Vector3(0, 0, 0), 200),
+		Particle(Vector3(50, 10, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), 20),
 		Sphere(Vector3(0, WINDOW_HEIGHT / 2, 0), 10, glm::vec3(255, 0, 0))
 	);
 
 	p2 = DefaultParticle(
-		Particle(Vector3(WINDOW_WIDTH - 400, WINDOW_HEIGHT / 2, 0), Vector3(-100, 0, 0), Vector3(0, 0, 0), 200),
-		Sphere(Vector3(WINDOW_WIDTH, WINDOW_HEIGHT / 2, 0), 10, glm::vec3(0, 0, 255))
+		Particle(Vector3(50, WINDOW_HEIGHT - 50, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), 2000),
+		Sphere(Vector3(WINDOW_WIDTH, WINDOW_HEIGHT / 2, 0), 30, glm::vec3(0, 255, 0))
 	);
+
+	gravity = GravityForce(80);
 }
 
 //--------------------------------------------------------------
@@ -54,8 +56,8 @@ void ofApp::update(){
 	CollidersComponentRegistry::solve_collisions();
 
 	// Applying forces
-	//ParticleForceRegistry::add(particle.get_physical_particle(), &gravity);
-	//ParticleForceRegistry::update_forces(delta);
+	ParticleForceRegistry::add(p1.get_physical_particle(), &gravity);
+	ParticleForceRegistry::update_forces(delta);
 
 	// Update mouse control on particle
 	if (drag_particle)
@@ -70,7 +72,7 @@ void ofApp::update(){
 	p2.update(delta);
 
 	// Clear for next update
-	//ParticleForceRegistry::clear();
+	ParticleForceRegistry::clear();
 }
 
 //--------------------------------------------------------------
