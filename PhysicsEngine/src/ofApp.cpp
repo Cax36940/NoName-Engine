@@ -53,7 +53,8 @@ void ofApp::update() {
 	PhysicsComponentRegistry::register_all_physics();
 
 	// Checking collisions
-	//CollidersComponentRegistry::checkCollisions();
+	CollidersComponentRegistry::check_collisions();
+	CollidersComponentRegistry::solve_collisions();
 
 	// Applying forces
 	ParticleForceRegistry::add(particle.get_physical_particle(), &gravity);
