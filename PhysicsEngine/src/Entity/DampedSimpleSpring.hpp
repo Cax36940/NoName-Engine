@@ -16,5 +16,5 @@ public:
 
 	DampedSimpleSpring(Particle* particle, const float stiffness, const float damping, const float default_length, const Vector3& fixed_point, const float width, const glm::vec3& color) : spring(particle, stiffness, damping, default_length, fixed_point), sprite(particle->get_position(), fixed_point, width, color) {}
 
-	void DampedSimpleSpring::update(const float& delta);
+	void update(const float& delta);
 };

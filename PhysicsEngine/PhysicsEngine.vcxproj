@@ -104,6 +104,7 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Component\Graphics\ConvexHull.cpp" />
     <ClCompile Include="src\Component\Graphics\Sphere.cpp" />
     <ClCompile Include="src\Component\Graphics\Spring.cpp" />
     <ClCompile Include="src\Component\Graphics\SpringSprite.cpp" />
@@ -120,6 +121,8 @@
     <ClCompile Include="src\Component\Physics\SimpleSpringComponent.cpp" />
     <ClCompile Include="src\Component\Physics\Force\DefaultSpringForce.cpp" />
     <ClCompile Include="src\Component\Vector3.cpp" />
+    <ClCompile Include="src\Entity\Blob.cpp" />
+    <ClCompile Include="src\Entity\DampedDoubleSpring.cpp" />
     <ClCompile Include="src\Entity\DampedSimpleSpring.cpp" />
     <ClCompile Include="src\Entity\DefaultParticle.cpp" />
     <ClCompile Include="src\Entity\DoubleSpring.cpp" />
@@ -134,6 +137,7 @@
     <ClCompile Include="src\ofApp.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Component\Graphics\ConvexHull.hpp" />
     <ClInclude Include="src\Component\Graphics\GraphicsComponent.hpp" />
     <ClInclude Include="src\Component\Graphics\Sphere.hpp" />
     <ClInclude Include="src\Component\Graphics\Spring.hpp" />
@@ -153,6 +157,8 @@
     <ClInclude Include="src\Component\Physics\PhysicsComponent.hpp" />
     <ClInclude Include="src\Component\Physics\SimpleSpringComponent.hpp" />
     <ClInclude Include="src\Component\Vector3.hpp" />
+    <ClInclude Include="src\Entity\Blob.hpp" />
+    <ClInclude Include="src\Entity\DampedDoubleSpring.hpp" />
     <ClInclude Include="src\Entity\DampedSimpleSpring.hpp" />
     <ClInclude Include="src\Entity\DoubleSpring.hpp" />
     <ClInclude Include="src\Entity\DefaultParticle.hpp" />

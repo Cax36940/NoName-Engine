@@ -31,6 +31,9 @@
     <ClCompile Include="src\Component\Physics\DampedDoubleSpringComponent.cpp" />
     <ClCompile Include="src\Component\Physics\DampedSimpleSpringComponent.cpp" />
     <ClCompile Include="src\Entity\DampedSimpleSpring.cpp" />
+    <ClCompile Include="src\Entity\Blob.cpp" />
+    <ClCompile Include="src\Entity\DampedDoubleSpring.cpp" />
+    <ClCompile Include="src\Component\Graphics\ConvexHull.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -70,6 +73,9 @@
     <ClInclude Include="src\Component\Physics\DampedDoubleSpringComponent.hpp" />
     <ClInclude Include="src\Component\Physics\DampedSimpleSpringComponent.hpp" />
     <ClInclude Include="src\Entity\DampedSimpleSpring.hpp" />
+    <ClInclude Include="src\Entity\Blob.hpp" />
+    <ClInclude Include="src\Entity\DampedDoubleSpring.hpp" />
+    <ClInclude Include="src\Component\Graphics\ConvexHull.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

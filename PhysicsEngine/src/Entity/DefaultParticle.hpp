@@ -8,7 +8,7 @@ class DefaultParticle {
 public:
 	Particle particle;
 	Sphere sprite;
-	SphereCollider collider;
+	//SphereCollider collider;
 
 	DefaultParticle() = default;
 	DefaultParticle(const DefaultParticle&) = default;

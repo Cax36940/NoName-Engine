@@ -19,5 +19,5 @@ public:
 	void set_space(const float& s);
 
 	void update(const float& delta);
-	void clearTrail();
+	void clear_trail();
 };

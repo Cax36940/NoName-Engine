@@ -16,5 +16,5 @@ public:
 
 	DoubleSpring(Particle* particle1, Particle* particle2, const float stiffness, const float default_length, const float width, const glm::vec3& color) : spring(particle1, particle2, stiffness, default_length), sprite(particle1->get_position(), particle2->get_position(), width, color) {}
 
-	void DoubleSpring::update(const float& delta);
+	void update(const float& delta);
 };
