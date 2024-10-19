@@ -2,13 +2,15 @@
 #include <ofMain.h>
 
 
-#define STIFFNESS 10
+#define STIFFNESS 20
 #define DAMPING 1
 #define DEFAULT_LENGTH 50
 #define WIDTH 1
 
 Blob::Blob(const Blob& copy_blob)
 {
+
+
 }
 
 Blob& Blob::operator=(const Blob& copy_blob)
@@ -16,9 +18,10 @@ Blob& Blob::operator=(const Blob& copy_blob)
 	particles = copy_blob.particles;
 	int particle_number = particles.size();
 	const glm::vec3 color(0.5, 0.5, 0.5);
+
 	for (int i = 0; i < particle_number; i++) {
 		springs.emplace_back(particles[i].get_physical_particle(), particles[(i + 1) % particle_number].get_physical_particle(), STIFFNESS, DAMPING, DEFAULT_LENGTH, WIDTH, color);
-		springs.emplace_back(particles[i].get_physical_particle(), particles[(i + 2) % particle_number].get_physical_particle(), STIFFNESS, DAMPING, DEFAULT_LENGTH, WIDTH, color);
+		springs.emplace_back(particles[i].get_physical_particle(), particles[(i + particles.size()/2 + 1) % particle_number].get_physical_particle(), STIFFNESS, DAMPING, DEFAULT_LENGTH / (sin(PI / particle_number)), WIDTH, color);
 	}
 
 	std::vector<Vector3*> positions;
@@ -28,7 +31,6 @@ Blob& Blob::operator=(const Blob& copy_blob)
 	}
 	sprite.set_positions(positions);
 	sprite.set_color(0., 128, 255);
-	//sprite.set_visible(false);
 
 	eye_white_l.set_color(255, 255, 255);
 	eye_black_l.set_color(0, 0, 0);
@@ -62,9 +64,8 @@ Blob::Blob(const Vector3& pos, const int& particle_number)
 	float radius = DEFAULT_LENGTH / (2 * sin(PI / particle_number));
 
 	for (int i = 0; i < particle_number; i++) {
-		particles.emplace_back(Particle(pos + Vector3(radius * cos(i*TWO_PI/particle_number), radius * sin(i*TWO_PI / particle_number), 0), Vector3(0, 0, 0), Vector3(0, 0, 0), 5), Sphere(pos, 10, glm::vec3(255, 255, 255)));
+		particles.emplace_back(Particle(pos + Vector3(radius * cos(i*TWO_PI/particle_number), radius * sin(i*TWO_PI / particle_number), 0), Vector3(0, 0, 0), Vector3(0, 0, 0), 5), Sphere(pos, 20, glm::vec3(255, 255, 255)));
 	}
-
 
 	/*for (int i = 0; i < particle_number; i++) {
 		springs.emplace_back(particles[i].get_physical_particle(), particles[(i + 1) % particle_number].get_physical_particle(), STIFFNESS, DAMPING, DEFAULT_LENGTH, WIDTH, color);

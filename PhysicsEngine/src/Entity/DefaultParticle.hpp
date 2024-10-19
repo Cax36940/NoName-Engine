@@ -8,16 +8,19 @@ class DefaultParticle {
 public:
 	Particle particle;
 	Sphere sprite;
-	//SphereCollider collider;
+	SphereCollider collider;
 
 	DefaultParticle() = default;
-	DefaultParticle(const DefaultParticle&) = default;
+	DefaultParticle(const DefaultParticle& dp) : 
+		particle(dp.particle), 
+		sprite(dp.sprite), 
+		collider(particle.get_position(), dp.collider.get_size(), &particle){}
 	DefaultParticle& operator=(const DefaultParticle& dp) {
 		particle = dp.particle;
 		sprite = dp.sprite;
 		collider = SphereCollider(particle.get_position(), dp.collider.get_size(), &particle);
 		return *this;
-	};
+	}
 
 	DefaultParticle(const Particle& _particle, const Sphere& sphere);
 
