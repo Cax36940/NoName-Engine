@@ -7,6 +7,7 @@
 #include "Entity/SimpleSpring.hpp"
 #include "Entity/DampedSimpleSpring.hpp"
 #include "Component/Physics/Force/GravityForce.hpp"
+#include "Component/Physics/Force/PullForce.hpp"
 #include <chrono>
 
 #define WINDOW_WIDTH	1280
@@ -37,6 +38,7 @@ private:
 
 	int mouse_x;
 	int mouse_y;
+	bool mouse_pressed;
 	DefaultParticle* drag_particle;
 	std::vector<DefaultParticle*> particle_list;
 
@@ -52,6 +54,8 @@ private:
 	Blob bob;
 
 	GravityForce gravity;
+	PullForce mouse_pull_force;
+
 
 	// Setup elements
 	ofImage backgroundPicture;

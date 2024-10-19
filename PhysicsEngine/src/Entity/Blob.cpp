@@ -7,9 +7,18 @@
 #define DEFAULT_LENGTH 50
 #define WIDTH 1
 
+void Blob::set_inside_visible(bool new_visible)
+{
+	for (DampedDoubleSpring& spring : springs) {
+		spring.sprite.set_visible(new_visible);
+	}
+	for (DefaultParticle& particle : particles) {
+		particle.sprite.set_visible(new_visible);
+	}
+}
+
 Blob::Blob(const Blob& copy_blob)
 {
-
 
 }
 

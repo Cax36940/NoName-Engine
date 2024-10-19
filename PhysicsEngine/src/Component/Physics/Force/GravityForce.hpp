@@ -11,7 +11,7 @@ public:
 	GravityForce(const GravityForce&) = default;
 	GravityForce& operator=(const GravityForce&) = default;
 
-	GravityForce::GravityForce(float gravity_strength) : gravity(gravity_strength) {}
+	GravityForce(float gravity_strength) : gravity(gravity_strength) {}
 
 	void update_force(Particle* particle, float duration) override;
 };

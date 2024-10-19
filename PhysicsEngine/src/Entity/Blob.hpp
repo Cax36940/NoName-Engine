@@ -17,6 +17,7 @@ public:
 	Sphere eye_white_r;
 	Sphere eye_black_r;
 
+	void set_inside_visible(bool new_visible);
 
 	Blob() = default;
 	Blob(const Blob&);

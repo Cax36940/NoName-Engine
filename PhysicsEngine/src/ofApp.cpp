@@ -37,6 +37,7 @@ void ofApp::setup() {
 	bob = Blob(Vector3(500, 500, 0), 20);
 
 	gravity = GravityForce(10);
+	mouse_pull_force = PullForce(10, Vector3(0, 0, 0));
 	/*
 	particle_list.push_back(&particle);
 	particle_list.push_back(&particle2);
@@ -67,10 +68,20 @@ void ofApp::update() {
 	// Applying forces
 	/*ParticleForceRegistry::add(particle.get_physical_particle(), &gravity);
 	ParticleForceRegistry::add(particle2.get_physical_particle(), &gravity);*/
+
+
+	if (mouse_pressed && !drag_particle) {
+		mouse_pull_force.set_position(Vector3(mouse_x, mouse_y, 0));
+	}
+
 	for (DefaultParticle& part : bob.particles) {
 		ParticleForceRegistry::add(part.get_physical_particle(), &gravity);
+		if (mouse_pressed && !drag_particle) {
+			ParticleForceRegistry::add(part.get_physical_particle(), &mouse_pull_force);
+		}
 	}
 	ParticleForceRegistry::update_forces(delta);
+
 
 	// Update mouse control on particle
 	if (drag_particle)
@@ -104,7 +115,11 @@ void ofApp::draw() {
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
-
+	static bool visible = false;
+	visible = !visible;
+	if (key == 'h') {
+		bob.set_inside_visible(visible);
+	}
 }
 
 //--------------------------------------------------------------
@@ -127,6 +142,7 @@ void ofApp::mouseDragged(int x, int y, int button) {
 void ofApp::mousePressed(int x, int y, int button) {
 	mouse_x = x;
 	mouse_y = y;
+	mouse_pressed = true;
 
 	for (DefaultParticle* particle_it : particle_list) {
 
@@ -145,6 +161,7 @@ void ofApp::mousePressed(int x, int y, int button) {
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button) {
+	mouse_pressed = false;
 	drag_particle = nullptr;
 }
 
