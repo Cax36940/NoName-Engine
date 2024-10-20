@@ -8,19 +8,8 @@ class CollidersComponentRegistry {
 private:
 	static std::vector<SphereCollider*> registry;
 
-	struct Collision {
-		SphereCollider* collider1;
-		SphereCollider* collider2;
-		float collision_distance;
-		Vector3 col1_to_col2;
-		Vector3 normal;
-	};
-
-	static std::vector<Collision> collisions;
-
 public:
 	static void add(SphereCollider* collider);
 	static void remove(SphereCollider* collider);
 	static void check_collisions();
-	static void solve_collisions();
 };

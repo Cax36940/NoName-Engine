@@ -23,6 +23,11 @@ float Particle::get_mass() const
 	return 1 / inv_mass;
 }
 
+float Particle::get_inv_mass() const
+{
+	return inv_mass;
+}
+
 void Particle::update(const float& delta)
 {
 	apply_forces_euler();

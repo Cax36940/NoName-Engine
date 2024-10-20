@@ -22,6 +22,7 @@ public:
 	Vector3 get_position() const;
 	Vector3 get_velocity() const;
 	float get_mass() const;
+	float get_inv_mass() const;
 
 	void update(const float& delta);
 

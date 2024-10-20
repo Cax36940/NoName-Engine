@@ -1,9 +1,12 @@
 #include "CollidersComponentRegistry.hpp"
+#include "CollisionsRegistry.hpp"
 #include "Component/Physics/Collider/SphereCollider.hpp"
+#include "Component/Particle.hpp"
 #include "Component/Vector3.hpp"
 
+#define ELASTIC_COEF 0.9
+
 std::vector<SphereCollider*> CollidersComponentRegistry::registry;
-std::vector<CollidersComponentRegistry::Collision> CollidersComponentRegistry::collisions;
 
 void CollidersComponentRegistry::add(SphereCollider* collider)
 {
@@ -25,42 +28,37 @@ void CollidersComponentRegistry::check_collisions()
 	// Check only sphere collisions
 	for (auto i = registry.begin(); i != registry.end(); i++) {
 		for (auto j = i + 1; j != registry.end(); j++) {
-			const Vector3 vector_ji = (*i)->get_position() - (*j)->get_position();
-			float minimal_length = (*i)->get_size() + (*j)->get_size();
-			if (Vector3::norm2(vector_ji) <= minimal_length * minimal_length) {
-				Collision collision = Collision();
-				collision.collider1 = *i;
-				collision.collider2 = *j;
-				collision.collision_distance = minimal_length - Vector3::norm(vector_ji);
-				collision.col1_to_col2 = Vector3::normalize(vector_ji);
-				collision.normal = collision.col1_to_col2; // Because we are only using Spheres
-				collisions.push_back(collision);
+			const Vector3 vector_ji = (*i)->physical_body->get_position() - (*j)->physical_body->get_position();
+			const float norm2_ij = Vector3::norm2(vector_ji);
+			const float minimal_length = (*i)->get_size() + (*j)->get_size();
+			if (norm2_ij <= minimal_length * minimal_length) {
+
+				Particle* particle1 = (*i)->physical_body;
+				Particle* particle2 = (*i)->physical_body;
+
+				const float norm_ij = std::sqrt(norm2_ij);
+				const Vector3 normal = vector_ji * (1/ norm_ij);
+
+				// Compute the distance to separate both objects
+				const float collision_distance = minimal_length - norm_ij;
+
+				const float m1 = particle1->get_mass();
+				const float m2 = particle2->get_mass();
+
+				const Vector3 delta_position1 = ( collision_distance * m2 / (m1 + m2)) * normal;
+				const Vector3 delta_position2 = (-collision_distance * m1 / (m1 + m2)) * normal;
+
+
+				// Compute the change in velocity for both objects
+				const Vector3 v_relative = particle1->get_velocity() - particle2->get_velocity();
+				const float k = ((ELASTIC_COEF + 1) * Vector3::dot(v_relative, normal)) / (particle1->get_inv_mass() + particle2->get_inv_mass());
+				const Vector3 delta_velocity1 = (-k * particle1->get_inv_mass()) * normal;
+				const Vector3 delta_velocity2 = ( k * particle2->get_inv_mass()) * normal;
+
+
+				CollisionsRegistry::add(particle1, delta_position1, delta_velocity1);
+				CollisionsRegistry::add(particle2, delta_position2, delta_velocity2);
 			}
 		}
 	}
-}
-
-void CollidersComponentRegistry::solve_collisions()
-{
-	float coef_elas = 0.9f;
-
-	for each (Collision collision in collisions)
-	{
-		float m1 = collision.collider1->physical_body->get_mass();
-		float m2 = collision.collider2->physical_body->get_mass();
-		Vector3 v1 = collision.collider1->physical_body->get_velocity();
-		Vector3 v2 = collision.collider2->physical_body->get_velocity();
-
-		float dp1 = m2 / (m1 + m2) * collision.collision_distance;
-		float dp2 = m1 / (m1 + m2) * collision.collision_distance;
-		collision.collider1->physical_body->set_position(collision.collider1->get_position() + collision.col1_to_col2 * dp1);
-		collision.collider2->physical_body->set_position(collision.collider2->get_position() - collision.col1_to_col2 * dp1);
-
-		Vector3 v_relative = v1 - v2;
-		float k = ((coef_elas + 1) * Vector3::dot(v_relative, collision.normal)) / (1 / m1 + 1 / m2);
-		collision.collider1->physical_body->set_velocity(collision.collider1->physical_body->get_velocity() - k * collision.normal * (1 / m1));
-		collision.collider2->physical_body->set_velocity(collision.collider2->physical_body->get_velocity() + k * collision.normal * (1 / m2));
-	}
-
-	collisions.clear();
 }
