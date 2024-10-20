@@ -6,7 +6,7 @@
     </ClCompile>
     <ClCompile Include="src\Component\Graphics\Sphere.cpp" />
     <ClCompile Include="src\Component\Graphics\Spring.cpp" />
-    <ClCompile Include="src\Component\Graphics\SpringSprite.cpp" />
+    <ClCompile Include="src\Component\Graphics\Line.cpp" />
     <ClCompile Include="src\Component\Matrix3.cpp" />
     <ClCompile Include="src\Component\Particle.cpp" />
     <ClCompile Include="src\Component\Physics\Collider\SphereCollider.cpp" />
@@ -38,6 +38,9 @@
     <ClCompile Include="src\Component\Graphics\EyeSprite.cpp" />
     <ClCompile Include="src\Entity\CountHUD.cpp" />
     <ClCompile Include="src\Entity\GravityChar.cpp" />
+    <ClCompile Include="src\Component\Physics\DoubleCableComponent.cpp" />
+    <ClCompile Include="src\System\CollisionsRegistry.cpp" />
+    <ClCompile Include="src\Entity\DoubleCable.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -51,7 +54,7 @@
     <ClInclude Include="src\Component\Graphics\GraphicsComponent.hpp" />
     <ClInclude Include="src\Component\Graphics\Sphere.hpp" />
     <ClInclude Include="src\Component\Graphics\Spring.hpp" />
-    <ClInclude Include="src\Component\Graphics\SpringSprite.hpp" />
+    <ClInclude Include="src\Component\Graphics\Line.hpp" />
     <ClInclude Include="src\Component\Matrix3.hpp" />
     <ClInclude Include="src\Component\Particle.hpp" />
     <ClInclude Include="src\Component\Physics\Collider\SphereCollider.hpp" />
@@ -84,6 +87,9 @@
     <ClInclude Include="src\Component\Graphics\EyeSprite.hpp" />
     <ClInclude Include="src\Entity\CountHUD.hpp" />
     <ClInclude Include="src\Entity\GravityChar.hpp" />
+    <ClInclude Include="src\Component\Physics\DoubleCableComponent.hpp" />
+    <ClInclude Include="src\System\CollisionsRegistry.hpp" />
+    <ClInclude Include="src\Entity\DoubleCable.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "Entity/Blob.hpp"
 #include "Entity/DefaultParticle.hpp"
+#include "Entity/DoubleCable.hpp"
 #include "Entity/DoubleSpring.hpp"
 #include "Entity/SimpleSpring.hpp"
 #include "Entity/DampedSimpleSpring.hpp"
@@ -47,13 +48,16 @@ private:
 	int nb_of_particles_in_blob;
 
 	/*DefaultParticle particle;
+	SimpleSpring spring;
 	DefaultParticle particle2;
+	DampedSimpleSpring spring2;
 	DefaultParticle particleA;
 	DefaultParticle particleB;
-
-	SimpleSpring spring;
-	DampedSimpleSpring spring2;
 	DoubleSpring springAB;*/
+
+	DefaultParticle particleC;
+	DefaultParticle particleD;
+	DoubleCable cableCD;
 
 	std::vector<Blob> blobs;
 
