@@ -118,6 +118,7 @@
     <ClCompile Include="src\Component\Physics\DoubleSpringComponent.cpp" />
     <ClCompile Include="src\Component\Physics\Force\BungeeSpringForce.cpp" />
     <ClCompile Include="src\Component\Physics\Force\DampedSpringForce.cpp" />
+    <ClCompile Include="src\Component\Physics\Force\FrictionForce.cpp" />
     <ClCompile Include="src\Component\Physics\Force\GravityForce.cpp" />
     <ClCompile Include="src\Component\Physics\Force\PullForce.cpp" />
     <ClCompile Include="src\Component\Physics\SimpleSpringComponent.cpp" />
@@ -157,6 +158,7 @@
     <ClInclude Include="src\Component\Physics\Force\BungeeSpringForce.hpp" />
     <ClInclude Include="src\Component\Physics\Force\DampedSpringForce.hpp" />
     <ClInclude Include="src\Component\Physics\Force\DefaultSpringForce.hpp" />
+    <ClInclude Include="src\Component\Physics\Force\FrictionForce.hpp" />
     <ClInclude Include="src\Component\Physics\Force\GravityForce.hpp" />
     <ClInclude Include="src\Component\Physics\Force\ParticleForceGenerator.hpp" />
     <ClInclude Include="src\Component\Physics\Force\PullForce.hpp" />
