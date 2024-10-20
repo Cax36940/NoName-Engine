@@ -8,10 +8,11 @@
 #include "Entity/DampedSimpleSpring.hpp"
 #include "Component/Physics/Force/GravityForce.hpp"
 #include "Component/Physics/Force/PullForce.hpp"
+#include "Entity/CountHUD.hpp"
 #include <chrono>
 
-#define WINDOW_WIDTH	2000
-#define WINDOW_HEIGHT	1000
+#define WINDOW_WIDTH	1600
+#define WINDOW_HEIGHT	900
 
 
 class ofApp : public ofBaseApp {
@@ -56,6 +57,7 @@ private:
 
 	std::vector<Blob> blobs;
 
+	CountHUD blob_size_counter;
 
 	GravityForce gravity;
 	PullForce mouse_pull_force;
