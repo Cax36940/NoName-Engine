@@ -4,7 +4,7 @@
 GravityChar::GravityChar(std::string c, float x_pos, float max_y_pos, float gravity_strength, ofTrueTypeFont* font)
 	: c(c)
 	, max_y_pos(max_y_pos)
-	, physical_body(Particle(Vector3(x_pos, 500, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), 1))
+	, physical_body(Particle(Vector3(x_pos, max_y_pos - 200, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), 1))
 	, gravity_strength(gravity_strength)
 	, font(font)
 {

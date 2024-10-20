@@ -117,10 +117,8 @@ void ofApp::draw() {
 	ofSetupScreenOrtho(WINDOW_WIDTH, WINDOW_HEIGHT, -1000, 1000);
 	ofSetColor(255);
 	backgroundPicture.draw(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
-	//myfont.drawString("Currently selected blob is composed of : " + std::to_string(blobs[current_selected_blob].particles.size()) + " particles", 30, 40);
 
-
-	myfont.drawString("click on screen to move blob\nSPACE BAR: split or merge blobs\nH: set visibility of skeleton\nC: change selected blob\nV: select second blob", 30, 850);
+	myfont.drawString("Click on screen to attract the selected blob\nSPACE BAR: split or merge selected blob(s)\nH: set visibility of skeleton\nC: change selected blob\nV: select second blob", 30, 40);
 	GraphicsComponentRegistry::draw_all();
 
 	blob_size_counter.draw();

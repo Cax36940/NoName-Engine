@@ -11,8 +11,8 @@
 #include "Entity/CountHUD.hpp"
 #include <chrono>
 
-#define WINDOW_WIDTH	2000
-#define WINDOW_HEIGHT	1000
+#define WINDOW_WIDTH	1600
+#define WINDOW_HEIGHT	900
 
 
 class ofApp : public ofBaseApp {
