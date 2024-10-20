@@ -12,17 +12,25 @@ public:
 	std::vector<DefaultParticle> particles;
 	std::vector<DampedDoubleSpring> springs;
 	ConvexHull sprite;
-	Sphere eye_white_l;
-	Sphere eye_black_l;
-	Sphere eye_white_r;
-	Sphere eye_black_r;
+	Sphere eye_white_l{ Vector3(0,0,0), 10, glm::vec3(255, 255, 255) };
+	Sphere eye_white_r{ Vector3(0,0,0), 10, glm::vec3(255, 255, 255) };
+	Sphere eye_black_l{ Vector3(0,0,0), 5, glm::vec3(0, 0, 0) };
+	Sphere eye_black_r{ Vector3(0,0,0), 5, glm::vec3(0, 0, 0) };
 
-	void set_inside_visible(bool new_visible);
+
+	void flip_inside_visible();
+
+	bool is_inside_visible();
+
+	void init();
 
 	Blob() = default;
 	Blob(const Blob&);
 	Blob& operator=(const Blob&);
 
-	Blob(const Vector3& pos, const int& particle_number);
+	Blob(const Vector3& pos, int particle_number);
+	Blob(const std::vector<DefaultParticle>& new_particles, int begin, size_t size);
+	Blob(const Blob& first_blob, const Blob& second_blob);
+
 	void update(const float& delta);
 };

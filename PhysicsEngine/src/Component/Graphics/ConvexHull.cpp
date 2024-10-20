@@ -29,6 +29,11 @@ void ConvexHull::set_color(const float& r, const float& g, const float& b) {
 	color = glm::vec3(r, g, b);
 }
 
+void ConvexHull::set_visible_outline(bool new_visible)
+{
+    visible_outline = new_visible;
+}
+
 void ConvexHull::draw()
 {
 	if (!visible) {
@@ -84,4 +89,18 @@ void ConvexHull::draw()
         ofVertex(point->x, point->y);
     }
     ofEndShape(true); // Close the shape
+
+    // Draw outline
+    if (visible_outline) {
+        ofSetColor(0);  // Outline color (black)
+        ofNoFill();     // Disable fill for outline
+        ofSetLineWidth(5);  // Set the line width for the outline
+    
+        ofBeginShape();
+        for (const Vector3* point : hullPoints) {
+            ofVertex(point->x, point->y);
+        }
+        ofEndShape(true);  // Close the shape
+        ofSetLineWidth(1);
+    }
 }

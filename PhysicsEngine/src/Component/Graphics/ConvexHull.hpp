@@ -9,6 +9,7 @@ class ConvexHull : public GraphicsComponent
 private:
 	std::vector<Vector3*> positions;
 	glm::vec3 color;
+	bool visible_outline = false;
 
 public:
 	ConvexHull() = default;
@@ -19,6 +20,8 @@ public:
 
 	void set_positions(const std::vector<Vector3*>& pos);
 	void set_color(const float& r, const float& g, const float& b);
+
+	void set_visible_outline(bool new_visible);
 
 	void draw() override;
 };

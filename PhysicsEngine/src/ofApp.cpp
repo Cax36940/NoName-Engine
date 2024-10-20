@@ -21,8 +21,10 @@ void ofApp::setup() {
 	mouse_x = 0;
 	mouse_y = 0;
 	drag_particle = nullptr;
+	current_selected_blob = 0;
+	second_selected_blob = 0;
 	particle_list.reserve(20);
-
+	blobs.reserve(20);
 	// Initialize scene entities
 	/*particle = ParticleFactory::createSimpleParticle(Vector3(WINDOW_WIDTH/2, 250, 0));
 	particle2 = ParticleFactory::createSimpleParticle(Vector3(WINDOW_WIDTH / 2 + 50, 250, 0));
@@ -34,7 +36,8 @@ void ofApp::setup() {
 	spring2 = DampedSimpleSpring(&particle2.particle, 10, 1, 100, Vector3(WINDOW_WIDTH / 2 + 50, 100, 0), 5, glm::vec3(0.5, 0.5, 0.5));
 	springAB = DoubleSpring(&particleA.particle, &particleB.particle, 1, 40, 5, glm::vec3(0.5, 0.5, 0.5));
 	*/
-	bob = Blob(Vector3(500, 500, 0), 20);
+	blobs.emplace_back(Vector3(500, 500, 0), 20);
+	blobs[current_selected_blob].sprite.set_visible_outline(true);
 
 	gravity = GravityForce(10);
 	mouse_pull_force = PullForce(10, Vector3(0, 0, 0));
@@ -44,11 +47,11 @@ void ofApp::setup() {
 	particle_list.push_back(&particleA);
 	particle_list.push_back(&particleB);*/
 
-
-	for (DefaultParticle& part : bob.particles) {
-		particle_list.push_back(&part);
+	for (Blob& blob : blobs) {
+		for (DefaultParticle& part : blob.particles) {
+			particle_list.push_back(&part);
+		}
 	}
-
 }
 
 //--------------------------------------------------------------
@@ -74,12 +77,15 @@ void ofApp::update() {
 		mouse_pull_force.set_position(Vector3(mouse_x, mouse_y, 0));
 	}
 
-	for (DefaultParticle& part : bob.particles) {
-		ParticleForceRegistry::add(part.get_physical_particle(), &gravity);
-		if (mouse_pressed && !drag_particle) {
-			ParticleForceRegistry::add(part.get_physical_particle(), &mouse_pull_force);
+	for (Blob& blob : blobs) {
+		for (DefaultParticle& part : blob.particles) {
+			ParticleForceRegistry::add(part.get_physical_particle(), &gravity);
+			if (mouse_pressed && !drag_particle && &blob == &blobs[current_selected_blob]) {
+				ParticleForceRegistry::add(part.get_physical_particle(), &mouse_pull_force);
+			}
 		}
 	}
+
 	ParticleForceRegistry::update_forces(delta);
 
 
@@ -99,7 +105,9 @@ void ofApp::update() {
 	spring.update(delta);
 	spring2.update(delta);
 	springAB.update(delta);*/
-	bob.update(delta);
+	for (Blob& blob : blobs) {
+		blob.update(delta);
+	}
 	// Clear for next update
 	ParticleForceRegistry::clear();
 }
@@ -115,10 +123,77 @@ void ofApp::draw() {
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
-	static bool visible = false;
-	visible = !visible;
-	if (key == 'h') {
-		bob.set_inside_visible(visible);
+	if (key == 'h') { // Show/Hide the skeleton of the currently selected blob 
+		blobs[current_selected_blob].flip_inside_visible();
+	}
+	if (key == 'c') { // Change currently selected blob
+		blobs[current_selected_blob].sprite.set_visible_outline(false);
+		blobs[second_selected_blob].sprite.set_visible_outline(false);
+		current_selected_blob = (current_selected_blob + 1) % blobs.size();
+		second_selected_blob = current_selected_blob;
+		blobs[current_selected_blob].sprite.set_visible_outline(true);
+	}
+	if (key == 'v') { // Change second selected blob
+		if (second_selected_blob != current_selected_blob) {
+			blobs[second_selected_blob].sprite.set_visible_outline(false);
+		}
+		second_selected_blob = (second_selected_blob + 1) % blobs.size();
+		blobs[second_selected_blob].sprite.set_visible_outline(true);
+	}
+	if (key == ' ') { // Split/Merge the blob
+		bool inside_visible = blobs[current_selected_blob].is_inside_visible();
+		if (current_selected_blob == second_selected_blob) {// If one plob selected, split the blob
+
+			// Just a ref to the particles list for better lisibility
+			const std::vector<DefaultParticle>& particle_list = blobs[current_selected_blob].particles;
+
+			if (particle_list.size() < 6) {
+				return;
+			}
+			
+			// Compute the size of the two blobs
+			size_t first_size = particle_list.size() / 2;
+			size_t second_size = particle_list.size() - first_size;
+
+			// Create the two resulting blobs
+			Blob first_blob(particle_list, 0, first_size);
+			Blob second_blob(particle_list, first_size, second_size);
+
+			// Replace current blob with the two created blobs
+			blobs.erase(std::next(blobs.begin(), current_selected_blob));
+			blobs.push_back(first_blob);
+			blobs.push_back(second_blob);
+			current_selected_blob = blobs.size() - 1;
+			second_selected_blob = current_selected_blob;
+			blobs[current_selected_blob].sprite.set_visible_outline(true);
+			if (inside_visible) {
+				blobs[current_selected_blob].flip_inside_visible();
+				blobs[current_selected_blob-1].flip_inside_visible();
+			}
+		}
+		else { // Otherwise merge the blobs
+			// Ensure current is higher to be removed the first
+			if (current_selected_blob < second_selected_blob) {
+				std::swap(current_selected_blob, second_selected_blob);
+			}
+
+			Blob first_blob = blobs[current_selected_blob];
+			Blob second_blob = blobs[second_selected_blob];
+			blobs.erase(std::next(blobs.begin(), current_selected_blob));
+			blobs.erase(std::next(blobs.begin(), second_selected_blob));
+			blobs.emplace_back(first_blob, second_blob);
+			current_selected_blob = blobs.size() - 1;
+			second_selected_blob = current_selected_blob;
+			blobs[current_selected_blob].sprite.set_visible_outline(true);
+			if (inside_visible) {
+				blobs[current_selected_blob].flip_inside_visible();
+			}
+		}
+
+		
+
+
+
 	}
 }
 

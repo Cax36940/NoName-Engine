@@ -41,7 +41,8 @@ private:
 	bool mouse_pressed;
 	DefaultParticle* drag_particle;
 	std::vector<DefaultParticle*> particle_list;
-
+	int current_selected_blob;
+	int second_selected_blob;
 
 	/*DefaultParticle particle;
 	DefaultParticle particle2;
@@ -51,7 +52,9 @@ private:
 	SimpleSpring spring;
 	DampedSimpleSpring spring2;
 	DoubleSpring springAB;*/
-	Blob bob;
+
+	std::vector<Blob> blobs;
+
 
 	GravityForce gravity;
 	PullForce mouse_pull_force;
