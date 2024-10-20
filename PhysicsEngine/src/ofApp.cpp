@@ -47,6 +47,8 @@ void ofApp::setup() {
 	particle_list.push_back(&particleA);
 	particle_list.push_back(&particleB);*/
 
+	blob_size_counter = CountHUD(30, WINDOW_HEIGHT - 20, 0, &myfont);
+
 }
 
 //--------------------------------------------------------------
@@ -103,6 +105,8 @@ void ofApp::update() {
 	for (Blob& blob : blobs) {
 		blob.update(delta);
 	}
+	blob_size_counter.update(delta, blobs[current_selected_blob].particles.size());
+
 	// Clear for next update
 	ParticleForceRegistry::clear();
 }
@@ -112,9 +116,11 @@ void ofApp::draw() {
 	ofSetupScreenOrtho(WINDOW_WIDTH, WINDOW_HEIGHT, -1000, 1000);
 	ofSetColor(255);
 	backgroundPicture.draw(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
-	myfont.drawString("Currently selected blob is composed of : " + std::to_string(blobs[current_selected_blob].particles.size()) + " particles", 30, 40);
+	//myfont.drawString("Currently selected blob is composed of : " + std::to_string(blobs[current_selected_blob].particles.size()) + " particles", 30, 40);
 
 	GraphicsComponentRegistry::draw_all();
+
+	blob_size_counter.draw();
 }
 
 //--------------------------------------------------------------

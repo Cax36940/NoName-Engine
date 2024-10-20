@@ -124,10 +124,12 @@
     <ClCompile Include="src\Component\Physics\Force\DefaultSpringForce.cpp" />
     <ClCompile Include="src\Component\Vector3.cpp" />
     <ClCompile Include="src\Entity\Blob.cpp" />
+    <ClCompile Include="src\Entity\CountHUD.cpp" />
     <ClCompile Include="src\Entity\DampedDoubleSpring.cpp" />
     <ClCompile Include="src\Entity\DampedSimpleSpring.cpp" />
     <ClCompile Include="src\Entity\DefaultParticle.cpp" />
     <ClCompile Include="src\Entity\DoubleSpring.cpp" />
+    <ClCompile Include="src\Entity\GravityChar.cpp" />
     <ClCompile Include="src\Entity\ParticleFactory.cpp" />
     <ClCompile Include="src\Entity\SimpleSpring.cpp" />
     <ClCompile Include="src\Entity\TrailParticle.cpp" />
@@ -162,10 +164,12 @@
     <ClInclude Include="src\Component\Physics\SimpleSpringComponent.hpp" />
     <ClInclude Include="src\Component\Vector3.hpp" />
     <ClInclude Include="src\Entity\Blob.hpp" />
+    <ClInclude Include="src\Entity\CountHUD.hpp" />
     <ClInclude Include="src\Entity\DampedDoubleSpring.hpp" />
     <ClInclude Include="src\Entity\DampedSimpleSpring.hpp" />
     <ClInclude Include="src\Entity\DoubleSpring.hpp" />
     <ClInclude Include="src\Entity\DefaultParticle.hpp" />
+    <ClInclude Include="src\Entity\GravityChar.hpp" />
     <ClInclude Include="src\Entity\ParticleFactory.hpp" />
     <ClInclude Include="src\Entity\SimpleSpring.hpp" />
     <ClInclude Include="src\Entity\TrailParticle.hpp" />
