@@ -10,8 +10,8 @@
 #include "Component/Physics/Force/PullForce.hpp"
 #include <chrono>
 
-#define WINDOW_WIDTH	1280
-#define WINDOW_HEIGHT	 720
+#define WINDOW_WIDTH	2000
+#define WINDOW_HEIGHT	1000
 
 
 class ofApp : public ofBaseApp {
@@ -43,6 +43,7 @@ private:
 	std::vector<DefaultParticle*> particle_list;
 	int current_selected_blob;
 	int second_selected_blob;
+	int nb_of_particles_in_blob;
 
 	/*DefaultParticle particle;
 	DefaultParticle particle2;
@@ -63,4 +64,5 @@ private:
 	// Setup elements
 	ofImage backgroundPicture;
 	ofTrueTypeFont myfont;
+
 };

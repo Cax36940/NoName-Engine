@@ -23,8 +23,9 @@ void ofApp::setup() {
 	drag_particle = nullptr;
 	current_selected_blob = 0;
 	second_selected_blob = 0;
-	particle_list.reserve(20);
-	blobs.reserve(20);
+	nb_of_particles_in_blob = 20;
+	particle_list.reserve(nb_of_particles_in_blob);
+	blobs.reserve(nb_of_particles_in_blob);
 	// Initialize scene entities
 	/*particle = ParticleFactory::createSimpleParticle(Vector3(WINDOW_WIDTH/2, 250, 0));
 	particle2 = ParticleFactory::createSimpleParticle(Vector3(WINDOW_WIDTH / 2 + 50, 250, 0));
@@ -36,7 +37,7 @@ void ofApp::setup() {
 	spring2 = DampedSimpleSpring(&particle2.particle, 10, 1, 100, Vector3(WINDOW_WIDTH / 2 + 50, 100, 0), 5, glm::vec3(0.5, 0.5, 0.5));
 	springAB = DoubleSpring(&particleA.particle, &particleB.particle, 1, 40, 5, glm::vec3(0.5, 0.5, 0.5));
 	*/
-	blobs.emplace_back(Vector3(500, 500, 0), 20);
+	blobs.emplace_back(Vector3(1000, 500, 0), nb_of_particles_in_blob);
 	blobs[current_selected_blob].sprite.set_visible_outline(true);
 
 	gravity = GravityForce(10);
@@ -114,6 +115,8 @@ void ofApp::draw() {
 	backgroundPicture.draw(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 	myfont.drawString("Currently selected blob is composed of : " + std::to_string(blobs[current_selected_blob].particles.size()) + " particles", 30, 40);
 
+
+	myfont.drawString("click on screen to move blob\nSPACE BAR: split or merge blobs\nH: set visibility of skeleton\nC: change selected blob\nV: select second blob", 30, 850);
 	GraphicsComponentRegistry::draw_all();
 }
 

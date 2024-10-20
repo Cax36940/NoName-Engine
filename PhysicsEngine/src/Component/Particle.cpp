@@ -28,9 +28,9 @@ void Particle::update(const float& delta)
 	apply_forces_euler();
 	velocity = velocity + acceleration * delta;
 	position = position + velocity * delta;
-	if (position.y >= 700)
+	if (position.y >= 900)
 	{
-		position.y = 700;
+		position.y = 900;
 	}
 	clear_accum();
 }
