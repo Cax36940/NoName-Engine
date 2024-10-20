@@ -38,6 +38,7 @@
     <ClCompile Include="src\Component\Graphics\EyeSprite.cpp" />
     <ClCompile Include="src\Entity\CountHUD.cpp" />
     <ClCompile Include="src\Entity\GravityChar.cpp" />
+    <ClCompile Include="src\Component\Physics\Force\FrictionForce.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -84,6 +85,7 @@
     <ClInclude Include="src\Component\Graphics\EyeSprite.hpp" />
     <ClInclude Include="src\Entity\CountHUD.hpp" />
     <ClInclude Include="src\Entity\GravityChar.hpp" />
+    <ClInclude Include="src\Component\Physics\Force\FrictionForce.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />
