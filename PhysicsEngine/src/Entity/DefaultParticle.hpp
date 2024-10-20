@@ -14,11 +14,11 @@ public:
 	DefaultParticle(const DefaultParticle& dp) : 
 		particle(dp.particle), 
 		sprite(dp.sprite), 
-		collider(particle.get_position(), dp.collider.get_size(), &particle){}
+		collider(dp.collider.get_size(), &particle){}
 	DefaultParticle& operator=(const DefaultParticle& dp) {
 		particle = dp.particle;
 		sprite = dp.sprite;
-		collider = SphereCollider(particle.get_position(), dp.collider.get_size(), &particle);
+		collider = SphereCollider(dp.collider.get_size(), &particle);
 		return *this;
 	}
 

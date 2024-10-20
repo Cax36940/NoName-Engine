@@ -3,17 +3,16 @@
 #include "Component/Vector3.hpp"
 
 class SphereCollider;
+class Particle;
 
 class CollidersComponentRegistry {
 private:
 	static std::vector<SphereCollider*> registry;
 
 	struct Collision {
-		SphereCollider* collider1;
-		SphereCollider* collider2;
-		float collision_distance;
-		Vector3 col1_to_col2;
-		Vector3 normal;
+		Particle* particle;
+		Vector3 delta_position;
+		Vector3 delta_velocity;
 	};
 
 	static std::vector<Collision> collisions;
