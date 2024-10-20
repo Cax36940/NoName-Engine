@@ -25,14 +25,14 @@ void CollidersComponentRegistry::check_collisions()
 	// Check only sphere collisions
 	for (auto i = registry.begin(); i != registry.end(); i++) {
 		for (auto j = i + 1; j != registry.end(); j++) {
-			Vector3 d = (*i)->get_position() - (*j)->get_position();
+			const Vector3 vector_ji = (*i)->get_position() - (*j)->get_position();
 			float minimal_length = (*i)->get_size() + (*j)->get_size();
-			if (Vector3::norm2(d) <= minimal_length * minimal_length) {
+			if (Vector3::norm2(vector_ji) <= minimal_length * minimal_length) {
 				Collision collision = Collision();
 				collision.collider1 = *i;
 				collision.collider2 = *j;
-				collision.collision_distance = minimal_length - Vector3::norm(d);
-				collision.col1_to_col2 = Vector3::normalize(d);
+				collision.collision_distance = minimal_length - Vector3::norm(vector_ji);
+				collision.col1_to_col2 = Vector3::normalize(vector_ji);
 				collision.normal = collision.col1_to_col2; // Because we are only using Spheres
 				collisions.push_back(collision);
 			}

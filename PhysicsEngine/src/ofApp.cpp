@@ -47,11 +47,6 @@ void ofApp::setup() {
 	particle_list.push_back(&particleA);
 	particle_list.push_back(&particleB);*/
 
-	for (Blob& blob : blobs) {
-		for (DefaultParticle& part : blob.particles) {
-			particle_list.push_back(&part);
-		}
-	}
 }
 
 //--------------------------------------------------------------
@@ -117,6 +112,7 @@ void ofApp::draw() {
 	ofSetupScreenOrtho(WINDOW_WIDTH, WINDOW_HEIGHT, -1000, 1000);
 	ofSetColor(255);
 	backgroundPicture.draw(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
+	myfont.drawString("Currently selected blob is composed of : " + std::to_string(blobs[current_selected_blob].particles.size()) + " particles", 30, 40);
 
 	GraphicsComponentRegistry::draw_all();
 }
