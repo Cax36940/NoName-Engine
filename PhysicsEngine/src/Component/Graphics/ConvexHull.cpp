@@ -92,7 +92,7 @@ void ConvexHull::draw()
 
     // Draw outline
     if (visible_outline) {
-        ofSetColor(0);  // Outline color (black)
+        ofSetColor(ofColor(255,155,0));  // Outline color (orange)
         ofNoFill();     // Disable fill for outline
         ofSetLineWidth(5);  // Set the line width for the outline
     
