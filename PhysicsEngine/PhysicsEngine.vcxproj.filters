@@ -41,6 +41,8 @@
     <ClCompile Include="src\Component\Physics\DoubleCableComponent.cpp" />
     <ClCompile Include="src\System\CollisionsRegistry.cpp" />
     <ClCompile Include="src\Entity\DoubleCable.cpp" />
+    <ClCompile Include="src\Component\Physics\DoubleRodComponent.cpp" />
+    <ClCompile Include="src\Entity\DoubleRod.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -90,6 +92,8 @@
     <ClInclude Include="src\Component\Physics\DoubleCableComponent.hpp" />
     <ClInclude Include="src\System\CollisionsRegistry.hpp" />
     <ClInclude Include="src\Entity\DoubleCable.hpp" />
+    <ClInclude Include="src\Component\Physics\DoubleRodComponent.hpp" />
+    <ClInclude Include="src\Entity\DoubleRod.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

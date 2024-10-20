@@ -116,6 +116,7 @@
     <ClCompile Include="src\Component\Physics\DampedDoubleSpringComponent.cpp" />
     <ClCompile Include="src\Component\Physics\DampedSimpleSpringComponent.cpp" />
     <ClCompile Include="src\Component\Physics\DoubleCableComponent.cpp" />
+    <ClCompile Include="src\Component\Physics\DoubleRodComponent.cpp" />
     <ClCompile Include="src\Component\Physics\DoubleSpringComponent.cpp" />
     <ClCompile Include="src\Component\Physics\Force\BungeeSpringForce.cpp" />
     <ClCompile Include="src\Component\Physics\Force\DampedSpringForce.cpp" />
@@ -130,6 +131,7 @@
     <ClCompile Include="src\Entity\DampedSimpleSpring.cpp" />
     <ClCompile Include="src\Entity\DefaultParticle.cpp" />
     <ClCompile Include="src\Entity\DoubleCable.cpp" />
+    <ClCompile Include="src\Entity\DoubleRod.cpp" />
     <ClCompile Include="src\Entity\DoubleSpring.cpp" />
     <ClCompile Include="src\Entity\GravityChar.cpp" />
     <ClCompile Include="src\Entity\ParticleFactory.cpp" />
@@ -157,6 +159,7 @@
     <ClInclude Include="src\Component\Physics\DampedDoubleSpringComponent.hpp" />
     <ClInclude Include="src\Component\Physics\DampedSimpleSpringComponent.hpp" />
     <ClInclude Include="src\Component\Physics\DoubleCableComponent.hpp" />
+    <ClInclude Include="src\Component\Physics\DoubleRodComponent.hpp" />
     <ClInclude Include="src\Component\Physics\DoubleSpringComponent.hpp" />
     <ClInclude Include="src\Component\Physics\Force\BungeeSpringForce.hpp" />
     <ClInclude Include="src\Component\Physics\Force\DampedSpringForce.hpp" />
@@ -172,6 +175,7 @@
     <ClInclude Include="src\Entity\DampedDoubleSpring.hpp" />
     <ClInclude Include="src\Entity\DampedSimpleSpring.hpp" />
     <ClInclude Include="src\Entity\DoubleCable.hpp" />
+    <ClInclude Include="src\Entity\DoubleRod.hpp" />
     <ClInclude Include="src\Entity\DoubleSpring.hpp" />
     <ClInclude Include="src\Entity\DefaultParticle.hpp" />
     <ClInclude Include="src\Entity\GravityChar.hpp" />

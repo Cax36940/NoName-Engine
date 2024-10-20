@@ -4,6 +4,7 @@
 #include "Entity/Blob.hpp"
 #include "Entity/DefaultParticle.hpp"
 #include "Entity/DoubleCable.hpp"
+#include "Entity/DoubleRod.hpp"
 #include "Entity/DoubleSpring.hpp"
 #include "Entity/SimpleSpring.hpp"
 #include "Entity/DampedSimpleSpring.hpp"
@@ -57,7 +58,8 @@ private:
 
 	DefaultParticle particleC;
 	DefaultParticle particleD;
-	DoubleCable cableCD;
+	//DoubleCable cableCD;
+	DoubleRod rodCD;
 
 	std::vector<Blob> blobs;
 

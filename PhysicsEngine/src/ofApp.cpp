@@ -41,7 +41,8 @@ void ofApp::setup() {
 
 	particleC = ParticleFactory::createSimpleParticle(Vector3(WINDOW_WIDTH / 2 - 150, 250, 0));
 	particleD = ParticleFactory::createSimpleParticle(Vector3(WINDOW_WIDTH / 2 - 100, 250, 0));
-	cableCD = DoubleCable(&particleC.particle, &particleD.particle, 100, 5, glm::vec3(0.5, 0.5, 0.5));
+	//cableCD = DoubleCable(&particleC.particle, &particleD.particle, 100, 5, glm::vec3(0.5, 0.5, 0.5));
+	rodCD = DoubleRod(&particleC.particle, &particleD.particle, 100, 5, glm::vec3(0.5, 0.5, 0.5));
 
 	blobs.emplace_back(Vector3(1000, 500, 0), nb_of_particles_in_blob);
 	blobs[current_selected_blob].sprite.set_visible_outline(true);
@@ -114,7 +115,8 @@ void ofApp::update() {
 	springAB.update(delta);*/
 	particleC.update(delta);
 	particleD.update(delta);
-	cableCD.update(delta);
+	//cableCD.update(delta);
+	rodCD.update(delta);
 	for (Blob& blob : blobs) {
 		blob.update(delta);
 	}
