@@ -127,10 +127,8 @@ void Blob::update(const float& delta)
 	}
 	mean_position *= 1. / particles.size();
 
-	eye_white_l.set_position(mean_position + Vector3(-20,0,0));
-	eye_black_l.set_position(mean_position + Vector3(-20, 0, 0));
-	eye_white_r.set_position(mean_position + Vector3(20, 0, 0));
-	eye_black_r.set_position(mean_position + Vector3(20, 0, 0));
+	eye_l.set_position(mean_position + Vector3(-20, 0, 0));
+	eye_r.set_position(mean_position + Vector3(20, 0, 0));
 
 	for (DampedDoubleSpring& spring_it : springs) {
 		spring_it.update(delta);

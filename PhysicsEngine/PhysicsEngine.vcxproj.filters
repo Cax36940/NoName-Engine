@@ -35,6 +35,7 @@
     <ClCompile Include="src\Entity\DampedDoubleSpring.cpp" />
     <ClCompile Include="src\Component\Graphics\ConvexHull.cpp" />
     <ClCompile Include="src\Component\Physics\Force\PullForce.cpp" />
+    <ClCompile Include="src\Component\Graphics\EyeSprite.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -78,6 +79,7 @@
     <ClInclude Include="src\Entity\DampedDoubleSpring.hpp" />
     <ClInclude Include="src\Component\Graphics\ConvexHull.hpp" />
     <ClInclude Include="src\Component\Physics\Force\PullForce.hpp" />
+    <ClInclude Include="src\Component\Graphics\EyeSprite.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

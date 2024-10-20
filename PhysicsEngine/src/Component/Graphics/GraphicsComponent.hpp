@@ -3,9 +3,9 @@
 
 // Abstract class for Component that can be drawn on the screen
 class GraphicsComponent {
+
 protected:
 	bool visible = true;
-
 public:
 	GraphicsComponent(){ GraphicsComponentRegistry::add(this); };
 	GraphicsComponent(const GraphicsComponent&) { GraphicsComponentRegistry::add(this); };

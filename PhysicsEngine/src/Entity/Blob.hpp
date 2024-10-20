@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Component/Graphics/ConvexHull.hpp"
-#include "Component/Graphics/Sphere.hpp"
+#include "Component/Graphics/EyeSprite.hpp"
 #include "Entity/DampedDoubleSpring.hpp"
 #include "Entity/DefaultParticle.hpp"
 
@@ -12,10 +12,9 @@ public:
 	std::vector<DefaultParticle> particles;
 	std::vector<DampedDoubleSpring> springs;
 	ConvexHull sprite;
-	Sphere eye_white_l{ Vector3(0,0,0), 10, glm::vec3(255, 255, 255) };
-	Sphere eye_white_r{ Vector3(0,0,0), 10, glm::vec3(255, 255, 255) };
-	Sphere eye_black_l{ Vector3(0,0,0), 5, glm::vec3(0, 0, 0) };
-	Sphere eye_black_r{ Vector3(0,0,0), 5, glm::vec3(0, 0, 0) };
+	EyeSprite eye_l{ Vector3(0,0,0)};
+	EyeSprite eye_r{ Vector3(0,0,0)};
+
 
 
 	void flip_inside_visible();
