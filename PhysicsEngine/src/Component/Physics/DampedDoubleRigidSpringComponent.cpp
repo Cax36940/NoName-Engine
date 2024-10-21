@@ -27,7 +27,7 @@ void DampedDoubleRigidSpringComponent::register_physics()
 	const float norm2_ij = Vector3::norm2(vector_ji);
 
 	// If the spring extends more than first_force.get_default_length() * MAX_EXPAND_COEF it acts as a cable
-	if (norm2_ij < first_force.get_default_length() * first_force.get_default_length() * MAX_EXPAND_COEF * MAX_EXPAND_COEF) {
+	if (norm2_ij <= first_force.get_default_length() * first_force.get_default_length() * MAX_EXPAND_COEF * MAX_EXPAND_COEF) {
 		first_force.set_origin(second->get_position());
 		second_force.set_origin(first->get_position());
 		ParticleForceRegistry::add(first, (ParticleForceGenerator*)&first_force);
@@ -50,7 +50,7 @@ void DampedDoubleRigidSpringComponent::register_physics()
 
 		// Compute the change in velocity for both objects
 		const Vector3 v_relative = first->get_velocity() - second->get_velocity();
-		const float k = (2 * Vector3::dot(v_relative, normal)) / (first->get_inv_mass() + second->get_inv_mass());
+		const float k = (0.1 + 1) * Vector3::dot(v_relative, normal) / (first->get_inv_mass() + second->get_inv_mass());
 		const Vector3 delta_velocity1 = (-k * first->get_inv_mass()) * normal;
 		const Vector3 delta_velocity2 = (k * second->get_inv_mass()) * normal;
 

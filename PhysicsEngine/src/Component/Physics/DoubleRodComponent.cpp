@@ -30,7 +30,7 @@ void DoubleRodComponent::register_physics()
 
 	// Compute the change in velocity for both objects
 	const Vector3 v_relative = first->get_velocity() - second->get_velocity();
-	const float k = (2 * Vector3::dot(v_relative, normal)) / (first->get_inv_mass() + second->get_inv_mass());
+	const float k = Vector3::dot(v_relative, normal) / (first->get_inv_mass() + second->get_inv_mass());
 	const Vector3 delta_velocity1 = (-k * first->get_inv_mass()) * normal;
 	const Vector3 delta_velocity2 = (k * second->get_inv_mass()) * normal;
 
