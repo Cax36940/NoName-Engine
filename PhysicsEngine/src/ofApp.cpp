@@ -39,24 +39,18 @@ void ofApp::setup() {
 	springAB = DoubleSpring(&particleA.particle, &particleB.particle, 1, 40, 5, glm::vec3(0.5, 0.5, 0.5));
 	*/
 
-	particleC = ParticleFactory::createSimpleParticle(Vector3(WINDOW_WIDTH / 2 - 150, 250, 0));
-	particleD = ParticleFactory::createSimpleParticle(Vector3(WINDOW_WIDTH / 2 - 100, 250, 0));
-	//cableCD = DoubleCable(&particleC.particle, &particleD.particle, 100, 5, glm::vec3(0.5, 0.5, 0.5));
-	rodCD = DoubleRod(&particleC.particle, &particleD.particle, 100, 5, glm::vec3(0.5, 0.5, 0.5));
 
 	blobs.emplace_back(Vector3(1000, 500, 0), nb_of_particles_in_blob);
 	blobs[current_selected_blob].sprite.set_visible_outline(true);
 
 	gravity = GravityForce(10);
-	mouse_pull_force = PullForce(0, Vector3(0, 0, 0));
+	mouse_pull_force = PullForce(10, Vector3(0, 0, 0));
 	/*
 	particle_list.push_back(&particle);
 	particle_list.push_back(&particle2);
 	particle_list.push_back(&particleA);
 	particle_list.push_back(&particleB);*/
 
-	particle_list.push_back(&particleC);
-	particle_list.push_back(&particleD);
 
 	blob_size_counter = CountHUD(30, WINDOW_HEIGHT - 20, 0, &myfont);
 
@@ -79,7 +73,6 @@ void ofApp::update() {
 	// Applying forces
 	/*ParticleForceRegistry::add(particle.get_physical_particle(), &gravity);
 	ParticleForceRegistry::add(particle2.get_physical_particle(), &gravity);*/
-	ParticleForceRegistry::add(particleD.get_physical_particle(), &gravity);
 
 	if (mouse_pressed && !drag_particle) {
 		mouse_pull_force.set_position(Vector3(mouse_x, mouse_y, 0));
@@ -113,10 +106,7 @@ void ofApp::update() {
 	spring.update(delta);
 	spring2.update(delta);
 	springAB.update(delta);*/
-	particleC.update(delta);
-	particleD.update(delta);
-	//cableCD.update(delta);
-	rodCD.update(delta);
+
 	for (Blob& blob : blobs) {
 		blob.update(delta);
 	}
@@ -159,7 +149,7 @@ void ofApp::keyPressed(int key) {
 	}
 	if (key == ' ') { // Split/Merge the blob
 		bool inside_visible = blobs[current_selected_blob].is_inside_visible();
-		if (current_selected_blob == second_selected_blob) {// If one plob selected, split the blob
+		if (current_selected_blob == second_selected_blob) {// If one blob is selected, split the blob
 
 			// Just a ref to the particles list for better lisibility
 			const std::vector<DefaultParticle>& particle_list = blobs[current_selected_blob].particles;

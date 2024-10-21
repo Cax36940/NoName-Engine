@@ -13,6 +13,11 @@ Vector3 DampedSpringForce::get_origin() const
 	return origin;
 }
 
+float DampedSpringForce::get_default_length() const
+{
+	return default_length;
+}
+
 void DampedSpringForce::update_force(Particle* particle, float duration)
 {
 	Vector3 force = particle->get_position() - origin;

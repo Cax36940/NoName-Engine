@@ -56,10 +56,7 @@ private:
 	DefaultParticle particleB;
 	DoubleSpring springAB;*/
 
-	DefaultParticle particleC;
-	DefaultParticle particleD;
-	//DoubleCable cableCD;
-	DoubleRod rodCD;
+;
 
 	std::vector<Blob> blobs;
 

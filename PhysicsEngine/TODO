@@ -5,3 +5,4 @@
 * Remove DefaultSpringForce because it is a DampedSpringForce with damping = 0
 	* Merge the three SpringForces into one because thay only differ by one line
 		* If possible merge some Spring classes
+* Add a way to simplify scene creation
