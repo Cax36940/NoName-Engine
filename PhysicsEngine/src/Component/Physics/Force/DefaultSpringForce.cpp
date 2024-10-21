@@ -13,6 +13,11 @@ Vector3 DefaultSpringForce::get_origin() const
 	return origin;
 }
 
+float DefaultSpringForce::get_default_length() const
+{
+	return default_length;
+}
+
 void DefaultSpringForce::update_force(Particle* particle, float duration)
 {
 	Vector3 force = particle->get_position() - origin;

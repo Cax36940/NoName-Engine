@@ -34,7 +34,7 @@ void CollidersComponentRegistry::check_collisions()
 			if (norm2_ij <= minimal_length * minimal_length) {
 
 				Particle* particle1 = (*i)->physical_body;
-				Particle* particle2 = (*i)->physical_body;
+				Particle* particle2 = (*j)->physical_body;
 
 				const float norm_ij = std::sqrt(norm2_ij);
 				const Vector3 normal = vector_ji * (1/ norm_ij);

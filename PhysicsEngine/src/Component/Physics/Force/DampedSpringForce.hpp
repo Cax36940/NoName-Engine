@@ -18,5 +18,6 @@ public:
 
 	void set_origin(const Vector3& new_origin);
 	Vector3 get_origin() const;
+	float get_default_length() const;
 	void update_force(Particle* particle, float duration) override;
 };

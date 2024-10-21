@@ -1,0 +1,8 @@
+* Make a LogicSystem for every component that uses the update function
+* Create a FIX_POINT Particle type that as infinite mass
+	* Remove SimpleSprings because they are DoubleSpring but with a FIX_POINT Particle instead of a Vector3
+	* Create a Link class for all components that are linking two particles (Rod, Cable, Spring)
+* Remove DefaultSpringForce because it is a DampedSpringForce with damping = 0
+	* Merge the three SpringForces into one because thay only differ by one line
+		* If possible merge some Spring classes
+* Add a way to simplify scene creation
