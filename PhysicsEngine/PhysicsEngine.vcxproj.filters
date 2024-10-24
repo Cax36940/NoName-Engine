@@ -37,8 +37,6 @@
     <ClCompile Include="src\System\CollisionsRegistry.cpp" />
     <ClCompile Include="src\Entity\DoubleCable.cpp" />
     <ClCompile Include="src\Entity\DoubleRod.cpp" />
-    <ClCompile Include="src\Component\Physics\DoubleRigidSpringComponent.cpp" />
-    <ClCompile Include="src\Entity\DoubleRigidSpring.cpp" />
     <ClCompile Include="src\Component\Physics\DampedDoubleRigidSpringComponent.cpp" />
     <ClCompile Include="src\Entity\DampedDoubleRigidSpring.cpp" />
   </ItemGroup>
@@ -86,8 +84,6 @@
     <ClInclude Include="src\Entity\DoubleCable.hpp" />
     <ClInclude Include="src\Component\Physics\DoubleRodComponent.hpp" />
     <ClInclude Include="src\Entity\DoubleRod.hpp" />
-    <ClInclude Include="src\Component\Physics\DoubleRigidSpringComponent.hpp" />
-    <ClInclude Include="src\Entity\DoubleRigidSpring.hpp" />
     <ClInclude Include="src\Component\Physics\DampedDoubleRigidSpringComponent.hpp" />
     <ClInclude Include="src\Entity\DampedDoubleRigidSpring.hpp" />
   </ItemGroup>
