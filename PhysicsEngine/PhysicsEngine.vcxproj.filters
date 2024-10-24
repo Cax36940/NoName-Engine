@@ -24,12 +24,10 @@
     <ClCompile Include="src\Component\Physics\Force\DefaultSpringForce.cpp" />
     <ClCompile Include="src\Component\Physics\Force\PullForce.cpp" />
     <ClCompile Include="src\Component\Physics\Force\FrictionForce.cpp" />
-    <ClCompile Include="src\Component\Physics\SimpleSpringComponent.cpp" />
     <ClCompile Include="src\Component\Vector3.cpp" />
     <ClCompile Include="src\Entity\DefaultParticle.cpp" />
     <ClCompile Include="src\Entity\DoubleSpring.cpp" />
     <ClCompile Include="src\Entity\ParticleFactory.cpp" />
-    <ClCompile Include="src\Entity\SimpleSpring.cpp" />
     <ClCompile Include="src\Entity\TrailParticle.cpp" />
     <ClCompile Include="src\System\CollidersComponentRegistry.cpp" />
     <ClCompile Include="src\System\GraphicsComponentRegistry.cpp" />
@@ -70,12 +68,10 @@
     <ClInclude Include="src\Component\Physics\Force\GravityForce.hpp" />
     <ClInclude Include="src\Component\Physics\Force\ParticleForceGenerator.hpp" />
     <ClInclude Include="src\Component\Physics\PhysicsComponent.hpp" />
-    <ClInclude Include="src\Component\Physics\SimpleSpringComponent.hpp" />
     <ClInclude Include="src\Component\Vector3.hpp" />
     <ClInclude Include="src\Entity\DefaultParticle.hpp" />
     <ClInclude Include="src\Entity\DoubleSpring.hpp" />
     <ClInclude Include="src\Entity\ParticleFactory.hpp" />
-    <ClInclude Include="src\Entity\SimpleSpring.hpp" />
     <ClInclude Include="src\Entity\TrailParticle.hpp" />
     <ClInclude Include="src\System\CollidersComponentRegistry.hpp" />
     <ClInclude Include="src\System\GraphicsComponentRegistry.hpp" />

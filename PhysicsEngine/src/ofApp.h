@@ -6,8 +6,6 @@
 #include "Entity/DoubleCable.hpp"
 #include "Entity/DoubleRod.hpp"
 #include "Entity/DoubleSpring.hpp"
-#include "Entity/SimpleSpring.hpp"
-#include "Entity/DampedSimpleSpring.hpp"
 #include "Component/Physics/Force/GravityForce.hpp"
 #include "Component/Physics/Force/PullForce.hpp"
 #include "Entity/CountHUD.hpp"
@@ -49,9 +47,7 @@ private:
 	int nb_of_particles_in_blob;
 
 	/*DefaultParticle particle;
-	SimpleSpring spring;
 	DefaultParticle particle2;
-	DampedSimpleSpring spring2;
 	DefaultParticle particleA;
 	DefaultParticle particleB;
 	DoubleSpring springAB;*/
