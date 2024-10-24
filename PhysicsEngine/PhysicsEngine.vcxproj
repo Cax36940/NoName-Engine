@@ -115,7 +115,6 @@
     <ClCompile Include="src\Component\Physics\Collider\SphereCollider.cpp" />
     <ClCompile Include="src\Component\Physics\DampedDoubleRigidSpringComponent.cpp" />
     <ClCompile Include="src\Component\Physics\DampedDoubleSpringComponent.cpp" />
-    <ClCompile Include="src\Component\Physics\DampedSimpleSpringComponent.cpp" />
     <ClCompile Include="src\Component\Physics\DoubleCableComponent.cpp" />
     <ClCompile Include="src\Component\Physics\DoubleRigidSpringComponent.cpp" />
     <ClCompile Include="src\Component\Physics\DoubleRodComponent.cpp" />
@@ -131,7 +130,6 @@
     <ClCompile Include="src\Entity\CountHUD.cpp" />
     <ClCompile Include="src\Entity\DampedDoubleRigidSpring.cpp" />
     <ClCompile Include="src\Entity\DampedDoubleSpring.cpp" />
-    <ClCompile Include="src\Entity\DampedSimpleSpring.cpp" />
     <ClCompile Include="src\Entity\DefaultParticle.cpp" />
     <ClCompile Include="src\Entity\DoubleCable.cpp" />
     <ClCompile Include="src\Entity\DoubleRigidSpring.cpp" />
@@ -161,7 +159,6 @@
     <ClInclude Include="src\Component\Physics\Collider\SphereCollider.hpp" />
     <ClInclude Include="src\Component\Physics\DampedDoubleRigidSpringComponent.hpp" />
     <ClInclude Include="src\Component\Physics\DampedDoubleSpringComponent.hpp" />
-    <ClInclude Include="src\Component\Physics\DampedSimpleSpringComponent.hpp" />
     <ClInclude Include="src\Component\Physics\DoubleCableComponent.hpp" />
     <ClInclude Include="src\Component\Physics\DoubleRigidSpringComponent.hpp" />
     <ClInclude Include="src\Component\Physics\DoubleRodComponent.hpp" />
@@ -179,7 +176,6 @@
     <ClInclude Include="src\Entity\CountHUD.hpp" />
     <ClInclude Include="src\Entity\DampedDoubleRigidSpring.hpp" />
     <ClInclude Include="src\Entity\DampedDoubleSpring.hpp" />
-    <ClInclude Include="src\Entity\DampedSimpleSpring.hpp" />
     <ClInclude Include="src\Entity\DoubleCable.hpp" />
     <ClInclude Include="src\Entity\DoubleRigidSpring.hpp" />
     <ClInclude Include="src\Entity\DoubleRod.hpp" />

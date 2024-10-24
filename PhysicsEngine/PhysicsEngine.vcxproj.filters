@@ -14,7 +14,6 @@
     <ClCompile Include="src\Component\Physics\BungeeSpringComponent.cpp" />
     <ClCompile Include="src\Component\Physics\Collider\SphereCollider.cpp" />
     <ClCompile Include="src\Component\Physics\DampedDoubleSpringComponent.cpp" />
-    <ClCompile Include="src\Component\Physics\DampedSimpleSpringComponent.cpp" />
     <ClCompile Include="src\Component\Physics\DoubleCableComponent.cpp" />
     <ClCompile Include="src\Component\Physics\DoubleRodComponent.cpp" />
     <ClCompile Include="src\Component\Physics\DoubleSpringComponent.cpp" />
@@ -34,7 +33,6 @@
     <ClCompile Include="src\System\ParticleForceRegistry.cpp" />
     <ClCompile Include="src\System\PhysicsComponentRegistry.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
-    <ClCompile Include="src\Entity\DampedSimpleSpring.cpp" />
     <ClCompile Include="src\Entity\Blob.cpp" />
     <ClCompile Include="src\Entity\DampedDoubleSpring.cpp" />
     <ClCompile Include="src\Entity\CountHUD.cpp" />
@@ -81,8 +79,6 @@
     <ClInclude Include="src\Component\Physics\Force\BungeeSpringForce.hpp" />
     <ClInclude Include="src\Component\Physics\Force\DampedSpringForce.hpp" />
     <ClInclude Include="src\Component\Physics\DampedDoubleSpringComponent.hpp" />
-    <ClInclude Include="src\Component\Physics\DampedSimpleSpringComponent.hpp" />
-    <ClInclude Include="src\Entity\DampedSimpleSpring.hpp" />
     <ClInclude Include="src\Entity\Blob.hpp" />
     <ClInclude Include="src\Entity\DampedDoubleSpring.hpp" />
     <ClInclude Include="src\Component\Graphics\ConvexHull.hpp" />
