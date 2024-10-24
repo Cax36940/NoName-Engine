@@ -5,7 +5,6 @@
 #include "Entity/DefaultParticle.hpp"
 #include "Entity/DoubleCable.hpp"
 #include "Entity/DoubleRod.hpp"
-#include "Entity/DoubleSpring.hpp"
 #include "Component/Physics/Force/GravityForce.hpp"
 #include "Component/Physics/Force/PullForce.hpp"
 #include "Entity/CountHUD.hpp"
