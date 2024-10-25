@@ -1,12 +1,12 @@
 #pragma once
 #include "Component/Particle.hpp"
-#include "Component/Physics/Force/BungeeSpringForce.hpp"
+#include "Component/Physics/Force/DampedSpringForce.hpp"
 #include "PhysicsComponent.hpp"
 
 class BungeeSpringComponent : public PhysicsComponent {
 private:
 	Particle* particle;
-	BungeeSpringForce spring_force;
+	DampedSpringForce spring_force;
 
 public:
 	BungeeSpringComponent() = default;

@@ -1,7 +1,7 @@
 #include "BungeeSpringComponent.hpp"
 #include "System/ParticleForceRegistry.hpp"
 
-BungeeSpringComponent::BungeeSpringComponent(Particle* particle, const float& stiffness, const float& default_length, const Vector3& fixed_point) : particle(particle), spring_force(stiffness, default_length, fixed_point) {}
+BungeeSpringComponent::BungeeSpringComponent(Particle* particle, const float& stiffness, const float& default_length, const Vector3& fixed_point) : particle(particle), spring_force(stiffness, 0, default_length, fixed_point, true) {}
 
 Vector3 BungeeSpringComponent::get_origin() const {
 	return spring_force.get_origin();
