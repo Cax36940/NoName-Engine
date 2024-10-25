@@ -1,5 +1,4 @@
 #include "FrictionForce.hpp"
-#include <iostream>
 
 void FrictionForce::update_force(Particle* particle, float duration)
 {
