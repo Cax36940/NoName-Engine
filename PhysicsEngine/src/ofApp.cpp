@@ -110,7 +110,8 @@ void ofApp::update() {
 	for (Blob& blob : blobs) {
 		blob.update(delta);
 	}
-	blob_size_counter.update(delta, blobs[current_selected_blob].particles.size());
+	blob_size_counter.set_value(blobs[current_selected_blob].particles.size());
+	blob_size_counter.update(delta);
 
 	// Clear for next update
 	ParticleForceRegistry::clear();

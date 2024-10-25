@@ -16,9 +16,8 @@ void CountHUD::set_value(int value)
 	}
 }
 
-void CountHUD::update(float delta, int value)
+void CountHUD::update(float delta)
 {
-	set_value(value);
 	for (int i = 0; i < characters.size(); i++)
 	{
 		characters[i].update(delta);
