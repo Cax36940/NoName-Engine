@@ -7,7 +7,7 @@ private:
 	float damping;
 	float default_length;
 	Vector3 origin;
-	bool is_bungee;
+	bool is_bungee; // If true : make the spring apply no force when compressed
 
 public:
 	DampedSpringForce() = default;

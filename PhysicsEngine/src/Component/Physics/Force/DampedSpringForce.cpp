@@ -27,7 +27,7 @@ void DampedSpringForce::update_force(Particle* particle, float duration)
 	length -=default_length;
 
 	if (is_bungee && length < 0) {
-		length = 0;
+		return; // Apply no force
 	}
 
 	force = ((-stiffness * length) * unit_vector) - damping * particle->get_velocity();
