@@ -1,11 +1,11 @@
 #include "DampedDoubleSpringComponent.hpp"
 #include "System/ParticleForceRegistry.hpp"
 
-DampedDoubleSpringComponent::DampedDoubleSpringComponent(Particle* first, Particle* second, const float& stiffness, const float& damping, const float& default_length) :
+DampedDoubleSpringComponent::DampedDoubleSpringComponent(Particle* first, Particle* second, const float& stiffness, const float& damping, const float& default_length, const bool is_bungee) :
 	first(first), 
 	second(second),
-	first_force(stiffness, damping, default_length),
-	second_force(stiffness, damping, default_length){}
+	first_force(stiffness, damping, default_length, is_bungee),
+	second_force(stiffness, damping, default_length, is_bungee){}
 
 Vector3 DampedDoubleSpringComponent::get_first_position() const
 {

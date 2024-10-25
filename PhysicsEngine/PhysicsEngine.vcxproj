@@ -111,7 +111,6 @@
     <ClCompile Include="src\Component\Graphics\Line.cpp" />
     <ClCompile Include="src\Component\Matrix3.cpp" />
     <ClCompile Include="src\Component\Particle.cpp" />
-    <ClCompile Include="src\Component\Physics\BungeeSpringComponent.cpp" />
     <ClCompile Include="src\Component\Physics\Collider\SphereCollider.cpp" />
     <ClCompile Include="src\Component\Physics\DampedDoubleRigidSpringComponent.cpp" />
     <ClCompile Include="src\Component\Physics\DampedDoubleSpringComponent.cpp" />
@@ -149,7 +148,6 @@
     <ClInclude Include="src\Component\Graphics\Line.hpp" />
     <ClInclude Include="src\Component\Matrix3.hpp" />
     <ClInclude Include="src\Component\Particle.hpp" />
-    <ClInclude Include="src\Component\Physics\BungeeSpringComponent.hpp" />
     <ClInclude Include="src\Component\Physics\Collider\SphereCollider.hpp" />
     <ClInclude Include="src\Component\Physics\DampedDoubleRigidSpringComponent.hpp" />
     <ClInclude Include="src\Component\Physics\DampedDoubleSpringComponent.hpp" />
