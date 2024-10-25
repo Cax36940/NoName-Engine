@@ -14,7 +14,5 @@ public:
 
 	DoubleRod(const DoubleRodComponent& rod, const Line& sprite) : rod(rod), sprite(sprite) {}
 
-	DoubleRod(Particle* particle1, Particle* particle2, const float default_length, const float width, const glm::vec3& color) : rod(particle1, particle2, default_length), sprite(particle1->get_position(), particle2->get_position(), width, color) {}
-
-	void update(const float& delta);
+	DoubleRod(Particle* particle1, Particle* particle2, const float default_length, const float width, const glm::vec3& color) : rod(particle1, particle2, default_length), sprite(particle1->get_position_ptr(), particle2->get_position_ptr(), width, color) {}
 };

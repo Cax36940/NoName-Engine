@@ -13,6 +13,11 @@ Vector3 Particle::get_position() const
 	return position;
 }
 
+const Vector3* Particle::get_position_ptr()
+{
+	return &position;
+}
+
 Vector3 Particle::get_velocity() const
 {
 	return velocity;

@@ -126,8 +126,6 @@
     <ClCompile Include="src\Entity\DampedDoubleRigidSpring.cpp" />
     <ClCompile Include="src\Entity\DampedDoubleSpring.cpp" />
     <ClCompile Include="src\Entity\DefaultParticle.cpp" />
-    <ClCompile Include="src\Entity\DoubleCable.cpp" />
-    <ClCompile Include="src\Entity\DoubleRod.cpp" />
     <ClCompile Include="src\Entity\GravityChar.cpp" />
     <ClCompile Include="src\Entity\ParticleFactory.cpp" />
     <ClCompile Include="src\Entity\TrailParticle.cpp" />

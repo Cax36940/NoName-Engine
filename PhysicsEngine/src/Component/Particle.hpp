@@ -20,6 +20,7 @@ public:
 	Particle(const Vector3& pos, const Vector3& vel, const Vector3& acc, const float& mass);
 
 	Vector3 get_position() const;
+	const Vector3* get_position_ptr();
 	Vector3 get_velocity() const;
 	float get_mass() const;
 	float get_inv_mass() const;
