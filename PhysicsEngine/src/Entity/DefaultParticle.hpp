@@ -4,7 +4,7 @@
 #include "Component/Graphics/Sphere.hpp"
 #include "Component/Physics/Collider/SphereCollider.hpp"
 
-class DefaultParticle {
+class DefaultParticle : public UpdatesComponent{
 public:
 	Particle particle;
 	Sphere sprite;
@@ -24,7 +24,7 @@ public:
 
 	DefaultParticle(const Particle& _particle, const Sphere& sphere);
 
-	void update(const float& delta);
+	void update(float delta) override;
 
 	Particle* get_physical_particle() {
 		return &particle;

@@ -136,6 +136,7 @@
     <ClCompile Include="src\System\PhysicsComponentRegistry.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
+    <ClCompile Include="src\System\UpdatesComponentRegistry.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Component\Graphics\ConvexHull.hpp" />
@@ -157,6 +158,7 @@
     <ClInclude Include="src\Component\Physics\Force\ParticleForceGenerator.hpp" />
     <ClInclude Include="src\Component\Physics\Force\PullForce.hpp" />
     <ClInclude Include="src\Component\Physics\PhysicsComponent.hpp" />
+    <ClInclude Include="src\Component\UpdatesComponent.hpp" />
     <ClInclude Include="src\Component\Vector3.hpp" />
     <ClInclude Include="src\Entity\Blob.hpp" />
     <ClInclude Include="src\Entity\CountHUD.hpp" />
@@ -174,6 +176,7 @@
     <ClInclude Include="src\System\ParticleForceRegistry.hpp" />
     <ClInclude Include="src\System\PhysicsComponentRegistry.hpp" />
     <ClInclude Include="src\ofApp.h" />
+    <ClInclude Include="src\System\UpdatesComponentRegistry.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">

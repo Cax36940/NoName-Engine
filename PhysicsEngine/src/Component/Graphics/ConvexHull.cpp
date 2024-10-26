@@ -2,7 +2,7 @@
 #include "ConvexHull.hpp"
 #include <stack>
 
-static Vector3* anchorPoint;
+static const Vector3* anchorPoint;
 
 
 int orientation(const Vector3* p, const Vector3* q, const Vector3* r) {
@@ -20,7 +20,7 @@ static bool compare(const Vector3* p1, const Vector3* p2) {
 }
 
 
-void ConvexHull::set_positions(const std::vector<Vector3*>& pos) {
+void ConvexHull::set_positions(const std::vector<const Vector3*>& pos) {
 	positions = pos;
 }
 
@@ -40,7 +40,7 @@ void ConvexHull::draw()
 		return;
 	}
 
-    std::vector<Vector3*> hullPoints;
+    std::vector<const Vector3*> hullPoints;
 
     int n = positions.size();
     if (n < 3) return; // Convex hull is not possible with fewer than 3 points
@@ -58,16 +58,16 @@ void ConvexHull::draw()
     std::sort(positions.begin() + 1, positions.end(), compare);
 
     // Step 3: Create a stack and process the sorted points
-    std::stack<Vector3*> hull;
+    std::stack<const Vector3*> hull;
     hull.push(positions[0]);
     hull.push(positions[1]);
     hull.push(positions[2]);
 
     for (int i = 3; i < n; i++) {
         while (hull.size() > 1) {
-            Vector3* top = hull.top();
+            const Vector3* top = hull.top();
             hull.pop();
-            Vector3* nextToTop = hull.top();
+            const Vector3* nextToTop = hull.top();
             if (orientation(nextToTop, top, positions[i]) == 2) {
                 hull.push(top);
                 break;

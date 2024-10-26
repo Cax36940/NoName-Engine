@@ -12,7 +12,7 @@ void TrailParticle::set_space(const float& s)
 	space = s;
 }
 
-void TrailParticle::update(const float& delta)
+void TrailParticle::update(float delta)
 {
 	if (space == space_counter)
 	{
@@ -25,7 +25,6 @@ void TrailParticle::update(const float& delta)
 		space_counter++;
 	}
 
-	particle.update(delta);
 }
 
 void TrailParticle::clear_trail()

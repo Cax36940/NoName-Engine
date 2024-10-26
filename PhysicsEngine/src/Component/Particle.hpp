@@ -1,8 +1,9 @@
 #pragma once
 
 #include "Vector3.hpp"
+#include "UpdatesComponent.hpp"
 
-class Particle {
+class Particle : public UpdatesComponent {
 private:
 	// Physics related
 	Vector3 position;
@@ -25,7 +26,7 @@ public:
 	float get_mass() const;
 	float get_inv_mass() const;
 
-	void update(const float& delta);
+	void update(float delta) override;
 
 
 	void add_force(const Vector3 &force);

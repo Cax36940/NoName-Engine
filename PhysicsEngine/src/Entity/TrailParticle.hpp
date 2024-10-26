@@ -2,7 +2,7 @@
 #include "Component/Graphics/Sphere.hpp"
 #include "DefaultParticle.hpp"
 
-class TrailParticle
+class TrailParticle : public UpdatesComponent
 {
 private:
 	DefaultParticle particle;
@@ -18,6 +18,6 @@ public:
 
 	void set_space(const float& s);
 
-	void update(const float& delta);
+	void update(float delta) override;
 	void clear_trail();
 };

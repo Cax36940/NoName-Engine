@@ -6,7 +6,7 @@
 #include "Entity/DefaultParticle.hpp"
 
 
-class Blob {
+class Blob : public UpdatesComponent{
 public:
 
 	std::vector<DefaultParticle> particles;
@@ -31,5 +31,5 @@ public:
 	Blob(const std::vector<DefaultParticle>& new_particles, int begin, size_t size);
 	Blob(const Blob& first_blob, const Blob& second_blob);
 
-	void update(const float& delta);
+	void update(float delta) override;
 };

@@ -16,14 +16,6 @@ void CountHUD::set_value(int value)
 	}
 }
 
-void CountHUD::update(float delta)
-{
-	for (int i = 0; i < characters.size(); i++)
-	{
-		characters[i].update(delta);
-	}
-}
-
 void CountHUD::draw()
 {
 	ofSetColor(255);

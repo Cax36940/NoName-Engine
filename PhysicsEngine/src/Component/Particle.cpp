@@ -33,7 +33,7 @@ float Particle::get_inv_mass() const
 	return inv_mass;
 }
 
-void Particle::update(const float& delta)
+void Particle::update(float delta)
 {
 	apply_forces_euler();
 	velocity = velocity + acceleration * delta;

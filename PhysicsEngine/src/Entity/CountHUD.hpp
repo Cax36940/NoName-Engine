@@ -24,6 +24,5 @@ public:
 	};
 
 	void set_value(int value);
-	void update(float delta);
 	void draw();
 };

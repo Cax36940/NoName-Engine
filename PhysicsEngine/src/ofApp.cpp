@@ -5,6 +5,7 @@
 #include "System/GraphicsComponentRegistry.hpp"
 #include "System/ParticleForceRegistry.hpp"
 #include "System/PhysicsComponentRegistry.hpp"
+#include "System/UpdatesComponentRegistry.hpp"
 #include "Entity/ParticleFactory.hpp"
 
 
@@ -107,11 +108,13 @@ void ofApp::update() {
 	spring2.update(delta);
 	springAB.update(delta);*/
 
-	for (Blob& blob : blobs) {
+	blob_size_counter.set_value(blobs[current_selected_blob].particles.size());
+	UpdatesComponentRegistry::update_all(delta);
+
+	/*for (Blob& blob : blobs) {
 		blob.update(delta);
 	}
-	blob_size_counter.set_value(blobs[current_selected_blob].particles.size());
-	blob_size_counter.update(delta);
+	blob_size_counter.update(delta);*/
 
 	// Clear for next update
 	ParticleForceRegistry::clear();

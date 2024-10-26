@@ -38,10 +38,10 @@ void Blob::init()
 	}
 
 	// Create sprite, need the position of all particles
-	std::vector<Vector3*> positions;
+	std::vector<const Vector3*> positions;
 	positions.reserve(particle_number);
 	for (int i = 0; i < particle_number; i++) {
-		positions.emplace_back((Vector3*)particles[i].get_physical_particle());
+		positions.emplace_back(particles[i].get_physical_particle()->get_position_ptr());
 	}
 	sprite.set_positions(positions);
 	sprite.set_color(0., 128, 255);
@@ -117,12 +117,11 @@ Blob::Blob(const Blob& first_blob, const Blob& second_blob)
 
 }
 
-void Blob::update(const float& delta)
+void Blob::update(float delta)
 {
 	Vector3 mean_position{};
 
 	for (DefaultParticle& particle_it : particles) {
-		particle_it.update(delta);
 		mean_position += particle_it.particle.get_position();
 	}
 	mean_position *= 1. / particles.size();

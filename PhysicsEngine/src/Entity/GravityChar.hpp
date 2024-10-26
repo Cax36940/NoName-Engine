@@ -4,7 +4,7 @@
 #include "Component/Physics/Force/GravityForce.hpp"
 #include <string>
 
-class GravityChar
+class GravityChar : public UpdatesComponent
 {
 private:
 	std::string c;
@@ -14,9 +14,9 @@ private:
 	float max_y_pos;
 
 public:
-	GravityChar();
+	GravityChar() = default;
 	GravityChar(std::string c, float x_pos, float max_y_pos, float gravity_strength, ofTrueTypeFont* font);
 
-	void update(float delta);
+	void update(float delta) override;
 	void draw();
 };

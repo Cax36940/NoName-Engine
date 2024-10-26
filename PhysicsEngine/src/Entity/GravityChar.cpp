@@ -17,7 +17,6 @@ void GravityChar::update(float delta)
 		physical_body.set_velocity(Vector3(0, -1. * physical_body.get_velocity().y * 0.5, 0));
 	}
 	physical_body.add_force(Vector3(0, gravity_strength * physical_body.get_mass(), 0));
-	physical_body.update(delta);
 }
 
 void GravityChar::draw()
