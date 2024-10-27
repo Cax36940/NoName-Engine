@@ -113,8 +113,7 @@
     <ClCompile Include="src\Component\Particle.cpp" />
     <ClCompile Include="src\Component\Physics\Collider\SphereCollider.cpp" />
     <ClCompile Include="src\Component\Physics\SpringComponent.cpp" />
-    <ClCompile Include="src\Component\Physics\DoubleCableComponent.cpp" />
-    <ClCompile Include="src\Component\Physics\DoubleRodComponent.cpp" />
+    <ClCompile Include="src\Component\Physics\CableComponent.cpp" />
     <ClCompile Include="src\Component\Physics\Force\SpringForce.cpp" />
     <ClCompile Include="src\Component\Physics\Force\FrictionForce.cpp" />
     <ClCompile Include="src\Component\Physics\Force\GravityForce.cpp" />
@@ -145,8 +144,7 @@
     <ClInclude Include="src\Component\Particle.hpp" />
     <ClInclude Include="src\Component\Physics\Collider\SphereCollider.hpp" />
     <ClInclude Include="src\Component\Physics\SpringComponent.hpp" />
-    <ClInclude Include="src\Component\Physics\DoubleCableComponent.hpp" />
-    <ClInclude Include="src\Component\Physics\DoubleRodComponent.hpp" />
+    <ClInclude Include="src\Component\Physics\CableComponent.hpp" />
     <ClInclude Include="src\Component\Physics\Force\SpringForce.hpp" />
     <ClInclude Include="src\Component\Physics\Force\FrictionForce.hpp" />
     <ClInclude Include="src\Component\Physics\Force\GravityForce.hpp" />
@@ -158,8 +156,7 @@
     <ClInclude Include="src\Entity\Blob.hpp" />
     <ClInclude Include="src\Entity\CountHUD.hpp" />
     <ClInclude Include="src\Entity\Spring.hpp" />
-    <ClInclude Include="src\Entity\DoubleCable.hpp" />
-    <ClInclude Include="src\Entity\DoubleRod.hpp" />
+    <ClInclude Include="src\Entity\Cable.hpp" />
     <ClInclude Include="src\Entity\DefaultParticle.hpp" />
     <ClInclude Include="src\Entity\GravityChar.hpp" />
     <ClInclude Include="src\Entity\ParticleFactory.hpp" />

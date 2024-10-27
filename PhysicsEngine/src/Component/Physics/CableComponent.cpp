@@ -1,21 +1,21 @@
-#include "DoubleCableComponent.hpp"
+#include "CableComponent.hpp"
 #include "System/CollisionsRegistry.hpp"
 
-Vector3 DoubleCableComponent::get_first_position() const
+Vector3 CableComponent::get_first_position() const
 {
 	return first->get_position();
 }
 
-Vector3 DoubleCableComponent::get_second_position() const
+Vector3 CableComponent::get_second_position() const
 {
 	return second->get_position();
 }
 
-void DoubleCableComponent::register_physics()
+void CableComponent::register_physics()
 {
 	const Vector3 vector_ji = first->get_position() - second->get_position();
 	const float norm2_ij = Vector3::norm2(vector_ji);
-	if (norm2_ij >= default_length * default_length) {
+	if (is_rigid || norm2_ij >= default_length * default_length) {
 
 		const float norm_ij = std::sqrt(norm2_ij);
 		const Vector3 normal = vector_ji * (1 / norm_ij);
