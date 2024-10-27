@@ -20,7 +20,6 @@
     <ClCompile Include="src\Component\Physics\Force\PullForce.cpp" />
     <ClCompile Include="src\Component\Physics\Force\FrictionForce.cpp" />
     <ClCompile Include="src\Component\Vector3.cpp" />
-    <ClCompile Include="src\Entity\DefaultParticle.cpp" />
     <ClCompile Include="src\Entity\ParticleFactory.cpp" />
     <ClCompile Include="src\Entity\TrailParticle.cpp" />
     <ClCompile Include="src\System\CollidersComponentRegistry.cpp" />
@@ -29,12 +28,10 @@
     <ClCompile Include="src\System\PhysicsComponentRegistry.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="src\Entity\Blob.cpp" />
-    <ClCompile Include="src\Entity\DampedDoubleSpring.cpp" />
     <ClCompile Include="src\Entity\CountHUD.cpp" />
     <ClCompile Include="src\Entity\GravityChar.cpp" />
     <ClCompile Include="src\System\CollisionsRegistry.cpp" />
     <ClCompile Include="src\Component\Physics\DampedDoubleRigidSpringComponent.cpp" />
-    <ClCompile Include="src\Entity\DampedDoubleRigidSpring.cpp" />
     <ClCompile Include="src\System\UpdatesComponentRegistry.cpp" />
   </ItemGroup>
   <ItemGroup>

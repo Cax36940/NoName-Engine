@@ -14,7 +14,5 @@ public:
 
 	DampedDoubleRigidSpring(const DampedDoubleRigidSpringComponent& spring, const Spring& sprite) : spring(spring), sprite(sprite) {}
 
-	DampedDoubleRigidSpring(Particle* particle1, Particle* particle2, const float stiffness, const float damping, const float default_length, const float width, const glm::vec3& color) : spring(particle1, particle2, stiffness, damping, default_length), sprite(particle1->get_position(), particle2->get_position(), width, color) {}
-
-	void update(const float& delta);
+	DampedDoubleRigidSpring(Particle* particle1, Particle* particle2, const float stiffness, const float damping, const float default_length, const float width, const glm::vec3& color) : spring(particle1, particle2, stiffness, damping, default_length), sprite(particle1->get_position_ptr(), particle2->get_position_ptr(), width, color) {}
 };

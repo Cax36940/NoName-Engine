@@ -81,7 +81,7 @@ Blob::Blob(const Vector3& pos, int particle_number)
 	float radius = DEFAULT_LENGTH / (2 * sin(PI / particle_number));
 
 	for (int i = 0; i < particle_number; i++) {
-		particles.emplace_back(Particle(pos + Vector3(radius * cos(i*TWO_PI/particle_number), radius * sin(i*TWO_PI / particle_number), 0), Vector3(0, 0, 0), Vector3(0, 0, 0), 5), Sphere(pos, 20, glm::vec3(255, 255, 255)));
+		particles.emplace_back(Particle(pos + Vector3(radius * cos(i*TWO_PI/particle_number), radius * sin(i*TWO_PI / particle_number), 0), Vector3(0, 0, 0), Vector3(0, 0, 0), 5), Sphere(20, glm::vec3(255, 255, 255)));
 	}
 
 	init();
@@ -129,7 +129,4 @@ void Blob::update(float delta)
 	eye_l.set_position(mean_position + Vector3(-20, 0, 0));
 	eye_r.set_position(mean_position + Vector3(20, 0, 0));
 
-	for (DampedDoubleSpring& spring_it : springs) {
-		spring_it.update(delta);
-	}
 }

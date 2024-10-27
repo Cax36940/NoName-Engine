@@ -1,7 +1,7 @@
 #include <ofMain.h>
 #include "Spring.hpp"
 
-void Spring::set_positions(const Vector3& pos_a, const Vector3& pos_b) {
+void Spring::set_positions(const Vector3* pos_a, const Vector3* pos_b) {
 	position_a = pos_a;
 	position_b = pos_b;
 }
@@ -21,14 +21,14 @@ void Spring::draw()
 	}
 	ofSetColor(color.r, color.g, color.b);
 
-	Vector3 direction = position_b - position_a;
+	const Vector3 direction = *position_b - *position_a;
 
-	float length = 10 * TWO_PI;
+	const float length = 10 * TWO_PI;
 
-	Matrix3 pass_matrix = Matrix3::get_orthonormal_base(direction);
+	const Matrix3 pass_matrix = Matrix3::get_orthonormal_base(direction);
 	Vector3 to_draw;
 	ofPolyline line;
-	float elongate = Vector3::norm(direction) / length;
+	const float elongate = Vector3::norm(direction) / length;
 	float i = 0;
 
 	while (i < length) {
@@ -36,7 +36,7 @@ void Spring::draw()
 		float f = cos(i) * radius;
 		float g = sin(i) * radius;
 
-		to_draw = position_a + pass_matrix * Vector3(e, f, g);
+		to_draw = *position_a + pass_matrix * Vector3(e, f, g);
 	
 		line.addVertex(ofVec3f(to_draw.x, to_draw.y, to_draw.z));
 		i += 0.05 * HALF_PI * 0.5;

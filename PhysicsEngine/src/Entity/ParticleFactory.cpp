@@ -18,7 +18,7 @@ static ParticleArgs particle_args_list[] = {
 
 DefaultParticle ParticleFactory::createParticle(ParticleType particle_type, const Vector3& pos, const Vector3& acc) {
 	const ParticleArgs& particle_args = particle_args_list[particle_type];
-	return DefaultParticle(Particle(pos, particle_args.velocity, acc, particle_args.mass), Sphere(pos, particle_args.size, particle_args.color));
+	return DefaultParticle(Particle(pos, particle_args.velocity, acc, particle_args.mass), Sphere(particle_args.size, particle_args.color));
 }
 
 DefaultParticle ParticleFactory::createSimpleParticle(const Vector3& pos) {

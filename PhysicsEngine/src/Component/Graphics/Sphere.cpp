@@ -1,7 +1,7 @@
 #include <ofGraphics.h>
 #include "Sphere.hpp"
 
-void Sphere::set_position(const Vector3& pos) {
+void Sphere::set_position(const Vector3* pos) {
 	position = pos;
 }
 
@@ -15,7 +15,7 @@ void Sphere::set_color(const float& r, const float& g, const float& b) {
 
 Vector3 Sphere::get_position() const
 {
-	return position;
+	return *position;
 }
 
 float Sphere::get_size() const
@@ -29,5 +29,5 @@ void Sphere::draw()
 		return;
 	}
 	ofSetColor(color.r, color.g, color.b);
-	ofDrawSphere(glm::vec3(position.x, position.y, position.z), size);
+	ofDrawSphere(glm::vec3(position->x, position->y, position->z), size);
 }

@@ -123,9 +123,6 @@
     <ClCompile Include="src\Component\Vector3.cpp" />
     <ClCompile Include="src\Entity\Blob.cpp" />
     <ClCompile Include="src\Entity\CountHUD.cpp" />
-    <ClCompile Include="src\Entity\DampedDoubleRigidSpring.cpp" />
-    <ClCompile Include="src\Entity\DampedDoubleSpring.cpp" />
-    <ClCompile Include="src\Entity\DefaultParticle.cpp" />
     <ClCompile Include="src\Entity\GravityChar.cpp" />
     <ClCompile Include="src\Entity\ParticleFactory.cpp" />
     <ClCompile Include="src\Entity\TrailParticle.cpp" />
