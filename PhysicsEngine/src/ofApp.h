@@ -3,8 +3,6 @@
 #include "ofMain.h"
 #include "Entity/Blob.hpp"
 #include "Entity/DefaultParticle.hpp"
-#include "Entity/DoubleCable.hpp"
-#include "Entity/DoubleRod.hpp"
 #include "Component/Physics/Force/GravityForce.hpp"
 #include "Component/Physics/Force/PullForce.hpp"
 #include "Entity/CountHUD.hpp"
@@ -41,17 +39,11 @@ private:
 	bool mouse_pressed;
 	DefaultParticle* drag_particle;
 	std::vector<DefaultParticle*> particle_list;
+
+
 	int current_selected_blob;
 	int second_selected_blob;
 	int nb_of_particles_in_blob;
-
-	/*DefaultParticle particle;
-	DefaultParticle particle2;
-	DefaultParticle particleA;
-	DefaultParticle particleB;
-	DoubleSpring springAB;*/
-
-;
 
 	std::vector<Blob> blobs;
 

@@ -23,35 +23,19 @@ void ofApp::setup() {
 	mouse_x = 0;
 	mouse_y = 0;
 	drag_particle = nullptr;
+
+
+	// Initialize scene entities
 	current_selected_blob = 0;
 	second_selected_blob = 0;
 	nb_of_particles_in_blob = 20;
 	particle_list.reserve(nb_of_particles_in_blob);
 	blobs.reserve(nb_of_particles_in_blob);
-	// Initialize scene entities
-	/*particle = ParticleFactory::createSimpleParticle(Vector3(WINDOW_WIDTH/2, 250, 0));
-	particle2 = ParticleFactory::createSimpleParticle(Vector3(WINDOW_WIDTH / 2 + 50, 250, 0));
-
-	particleA = ParticleFactory::createSimpleParticle(Vector3(WINDOW_WIDTH / 2 - 150, 250, 0));
-	particleB = ParticleFactory::createSimpleParticle(Vector3(WINDOW_WIDTH / 2 - 100, 250, 0));
-
-	spring = SimpleSpring(&particle.particle, 10, 100, Vector3(WINDOW_WIDTH / 2, 100, 0), 5, glm::vec3(0.5, 0.5, 0.5));
-	spring2 = DampedSimpleSpring(&particle2.particle, 10, 1, 100, Vector3(WINDOW_WIDTH / 2 + 50, 100, 0), 5, glm::vec3(0.5, 0.5, 0.5));
-	springAB = DoubleSpring(&particleA.particle, &particleB.particle, 1, 40, 5, glm::vec3(0.5, 0.5, 0.5));
-	*/
-
-
 	blobs.emplace_back(Vector3(1000, 500, 0), nb_of_particles_in_blob);
 	blobs[current_selected_blob].sprite.set_visible_outline(true);
 
 	gravity = GravityForce(10);
 	mouse_pull_force = PullForce(10, Vector3(0, 0, 0));
-	/*
-	particle_list.push_back(&particle);
-	particle_list.push_back(&particle2);
-	particle_list.push_back(&particleA);
-	particle_list.push_back(&particleB);*/
-
 
 	blob_size_counter = CountHUD(30, WINDOW_HEIGHT - 20, 0, &myfont);
 
@@ -72,8 +56,7 @@ void ofApp::update() {
 	CollisionsRegistry::solve_collisions();
 
 	// Applying forces
-	/*ParticleForceRegistry::add(particle.get_physical_particle(), &gravity);
-	ParticleForceRegistry::add(particle2.get_physical_particle(), &gravity);*/
+
 
 	if (mouse_pressed && !drag_particle) {
 		mouse_pull_force.set_position(Vector3(mouse_x, mouse_y, 0));
@@ -99,22 +82,10 @@ void ofApp::update() {
 		drag_particle->get_physical_particle()->set_velocity(Vector3(0, 0, 0));
 	}
 
-	// Updating every object
-	/*particle.update(delta);
-	particle2.update(delta);
-	particleA.update(delta);
-	particleB.update(delta);
-	spring.update(delta);
-	spring2.update(delta);
-	springAB.update(delta);*/
-
 	blob_size_counter.set_value(blobs[current_selected_blob].particles.size());
-	UpdatesComponentRegistry::update_all(delta);
 
-	/*for (Blob& blob : blobs) {
-		blob.update(delta);
-	}
-	blob_size_counter.update(delta);*/
+	// Updating every object
+	UpdatesComponentRegistry::update_all(delta);
 
 	// Clear for next update
 	ParticleForceRegistry::clear();
