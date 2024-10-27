@@ -1,5 +1,3 @@
-* Make a LogicSystem for every component that uses the update function
 * Create a Link class for all components that are linking two particles (Rod, Cable, Spring)
-* Merge the three SpringForces into one because thay only differ by one line
 	* If possible merge some Spring classes
 * Add a way to simplify scene creation
