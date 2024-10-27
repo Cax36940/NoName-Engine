@@ -1,20 +1,20 @@
 #include <ofMain.h>
-#include "Spring.hpp"
+#include "SpringSprite.hpp"
 
-void Spring::set_positions(const Vector3* pos_a, const Vector3* pos_b) {
+void SpringSprite::set_positions(const Vector3* pos_a, const Vector3* pos_b) {
 	position_a = pos_a;
 	position_b = pos_b;
 }
 
-void Spring::set_radius(const float& new_radius) {
+void SpringSprite::set_radius(const float& new_radius) {
 	radius = new_radius;
 }
 
-void Spring::set_color(const float& r, const float& g, const float& b) {
+void SpringSprite::set_color(const float& r, const float& g, const float& b) {
 	color = glm::vec3(r, g, b);
 }
 
-void Spring::draw()
+void SpringSprite::draw()
 {
 	if (!visible) {
 		return;

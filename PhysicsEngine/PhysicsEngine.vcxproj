@@ -107,7 +107,7 @@
     <ClCompile Include="src\Component\Graphics\ConvexHull.cpp" />
     <ClCompile Include="src\Component\Graphics\EyeSprite.cpp" />
     <ClCompile Include="src\Component\Graphics\Sphere.cpp" />
-    <ClCompile Include="src\Component\Graphics\Spring.cpp" />
+    <ClCompile Include="src\Component\Graphics\SpringSprite.cpp" />
     <ClCompile Include="src\Component\Graphics\Line.cpp" />
     <ClCompile Include="src\Component\Matrix3.cpp" />
     <ClCompile Include="src\Component\Particle.cpp" />
@@ -139,7 +139,7 @@
     <ClInclude Include="src\Component\Graphics\EyeSprite.hpp" />
     <ClInclude Include="src\Component\Graphics\GraphicsComponent.hpp" />
     <ClInclude Include="src\Component\Graphics\Sphere.hpp" />
-    <ClInclude Include="src\Component\Graphics\Spring.hpp" />
+    <ClInclude Include="src\Component\Graphics\SpringSprite.hpp" />
     <ClInclude Include="src\Component\Graphics\Line.hpp" />
     <ClInclude Include="src\Component\Matrix3.hpp" />
     <ClInclude Include="src\Component\Particle.hpp" />
