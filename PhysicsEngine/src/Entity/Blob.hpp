@@ -2,7 +2,7 @@
 
 #include "Component/Graphics/ConvexHull.hpp"
 #include "Component/Graphics/EyeSprite.hpp"
-#include "Entity/DampedDoubleSpring.hpp"
+#include "Entity/Spring.hpp"
 #include "Entity/DefaultParticle.hpp"
 
 
@@ -10,7 +10,7 @@ class Blob : public UpdatesComponent{
 public:
 
 	std::vector<DefaultParticle> particles;
-	std::vector<DampedDoubleSpring> springs;
+	std::vector<Spring> springs;
 	ConvexHull sprite;
 	EyeSprite eye_l{ Vector3(0,0,0)};
 	EyeSprite eye_r{ Vector3(0,0,0)};

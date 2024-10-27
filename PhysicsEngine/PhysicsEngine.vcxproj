@@ -157,7 +157,7 @@
     <ClInclude Include="src\Component\Vector3.hpp" />
     <ClInclude Include="src\Entity\Blob.hpp" />
     <ClInclude Include="src\Entity\CountHUD.hpp" />
-    <ClInclude Include="src\Entity\DampedDoubleSpring.hpp" />
+    <ClInclude Include="src\Entity\Spring.hpp" />
     <ClInclude Include="src\Entity\DoubleCable.hpp" />
     <ClInclude Include="src\Entity\DoubleRod.hpp" />
     <ClInclude Include="src\Entity\DefaultParticle.hpp" />

@@ -10,7 +10,7 @@
 void Blob::flip_inside_visible()
 {
 	const bool visible = springs[0].sprite.is_visible();
-	for (DampedDoubleSpring& spring : springs) {
+	for (Spring& spring : springs) {
 		spring.sprite.set_visible(!visible);
 	}
 	for (DefaultParticle& particle : particles) {

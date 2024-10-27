@@ -63,7 +63,7 @@
     <ClInclude Include="src\Component\Physics\Force\DampedSpringForce.hpp" />
     <ClInclude Include="src\Component\Physics\DampedDoubleSpringComponent.hpp" />
     <ClInclude Include="src\Entity\Blob.hpp" />
-    <ClInclude Include="src\Entity\DampedDoubleSpring.hpp" />
+    <ClInclude Include="src\Entity\Spring.hpp" />
     <ClInclude Include="src\Component\Graphics\ConvexHull.hpp" />
     <ClInclude Include="src\Component\Physics\Force\PullForce.hpp" />
     <ClInclude Include="src\Component\Graphics\EyeSprite.hpp" />
