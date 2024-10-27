@@ -1,25 +1,25 @@
-#include "DampedDoubleSpringComponent.hpp"
+#include "SpringComponent.hpp"
 #include "System/ParticleForceRegistry.hpp"
 #include "System/CollisionsRegistry.hpp"
 
-DampedDoubleSpringComponent::DampedDoubleSpringComponent(Particle* first, Particle* second, const float& stiffness, const float& damping, const float& default_length, const float rigid_coeff, const bool is_bungee) :
+SpringComponent::SpringComponent(Particle* first, Particle* second, const float& stiffness, const float& damping, const float& default_length, const float rigid_coeff, const bool is_bungee) :
 	first(first), 
 	second(second),
 	first_force(stiffness, damping, default_length, is_bungee),
 	second_force(stiffness, damping, default_length, is_bungee),
 	rigid_coeff(rigid_coeff){}
 
-Vector3 DampedDoubleSpringComponent::get_first_position() const
+Vector3 SpringComponent::get_first_position() const
 {
 	return first->get_position();
 }
 
-Vector3 DampedDoubleSpringComponent::get_second_position() const
+Vector3 SpringComponent::get_second_position() const
 {
 	return second->get_position();
 }
 
-void DampedDoubleSpringComponent::register_physics()
+void SpringComponent::register_physics()
 {
 	if (rigid_coeff > 0.0f) {
 		register_rigid_physics();
@@ -32,7 +32,7 @@ void DampedDoubleSpringComponent::register_physics()
 	ParticleForceRegistry::add(second, (ParticleForceGenerator*)&second_force);
 }
 
-void DampedDoubleSpringComponent::register_rigid_physics()
+void SpringComponent::register_rigid_physics()
 {
 
 	const Vector3 vector_ji = first->get_position() - second->get_position();
