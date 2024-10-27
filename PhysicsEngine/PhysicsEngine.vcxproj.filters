@@ -31,7 +31,6 @@
     <ClCompile Include="src\Entity\CountHUD.cpp" />
     <ClCompile Include="src\Entity\GravityChar.cpp" />
     <ClCompile Include="src\System\CollisionsRegistry.cpp" />
-    <ClCompile Include="src\Component\Physics\DampedDoubleRigidSpringComponent.cpp" />
     <ClCompile Include="src\System\UpdatesComponentRegistry.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -76,8 +75,6 @@
     <ClInclude Include="src\Entity\DoubleCable.hpp" />
     <ClInclude Include="src\Component\Physics\DoubleRodComponent.hpp" />
     <ClInclude Include="src\Entity\DoubleRod.hpp" />
-    <ClInclude Include="src\Component\Physics\DampedDoubleRigidSpringComponent.hpp" />
-    <ClInclude Include="src\Entity\DampedDoubleRigidSpring.hpp" />
     <ClInclude Include="src\System\UpdatesComponentRegistry.hpp" />
     <ClInclude Include="src\Component\UpdatesComponent.hpp" />
   </ItemGroup>
