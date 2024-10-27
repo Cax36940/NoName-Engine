@@ -1,14 +1,14 @@
 #pragma once
 #include "Component/Particle.hpp"
-#include "Component/Physics/Force/DampedSpringForce.hpp"
+#include "Component/Physics/Force/SpringForce.hpp"
 #include "PhysicsComponent.hpp"
 
 class SpringComponent : public PhysicsComponent {
 private:	
 	Particle* first;
 	Particle* second;
-	DampedSpringForce first_force;
-	DampedSpringForce second_force;
+	SpringForce first_force;
+	SpringForce second_force;
 	float rigid_coeff; // If true the spring does not elongate more than its rigid_coeff * length
 
 public:
