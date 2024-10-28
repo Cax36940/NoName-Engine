@@ -31,6 +31,8 @@
     <ClCompile Include="src\Entity\GravityChar.cpp" />
     <ClCompile Include="src\System\CollisionsRegistry.cpp" />
     <ClCompile Include="src\System\UpdatesComponentRegistry.cpp" />
+    <ClCompile Include="src\Component\Matrix4.cpp" />
+    <ClCompile Include="src\Component\Quaternion.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -74,6 +76,8 @@
     <ClInclude Include="src\Entity\Cable.hpp" />
     <ClInclude Include="src\System\UpdatesComponentRegistry.hpp" />
     <ClInclude Include="src\Component\UpdatesComponent.hpp" />
+    <ClInclude Include="src\Component\Matrix4.hpp" />
+    <ClInclude Include="src\Component\Quaternion.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />
