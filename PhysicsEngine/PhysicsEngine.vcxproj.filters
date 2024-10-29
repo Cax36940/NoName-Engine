@@ -32,8 +32,9 @@
     <ClCompile Include="src\System\CollisionsRegistry.cpp" />
     <ClCompile Include="src\System\UpdatesComponentRegistry.cpp" />
     <ClCompile Include="src\Component\Matrix4.cpp" />
-    <ClCompile Include="src\Component\Quaternion.cpp" />
     <ClCompile Include="src\Component\Vector4.cpp" />
+    <ClCompile Include="src\Component\Quaternion.cpp" />
+    <ClCompile Include="ClassToSuppress.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -78,8 +79,9 @@
     <ClInclude Include="src\System\UpdatesComponentRegistry.hpp" />
     <ClInclude Include="src\Component\UpdatesComponent.hpp" />
     <ClInclude Include="src\Component\Matrix4.hpp" />
-    <ClInclude Include="src\Component\Quaternion.hpp" />
     <ClInclude Include="src\Component\Vector4.hpp" />
+    <ClInclude Include="src\Component\Quaternion.hpp" />
+    <ClInclude Include="ClassToSuppress.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

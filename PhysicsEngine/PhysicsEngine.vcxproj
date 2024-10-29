@@ -104,6 +104,7 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ClassToSuppress.cpp" />
     <ClCompile Include="src\Component\Graphics\ConvexHull.cpp" />
     <ClCompile Include="src\Component\Graphics\EyeSprite.cpp" />
     <ClCompile Include="src\Component\Graphics\Sphere.cpp" />
@@ -121,6 +122,7 @@
     <ClCompile Include="src\Component\Physics\Force\PullForce.cpp" />
     <ClCompile Include="src\Component\Quaternion.cpp" />
     <ClCompile Include="src\Component\Vector3.cpp" />
+    <ClCompile Include="src\Component\Vector4.cpp" />
     <ClCompile Include="src\Entity\Blob.cpp" />
     <ClCompile Include="src\Entity\CountHUD.cpp" />
     <ClCompile Include="src\Entity\GravityChar.cpp" />
@@ -136,6 +138,7 @@
     <ClCompile Include="src\System\UpdatesComponentRegistry.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ClassToSuppress.h" />
     <ClInclude Include="src\Component\Graphics\ConvexHull.hpp" />
     <ClInclude Include="src\Component\Graphics\EyeSprite.hpp" />
     <ClInclude Include="src\Component\Graphics\GraphicsComponent.hpp" />
@@ -157,6 +160,7 @@
     <ClInclude Include="src\Component\Quaternion.hpp" />
     <ClInclude Include="src\Component\UpdatesComponent.hpp" />
     <ClInclude Include="src\Component\Vector3.hpp" />
+    <ClInclude Include="src\Component\Vector4.hpp" />
     <ClInclude Include="src\Entity\Blob.hpp" />
     <ClInclude Include="src\Entity\CountHUD.hpp" />
     <ClInclude Include="src\Entity\Spring.hpp" />
