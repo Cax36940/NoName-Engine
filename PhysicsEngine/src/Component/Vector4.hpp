@@ -136,10 +136,4 @@ public:
      */
     static float dot(const Vector4& vector_u, const Vector4& vector_v);
 
-    /**
-     * @brief Orthogonal projection of one vector on another
-     * @param support_v
-     * @param projected_v
-     */
-    static Vector4 orthogonal_projection(const Vector4& support_v, const Vector4& projected_v);
 };

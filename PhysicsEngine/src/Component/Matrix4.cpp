@@ -205,21 +205,3 @@ Matrix4 Matrix4::inv(const Matrix4& matrix) {
 
     return inv;
 }
-
-
-Matrix4 Matrix4::get_orthonormal_base(const Vector4& vector) {
-    Vector4 u1 = Vector4::normalize(vector);
-
-    // Choisir deux vecteurs arbitraires qui ne sont pas colinéaires avec u1
-    Vector4 v2 = (std::abs(u1.x) > 0.1f) ? Vector4(0, 1, 0, 0) : Vector4(1, 0, 0, 0);
-    Vector4 v3 = Vector4(0, 0, 1, 0);
-    Vector4 v4 = Vector4(0, 0, 0, 1);
-
-    // Gram-Schmidt pour orthogonaliser les vecteurs par rapport à u1
-    Vector4 u2 = Vector4::normalize(v2 - Vector4::dot(u1, v2) * u1);
-    Vector4 u3 = Vector4::normalize(v3 - Vector4::dot(u1, v3) * u1 - Vector4::dot(u2, v3) * u2);
-    Vector4 u4 = Vector4::normalize(v4 - Vector4::dot(u1, v4) * u1 - Vector4::dot(u2, v4) * u2 - Vector4::dot(u3, v4) * u3);
-
-    // Retourne la matrice contenant les vecteurs orthonormés
-    return Matrix4(u1, u2, u3, u4);
-}

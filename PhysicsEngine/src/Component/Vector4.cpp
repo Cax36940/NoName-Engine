@@ -82,12 +82,3 @@ Vector4 Vector4::conv(const Vector4& vector_u, const Vector4& vector_v) {
 float Vector4::dot(const Vector4& vector_u, const Vector4& vector_v) {
     return vector_u.x * vector_v.x + vector_u.y * vector_v.y + vector_u.z * vector_v.z + vector_u.t * vector_v.t;
 }
-
-
-Vector4 Vector4::orthogonal_projection(const Vector4& support_v, const Vector4& projected_v)
-{
-    float support_norm2 = norm2(support_v);
-    Vector4 projection = dot(support_v, projected_v) * support_v * (1 / support_norm2);
-
-    return projection;
-}

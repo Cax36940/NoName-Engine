@@ -121,9 +121,4 @@ public:
      */
     static Matrix4 inv(const Matrix4& matrix);
 
-    /**
-     * @brief Create an orthonormal base
-     * @param vector the vector from which the base is constructed
-     */
-    static Matrix4 get_orthonormal_base(const Vector4& vector);
 };
