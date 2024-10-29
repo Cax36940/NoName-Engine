@@ -76,14 +76,14 @@ public:
      * @param matrix the left matrix
      * @param matrix the right matrix
      */
-    //friend Matrix4 operator*(const Matrix4& left_m, const Matrix4& right_m);
+    friend Matrix4 operator*(const Matrix4& left_m, const Matrix4& right_m);
 
     /**
      * @brief Matrix-Vector multiplication
      * @param vector the vector
      * @param matrix the matrix
      */
-    //friend Vector4 operator*(const Matrix4& matrix, const Vector4& vector);
+    friend Vector4 operator*(const Matrix4& matrix, const Vector4& vector);
 
     /**
      * @brief Matrix addition (return new matrix)
@@ -113,17 +113,17 @@ public:
      * @brief Matrix determinant
      * @param matrix the matrix from which the determinant is calculated
      */
-    //static float determinant(const Matrix4& matrix);
+    static float determinant(const Matrix4& matrix);
 
     /**
      * @brief Matrix inverse
      * @param matrix the matrix to inverse
      */
-    //static Matrix4 inv(const Matrix4& matrix);
+    static Matrix4 inv(const Matrix4& matrix);
 
     /**
      * @brief Create an orthonormal base
      * @param vector the vector from which the base is constructed
      */
-    //static Matrix4 get_orthonormal_base(const Vector4& vector);
+    static Matrix4 get_orthonormal_base(const Vector4& vector);
 };

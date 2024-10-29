@@ -137,13 +137,6 @@ public:
     static float dot(const Vector4& vector_u, const Vector4& vector_v);
 
     /**
-     * @brief Cross product between two vectors
-     * @param vector_u
-     * @param vector_v
-     */
-    //static Vector4 cross(const Vector4& vector_u, const Vector4& vector_v);
-
-    /**
      * @brief Orthogonal projection of one vector on another
      * @param support_v
      * @param projected_v
