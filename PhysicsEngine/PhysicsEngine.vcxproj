@@ -104,6 +104,7 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ClassToSuppress.cpp" />
     <ClCompile Include="src\Component\Graphics\ConvexHull.cpp" />
     <ClCompile Include="src\Component\Graphics\EyeSprite.cpp" />
     <ClCompile Include="src\Component\Graphics\Sphere.cpp" />
@@ -121,6 +122,7 @@
     <ClCompile Include="src\Component\Physics\Force\PullForce.cpp" />
     <ClCompile Include="src\Component\Quaternion.cpp" />
     <ClCompile Include="src\Component\Vector3.cpp" />
+    <ClCompile Include="src\Component\Vector4.cpp" />
     <ClCompile Include="src\Entity\Blob.cpp" />
     <ClCompile Include="src\Entity\CountHUD.cpp" />
     <ClCompile Include="src\Entity\GravityChar.cpp" />
@@ -136,6 +138,7 @@
     <ClCompile Include="src\System\UpdatesComponentRegistry.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ClassToSuppress.h" />
     <ClInclude Include="src\Component\Graphics\ConvexHull.hpp" />
     <ClInclude Include="src\Component\Graphics\EyeSprite.hpp" />
     <ClInclude Include="src\Component\Graphics\GraphicsComponent.hpp" />
@@ -172,6 +175,7 @@
     <ClInclude Include="src\System\PhysicsComponentRegistry.hpp" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\System\UpdatesComponentRegistry.hpp" />
+    <ClInclude Include="src\Component\Vector4.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">
