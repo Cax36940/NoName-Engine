@@ -47,12 +47,29 @@ Quaternion& Quaternion::operator*=(const Quaternion& quat)
         this->w * quat_vect + quat.w * this_vect + Vector3::cross(this_vect, quat_vect));
 }
 
+Quaternion Quaternion::operator+(const Quaternion& quat) const
+{
+    return Quaternion(this->w + quat.w, this->x + quat.x, this->y + quat.y, this->z + quat.z);
+}
+
+Quaternion& Quaternion::operator+=(const Quaternion& quat)
+{
+    this->w += quat.w;
+    this->x += quat.x;
+    this->y += quat.y;
+    this->z += quat.z;
+    return *this;
+}
+
 Quaternion Quaternion::operator-(const Quaternion& quat) const {
-    return *this * Quaternion::conj(quat);
+    return Quaternion(this->w - quat.w, this->x - quat.x, this->y - quat.y, this->z - quat.z);
 }
 
 Quaternion& Quaternion::operator-=(const Quaternion& quat) {
-    *this *= Quaternion::conj(quat);
+    this->w -= quat.w;
+    this->x -= quat.x;
+    this->y -= quat.y;
+    this->z -= quat.z;
     return *this;
 }
 
@@ -64,6 +81,11 @@ Quaternion& Quaternion::operator-()
 Quaternion Quaternion::conj(const Quaternion& quat)
 {
     return Quaternion(quat.w, -quat.x, -quat.y, -quat.z);
+}
+
+Quaternion Quaternion::diff(const Quaternion& quat_u, const Quaternion& quat_v)
+{
+    return quat_u * Quaternion::conj(quat_v);
 }
 
 Quaternion Quaternion::inv(const Quaternion& quat)

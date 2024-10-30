@@ -1,7 +1,6 @@
 #pragma once
 #include "Vector3.hpp"
 
-
 class Quaternion {
 
 public:
@@ -93,14 +92,26 @@ public:
     Quaternion& operator*=(const Quaternion& quat);
 
     /**
-     * @brief Quaternion subtraction (return new quaternion)
+     * @brief Quaternion addition (return new quaternion)
      * @param quat the quaternion to add to current quaternion
+     */
+    Quaternion operator+(const Quaternion& quat) const;
+
+    /**
+     * @brief Quaternion addition assignment
+     * @param quat the quaternion to add to current quaternion
+     */
+    Quaternion& operator+=(const Quaternion& quat);
+
+    /**
+     * @brief Quaternion subtraction (return new quaternion)
+     * @param quat the quaternion to substract to current quaternion
      */
     Quaternion operator-(const Quaternion& quat) const;
 
     /**
      * @brief Quaternion subtraction assignment
-     * @param quat the quaternion to add to current quaternion
+     * @param quat the quaternion to substract to current quaternion
      */
     Quaternion& operator-=(const Quaternion& quat);
 
@@ -114,6 +125,13 @@ public:
      * @param quat The quaternion from which to take the conjugate
      */
     static Quaternion conj(const Quaternion& quat);
+
+    /**
+     * @brief Quaternion to go from quat_u to quat_v
+     * @param quat_u
+     * @param quat_v
+     */
+    static Quaternion diff(const Quaternion& quat_u, const Quaternion& quat_v);
 
     /**
      * @brief Quaternion inverse
