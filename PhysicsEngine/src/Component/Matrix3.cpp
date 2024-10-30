@@ -4,9 +4,7 @@
 #include "Matrix3.hpp"
 #include "Vector3.hpp"
 
-Matrix3::Matrix3() {
-    Matrix3(Vector3(1, 0, 0), Vector3(0, 1, 0), Vector3(0, 0, 1));
-}
+Matrix3::Matrix3() : x(1, 0, 0), y(0, 1, 0), z(0, 0, 1) {}
 
 Matrix3::Matrix3(const Vector3& x, const Vector3& y, const Vector3& z) : x(x), y(y), z(z) {}
 
@@ -84,6 +82,9 @@ float Matrix3::determinant(const Matrix3& matrix)
 
 Matrix3 Matrix3::inv(const Matrix3& matrix)
 {
+    if (determinant(matrix) == 0.f) {
+        return Matrix3(Vector3(0,0,0),Vector3(0,0,0),Vector3(0,0,0));
+    }
     Matrix3 temp = matrix;
     Matrix3 inv = Matrix3();
     //1st step
