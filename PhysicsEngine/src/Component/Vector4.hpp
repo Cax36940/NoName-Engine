@@ -1,7 +1,8 @@
 #pragma once
 #include <of3dGraphics.h>
 
-class Vector4 {
+class Vector4
+{
 
 public:
     float x;
@@ -135,5 +136,5 @@ public:
      * @param vector_v
      */
     static float dot(const Vector4& vector_u, const Vector4& vector_v);
-
 };
+

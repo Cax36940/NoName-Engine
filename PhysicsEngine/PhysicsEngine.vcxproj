@@ -160,7 +160,6 @@
     <ClInclude Include="src\Component\Quaternion.hpp" />
     <ClInclude Include="src\Component\UpdatesComponent.hpp" />
     <ClInclude Include="src\Component\Vector3.hpp" />
-    <ClInclude Include="src\Component\Vector4.hpp" />
     <ClInclude Include="src\Entity\Blob.hpp" />
     <ClInclude Include="src\Entity\CountHUD.hpp" />
     <ClInclude Include="src\Entity\Spring.hpp" />
@@ -176,6 +175,7 @@
     <ClInclude Include="src\System\PhysicsComponentRegistry.hpp" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\System\UpdatesComponentRegistry.hpp" />
+    <ClInclude Include="src\Component\Vector4.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">
