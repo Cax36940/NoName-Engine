@@ -194,28 +194,11 @@ namespace TestVector4
 
 		TEST_METHOD(Normalize)
 		{
-			/*Vector4 test_vector_a(1.0f, 2.0f, 3.0f, 4.0f);
-			test_vector_a = Vector4::normalize(test_vector_a);
-			Assert::AreEqual(1.0f / sqrtf(30.0f), test_vector_a.x);
-			Assert::AreEqual(2.0f / sqrtf(30.0f), test_vector_a.y);
-			Assert::AreEqual(3.0f / sqrtf(30.0f), test_vector_a.z);
-			Assert::AreEqual(4.0f / sqrtf(30.0f), test_vector_a.t);
-
-			Vector4 test_vector_b(0.0f, 0.0f, 0.0f, 0.0f);
-			test_vector_b = Vector4::normalize(test_vector_b);
-			Assert::AreEqual(0.0f, test_vector_b.x);
-			Assert::AreEqual(0.0f, test_vector_b.y);
-			Assert::AreEqual(0.0f, test_vector_b.z);
-			Assert::AreEqual(0.0f, test_vector_b.t);*/
-
-
 			Vector4 test_vector_a(1.0f, 2.0f, 3.0f, 4.0f);
 			Assert::AreEqual(sqrtf(30.0f), Vector4::norm(test_vector_a));
 
 			Vector4 test_vector_b(0.0f, 0.0f, 0.0f, 0.0f);
 			Assert::AreEqual(0.0f, Vector4::norm(test_vector_b));
-
-	
 		}
 
 		TEST_METHOD(Conv)
