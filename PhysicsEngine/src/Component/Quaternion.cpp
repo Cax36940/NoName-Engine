@@ -43,8 +43,13 @@ Quaternion& Quaternion::operator*=(const Quaternion& quat)
 {
     Vector3 this_vect(x, y, z);
     Vector3 quat_vect(quat.x, quat.y, quat.z);
-    return Quaternion(this->w * quat.w - Vector3::dot(this_vect, quat_vect),
-        this->w * quat_vect + quat.w * this_vect + Vector3::cross(this_vect, quat_vect));
+    Vector3 result = this->w * quat_vect + quat.w * this_vect + Vector3::cross(this_vect, quat_vect);
+    this->w = this->w * quat.w - Vector3::dot(this_vect, quat_vect);
+    this->x = result.x;
+    this->y = result.y;
+    this->z = result.z;
+
+    return *this;
 }
 
 Quaternion Quaternion::operator+(const Quaternion& quat) const
