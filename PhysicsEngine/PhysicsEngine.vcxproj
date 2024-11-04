@@ -105,6 +105,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ClassToSuppress.cpp" />
+    <ClCompile Include="src\Entity\RigidBody.cpp" />
     <ClCompile Include="src\Component\Graphics\ConvexHull.cpp" />
     <ClCompile Include="src\Component\Graphics\EyeSprite.cpp" />
     <ClCompile Include="src\Component\Graphics\Sphere.cpp" />
@@ -139,6 +140,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ClassToSuppress.h" />
+    <ClInclude Include="src\Entity\RigidBody.hpp" />
     <ClInclude Include="src\Component\Graphics\ConvexHull.hpp" />
     <ClInclude Include="src\Component\Graphics\EyeSprite.hpp" />
     <ClInclude Include="src\Component\Graphics\GraphicsComponent.hpp" />

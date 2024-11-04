@@ -1,6 +1,7 @@
 #include <cmath>
 #include <iostream>
 #include "Quaternion.hpp"
+#include "Matrix3.hpp"
 
 Quaternion::Quaternion() : w(1), x(0), y(0), z(0) {}
 
@@ -141,5 +142,16 @@ Vector3 Quaternion::toVector3() const
 Vector3 Quaternion::toVector3(const Quaternion& quat)
 {
     return Vector3(quat.x, quat.y, quat.z);
+}
+
+Matrix3 Quaternion::toMatrix3(const Quaternion& q)
+{
+    Vector3 x = Vector3((1 - 2 * (pow((q.y), 2) + pow((q.z), 2))), 2 * (q.x * q.y + q.z * q.w), 2 * (q.x * q.z - q.y * q.w));
+
+    Vector3 y = Vector3(2 * (q.x * q.y - q.z * q.w), (1 - 2 * (pow((q.x), 2) + pow((q.z), 2))), 2 * (q.y * q.z + q.x * q.w));
+
+    Vector3 z = Vector3(2 * (q.x * q.z + q.y * q.w), 2 * (q.y * q.z - q.x * q.w), (1 - 2 * (pow((q.x), 2) + pow((q.y), 2))));
+
+    return Matrix3(x, y, z);
 }
 

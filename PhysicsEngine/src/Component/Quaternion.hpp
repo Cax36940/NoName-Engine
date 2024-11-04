@@ -187,4 +187,10 @@ public:
      */
     static Vector3 toVector3(const Quaternion& quat);
 
+    /*
+    @brief Transform quaternion to matrix
+    @param q
+    */
+    static Matrix3 toMatrix3(const Quaternion& q);
+
 };
