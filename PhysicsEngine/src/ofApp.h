@@ -44,4 +44,5 @@ private:
 	ofImage backgroundPicture;
 	ofTrueTypeFont myfont;
 	ofEasyCam camera;
+	ofLight sun;
 };
