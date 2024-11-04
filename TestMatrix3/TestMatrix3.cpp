@@ -218,6 +218,6 @@ namespace TestMatrix3
 			Assert::AreEqual((float)7 / 18, inv.z.x, epsilon);
 			Assert::AreEqual((float)-5 / 18, inv.z.y, epsilon);
 			Assert::AreEqual((float)1 / 18, inv.z.z, epsilon);
-		}
+		}*/
 	};
 }
