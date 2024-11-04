@@ -119,6 +119,10 @@ public:
      * @brief Matrix inverse
      * @param matrix the matrix to inverse
      */
-    static Matrix4 inv(const Matrix4& matrix);
+
+    //pas fonctionnel
+   
+    //static Matrix4 inv(const Matrix4& matrix);
+    
 
 };

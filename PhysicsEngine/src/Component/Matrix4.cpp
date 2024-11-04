@@ -108,100 +108,100 @@ float Matrix4::determinant(const Matrix4& matrix) {
 }
 
 
-Matrix4 Matrix4::inv(const Matrix4& matrix) {
-    Matrix4 temp = matrix;
-    Matrix4 inv = Matrix4();
-
-    // Étape 1
-    inv.x.x = 1 / temp.x.x;
-    temp.y.x = temp.y.x / temp.x.x;
-    temp.z.x = temp.z.x / temp.x.x;
-    temp.t.x = temp.t.x / temp.x.x;
-    temp.x.x = 1;
-
-    inv.x.y = -temp.x.y * inv.x.x;
-    temp.y.y = temp.y.y - temp.x.y * temp.y.x;
-    temp.z.y = temp.z.y - temp.x.y * temp.z.x;
-    temp.t.y = temp.t.y - temp.x.y * temp.t.x;
-    temp.x.y = 0;
-
-    inv.x.z = -temp.x.z * inv.x.x;
-    temp.y.z = temp.y.z - temp.x.z * temp.y.x;
-    temp.z.z = temp.z.z - temp.x.z * temp.z.x;
-    temp.t.z = temp.t.z - temp.x.z * temp.t.x;
-    temp.x.z = 0;
-
-    inv.x.t = -temp.x.t * inv.x.x;
-    temp.y.t = temp.y.t - temp.x.t * temp.y.x;
-    temp.z.t = temp.z.t - temp.x.t * temp.z.x;
-    temp.t.t = temp.t.t - temp.x.t * temp.t.x;
-    temp.x.t = 0;
-
-    // Étape 2
-    inv.y.y = 1 / temp.y.y;
-    inv.x.y = inv.x.y / temp.y.y;
-    temp.z.y = temp.z.y / temp.y.y;
-    temp.t.y = temp.t.y / temp.y.y;
-    temp.y.y = 1;
-
-    inv.x.x = inv.x.x - temp.y.x * inv.x.y;
-    inv.y.x = inv.y.x - temp.y.x * inv.y.y;
-    temp.z.x = temp.z.x - temp.y.x * temp.z.y;
-    temp.t.x = temp.t.x - temp.y.x * temp.t.y;
-    temp.y.x = 0;
-
-    inv.x.z = inv.x.z - temp.y.z * inv.x.y;
-    inv.y.z = inv.y.z - temp.y.z * inv.y.y;
-    temp.z.z = temp.z.z - temp.y.z * temp.z.y;
-    temp.t.z = temp.t.z - temp.y.z * temp.t.y;
-    temp.y.z = 0;
-
-    inv.x.t = inv.x.t - temp.y.t * inv.x.y;
-    inv.y.t = inv.y.t - temp.y.t * inv.y.y;
-    temp.z.t = temp.z.t - temp.y.t * temp.z.y;
-    temp.t.t = temp.t.t - temp.y.t * temp.t.y;
-    temp.y.t = 0;
-
-    // Étape 3
-    inv.z.z = 1 / temp.z.z;
-    inv.x.z = inv.x.z / temp.z.z;
-    inv.y.z = inv.y.z / temp.z.z;
-    temp.t.z = temp.t.z / temp.z.z;
-    temp.z.z = 1;
-
-    inv.x.x = inv.x.x - temp.z.x * inv.x.z;
-    inv.y.x = inv.y.x - temp.z.x * inv.y.z;
-    inv.z.x = inv.z.x - temp.z.x * inv.z.z;
-    temp.t.x = temp.t.x - temp.z.x * temp.t.z;
-    temp.z.x = 0;
-
-    inv.x.y = inv.x.y - temp.z.y * inv.x.z;
-    inv.y.y = inv.y.y - temp.z.y * inv.y.z;
-    inv.z.y = inv.z.y - temp.z.y * inv.z.z;
-    temp.t.y = temp.t.y - temp.z.y * temp.t.z;
-    temp.z.y = 0;
-
-    // Étape 4
-    inv.t.t = 1 / temp.t.t;
-    inv.x.t = inv.x.t / temp.t.t;
-    inv.y.t = inv.y.t / temp.t.t;
-    inv.z.t = inv.z.t / temp.t.t;
-    temp.t.t = 1;
-
-    inv.x.x = inv.x.x - temp.t.x * inv.x.t;
-    inv.y.x = inv.y.x - temp.t.x * inv.y.t;
-    inv.z.x = inv.z.x - temp.t.x * inv.z.t;
-    temp.t.x = 0;
-
-    inv.x.y = inv.x.y - temp.t.y * inv.x.t;
-    inv.y.y = inv.y.y - temp.t.y * inv.y.t;
-    inv.z.y = inv.z.y - temp.t.y * inv.z.t;
-    temp.t.y = 0;
-
-    inv.x.z = inv.x.z - temp.t.z * inv.x.t;
-    inv.y.z = inv.y.z - temp.t.z * inv.y.t;
-    inv.z.z = inv.z.z - temp.t.z * inv.z.t;
-    temp.t.z = 0;
-
-    return inv;
-}
+//Matrix4 Matrix4::inv(const Matrix4& matrix) {
+//    Matrix4 temp = matrix;
+//    Matrix4 inv = Matrix4();
+//
+//    // Étape 1
+//    inv.x.x = 1 / temp.x.x;
+//    temp.y.x = temp.y.x / temp.x.x;
+//    temp.z.x = temp.z.x / temp.x.x;
+//    temp.t.x = temp.t.x / temp.x.x;
+//    temp.x.x = 1;
+//
+//    inv.x.y = -temp.x.y * inv.x.x;
+//    temp.y.y = temp.y.y - temp.x.y * temp.y.x;
+//    temp.z.y = temp.z.y - temp.x.y * temp.z.x;
+//    temp.t.y = temp.t.y - temp.x.y * temp.t.x;
+//    temp.x.y = 0;
+//
+//    inv.x.z = -temp.x.z * inv.x.x;
+//    temp.y.z = temp.y.z - temp.x.z * temp.y.x;
+//    temp.z.z = temp.z.z - temp.x.z * temp.z.x;
+//    temp.t.z = temp.t.z - temp.x.z * temp.t.x;
+//    temp.x.z = 0;
+//
+//    inv.x.t = -temp.x.t * inv.x.x;
+//    temp.y.t = temp.y.t - temp.x.t * temp.y.x;
+//    temp.z.t = temp.z.t - temp.x.t * temp.z.x;
+//    temp.t.t = temp.t.t - temp.x.t * temp.t.x;
+//    temp.x.t = 0;
+//
+//    // Étape 2
+//    inv.y.y = 1 / temp.y.y;
+//    inv.x.y = inv.x.y / temp.y.y;
+//    temp.z.y = temp.z.y / temp.y.y;
+//    temp.t.y = temp.t.y / temp.y.y;
+//    temp.y.y = 1;
+//
+//    inv.x.x = inv.x.x - temp.y.x * inv.x.y;
+//    inv.y.x = inv.y.x - temp.y.x * inv.y.y;
+//    temp.z.x = temp.z.x - temp.y.x * temp.z.y;
+//    temp.t.x = temp.t.x - temp.y.x * temp.t.y;
+//    temp.y.x = 0;
+//
+//    inv.x.z = inv.x.z - temp.y.z * inv.x.y;
+//    inv.y.z = inv.y.z - temp.y.z * inv.y.y;
+//    temp.z.z = temp.z.z - temp.y.z * temp.z.y;
+//    temp.t.z = temp.t.z - temp.y.z * temp.t.y;
+//    temp.y.z = 0;
+//
+//    inv.x.t = inv.x.t - temp.y.t * inv.x.y;
+//    inv.y.t = inv.y.t - temp.y.t * inv.y.y;
+//    temp.z.t = temp.z.t - temp.y.t * temp.z.y;
+//    temp.t.t = temp.t.t - temp.y.t * temp.t.y;
+//    temp.y.t = 0;
+//
+//    // Étape 3
+//    inv.z.z = 1 / temp.z.z;
+//    inv.x.z = inv.x.z / temp.z.z;
+//    inv.y.z = inv.y.z / temp.z.z;
+//    temp.t.z = temp.t.z / temp.z.z;
+//    temp.z.z = 1;
+//
+//    inv.x.x = inv.x.x - temp.z.x * inv.x.z;
+//    inv.y.x = inv.y.x - temp.z.x * inv.y.z;
+//    inv.z.x = inv.z.x - temp.z.x * inv.z.z;
+//    temp.t.x = temp.t.x - temp.z.x * temp.t.z;
+//    temp.z.x = 0;
+//
+//    inv.x.y = inv.x.y - temp.z.y * inv.x.z;
+//    inv.y.y = inv.y.y - temp.z.y * inv.y.z;
+//    inv.z.y = inv.z.y - temp.z.y * inv.z.z;
+//    temp.t.y = temp.t.y - temp.z.y * temp.t.z;
+//    temp.z.y = 0;
+//
+//    // Étape 4
+//    inv.t.t = 1 / temp.t.t;
+//    inv.x.t = inv.x.t / temp.t.t;
+//    inv.y.t = inv.y.t / temp.t.t;
+//    inv.z.t = inv.z.t / temp.t.t;
+//    temp.t.t = 1;
+//
+//    inv.x.x = inv.x.x - temp.t.x * inv.x.t;
+//    inv.y.x = inv.y.x - temp.t.x * inv.y.t;
+//    inv.z.x = inv.z.x - temp.t.x * inv.z.t;
+//    temp.t.x = 0;
+//
+//    inv.x.y = inv.x.y - temp.t.y * inv.x.t;
+//    inv.y.y = inv.y.y - temp.t.y * inv.y.t;
+//    inv.z.y = inv.z.y - temp.t.y * inv.z.t;
+//    temp.t.y = 0;
+//
+//    inv.x.z = inv.x.z - temp.t.z * inv.x.t;
+//    inv.y.z = inv.y.z - temp.t.z * inv.y.t;
+//    inv.z.z = inv.z.z - temp.t.z * inv.z.t;
+//    temp.t.z = 0;
+//
+//    return inv;
+//}
