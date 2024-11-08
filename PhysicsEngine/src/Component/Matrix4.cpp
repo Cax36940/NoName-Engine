@@ -49,19 +49,19 @@ Matrix4 operator*(const Matrix4& left_m, const Matrix4& right_m)
     result.y.x = Vector4::dot(left_m.y, tmp);
     result.z.x = Vector4::dot(left_m.z, tmp);
 
-    Vector4 tmp(right_m.x.y, right_m.y.y, right_m.z.y, 0);
+    tmp = Vector4(right_m.x.y, right_m.y.y, right_m.z.y, 0);
 
     result.x.y = Vector4::dot(left_m.x, tmp);
     result.y.y = Vector4::dot(left_m.y, tmp);
     result.z.y = Vector4::dot(left_m.z, tmp);
 
-    Vector4 tmp(right_m.x.z, right_m.y.z, right_m.z.z, 0);
+    tmp = Vector4(right_m.x.z, right_m.y.z, right_m.z.z, 0);
 
     result.x.z = Vector4::dot(left_m.x, tmp);
     result.y.z = Vector4::dot(left_m.y, tmp);
     result.z.z = Vector4::dot(left_m.z, tmp);
 
-    Vector4 tmp(right_m.x.t, right_m.y.t, right_m.z.t, 1);
+    tmp = Vector4(right_m.x.t, right_m.y.t, right_m.z.t, 1);
 
     result.x.t = Vector4::dot(left_m.x, tmp);
     result.y.t = Vector4::dot(left_m.y, tmp);
