@@ -4,7 +4,7 @@
 #include "Component/Quaternion.hpp"
 #include "Component/Vector3.hpp"
 
-class RigidClass
+class RigidBody
 {
 private: 
 	Particle particle;
@@ -13,8 +13,8 @@ private:
 	//ressources* mesh; ??
 
 public:
-	RigidClass() = default;
-	RigidClass::RigidClass(Vector3 pos, float mass, Matrix3 m, Quaternion q);
+	RigidBody() = default;
+	RigidBody::RigidBody(Vector3 pos, float mass, Matrix3 m, Quaternion q);
 
 
 	void RotateX();
