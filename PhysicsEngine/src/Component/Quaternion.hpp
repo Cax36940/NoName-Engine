@@ -1,5 +1,6 @@
 #pragma once
 #include "Vector3.hpp"
+#include "Matrix3.hpp"
 
 class Quaternion {
 
@@ -181,10 +182,17 @@ public:
      * @brief Return the vector part of the quaternion
      */
     Vector3 toVector3() const;
+
     /**
      * @brief Return the vector part of the quaternion
      * @param quat
      */
     static Vector3 toVector3(const Quaternion& quat);
+
+    /**
+     * @brief Transform quaternion to matrix
+     * @param quat
+     */
+    static Matrix3 toMatrix3(const Quaternion& quat);
 
 };

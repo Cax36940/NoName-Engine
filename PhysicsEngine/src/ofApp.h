@@ -37,24 +37,12 @@ private:
 	int mouse_x;
 	int mouse_y;
 	bool mouse_pressed;
-	DefaultParticle* drag_particle;
-	std::vector<DefaultParticle*> particle_list;
-
-
-	int current_selected_blob;
-	int second_selected_blob;
-	int nb_of_particles_in_blob;
-
-	std::vector<Blob> blobs;
-
-	CountHUD blob_size_counter;
 
 	GravityForce gravity;
-	PullForce mouse_pull_force;
-
 
 	// Setup elements
 	ofImage backgroundPicture;
 	ofTrueTypeFont myfont;
-
+	ofEasyCam camera;
+	ofLight sun;
 };
