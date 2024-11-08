@@ -1,11 +1,8 @@
 #pragma once
 
 #include "ofMain.h"
-#include "Entity/Blob.hpp"
-#include "Entity/DefaultParticle.hpp"
 #include "Component/Physics/Force/GravityForce.hpp"
-#include "Component/Physics/Force/PullForce.hpp"
-#include "Entity/CountHUD.hpp"
+#include "Component/Mesh/CubeMesh.h"
 #include <chrono>
 
 #define WINDOW_WIDTH	1600
@@ -45,4 +42,7 @@ private:
 	ofTrueTypeFont myfont;
 	ofEasyCam camera;
 	ofLight sun;
+
+	// Scene Entities
+	CubeMesh cube;
 };

@@ -12,7 +12,6 @@
     <ClCompile Include="src\Component\Matrix3.cpp" />
     <ClCompile Include="src\Component\Matrix4.cpp" />
     <ClCompile Include="src\Component\Mesh\Mesh.cpp" />
-    <ClCompile Include="src\Component\Mesh\CubeMesh.cpp" />
     <ClCompile Include="src\Component\Mesh\DodecahedronMesh.cpp" />
     <ClCompile Include="src\Component\Mesh\IcosahedronMesh.cpp" />
     <ClCompile Include="src\Component\Mesh\OctahedronMesh.cpp" />

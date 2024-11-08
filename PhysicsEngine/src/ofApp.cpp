@@ -31,6 +31,10 @@ void ofApp::setup() {
 	mouse_y = 0;
 
 	gravity = GravityForce(10);
+
+	// Setup Scene
+	cube = CubeMesh(nullptr);
+
 }
 
 //--------------------------------------------------------------
@@ -39,6 +43,7 @@ void ofApp::update() {
 	auto time = std::chrono::high_resolution_clock::now();
 	auto delta = std::chrono::duration_cast<std::chrono::milliseconds>(time - timeLastFrame).count() / 1000.; //durée de calcul d'une frame
 	timeLastFrame = time;
+
 
 	// Register forces from physics components
 	PhysicsComponentRegistry::register_all_physics();
@@ -66,8 +71,7 @@ void ofApp::draw() {
 
 	ofSetColor(255, 0, 0);
 	ofFill();
-	ofDrawBox(30);
-
+	//ofDrawBox(30);
 
 	GraphicsComponentRegistry::draw_all();
 
