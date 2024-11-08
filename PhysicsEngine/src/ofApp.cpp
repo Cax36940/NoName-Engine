@@ -21,6 +21,9 @@ void ofApp::setup() {
 	backgroundPicture.load("images/bg_picture.png");
 	myfont.load("calibri", 20);
 	camera.setDistance(160);
+	sun.setDirectional();
+	glm::quat sunDir = glm::quat(0.354, -0.146, -0.854, 0.354);
+	sun.setGlobalOrientation(sunDir);
 
 	timeLastFrame = std::chrono::high_resolution_clock::now();
 
@@ -28,7 +31,6 @@ void ofApp::setup() {
 	mouse_y = 0;
 
 	gravity = GravityForce(10);
-
 }
 
 //--------------------------------------------------------------
@@ -58,6 +60,7 @@ void ofApp::update() {
 
 //--------------------------------------------------------------
 void ofApp::draw() {
+	sun.enable();
 	// Begin rendering from the camera's perspective.
 	camera.begin();
 
@@ -70,6 +73,7 @@ void ofApp::draw() {
 
 	// End rendering form the camera's perspective.
 	camera.end();
+	sun.disable();
 }
 
 //--------------------------------------------------------------

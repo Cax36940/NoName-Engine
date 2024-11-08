@@ -105,10 +105,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ClassToSuppress.cpp" />
+    <ClCompile Include="src\Component\Mesh\CubeMesh.cpp" />
     <ClCompile Include="src\Component\Mesh\DodecahedronMesh.cpp" />
     <ClCompile Include="src\Component\Mesh\IcosahedronMesh.cpp" />
     <ClCompile Include="src\Component\Mesh\OctahedronMesh.cpp" />
-    <ClCompile Include="src\Component\Mesh\CubeMesh.cpp" />
+    <ClCompile Include="src\Component\Mesh\TetrahedronMesh.cpp" />
+    <ClCompile Include="src\Component\Mesh\TrapezohedronMesh.cpp" />
     <ClCompile Include="src\Component\Mesh\Mesh.cpp" />
     <ClCompile Include="src\Component\Graphics\ConvexHull.cpp" />
     <ClCompile Include="src\Component\Graphics\EyeSprite.cpp" />
@@ -132,25 +134,26 @@
     <ClCompile Include="src\Entity\CountHUD.cpp" />
     <ClCompile Include="src\Entity\GravityChar.cpp" />
     <ClCompile Include="src\Entity\ParticleFactory.cpp" />
+    <ClCompile Include="src\Entity\RigidBody.cpp" />
     <ClCompile Include="src\Entity\TrailParticle.cpp" />
     <ClCompile Include="src\System\CollidersComponentRegistry.cpp" />
     <ClCompile Include="src\System\CollisionsRegistry.cpp" />
     <ClCompile Include="src\System\GraphicsComponentRegistry.cpp" />
     <ClCompile Include="src\System\ParticleForceRegistry.cpp" />
     <ClCompile Include="src\System\PhysicsComponentRegistry.cpp" />
+    <ClCompile Include="src\System\UpdatesComponentRegistry.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
-    <ClCompile Include="src\System\UpdatesComponentRegistry.cpp" />
-    <ClCompile Include="src\Component\Mesh\TetrahedronMesh.cpp" />
-    <ClCompile Include="src\Component\Mesh\TrapezohedronMesh.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ClassToSuppress.h" />
+    <ClInclude Include="src\Component\Mesh\CubeMesh.h" />
     <ClInclude Include="src\Component\Mesh\DodecahedronMesh.h" />
     <ClInclude Include="src\Component\Mesh\IcosahedronMesh.h" />
-    <ClInclude Include="src\Component\Mesh\OctahedronMesh.h" />
-    <ClInclude Include="src\Component\Mesh\CubeMesh.h" />
     <ClInclude Include="src\Component\Mesh\Mesh.h" />
+    <ClInclude Include="src\Component\Mesh\OctahedronMesh.h" />
+    <ClInclude Include="src\Component\Mesh\TetrahedronMesh.h" />
+    <ClInclude Include="src\Component\Mesh\TrapezohedronMesh.h" />
     <ClInclude Include="src\Component\Graphics\ConvexHull.hpp" />
     <ClInclude Include="src\Component\Graphics\EyeSprite.hpp" />
     <ClInclude Include="src\Component\Graphics\GraphicsComponent.hpp" />
@@ -172,24 +175,23 @@
     <ClInclude Include="src\Component\Quaternion.hpp" />
     <ClInclude Include="src\Component\UpdatesComponent.hpp" />
     <ClInclude Include="src\Component\Vector3.hpp" />
+    <ClInclude Include="src\Component\Vector4.hpp" />
     <ClInclude Include="src\Entity\Blob.hpp" />
-    <ClInclude Include="src\Entity\CountHUD.hpp" />
-    <ClInclude Include="src\Entity\Spring.hpp" />
     <ClInclude Include="src\Entity\Cable.hpp" />
+    <ClInclude Include="src\Entity\CountHUD.hpp" />
     <ClInclude Include="src\Entity\DefaultParticle.hpp" />
     <ClInclude Include="src\Entity\GravityChar.hpp" />
     <ClInclude Include="src\Entity\ParticleFactory.hpp" />
+    <ClInclude Include="src\Entity\RigidBody.hpp" />
+    <ClInclude Include="src\Entity\Spring.hpp" />
     <ClInclude Include="src\Entity\TrailParticle.hpp" />
     <ClInclude Include="src\System\CollidersComponentRegistry.hpp" />
     <ClInclude Include="src\System\CollisionsRegistry.hpp" />
     <ClInclude Include="src\System\GraphicsComponentRegistry.hpp" />
     <ClInclude Include="src\System\ParticleForceRegistry.hpp" />
     <ClInclude Include="src\System\PhysicsComponentRegistry.hpp" />
-    <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\System\UpdatesComponentRegistry.hpp" />
-    <ClInclude Include="src\Component\Vector4.hpp" />
-    <ClInclude Include="src\Component\Mesh\TetrahedronMesh.h" />
-    <ClInclude Include="src\Component\Mesh\TrapezohedronMesh.h" />
+    <ClInclude Include="src\ofApp.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">
