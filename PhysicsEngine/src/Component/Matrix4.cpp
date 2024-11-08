@@ -2,96 +2,105 @@
 #include <cmath>
 
 #include "Matrix4.hpp"
-#include "Vector4.hpp"
 
 Matrix4::Matrix4() {
-    Matrix4(Vector4(1, 0, 0, 0), Vector4(0, 1, 0, 0), Vector4(0, 0, 1, 0), Vector4(0, 0, 0, 1));
+    Matrix4(Vector4(1, 0, 0, 0), Vector4(0, 1, 0, 0), Vector4(0, 0, 1, 0));
 }
 
-Matrix4::Matrix4(const Vector4& x, const Vector4& y, const Vector4& z, const Vector4& t) : x(x), y(y), z(z), t(t) {}
+Matrix4::Matrix4(const Vector4& x, const Vector4& y, const Vector4& z) : x(x), y(y), z(z) {}
+
+Matrix4::Matrix4(const Vector3& x, const Vector3& y, const Vector3& z, const Vector3& t) : 
+    x(x.x, y.x, z.x, t.x), 
+    y(x.y, y.y, z.y, t.y),
+    z(x.z, y.z, z.z, t.z) {}
+
+Matrix4::Matrix4(const Matrix3& matrix, const Vector3& vector) : 
+    x(matrix.x.x, matrix.y.x, matrix.z.x, vector.x), 
+    y(matrix.x.y, matrix.y.y, matrix.z.y, vector.y), 
+    z(matrix.x.z, matrix.y.z, matrix.z.z, vector.z) {}
 
 bool Matrix4::operator==(const Matrix4& matrix)
 {
-    return (this->x == matrix.x) && (this->y == matrix.y) && (this->z == matrix.z) && (this->t == matrix.t);
+    return (this->x == matrix.x) && (this->y == matrix.y) && (this->z == matrix.z);
 }
 
 Matrix4 Matrix4::operator*(const float& alpha) const {
-    return Matrix4(alpha * this->x, alpha * this->y, alpha * this->z, alpha * this->t);
+    return Matrix4(alpha * this->x, alpha * this->y, alpha * this->z);
 }
 
 Matrix4& Matrix4::operator*=(const float& alpha) {
     this->x *= alpha;
     this->y *= alpha;
     this->z *= alpha;
-    this->t *= alpha;
     return *this;
 }
 
 Matrix4 operator*(const float& alpha, const Matrix4& matrix) {
-    return Matrix4(alpha * matrix.x, alpha * matrix.y, alpha * matrix.z, alpha * matrix.t);
+    return Matrix4(alpha * matrix.x, alpha * matrix.y, alpha * matrix.z);
 }
 
 Matrix4 operator*(const Matrix4& left_m, const Matrix4& right_m)
 {
     Matrix4 result;
 
-    result.x.x = left_m.x.x * right_m.x.x + left_m.y.x * right_m.x.y + left_m.z.x * right_m.x.z + left_m.t.x * right_m.x.t;
-    result.x.y = left_m.x.y * right_m.x.x + left_m.y.y * right_m.x.y + left_m.z.y * right_m.x.z + left_m.t.y * right_m.x.t;
-    result.x.z = left_m.x.z * right_m.x.x + left_m.y.z * right_m.x.y + left_m.z.z * right_m.x.z + left_m.t.z * right_m.x.t;
-    result.x.t = left_m.x.t * right_m.x.x + left_m.y.t * right_m.x.y + left_m.z.t * right_m.x.z + left_m.t.t * right_m.x.t;
+    Vector4 tmp(right_m.x.x, right_m.y.x, right_m.z.x, 0);
 
-    result.y.x = left_m.x.x * right_m.y.x + left_m.y.x * right_m.y.y + left_m.z.x * right_m.y.z + left_m.t.x * right_m.y.t;
-    result.y.y = left_m.x.y * right_m.y.x + left_m.y.y * right_m.y.y + left_m.z.y * right_m.y.z + left_m.t.y * right_m.y.t;
-    result.y.z = left_m.x.z * right_m.y.x + left_m.y.z * right_m.y.y + left_m.z.z * right_m.y.z + left_m.t.z * right_m.y.t;
-    result.y.t = left_m.x.t * right_m.y.x + left_m.y.t * right_m.y.y + left_m.z.t * right_m.y.z + left_m.t.t * right_m.y.t;
+    result.x.x = Vector4::dot(left_m.x, tmp);
+    result.y.x = Vector4::dot(left_m.y, tmp);
+    result.z.x = Vector4::dot(left_m.z, tmp);
 
-    result.z.x = left_m.x.x * right_m.z.x + left_m.y.x * right_m.z.y + left_m.z.x * right_m.z.z + left_m.t.x * right_m.z.t;
-    result.z.y = left_m.x.y * right_m.z.x + left_m.y.y * right_m.z.y + left_m.z.y * right_m.z.z + left_m.t.y * right_m.z.t;
-    result.z.z = left_m.x.z * right_m.z.x + left_m.y.z * right_m.z.y + left_m.z.z * right_m.z.z + left_m.t.z * right_m.z.t;
-    result.z.t = left_m.x.t * right_m.z.x + left_m.y.t * right_m.z.y + left_m.z.t * right_m.z.z + left_m.t.t * right_m.z.t;
+    Vector4 tmp(right_m.x.y, right_m.y.y, right_m.z.y, 0);
 
-    result.t.x = left_m.x.x * right_m.t.x + left_m.y.x * right_m.t.y + left_m.z.x * right_m.t.z + left_m.t.x * right_m.t.t;
-    result.t.y = left_m.x.y * right_m.t.x + left_m.y.y * right_m.t.y + left_m.z.y * right_m.t.z + left_m.t.y * right_m.t.t;
-    result.t.z = left_m.x.z * right_m.t.x + left_m.y.z * right_m.t.y + left_m.z.z * right_m.t.z + left_m.t.z * right_m.t.t;
-    result.t.t = left_m.x.t * right_m.t.x + left_m.y.t * right_m.t.y + left_m.z.t * right_m.t.z + left_m.t.t * right_m.t.t;
-    
+    result.x.y = Vector4::dot(left_m.x, tmp);
+    result.y.y = Vector4::dot(left_m.y, tmp);
+    result.z.y = Vector4::dot(left_m.z, tmp);
+
+    Vector4 tmp(right_m.x.z, right_m.y.z, right_m.z.z, 0);
+
+    result.x.z = Vector4::dot(left_m.x, tmp);
+    result.y.z = Vector4::dot(left_m.y, tmp);
+    result.z.z = Vector4::dot(left_m.z, tmp);
+
+    Vector4 tmp(right_m.x.t, right_m.y.t, right_m.z.t, 1);
+
+    result.x.t = Vector4::dot(left_m.x, tmp);
+    result.y.t = Vector4::dot(left_m.y, tmp);
+    result.z.t = Vector4::dot(left_m.z, tmp);
+
     return result;
 }
 
 Vector4 operator*(const Matrix4& matrix, const Vector4& vector) {
-    float x = vector.x * matrix.x.x + vector.y * matrix.y.x + vector.z * matrix.z.x + vector.t * matrix.t.x;
-    float y = vector.x * matrix.x.y + vector.y * matrix.y.y + vector.z * matrix.z.y + vector.t * matrix.t.y;
-    float z = vector.x * matrix.x.z + vector.y * matrix.y.z + vector.z * matrix.z.z + vector.t * matrix.t.z;
-    float t = vector.x * matrix.x.t + vector.y * matrix.y.t + vector.z * matrix.z.t + vector.t * matrix.t.t;
-    return Vector4(x, y, z, t);
+    float x = vector.x * matrix.x.x + vector.y * matrix.x.y + vector.z * matrix.x.z + vector.t * matrix.x.t;
+    float y = vector.x * matrix.y.x + vector.y * matrix.y.y + vector.z * matrix.y.z + vector.t * matrix.y.t;
+    float z = vector.x * matrix.z.x + vector.y * matrix.z.y + vector.z * matrix.z.z + vector.t * matrix.z.t;
+    return Vector4(x, y, z, vector.t);
 }
 
 
 Matrix4 Matrix4::operator+(const Matrix4& matrix) const {
-    return Matrix4(this->x + matrix.x, this->y + matrix.y, this->z + matrix.z, this->t + matrix.t);
+    return Matrix4(this->x + matrix.x, this->y + matrix.y, this->z + matrix.z);
 }
 
 Matrix4& Matrix4::operator+=(const Matrix4& matrix) {
     this->x += matrix.x;
     this->y += matrix.y;
     this->z += matrix.z;
-    this->t += matrix.t;
     return *this;
 }
 
 Matrix4 Matrix4::operator-(const Matrix4& matrix) const {
-    return Matrix4(this->x - matrix.x, this->y - matrix.y, this->z - matrix.z, this->t - matrix.t);
+    return Matrix4(this->x - matrix.x, this->y - matrix.y, this->z - matrix.z);
 }
 
 Matrix4& Matrix4::operator-=(const Matrix4& matrix) {
     this->x -= matrix.x;
     this->y -= matrix.y;
     this->z -= matrix.z;
-    this->t -= matrix.t;
     return *this;
 }
 
-float Matrix4::determinant(const Matrix4& matrix) {
+/*float Matrix4::determinant(const Matrix4& matrix) {
     return
         matrix.x.x * (matrix.y.y * (matrix.z.z * matrix.t.t - matrix.z.t * matrix.t.z) -
             matrix.y.z * (matrix.z.y * matrix.t.t - matrix.z.t * matrix.t.y) +
@@ -105,7 +114,7 @@ float Matrix4::determinant(const Matrix4& matrix) {
         - matrix.x.t * (matrix.y.x * (matrix.z.y * matrix.t.z - matrix.z.z * matrix.t.y) -
             matrix.y.y * (matrix.z.x * matrix.t.z - matrix.z.z * matrix.t.x) +
             matrix.y.z * (matrix.z.x * matrix.t.y - matrix.z.y * matrix.t.x));
-}
+}*/
 
 
 //Matrix4 Matrix4::inv(const Matrix4& matrix) {

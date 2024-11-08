@@ -1,6 +1,6 @@
 #pragma once
 #include "Vector4.hpp"
-
+#include "Matrix3.hpp"
 class Matrix4
 {
 public:
@@ -9,7 +9,6 @@ public:
     Vector4 x;
     Vector4 y;
     Vector4 z;
-    Vector4 t;
 
     /**
      * @brief Default constructor
@@ -42,9 +41,19 @@ public:
     ~Matrix4() = default;
 
     /**
-     * @brief Constructor from coordinates
+     * @brief Constructor from Vector4 rows
      */
-    Matrix4(const Vector4& x, const Vector4& y, const Vector4& z, const Vector4& t);
+    Matrix4(const Vector4& x, const Vector4& y, const Vector4& z);
+
+    /**
+     * @brief Constructor from Vector3 columns
+     */
+    Matrix4::Matrix4(const Vector3& x, const Vector3& y, const Vector3& z, const Vector3& t);
+
+    /**
+     * @brief Constructor from a Matrix3 and a Vector3
+     */
+    Matrix4::Matrix4(const Matrix3& matrix, const Vector3& vector);
 
     /**
      * @brief Equal operator
@@ -108,21 +117,5 @@ public:
      * @param matrix the matrix to add to current matrix
      */
     Matrix4& operator-=(const Matrix4& matrix);
-
-    /**
-     * @brief Matrix determinant
-     * @param matrix the matrix from which the determinant is calculated
-     */
-    static float determinant(const Matrix4& matrix);
-
-    /**
-     * @brief Matrix inverse
-     * @param matrix the matrix to inverse
-     */
-
-    //pas fonctionnel
-   
-    //static Matrix4 inv(const Matrix4& matrix);
-    
 
 };

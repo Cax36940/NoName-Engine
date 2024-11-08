@@ -16,8 +16,7 @@ namespace TestMatrix4
 			Vector4 x = Vector4(1, 2, 3, 4);
 			Vector4 y = Vector4(5, 6, 7, 8);
 			Vector4 z = Vector4(9, 10, 11, 12);
-			Vector4 t = Vector4(13, 14, 15, 16);
-			Matrix4 matrix(x,y,z,t);
+			Matrix4 matrix(x,y,z);
 			Assert::AreEqual(1.0f, matrix.x.x);
 			Assert::AreEqual(2.0f, matrix.x.y);
 			Assert::AreEqual(3.0f, matrix.x.z);
@@ -33,10 +32,6 @@ namespace TestMatrix4
 			Assert::AreEqual(11.0f, matrix.z.z);
 			Assert::AreEqual(12.0f, matrix.z.t);
 
-			Assert::AreEqual(13.0f, matrix.t.x);
-			Assert::AreEqual(14.0f, matrix.t.y);
-			Assert::AreEqual(15.0f, matrix.t.z);
-			Assert::AreEqual(16.0f, matrix.t.t);
 		}
 
 		TEST_METHOD(Mult_scalar)
@@ -44,8 +39,7 @@ namespace TestMatrix4
 			Vector4 x(1, 2, 3, 4);
 			Vector4 y(5, 6, 7, 8);
 			Vector4 z(9, 10, 11, 12);
-			Vector4 t(13, 14, 15, 16);
-			Matrix4 matrix(x, y, z, t);
+			Matrix4 matrix(x, y, z);
 
 			float scalar = 2.0f;
 			Matrix4 result = matrix * scalar;
@@ -65,10 +59,6 @@ namespace TestMatrix4
 			Assert::AreEqual(22.0f, result.z.z);
 			Assert::AreEqual(24.0f, result.z.t);
 
-			Assert::AreEqual(26.0f, result.t.x);
-			Assert::AreEqual(28.0f, result.t.y);
-			Assert::AreEqual(30.0f, result.t.z);
-			Assert::AreEqual(32.0f, result.t.t);
 		}
 
 		TEST_METHOD(MultEqu_scalar)
@@ -76,8 +66,7 @@ namespace TestMatrix4
 			Vector4 x(1, 2, 3, 4);
 			Vector4 y(5, 6, 7, 8);
 			Vector4 z(9, 10, 11, 12);
-			Vector4 t(13, 14, 15, 16);
-			Matrix4 matrix(x, y, z, t);
+			Matrix4 matrix(x, y, z);
 
 			float scalar = 2.0f;
 			matrix *= scalar;
@@ -97,16 +86,12 @@ namespace TestMatrix4
 			Assert::AreEqual(22.0f, matrix.z.z);
 			Assert::AreEqual(24.0f, matrix.z.t);
 
-			Assert::AreEqual(26.0f, matrix.t.x);
-			Assert::AreEqual(28.0f, matrix.t.y);
-			Assert::AreEqual(30.0f, matrix.t.z);
-			Assert::AreEqual(32.0f, matrix.t.t);
 		}
 
 		TEST_METHOD(MatrixMultiplication)
 		{
-			Matrix4 matrix1(Vector4(1, 0, 0, 0), Vector4(0, 1, 0, 0), Vector4(0, 0, 1, 0), Vector4(0, 0, 0, 1));
-			Matrix4 matrix2(Vector4(2, 3, 4, 5), Vector4(6, 7, 8, 9), Vector4(10, 11, 12, 13), Vector4(14, 15, 16, 17));
+			Matrix4 matrix1(Vector4(1, 0, 0, 0), Vector4(0, 1, 0, 0), Vector4(0, 0, 1, 0));
+			Matrix4 matrix2(Vector4(2, 3, 4, 5), Vector4(6, 7, 8, 9), Vector4(10, 11, 12, 13));
 			Matrix4 result = matrix1 * matrix2;
 
 			Assert::AreEqual(2.0f, result.x.x);
@@ -124,15 +109,11 @@ namespace TestMatrix4
 			Assert::AreEqual(12.0f, result.z.z);
 			Assert::AreEqual(13.0f, result.z.t);
 
-			Assert::AreEqual(14.0f, result.t.x);
-			Assert::AreEqual(15.0f, result.t.y);
-			Assert::AreEqual(16.0f, result.t.z);
-			Assert::AreEqual(17.0f, result.t.t);
 		}
 
 		TEST_METHOD(MatrixVectorMultiplication)
 		{
-			Matrix4 matrix(Vector4(1, 0, 0, 0), Vector4(0, 1, 0, 0), Vector4(0, 0, 1, 0), Vector4(0, 0, 0, 1));
+			Matrix4 matrix(Vector4(1, 0, 0, 0), Vector4(0, 1, 0, 0), Vector4(0, 0, 1, 0));
 			Vector4 vector(2, 3, 4, 5);
 			Vector4 result = matrix * vector;
 
@@ -145,8 +126,8 @@ namespace TestMatrix4
 
 		TEST_METHOD(MatrixAddition)
 		{
-			Matrix4 matrix1(Vector4(1, 2, 3, 4), Vector4(5, 6, 7, 8), Vector4(9, 10, 11, 12), Vector4(13, 14, 15, 16));
-			Matrix4 matrix2(Vector4(1, 1, 1, 1), Vector4(1, 1, 1, 1), Vector4(1, 1, 1, 1), Vector4(1, 1, 1, 1));
+			Matrix4 matrix1(Vector4(1, 2, 3, 4), Vector4(5, 6, 7, 8), Vector4(9, 10, 11, 12));
+			Matrix4 matrix2(Vector4(1, 1, 1, 1), Vector4(1, 1, 1, 1), Vector4(1, 1, 1, 1));
 			Matrix4 result = matrix1 + matrix2;
 
 			Assert::AreEqual(2.0f, result.x.x);
@@ -164,16 +145,12 @@ namespace TestMatrix4
 			Assert::AreEqual(12.0f, result.z.z);
 			Assert::AreEqual(13.0f, result.z.t);
 
-			Assert::AreEqual(14.0f, result.t.x);
-			Assert::AreEqual(15.0f, result.t.y);
-			Assert::AreEqual(16.0f, result.t.z);
-			Assert::AreEqual(17.0f, result.t.t);
 		}
 
 		TEST_METHOD(MatrixAddEqu)
 		{
-			Matrix4 matrix1(Vector4(1, 2, 3, 4), Vector4(5, 6, 7, 8), Vector4(9, 10, 11, 12), Vector4(13, 14, 15, 16));
-			Matrix4 matrix2(Vector4(1, 1, 1, 1), Vector4(1, 1, 1, 1), Vector4(1, 1, 1, 1), Vector4(1, 1, 1, 1));
+			Matrix4 matrix1(Vector4(1, 2, 3, 4), Vector4(5, 6, 7, 8), Vector4(9, 10, 11, 12));
+			Matrix4 matrix2(Vector4(1, 1, 1, 1), Vector4(1, 1, 1, 1), Vector4(1, 1, 1, 1));
 			matrix1 += matrix2;
 
 			Assert::AreEqual(2.0f, matrix1.x.x);
@@ -191,16 +168,12 @@ namespace TestMatrix4
 			Assert::AreEqual(12.0f, matrix1.z.z);
 			Assert::AreEqual(13.0f, matrix1.z.t);
 
-			Assert::AreEqual(14.0f, matrix1.t.x);
-			Assert::AreEqual(15.0f, matrix1.t.y);
-			Assert::AreEqual(16.0f, matrix1.t.z);
-			Assert::AreEqual(17.0f, matrix1.t.t);
 		}
 
 		TEST_METHOD(MatrixSubtraction)
 		{
-			Matrix4 matrix1(Vector4(2, 3, 4, 5), Vector4(6, 7, 8, 9), Vector4(10, 11, 12, 13), Vector4(14, 15, 16, 17));
-			Matrix4 matrix2(Vector4(1, 1, 1, 1), Vector4(1, 1, 1, 1), Vector4(1, 1, 1, 1), Vector4(1, 1, 1, 1));
+			Matrix4 matrix1(Vector4(2, 3, 4, 5), Vector4(6, 7, 8, 9), Vector4(10, 11, 12, 13));
+			Matrix4 matrix2(Vector4(1, 1, 1, 1), Vector4(1, 1, 1, 1), Vector4(1, 1, 1, 1));
 			Matrix4 result = matrix1 - matrix2;
 
 			Assert::AreEqual(1.0f, result.x.x);
@@ -218,16 +191,12 @@ namespace TestMatrix4
 			Assert::AreEqual(11.0f, result.z.z);
 			Assert::AreEqual(12.0f, result.z.t);
 
-			Assert::AreEqual(13.0f, result.t.x);
-			Assert::AreEqual(14.0f, result.t.y);
-			Assert::AreEqual(15.0f, result.t.z);
-			Assert::AreEqual(16.0f, result.t.t);
 		}
 
 		TEST_METHOD(MatrixSubEqu)
 		{
-			Matrix4 matrix1(Vector4(2, 3, 4, 5), Vector4(6, 7, 8, 9), Vector4(10, 11, 12, 13), Vector4(14, 15, 16, 17));
-			Matrix4 matrix2(Vector4(1, 1, 1, 1), Vector4(1, 1, 1, 1), Vector4(1, 1, 1, 1), Vector4(1, 1, 1, 1));
+			Matrix4 matrix1(Vector4(2, 3, 4, 5), Vector4(6, 7, 8, 9), Vector4(10, 11, 12, 13));
+			Matrix4 matrix2(Vector4(1, 1, 1, 1), Vector4(1, 1, 1, 1), Vector4(1, 1, 1, 1));
 			matrix1 -= matrix2;
 
 			Assert::AreEqual(1.0f, matrix1.x.x);
@@ -245,13 +214,9 @@ namespace TestMatrix4
 			Assert::AreEqual(11.0f, matrix1.z.z);
 			Assert::AreEqual(12.0f, matrix1.z.t);
 
-			Assert::AreEqual(13.0f, matrix1.t.x);
-			Assert::AreEqual(14.0f, matrix1.t.y);
-			Assert::AreEqual(15.0f, matrix1.t.z);
-			Assert::AreEqual(16.0f, matrix1.t.t);
 		}
 
-		TEST_METHOD(Determinant)
+		/*TEST_METHOD(Determinant)
 		{
 			Matrix4 matrix(Vector4(1, 2, 3, 4), Vector4(5, 6, 7, 8), Vector4(9, 10, 11, 12), Vector4(13, 14, 15, 16));
 			float result = Matrix4::determinant(matrix);
@@ -266,7 +231,7 @@ namespace TestMatrix4
 
 			// Pour cette matrice, le déterminant est connu pour être 0
 			Assert::AreEqual(2.0f, res2);
-		}
+		}*/
 
 
 		/*TEST_METHOD(Inverse)
