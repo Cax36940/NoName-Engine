@@ -35,6 +35,13 @@
     <ClCompile Include="src\Component\Quaternion.cpp" />
     <ClCompile Include="ClassToSuppress.cpp" />
     <ClCompile Include="src\Component\Vector4.cpp" />
+    <ClCompile Include="src\Component\Mesh\Mesh.cpp" />
+    <ClCompile Include="src\Component\Mesh\CubeMesh.cpp" />
+    <ClCompile Include="src\Component\Mesh\TetrahedronMesh.cpp" />
+    <ClCompile Include="src\Component\Mesh\OctahedronMesh.cpp" />
+    <ClCompile Include="src\Component\Mesh\DodecahedronMesh.cpp" />
+    <ClCompile Include="src\Component\Mesh\IcosahedronMesh.cpp" />
+    <ClCompile Include="src\Component\Mesh\TrapezohedronMesh.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -82,6 +89,13 @@
     <ClInclude Include="src\Component\Quaternion.hpp" />
     <ClInclude Include="ClassToSuppress.h" />
     <ClInclude Include="src\Component\Vector4.hpp" />
+    <ClInclude Include="src\Component\Mesh\Mesh.h" />
+    <ClInclude Include="src\Component\Mesh\CubeMesh.h" />
+    <ClInclude Include="src\Component\Mesh\TetrahedronMesh.h" />
+    <ClInclude Include="src\Component\Mesh\OctahedronMesh.h" />
+    <ClInclude Include="src\Component\Mesh\DodecahedronMesh.h" />
+    <ClInclude Include="src\Component\Mesh\IcosahedronMesh.h" />
+    <ClInclude Include="src\Component\Mesh\TrapezohedronMesh.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

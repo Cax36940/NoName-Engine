@@ -105,6 +105,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ClassToSuppress.cpp" />
+    <ClCompile Include="src\Component\Mesh\DodecahedronMesh.cpp" />
+    <ClCompile Include="src\Component\Mesh\IcosahedronMesh.cpp" />
+    <ClCompile Include="src\Component\Mesh\OctahedronMesh.cpp" />
+    <ClCompile Include="src\Component\Mesh\CubeMesh.cpp" />
+    <ClCompile Include="src\Component\Mesh\Mesh.cpp" />
     <ClCompile Include="src\Component\Graphics\ConvexHull.cpp" />
     <ClCompile Include="src\Component\Graphics\EyeSprite.cpp" />
     <ClCompile Include="src\Component\Graphics\Sphere.cpp" />
@@ -136,9 +141,16 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="src\System\UpdatesComponentRegistry.cpp" />
+    <ClCompile Include="src\Component\Mesh\TetrahedronMesh.cpp" />
+    <ClCompile Include="src\Component\Mesh\TrapezohedronMesh.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ClassToSuppress.h" />
+    <ClInclude Include="src\Component\Mesh\DodecahedronMesh.h" />
+    <ClInclude Include="src\Component\Mesh\IcosahedronMesh.h" />
+    <ClInclude Include="src\Component\Mesh\OctahedronMesh.h" />
+    <ClInclude Include="src\Component\Mesh\CubeMesh.h" />
+    <ClInclude Include="src\Component\Mesh\Mesh.h" />
     <ClInclude Include="src\Component\Graphics\ConvexHull.hpp" />
     <ClInclude Include="src\Component\Graphics\EyeSprite.hpp" />
     <ClInclude Include="src\Component\Graphics\GraphicsComponent.hpp" />
@@ -176,6 +188,8 @@
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\System\UpdatesComponentRegistry.hpp" />
     <ClInclude Include="src\Component\Vector4.hpp" />
+    <ClInclude Include="src\Component\Mesh\TetrahedronMesh.h" />
+    <ClInclude Include="src\Component\Mesh\TrapezohedronMesh.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">
