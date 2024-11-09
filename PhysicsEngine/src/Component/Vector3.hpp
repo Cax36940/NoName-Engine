@@ -1,5 +1,5 @@
 #pragma once
-#include <of3dGraphics.h>
+#include <ofMesh.h> // Needed for glm::vec3
 
 class Vector3 {
 

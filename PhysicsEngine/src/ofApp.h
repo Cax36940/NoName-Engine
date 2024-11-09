@@ -2,7 +2,7 @@
 
 #include "ofMain.h"
 #include "Component/Physics/Force/GravityForce.hpp"
-#include "Component/Mesh/CubeMesh.h"
+#include "Entity/RigidBody.hpp"
 #include <chrono>
 
 #define WINDOW_WIDTH	1600
@@ -44,5 +44,5 @@ private:
 	ofLight sun;
 
 	// Scene Entities
-	CubeMesh cube;
+	RigidBody body;
 };

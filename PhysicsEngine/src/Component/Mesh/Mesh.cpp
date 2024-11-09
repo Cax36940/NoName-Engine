@@ -1,5 +1,6 @@
+#include <ofMaterial.h>
+#include <ofMesh.h>
 #include "Mesh.h"
-
 
 Mesh::Mesh() : transform(nullptr) {}
 
@@ -24,14 +25,19 @@ void Mesh::draw()
         transform_matrix = *transform;
     }
 
-    for (const auto& vertex : get_vertices()) {
-        mesh.addVertex(Vector3::to_glm_vec3(vertex));
-        mesh.addColor(ofFloatColor(255, 255, 255));
+    const std::vector<Vector3> vertices = get_vertices();
+
+    for (const auto& vertex : vertices) {
+        mesh.addVertex(Vector3::to_glm_vec3(transform_matrix * vertex));
+        mesh.addColor(ofColor(255, 0, 0));
     }
 
-    for (const auto& index : get_indices()) {
+    const std::vector<unsigned int> indices = get_indices();
+
+    for (const auto& index : indices) {
         mesh.addIndex(index);
     }
 
+    mesh.addNormals(mesh.getFaceNormals());
     mesh.draw();
 }

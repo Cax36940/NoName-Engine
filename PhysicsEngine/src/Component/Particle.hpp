@@ -18,6 +18,8 @@ public:
 	Particle() = default;
 	Particle(const Particle&) = default;
 	Particle& operator=(const Particle&) = default;
+	Particle(Particle&&) = default;
+	Particle& operator=(Particle&&) = default;
 	Particle(const Vector3& pos, const Vector3& vel, const Vector3& acc, const float& mass);
 
 	Vector3 get_position() const;

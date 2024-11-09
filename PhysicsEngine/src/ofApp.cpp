@@ -33,7 +33,7 @@ void ofApp::setup() {
 	gravity = GravityForce(10);
 
 	// Setup Scene
-	cube = CubeMesh(nullptr);
+	body = RigidBody(Vector3(), 1, 15 * Matrix3(), Quaternion());
 
 }
 
@@ -71,7 +71,7 @@ void ofApp::draw() {
 
 	ofSetColor(255, 0, 0);
 	ofFill();
-	//ofDrawBox(30);
+	//ofDrawBox(20);
 
 	GraphicsComponentRegistry::draw_all();
 

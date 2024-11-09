@@ -1,4 +1,5 @@
 #include <ofGraphics.h>
+#include <of3dGraphics.h>
 #include "EyeSprite.hpp"
 
 void EyeSprite::set_position(const Vector3& pos) {

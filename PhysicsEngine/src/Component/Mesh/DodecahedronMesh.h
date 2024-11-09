@@ -1,5 +1,6 @@
 #pragma once
-#include "../Vector3.hpp"
+#include <vector>
+#include "Component/Vector3.hpp"
 class DodecahedronMesh
 {
 	float gold = 1.6;

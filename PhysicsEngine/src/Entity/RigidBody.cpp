@@ -1,11 +1,34 @@
 #include "RigidBody.hpp"
 
-RigidBody::RigidBody(Vector3 pos, float mass, Matrix3 m, Quaternion q)
+RigidBody::RigidBody()
 {
-	this->particle = Particle(pos, Vector3(0, 0, 0), Vector3(0, 0, 0), mass);
-	this->matrice = m;
-	this->quaternion = q;
+	mesh.set_transform_ptr(&transform);
 }
+
+RigidBody::RigidBody(const RigidBody& body) :
+	particle(body.particle),
+	transform(body.transform),
+	quaternion(body.quaternion),
+	mesh(body.mesh)
+{
+	mesh.set_transform_ptr(&transform);
+}
+
+RigidBody& RigidBody::operator=(const RigidBody& body)
+{
+	particle = body.particle,
+	transform = body.transform;
+	quaternion = body.quaternion;
+	mesh = body.mesh;
+	mesh.set_transform_ptr(&transform);
+	return *this;
+}
+
+RigidBody::RigidBody(const Vector3& pos, const float& mass, const Matrix3& transform, const Quaternion& quat) :
+	particle(pos, Vector3(0, 0, 0), Vector3(0, 0, 0), mass),
+	transform(transform),
+	quaternion(quat),
+	mesh(&this->transform){}
 
 void RigidBody::RotateX()
 {
@@ -24,11 +47,11 @@ void RigidBody::update(float delta)
 {
 
 	//update de la rotation
-	Matrix3 rotatedMatrix = Quaternion::toMatrix3(this->quaternion);
-	this->matrice = this->matrice * rotatedMatrix;
+	Matrix3 rotatedMatrix = Quaternion::toMatrix3(quaternion);
+	transform = transform * rotatedMatrix;
 
 
 	//update de la translation
-	this->particle.update(delta);
+	particle.update(delta);
 
 }

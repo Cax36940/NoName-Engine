@@ -1,4 +1,5 @@
 #include <ofGraphics.h>
+#include <of3dGraphics.h>
 #include "Sphere.hpp"
 
 void Sphere::set_position(const Vector3* pos) {
