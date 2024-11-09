@@ -22,7 +22,7 @@ public:
 
 	void RotateX();
 	void RotateY();
-	void RotateZ();
+	void RotateZ(float alpha);
 
 	void update(float delta);
 

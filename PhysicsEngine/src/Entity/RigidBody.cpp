@@ -38,8 +38,9 @@ void RigidBody::RotateY()
 {
 }
 
-void RigidBody::RotateZ()
+void RigidBody::RotateZ(float alpha)
 {
+	quaternion = Quaternion(cos(alpha), 0, 0, sin(alpha)) * quaternion;
 }
 
 
@@ -48,7 +49,8 @@ void RigidBody::update(float delta)
 
 	//update de la rotation
 	Matrix3 rotatedMatrix = Quaternion::toMatrix3(quaternion);
-	transform = transform * rotatedMatrix;
+	quaternion = Quaternion();
+	transform = rotatedMatrix * transform;
 
 
 	//update de la translation

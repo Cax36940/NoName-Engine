@@ -44,7 +44,8 @@ void ofApp::update() {
 	auto delta = std::chrono::duration_cast<std::chrono::milliseconds>(time - timeLastFrame).count() / 1000.; //durée de calcul d'une frame
 	timeLastFrame = time;
 
-
+	body.RotateZ(0.01);
+	body.update(delta);
 	// Register forces from physics components
 	PhysicsComponentRegistry::register_all_physics();
 
