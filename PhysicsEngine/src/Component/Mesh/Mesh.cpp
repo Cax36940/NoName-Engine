@@ -25,45 +25,46 @@ void Mesh::draw()
         transform_matrix = *transform;
     }
 
-    // Add vertices of the mesh
-    const std::vector<Vector3> vertices = get_vertices();
-    for (const auto& vertex : vertices) {
-        mesh.addVertex(Vector3::to_glm_vec3(transform_matrix * vertex));
-        mesh.addColor(ofColor(255, 0, 0));
+    // Apply transform on vertices
+    std::vector<Vector3> vertices = get_vertices();
+    for (auto& vertex : vertices) {
+        vertex = transform_matrix * vertex;
     }
 
-    // Add indices of the mesh
     const std::vector<unsigned int> indices = get_indices();
-    for (const auto& index : indices) {
-        mesh.addIndex(index);
-    }
-
-    // Calculate normals per vertex by accumulating face normals
-    std::vector<ofDefaultNormalType> vertex_normals(vertices.size());
 
     for (size_t i = 0; i < indices.size(); i += 3) {
+        // Get indices of the face
         unsigned int i0 = indices[i];
         unsigned int i1 = indices[i + 1];
         unsigned int i2 = indices[i + 2];
 
         // Get vertices of the face
-        ofDefaultVertexType v0 = mesh.getVertex(i0);
-        ofDefaultVertexType v1 = mesh.getVertex(i1);
-        ofDefaultVertexType v2 = mesh.getVertex(i2);
+        ofDefaultVertexType v0 = Vector3::to_glm_vec3(vertices[i0]);
+        ofDefaultVertexType v1 = Vector3::to_glm_vec3(vertices[i1]);
+        ofDefaultVertexType v2 = Vector3::to_glm_vec3(vertices[i2]);
+
+        // Add vertices to mesh
+        mesh.addVertex(v0);
+        mesh.addVertex(v1);
+        mesh.addVertex(v2);
+
+        // Add indices to mesh
+        mesh.addIndex(i);
+        mesh.addIndex(i + 1);
+        mesh.addIndex(i + 2);
 
         // Calculate the face normal
         ofDefaultVertexType edge1 = v1 - v0;
         ofDefaultVertexType edge2 = v2 - v0;
         ofDefaultVertexType face_normal = glm::normalize(glm::cross(edge1,edge2));
 
-        // Accumulate face normal for each vertex
-        vertex_normals[i0] += face_normal;
-        vertex_normals[i1] += face_normal;
-        vertex_normals[i2] += face_normal;
-    }
+        // Add normals to mesh
+        mesh.addNormal(face_normal);
+        mesh.addNormal(face_normal);
+        mesh.addNormal(face_normal);
 
-    // Normalize accumulated normals and add them to the mesh
-    mesh.addNormals(vertex_normals);
+    }
 
     mesh.draw();
     
