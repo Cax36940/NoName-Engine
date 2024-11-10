@@ -13,6 +13,10 @@ Mesh& Mesh::operator=(const Mesh& mesh) {
 
 Mesh::Mesh(Matrix3* transform) : transform(transform) {}
 
+void Mesh::set_transform_ptr(Matrix3* new_transform) {
+    transform = new_transform;
+}
+
 void Mesh::draw()
 {
     ofMesh mesh;

@@ -15,7 +15,6 @@
     <ClCompile Include="src\Component\Mesh\DodecahedronMesh.cpp" />
     <ClCompile Include="src\Component\Mesh\IcosahedronMesh.cpp" />
     <ClCompile Include="src\Component\Mesh\OctahedronMesh.cpp" />
-    <ClCompile Include="src\Component\Mesh\TetrahedronMesh.cpp" />
     <ClCompile Include="src\Component\Mesh\TrapezohedronMesh.cpp" />
     <ClCompile Include="src\Component\Particle.cpp" />
     <ClCompile Include="src\Component\Physics\Collider\SphereCollider.cpp" />
@@ -32,7 +31,6 @@
     <ClCompile Include="src\Entity\CountHUD.cpp" />
     <ClCompile Include="src\Entity\GravityChar.cpp" />
     <ClCompile Include="src\Entity\ParticleFactory.cpp" />
-    <ClCompile Include="src\Entity\RigidBody.cpp" />
     <ClCompile Include="src\Entity\TrailParticle.cpp" />
     <ClCompile Include="src\System\CollidersComponentRegistry.cpp" />
     <ClCompile Include="src\System\CollisionsRegistry.cpp" />

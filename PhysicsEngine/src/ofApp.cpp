@@ -33,7 +33,7 @@ void ofApp::setup() {
 	gravity = GravityForce(10);
 
 	// Setup Scene
-	body = RigidBody(Vector3(), 1, 15 * Matrix3(), Quaternion());
+	cube = RigidTetrahedron(Vector3(), 1, 15 * Matrix3());
 
 }
 
@@ -44,8 +44,8 @@ void ofApp::update() {
 	auto delta = std::chrono::duration_cast<std::chrono::milliseconds>(time - timeLastFrame).count() / 1000.; //durée de calcul d'une frame
 	timeLastFrame = time;
 
-	body.RotateZ(0.01);
-	body.update(delta);
+	cube.RotateZ(0.01);
+
 	// Register forces from physics components
 	PhysicsComponentRegistry::register_all_physics();
 

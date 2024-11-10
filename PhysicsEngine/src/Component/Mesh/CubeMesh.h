@@ -12,10 +12,6 @@ public:
     const std::vector<Vector3>& get_vertices() const override { return CubeMesh::vertices; }
     const std::vector<unsigned int>& get_indices() const override { return CubeMesh::indices; }
 
-	void set_transform_ptr(Matrix3* new_transform) {
-		transform = new_transform;
-	}
-
 private:
 
     static const std::vector<Vector3> vertices;

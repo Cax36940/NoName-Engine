@@ -10,6 +10,8 @@ public :
     Mesh(const Mesh& mesh);
     Mesh& operator=(const Mesh& mesh);
     Mesh(Matrix3* transform);
+
+    void set_transform_ptr(Matrix3* new_transform);
     void draw() override;
 
 protected:
