@@ -11,11 +11,13 @@ public:
 
     const std::vector<Vector3>& get_vertices() const override { return CubeMesh::vertices; }
     const std::vector<unsigned int>& get_indices() const override { return CubeMesh::indices; }
+	const Matrix3& get_moment_of_inertia() const override { return CubeMesh::moment_of_inertia; }
 
 private:
 
     static const std::vector<Vector3> vertices;
     static const std::vector<unsigned int> indices;
+	static const Matrix3 moment_of_inertia;
 };
 
 const std::vector<Vector3> CubeMesh::vertices =
@@ -42,3 +44,8 @@ const std::vector<unsigned int> CubeMesh::indices =
 		0, 3, 5,
 		0, 5, 4};
 
+const Matrix3 CubeMesh::moment_of_inertia = Matrix3(
+	Vector3(2./3., 0, 0),
+	Vector3(0, 2./3., 0),
+	Vector3(0, 0, 2./3.)
+);
