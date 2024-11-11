@@ -53,7 +53,7 @@ public:
     /**
      * @brief Constructor from a Matrix3 and a Vector3
      */
-    Matrix4::Matrix4(const Matrix3& matrix, const Vector3& vector);
+    Matrix4::Matrix4(const Matrix3& matrix, const Vector3& vector = Vector3());
 
     /**
      * @brief Equal operator
@@ -117,5 +117,7 @@ public:
      * @param matrix the matrix to add to current matrix
      */
     Matrix4& operator-=(const Matrix4& matrix);
+
+    void set_translate(const Vector3& t);
 
 };

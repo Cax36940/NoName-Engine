@@ -7,7 +7,7 @@ public:
 	TetrahedronMesh(const TetrahedronMesh&) = default;
 	TetrahedronMesh& operator=(const TetrahedronMesh&) = default;
 
-	TetrahedronMesh(Matrix3* transform) : Mesh(transform) {}
+	TetrahedronMesh(Matrix4* transform) : Mesh(transform) {}
 
 	const std::vector<Vector3>& get_vertices() const override { return TetrahedronMesh::vertices; }
 	const std::vector<unsigned int>& get_indices() const override { return TetrahedronMesh::indices; }

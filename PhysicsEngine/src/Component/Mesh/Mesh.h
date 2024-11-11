@@ -1,6 +1,7 @@
 #pragma once
 #include "Component/Graphics/GraphicsComponent.hpp"
 #include "Component/Matrix3.hpp"
+#include "Component/Matrix4.hpp"
 #include "Component/Vector3.hpp"
 
 class Mesh : public GraphicsComponent
@@ -9,15 +10,15 @@ public :
     Mesh();
     Mesh(const Mesh& mesh);
     Mesh& operator=(const Mesh& mesh);
-    Mesh(Matrix3* transform);
+    Mesh(Matrix4* transform);
 
-    void set_transform_ptr(Matrix3* new_transform);
+    void set_transform_ptr(Matrix4* new_transform);
     void draw() override;
 
 protected:
     virtual const std::vector<Vector3>& get_vertices() const = 0;
     virtual const std::vector<unsigned int>& get_indices() const = 0;
     virtual const Matrix3& get_moment_of_inertia() const = 0;
-    Matrix3* transform;
+    Matrix4* transform;
 };
 

@@ -7,7 +7,7 @@ public:
     CubeMesh(const CubeMesh&) = default;     
     CubeMesh& operator=(const CubeMesh&) = default;
 
-	CubeMesh(Matrix3* transform) : Mesh(transform) {}
+	CubeMesh(Matrix4* transform) : Mesh(transform) {}
 
     const std::vector<Vector3>& get_vertices() const override { return CubeMesh::vertices; }
     const std::vector<unsigned int>& get_indices() const override { return CubeMesh::indices; }

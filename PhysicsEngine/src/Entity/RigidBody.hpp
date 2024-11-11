@@ -6,6 +6,7 @@
 
 #include "Component/Particle.hpp"
 #include "Component/Matrix3.hpp"
+#include "Component/Matrix4.hpp"
 #include "Component/Quaternion.hpp"
 #include "Component/Vector3.hpp"
 
@@ -16,7 +17,7 @@ class RigidBody : public UpdatesComponent
 {
 private: 
 	Particle particle;
-	Matrix3 transform;
+	Matrix4 transform;
 	Quaternion rotation;
 	MeshType mesh;
 
@@ -55,7 +56,7 @@ public:
 		return *this;
 	}
 
-	RigidBody(const Vector3& pos, const float& mass = 1.0f, const Matrix3& transform = Matrix3(), const Quaternion& rot = Quaternion()) :
+	RigidBody(const Vector3& pos, const float& mass = 1.0f, const Matrix4& transform = Matrix4(), const Quaternion& rot = Quaternion()) :
 		particle(pos, Vector3(0, 0, 0), Vector3(0, 0, 0), mass),
 		transform(transform),
 		rotation(rot),
@@ -81,7 +82,8 @@ public:
 
 		Matrix3 rotatedMatrix = Quaternion::toMatrix3(rotation);
 		rotation = Quaternion();
-		transform = rotatedMatrix * transform;
+		transform = Matrix4(rotatedMatrix) * transform;
+		transform.set_translate(particle.get_position());
 	}
 
 };

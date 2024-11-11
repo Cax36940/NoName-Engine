@@ -11,16 +11,16 @@ Mesh& Mesh::operator=(const Mesh& mesh) {
     return *this;
 }
 
-Mesh::Mesh(Matrix3* transform) : transform(transform) {}
+Mesh::Mesh(Matrix4* transform) : transform(transform) {}
 
-void Mesh::set_transform_ptr(Matrix3* new_transform) {
+void Mesh::set_transform_ptr(Matrix4* new_transform) {
     transform = new_transform;
 }
 
 void Mesh::draw()
 {
     ofMesh mesh;
-    Matrix3 transform_matrix;
+    Matrix4 transform_matrix;
 
     if (transform == nullptr) {
         std::cout << "[WARNING] Mesh transform is nullptr. Mesh at address : " << this << std::endl;
@@ -32,7 +32,8 @@ void Mesh::draw()
     // Apply transform on vertices
     std::vector<Vector3> vertices = get_vertices();
     for (auto& vertex : vertices) {
-        vertex = transform_matrix * vertex;
+        Vector4 tmp_vector = transform_matrix * Vector4(vertex, 1);
+        vertex = Vector3(tmp_vector.x, tmp_vector.y, tmp_vector.z);
     }
 
     const std::vector<unsigned int> indices = get_indices();

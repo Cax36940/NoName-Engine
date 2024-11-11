@@ -8,7 +8,7 @@ public:
 	OctahedronMesh(const OctahedronMesh&) = default;
 	OctahedronMesh& operator=(const OctahedronMesh&) = default;
 
-	OctahedronMesh(Matrix3* transform) : Mesh(transform) {}
+	OctahedronMesh(Matrix4* transform) : Mesh(transform) {}
 
 	const std::vector<Vector3>& get_vertices() const override { return OctahedronMesh::vertices; }
 	const std::vector<unsigned int>& get_indices() const override { return OctahedronMesh::indices; }
