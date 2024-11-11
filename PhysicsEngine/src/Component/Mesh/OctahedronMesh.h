@@ -12,11 +12,13 @@ public:
 
 	const std::vector<Vector3>& get_vertices() const override { return OctahedronMesh::vertices; }
 	const std::vector<unsigned int>& get_indices() const override { return OctahedronMesh::indices; }
+	const Matrix3& get_moment_of_inertia() const override { return OctahedronMesh::moment_of_inertia; }
 
 private:
 
 	static const std::vector<Vector3> vertices;
 	static const std::vector<unsigned int> indices;
+	static const Matrix3 moment_of_inertia;
 };
 
 const std::vector<Vector3> OctahedronMesh::vertices = {
@@ -39,4 +41,5 @@ const std::vector<unsigned int> OctahedronMesh::indices =
 	1, 0, 5
 	 };
 
+const Matrix3 OctahedronMesh::moment_of_inertia = Matrix3();
 
