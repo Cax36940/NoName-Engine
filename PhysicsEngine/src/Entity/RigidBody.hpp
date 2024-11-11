@@ -1,9 +1,10 @@
 #pragma once
 #include "Component/Mesh/Mesh.hpp"
 #include "Component/Mesh/CubeMesh.hpp"
-#include "Component/Mesh/TetrahedronMesh.hpp"
-#include "Component/Mesh/OctahedronMesh.hpp"
+#include "Component/Mesh/DodecahedronMesh.hpp"
 #include "Component/Mesh/IcosahedronMesh.hpp"
+#include "Component/Mesh/OctahedronMesh.hpp"
+#include "Component/Mesh/TetrahedronMesh.hpp"
 
 #include "Component/Particle.hpp"
 #include "Component/Matrix3.hpp"
@@ -93,3 +94,4 @@ using RigidCube = RigidBody<CubeMesh>;
 using RigidTetrahedron = RigidBody<TetrahedronMesh>;
 using RigidOctahedron = RigidBody<OctahedronMesh>;
 using RigidIcosahedron = RigidBody<IcosahedronMesh>;
+using RigidDodecahedron = RigidBody<DodecahedronMesh>;
