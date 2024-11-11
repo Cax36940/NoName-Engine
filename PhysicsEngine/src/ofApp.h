@@ -44,5 +44,5 @@ private:
 	ofLight sun;
 
 	// Scene Entities
-	RigidTetrahedron cube;
+	RigidOctahedron cube;
 };
