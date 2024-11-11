@@ -105,8 +105,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ClassToSuppress.cpp" />
-    <ClCompile Include="src\Component\Mesh\DodecahedronMesh.cpp" />
-    <ClCompile Include="src\Component\Mesh\TrapezohedronMesh.cpp" />
     <ClCompile Include="src\Component\Mesh\Mesh.cpp" />
     <ClCompile Include="src\Component\Graphics\ConvexHull.cpp" />
     <ClCompile Include="src\Component\Graphics\EyeSprite.cpp" />
@@ -142,13 +140,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ClassToSuppress.h" />
-    <ClInclude Include="src\Component\Mesh\CubeMesh.h" />
-    <ClInclude Include="src\Component\Mesh\DodecahedronMesh.h" />
-    <ClInclude Include="src\Component\Mesh\IcosahedronMesh.h" />
-    <ClInclude Include="src\Component\Mesh\Mesh.h" />
-    <ClInclude Include="src\Component\Mesh\OctahedronMesh.h" />
-    <ClInclude Include="src\Component\Mesh\TetrahedronMesh.h" />
-    <ClInclude Include="src\Component\Mesh\TrapezohedronMesh.h" />
+    <ClInclude Include="src\Component\Mesh\CubeMesh.hpp" />
+    <ClInclude Include="src\Component\Mesh\DodecahedronMesh.hpp" />
+    <ClInclude Include="src\Component\Mesh\IcosahedronMesh.hpp" />
+    <ClInclude Include="src\Component\Mesh\Mesh.hpp" />
+    <ClInclude Include="src\Component\Mesh\OctahedronMesh.hpp" />
+    <ClInclude Include="src\Component\Mesh\TetrahedronMesh.hpp" />
     <ClInclude Include="src\Component\Graphics\ConvexHull.hpp" />
     <ClInclude Include="src\Component\Graphics\EyeSprite.hpp" />
     <ClInclude Include="src\Component\Graphics\GraphicsComponent.hpp" />

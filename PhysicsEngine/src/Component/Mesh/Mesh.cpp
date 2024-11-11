@@ -1,6 +1,6 @@
 #include <ofMaterial.h>
 #include <ofMesh.h>
-#include "Mesh.h"
+#include "Mesh.hpp"
 
 Mesh::Mesh() : transform(nullptr) {}
 

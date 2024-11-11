@@ -1,9 +1,9 @@
 #pragma once
-#include "Component/Mesh/Mesh.h"
-#include "Component/Mesh/CubeMesh.h"
-#include "Component/Mesh/TetrahedronMesh.h"
-#include "Component/Mesh/OctahedronMesh.h"
-#include "Component/Mesh/IcosahedronMesh.h"
+#include "Component/Mesh/Mesh.hpp"
+#include "Component/Mesh/CubeMesh.hpp"
+#include "Component/Mesh/TetrahedronMesh.hpp"
+#include "Component/Mesh/OctahedronMesh.hpp"
+#include "Component/Mesh/IcosahedronMesh.hpp"
 
 #include "Component/Particle.hpp"
 #include "Component/Matrix3.hpp"
