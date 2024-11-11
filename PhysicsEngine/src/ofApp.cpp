@@ -33,7 +33,7 @@ void ofApp::setup() {
 	gravity = GravityForce(10);
 
 	// Setup Scene
-	cube = RigidOctahedron(Vector3(10, 10, 10), 1, 15 * Matrix3());
+	cube = RigidIcosahedron(Vector3(10, 10, 10), 1, 15 * Matrix3());
 
 }
 

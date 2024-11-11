@@ -106,7 +106,6 @@
   <ItemGroup>
     <ClCompile Include="ClassToSuppress.cpp" />
     <ClCompile Include="src\Component\Mesh\DodecahedronMesh.cpp" />
-    <ClCompile Include="src\Component\Mesh\IcosahedronMesh.cpp" />
     <ClCompile Include="src\Component\Mesh\TrapezohedronMesh.cpp" />
     <ClCompile Include="src\Component\Mesh\Mesh.cpp" />
     <ClCompile Include="src\Component\Graphics\ConvexHull.cpp" />

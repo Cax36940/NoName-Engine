@@ -3,6 +3,7 @@
 #include "Component/Mesh/CubeMesh.h"
 #include "Component/Mesh/TetrahedronMesh.h"
 #include "Component/Mesh/OctahedronMesh.h"
+#include "Component/Mesh/IcosahedronMesh.h"
 
 #include "Component/Particle.hpp"
 #include "Component/Matrix3.hpp"
@@ -91,4 +92,4 @@ public:
 using RigidCube = RigidBody<CubeMesh>;
 using RigidTetrahedron = RigidBody<TetrahedronMesh>;
 using RigidOctahedron = RigidBody<OctahedronMesh>;
-
+using RigidIcosahedron = RigidBody<IcosahedronMesh>;
