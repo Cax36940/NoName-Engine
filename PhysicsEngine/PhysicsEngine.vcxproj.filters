@@ -36,6 +36,7 @@
     <ClCompile Include="src\System\UpdatesComponentRegistry.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="ClassToSuppress.cpp" />
+    <ClCompile Include="src\Entity\RigidBodyFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -90,6 +91,7 @@
     <ClInclude Include="src\System\PhysicsComponentRegistry.hpp" />
     <ClInclude Include="src\System\UpdatesComponentRegistry.hpp" />
     <ClInclude Include="ClassToSuppress.h" />
+    <ClInclude Include="src\Entity\RigidBodyFactory.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />
