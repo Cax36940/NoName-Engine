@@ -9,6 +9,7 @@ public:
     ArrowMesh(const ArrowMesh&) = default;
 	ArrowMesh& operator=(const ArrowMesh& mesh) {
 		tf = mesh.tf;
+		color = mesh.color;
 		length = mesh.length;
 		sized_vertices = {
 			Vector3(0.2, length, -0.2),

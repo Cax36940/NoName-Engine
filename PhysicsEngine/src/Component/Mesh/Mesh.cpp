@@ -1,17 +1,20 @@
 #include <ofMaterial.h>
 #include <ofMesh.h>
+#include <ofGraphics.h>
+#include <of3dGraphics.h>
 #include "Mesh.hpp"
 
-Mesh::Mesh() : transform(nullptr) {}
+Mesh::Mesh() : transform(nullptr), color(255, 0, 0) {}
 
-Mesh::Mesh(const Mesh& mesh) : transform(nullptr) {}
+Mesh::Mesh(const Mesh& mesh) : transform(nullptr), color(255, 0, 0) {}
 
 Mesh& Mesh::operator=(const Mesh& mesh) {
     transform = nullptr;
+    color = mesh.color;
     return *this;
 }
 
-Mesh::Mesh(Matrix4* transform) : transform(transform) {}
+Mesh::Mesh(Matrix4* transform) : transform(transform), color(255, 0, 0) {}
 
 void Mesh::set_transform_ptr(Matrix4* new_transform) {
     transform = new_transform;
@@ -68,9 +71,9 @@ void Mesh::draw()
         mesh.addNormal(face_normal);
         mesh.addNormal(face_normal);
         mesh.addNormal(face_normal);
-
     }
 
+    ofSetColor(color.x, color.y, color.z);
     mesh.draw();
     
 }

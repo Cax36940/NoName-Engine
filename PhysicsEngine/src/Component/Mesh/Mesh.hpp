@@ -15,10 +15,14 @@ public :
     void set_transform_ptr(Matrix4* new_transform);
     void draw() override;
 
+    void set_color(Vector3 color) { this->color = color; }
+    Vector3 get_color() { return color; }
+
 protected:
     virtual const std::vector<Vector3>& get_vertices() const = 0;
     virtual const std::vector<unsigned int>& get_indices() const = 0;
     virtual const Matrix3& get_moment_of_inertia() const = 0;
     Matrix4* transform;
+    Vector3 color;
 };
 
