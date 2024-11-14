@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "Component/Physics/Force/GravityForce.hpp"
 #include "Entity/RigidBody.hpp"
+#include "Entity/Origin.hpp"
 #include <chrono>
 
 #define WINDOW_WIDTH	1600
@@ -45,4 +46,6 @@ private:
 
 	// Scene Entities
 	RigidDodecahedron cube;
+	ArrowMesh arrow;
+	Origin origin;
 };

@@ -90,6 +90,8 @@
     <ClInclude Include="src\System\PhysicsComponentRegistry.hpp" />
     <ClInclude Include="src\System\UpdatesComponentRegistry.hpp" />
     <ClInclude Include="ClassToSuppress.h" />
+    <ClInclude Include="src\Component\Mesh\ArrowMesh.hpp" />
+    <ClInclude Include="src\Entity\Origin.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

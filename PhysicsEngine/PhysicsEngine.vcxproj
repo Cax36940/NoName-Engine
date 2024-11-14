@@ -140,6 +140,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ClassToSuppress.h" />
+    <ClInclude Include="src\Component\Mesh\ArrowMesh.hpp" />
     <ClInclude Include="src\Component\Mesh\CubeMesh.hpp" />
     <ClInclude Include="src\Component\Mesh\DodecahedronMesh.hpp" />
     <ClInclude Include="src\Component\Mesh\IcosahedronMesh.hpp" />
@@ -173,6 +174,7 @@
     <ClInclude Include="src\Entity\CountHUD.hpp" />
     <ClInclude Include="src\Entity\DefaultParticle.hpp" />
     <ClInclude Include="src\Entity\GravityChar.hpp" />
+    <ClInclude Include="src\Entity\Origin.hpp" />
     <ClInclude Include="src\Entity\ParticleFactory.hpp" />
     <ClInclude Include="src\Entity\RigidBody.hpp" />
     <ClInclude Include="src\Entity\Spring.hpp" />

@@ -33,8 +33,11 @@ void ofApp::setup() {
 	gravity = GravityForce(10);
 
 	// Setup Scene
-	cube = RigidDodecahedron(Vector3(10, 10, 10), 1, 15 * Matrix3());
+	//cube = RigidDodecahedron(Vector3(10, 10, 10), 1, 15 * Matrix3());
+	arrow = ArrowMesh(5.0f, 3*Matrix3());
+	arrow.set_origin_and_direction(Vector3(20, 0, 0), Quaternion(0.354, -0.146, -0.854, 0.354));
 
+	origin = Origin(5.0, 3.0);
 }
 
 //--------------------------------------------------------------
@@ -44,7 +47,7 @@ void ofApp::update() {
 	auto delta = std::chrono::duration_cast<std::chrono::milliseconds>(time - timeLastFrame).count() / 1000.; //durée de calcul d'une frame
 	timeLastFrame = time;
 
-	cube.RotateZ(0.01);
+	//cube.RotateZ(0.01);
 
 	// Register forces from physics components
 	PhysicsComponentRegistry::register_all_physics();
