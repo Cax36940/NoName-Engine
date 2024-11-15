@@ -104,7 +104,6 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ClassToSuppress.cpp" />
     <ClCompile Include="src\Component\Mesh\Mesh.cpp" />
     <ClCompile Include="src\Component\Graphics\ConvexHull.cpp" />
     <ClCompile Include="src\Component\Graphics\EyeSprite.cpp" />
@@ -139,7 +138,6 @@
     <ClCompile Include="src\ofApp.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ClassToSuppress.h" />
     <ClInclude Include="src\Component\Mesh\ArrowMesh.hpp" />
     <ClInclude Include="src\Component\Mesh\CubeMesh.hpp" />
     <ClInclude Include="src\Component\Mesh\DodecahedronMesh.hpp" />
