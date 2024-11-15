@@ -21,11 +21,11 @@ public:
 		xAxis.set_color(Vector3(255, 0, 0));
 
 		yAxis = ArrowMesh(length, size * Matrix3());
-		yAxis.set_color(Vector3(0, 0, 255));
+		yAxis.set_color(Vector3(0, 255, 0));
 
 		zAxis = ArrowMesh(length, size * Matrix3());
 		zAxis.set_origin_and_direction(Vector3(), Quaternion(0.707, 0.707, 0, 0));
-		zAxis.set_color(Vector3(0, 255, 0));
+		zAxis.set_color(Vector3(0, 0, 255));
 	}
 
 private:

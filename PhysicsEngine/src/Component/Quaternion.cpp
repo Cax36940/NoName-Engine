@@ -128,6 +128,9 @@ float Quaternion::dot(const Quaternion& quat_u, const Quaternion& quat_v) {
 Quaternion Quaternion::exp(const Quaternion& quat, const float& alpha)
 {
     float angle = std::acos(quat.w);
+    if (isnan(angle)) {
+        std::cout << "Angle nan" << std::endl;
+    }
     if (angle == 0) {
         return Quaternion();
     }

@@ -44,6 +44,11 @@ public:
     Matrix3(const Vector3& x, const Vector3& y, const Vector3& z);
 
     /**
+     * @brief Constructor from diagonal values
+     */
+    Matrix3(float x, float y, float z);
+
+    /**
      * @brief Equal operator
      * @param vector
      */

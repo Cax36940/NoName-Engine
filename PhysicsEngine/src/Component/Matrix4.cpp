@@ -100,13 +100,6 @@ Matrix4& Matrix4::operator-=(const Matrix4& matrix) {
     return *this;
 }
 
-void Matrix4::set_translate(const Vector3& t)
-{
-    x.t = t.x;
-    y.t = t.y;
-    z.t = t.z;
-}
-
 /*float Matrix4::determinant(const Matrix4& matrix) {
     return
         matrix.x.x * (matrix.y.y * (matrix.z.z * matrix.t.t - matrix.z.t * matrix.t.z) -

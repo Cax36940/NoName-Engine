@@ -8,6 +8,8 @@ Matrix3::Matrix3() : x(1, 0, 0), y(0, 1, 0), z(0, 0, 1) {}
 
 Matrix3::Matrix3(const Vector3& x, const Vector3& y, const Vector3& z) : x(x), y(y), z(z) {}
 
+Matrix3::Matrix3(float x, float y, float z) : x(x, 0, 0), y(0, y, 0), z(0, 0, z) {}
+
 bool Matrix3::operator==(const Matrix3& matrix)
 {
     return (this->x == matrix.x) && (this->y == matrix.y) && (this->z == matrix.z);

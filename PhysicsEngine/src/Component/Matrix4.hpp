@@ -118,6 +118,4 @@ public:
      */
     Matrix4& operator-=(const Matrix4& matrix);
 
-    void set_translate(const Vector3& t);
-
 };

@@ -37,8 +37,7 @@ public:
 
 	void set_origin_and_direction(Vector3 origin, Quaternion dir) {
 		Matrix3 rotatedMatrix = Quaternion::toMatrix3(dir);
-		tf = Matrix4(rotatedMatrix) * tf;
-		tf.set_translate(origin);
+		tf = Matrix4(rotatedMatrix, origin) * tf;
 	}
 
     const std::vector<Vector3>& get_vertices() const override { return sized_vertices; }
