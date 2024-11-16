@@ -127,6 +127,7 @@
     <ClCompile Include="src\Entity\CountHUD.cpp" />
     <ClCompile Include="src\Entity\GravityChar.cpp" />
     <ClCompile Include="src\Entity\ParticleFactory.cpp" />
+    <ClCompile Include="src\Entity\RigidBodyFactory.cpp" />
     <ClCompile Include="src\Entity\TrailParticle.cpp" />
     <ClCompile Include="src\System\CollidersComponentRegistry.cpp" />
     <ClCompile Include="src\System\CollisionsRegistry.cpp" />
@@ -175,6 +176,7 @@
     <ClInclude Include="src\Entity\Origin.hpp" />
     <ClInclude Include="src\Entity\ParticleFactory.hpp" />
     <ClInclude Include="src\Entity\RigidBody.hpp" />
+    <ClInclude Include="src\Entity\RigidBodyFactory.h" />
     <ClInclude Include="src\Entity\Spring.hpp" />
     <ClInclude Include="src\Entity\TrailParticle.hpp" />
     <ClInclude Include="src\System\CollidersComponentRegistry.hpp" />

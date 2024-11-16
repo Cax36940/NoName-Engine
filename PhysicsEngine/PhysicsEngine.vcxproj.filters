@@ -27,6 +27,7 @@
     <ClCompile Include="src\Entity\CountHUD.cpp" />
     <ClCompile Include="src\Entity\GravityChar.cpp" />
     <ClCompile Include="src\Entity\ParticleFactory.cpp" />
+    <ClCompile Include="src\Entity\RigidBodyFactory.cpp" />
     <ClCompile Include="src\Entity\TrailParticle.cpp" />
     <ClCompile Include="src\System\CollidersComponentRegistry.cpp" />
     <ClCompile Include="src\System\CollisionsRegistry.cpp" />
@@ -53,6 +54,7 @@
     <ClInclude Include="src\Component\Graphics\SpringSprite.hpp" />
     <ClInclude Include="src\Component\Matrix3.hpp" />
     <ClInclude Include="src\Component\Matrix4.hpp" />
+    <ClInclude Include="src\Component\Mesh\ArrowMesh.hpp" />
     <ClInclude Include="src\Component\Mesh\Mesh.hpp" />
     <ClInclude Include="src\Component\Mesh\CubeMesh.hpp" />
     <ClInclude Include="src\Component\Mesh\DodecahedronMesh.hpp" />
@@ -78,8 +80,10 @@
     <ClInclude Include="src\Entity\CountHUD.hpp" />
     <ClInclude Include="src\Entity\DefaultParticle.hpp" />
     <ClInclude Include="src\Entity\GravityChar.hpp" />
+    <ClInclude Include="src\Entity\Origin.hpp" />
     <ClInclude Include="src\Entity\ParticleFactory.hpp" />
     <ClInclude Include="src\Entity\RigidBody.hpp" />
+    <ClInclude Include="src\Entity\RigidBodyFactory.h" />
     <ClInclude Include="src\Entity\Spring.hpp" />
     <ClInclude Include="src\Entity\TrailParticle.hpp" />
     <ClInclude Include="src\System\CollidersComponentRegistry.hpp" />
@@ -88,8 +92,6 @@
     <ClInclude Include="src\System\ParticleForceRegistry.hpp" />
     <ClInclude Include="src\System\PhysicsComponentRegistry.hpp" />
     <ClInclude Include="src\System\UpdatesComponentRegistry.hpp" />
-    <ClInclude Include="src\Component\Mesh\ArrowMesh.hpp" />
-    <ClInclude Include="src\Entity\Origin.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />
