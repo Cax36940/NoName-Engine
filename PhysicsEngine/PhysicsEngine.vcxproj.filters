@@ -36,6 +36,8 @@
     <ClCompile Include="src\System\PhysicsComponentRegistry.cpp" />
     <ClCompile Include="src\System\UpdatesComponentRegistry.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
+    <ClCompile Include="src\Component\RigidBody.cpp" />
+    <ClCompile Include="src\Entity\DefaultRigidBody.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -82,8 +84,8 @@
     <ClInclude Include="src\Entity\GravityChar.hpp" />
     <ClInclude Include="src\Entity\Origin.hpp" />
     <ClInclude Include="src\Entity\ParticleFactory.hpp" />
-    <ClInclude Include="src\Entity\RigidBody.hpp" />
-    <ClInclude Include="src\Entity\RigidBodyFactory.h" />
+    <ClInclude Include="src\Component\RigidBody.hpp" />
+    <ClInclude Include="src\Entity\RigidBodyFactory.hpp" />
     <ClInclude Include="src\Entity\Spring.hpp" />
     <ClInclude Include="src\Entity\TrailParticle.hpp" />
     <ClInclude Include="src\System\CollidersComponentRegistry.hpp" />
@@ -92,6 +94,8 @@
     <ClInclude Include="src\System\ParticleForceRegistry.hpp" />
     <ClInclude Include="src\System\PhysicsComponentRegistry.hpp" />
     <ClInclude Include="src\System\UpdatesComponentRegistry.hpp" />
+    <ClInclude Include="src\Component\Mesh\MeshRessource.hpp" />
+    <ClInclude Include="src\Entity\Arrow.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

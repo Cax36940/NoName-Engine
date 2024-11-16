@@ -8,10 +8,8 @@
 #include "System/ParticleForceRegistry.hpp"
 #include "System/PhysicsComponentRegistry.hpp"
 #include "System/UpdatesComponentRegistry.hpp"
-#include "Entity/ParticleFactory.hpp"
+#include "Entity/RigidBodyFactory.hpp"
 
-
-#include "Entity/ParticleFactory.hpp"
 
 //--------------------------------------------------------------
 void ofApp::setup() {
@@ -33,15 +31,11 @@ void ofApp::setup() {
 	gravity = GravityForce(10);
 
 	// Setup Scene
-	cube = RigidDodecahedron(Vector3(30, 30, 30), 1);
-	cube.set_scale(15, 15, 15);
+	cube = RigidBodyFactory::createRigidBody(CUBE, Vector3(30, 30, 30));
 
+	arrow = Arrow(Vector3(20, 0, 0), 3, Vector3(255, 255, 255), Quaternion(0.354, -0.146, -0.854, 0.354));
 
-	arrow = ArrowMesh(5.0f, 3*Matrix3());
-	arrow.set_origin_and_direction(Vector3(20, 0, 0), Quaternion(0.354, -0.146, -0.854, 0.354));
-	arrow.set_color(Vector3(255, 255, 255));
-
-	origin = Origin(5.0, 3.0);
+	origin = Origin(3.0);
 }
 
 //--------------------------------------------------------------
@@ -56,7 +50,7 @@ void ofApp::update() {
 		glm::vec3 screen_cube_position = camera.worldToCamera(Vector3::to_glm_vec3(cube.get_position()));
 		glm::vec3 cube_mouse_vector = glm::vec3(((float)mouse_x * 2 / WINDOW_WIDTH) - 1, 1 - ((float)mouse_y * 2 / WINDOW_HEIGHT), 0) - screen_cube_position;
 		Vector3 moment_arm(cube_mouse_vector.x * camera.getXAxis() + cube_mouse_vector.y * camera.getYAxis());
-		cube.add_force(Vector3::cross(moment_arm, camera_facing_vector));
+		cube.add_force(100 * Vector3::cross(moment_arm, camera_facing_vector));
 	}
 
 	// Register forces from physics components

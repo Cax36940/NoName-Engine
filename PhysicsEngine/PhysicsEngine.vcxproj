@@ -121,10 +121,12 @@
     <ClCompile Include="src\Component\Physics\Force\GravityForce.cpp" />
     <ClCompile Include="src\Component\Physics\Force\PullForce.cpp" />
     <ClCompile Include="src\Component\Quaternion.cpp" />
+    <ClCompile Include="src\Component\RigidBody.cpp" />
     <ClCompile Include="src\Component\Vector3.cpp" />
     <ClCompile Include="src\Component\Vector4.cpp" />
     <ClCompile Include="src\Entity\Blob.cpp" />
     <ClCompile Include="src\Entity\CountHUD.cpp" />
+    <ClCompile Include="src\Entity\DefaultRigidBody.hpp" />
     <ClCompile Include="src\Entity\GravityChar.cpp" />
     <ClCompile Include="src\Entity\ParticleFactory.cpp" />
     <ClCompile Include="src\Entity\RigidBodyFactory.cpp" />
@@ -144,6 +146,7 @@
     <ClInclude Include="src\Component\Mesh\DodecahedronMesh.hpp" />
     <ClInclude Include="src\Component\Mesh\IcosahedronMesh.hpp" />
     <ClInclude Include="src\Component\Mesh\Mesh.hpp" />
+    <ClInclude Include="src\Component\Mesh\MeshRessource.hpp" />
     <ClInclude Include="src\Component\Mesh\OctahedronMesh.hpp" />
     <ClInclude Include="src\Component\Mesh\TetrahedronMesh.hpp" />
     <ClInclude Include="src\Component\Graphics\ConvexHull.hpp" />
@@ -168,6 +171,7 @@
     <ClInclude Include="src\Component\UpdatesComponent.hpp" />
     <ClInclude Include="src\Component\Vector3.hpp" />
     <ClInclude Include="src\Component\Vector4.hpp" />
+    <ClInclude Include="src\Entity\Arrow.hpp" />
     <ClInclude Include="src\Entity\Blob.hpp" />
     <ClInclude Include="src\Entity\Cable.hpp" />
     <ClInclude Include="src\Entity\CountHUD.hpp" />
@@ -175,8 +179,8 @@
     <ClInclude Include="src\Entity\GravityChar.hpp" />
     <ClInclude Include="src\Entity\Origin.hpp" />
     <ClInclude Include="src\Entity\ParticleFactory.hpp" />
-    <ClInclude Include="src\Entity\RigidBody.hpp" />
-    <ClInclude Include="src\Entity\RigidBodyFactory.h" />
+    <ClInclude Include="src\Component\RigidBody.hpp" />
+    <ClInclude Include="src\Entity\RigidBodyFactory.hpp" />
     <ClInclude Include="src\Entity\Spring.hpp" />
     <ClInclude Include="src\Entity\TrailParticle.hpp" />
     <ClInclude Include="src\System\CollidersComponentRegistry.hpp" />

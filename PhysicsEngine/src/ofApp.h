@@ -2,7 +2,7 @@
 
 #include "ofMain.h"
 #include "Component/Physics/Force/GravityForce.hpp"
-#include "Entity/RigidBody.hpp"
+#include "Entity/DefaultRigidBody.hpp"
 #include "Entity/Origin.hpp"
 #include <chrono>
 
@@ -45,7 +45,7 @@ private:
 	ofLight sun;
 
 	// Scene Entities
-	RigidDodecahedron cube;
-	ArrowMesh arrow;
+	DefaultRigidBody cube;
+	Arrow arrow;
 	Origin origin;
 };

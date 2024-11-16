@@ -21,6 +21,7 @@ public:
 	DefaultParticle& operator=(const DefaultParticle& dp) {
 		particle = dp.particle;
 		sprite = dp.sprite;
+		sprite.set_position(particle.get_position_ptr());
 		collider = SphereCollider(dp.collider.get_size(), &particle);
 		return *this;
 	}
