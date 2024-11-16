@@ -34,7 +34,6 @@ void ofApp::setup() {
 
 	// Setup Scene
 	cube = RigidDodecahedron(Vector3(30, 30, 30), 1);
-	//cube.set_angular_velocity(0, 1, 0);
 	cube.set_scale(15, 15, 15);
 
 
@@ -52,7 +51,13 @@ void ofApp::update() {
 	auto delta = std::chrono::duration_cast<std::chrono::milliseconds>(time - timeLastFrame).count() / 1000.; //durée de calcul d'une frame
 	timeLastFrame = time;
 
-	cube.add_force(Vector3(0,0,1));
+	if (apply_force) {
+		Vector3 camera_facing_vector(-camera.getZAxis()); 
+		glm::vec3 screen_cube_position = camera.worldToCamera(Vector3::to_glm_vec3(cube.get_position()));
+		glm::vec3 cube_mouse_vector = glm::vec3(((float)mouse_x * 2 / WINDOW_WIDTH) - 1, 1 - ((float)mouse_y * 2 / WINDOW_HEIGHT), 0) - screen_cube_position;
+		Vector3 moment_arm(cube_mouse_vector.x * camera.getXAxis() + cube_mouse_vector.y * camera.getYAxis());
+		cube.add_force(Vector3::cross(moment_arm, camera_facing_vector));
+	}
 
 	// Register forces from physics components
 	PhysicsComponentRegistry::register_all_physics();
@@ -91,17 +96,22 @@ void ofApp::draw() {
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
-
+	if (key == 97) { // A
+		apply_force = true;
+	}
 }
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key) {
-
+	if (key == 97) { // A
+		apply_force = false;
+	}
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y) {
-
+	mouse_x = x;
+	mouse_y = y;
 }
 
 //--------------------------------------------------------------
@@ -114,6 +124,7 @@ void ofApp::mouseDragged(int x, int y, int button) {
 void ofApp::mousePressed(int x, int y, int button) {
 	mouse_x = x;
 	mouse_y = y;
+	mouse_pressed = true;
 }
 
 //--------------------------------------------------------------

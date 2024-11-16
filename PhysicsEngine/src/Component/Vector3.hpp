@@ -44,6 +44,11 @@ public:
     Vector3(const float& x, const float& y, const float& z);
 
     /**
+     * @brief Constructor from glm::vec3
+     */
+    Vector3(const glm::vec3& vector);
+
+    /**
      * @brief Converter from Vector3 to glm::vec3
      */
     static glm::vec3 to_glm_vec3(const Vector3& vector);

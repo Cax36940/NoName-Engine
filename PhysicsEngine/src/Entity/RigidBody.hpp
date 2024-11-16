@@ -86,6 +86,10 @@ public:
 		inv_moment_inertia = Matrix3::inv(mesh.get_moment_of_inertia() * particle.get_mass());
 	}
 
+	Vector3 get_position() const {
+		return particle.get_position();
+	}
+
 	void rotate_x(float alpha) {
 		angular_position = Quaternion(cos(alpha), sin(alpha), 0, 0) * angular_position;
 	}
@@ -125,7 +129,6 @@ public:
 
 		// Update angular velocity
 		angular_velocity += angular_acceleration * delta;
-		std::cout << angular_velocity.x << "  " << angular_velocity.y << "  " << angular_velocity.z << std::endl;
 		
 		// Rotate
 		float angle = Vector3::norm(delta * angular_velocity);

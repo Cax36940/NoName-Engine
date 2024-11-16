@@ -3,6 +3,8 @@
 
 Vector3::Vector3(const float& x, const float& y, const float& z) : x(x), y(y), z(z) {}
 
+Vector3::Vector3(const glm::vec3& vector) : x(vector.x), y(vector.y), z(vector.z) {}
+
 glm::vec3 Vector3::to_glm_vec3(const Vector3& vector)
 {
     return glm::vec3(vector.x, vector.y, vector.z);
