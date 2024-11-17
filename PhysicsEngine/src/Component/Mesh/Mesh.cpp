@@ -6,16 +6,17 @@
 
 Mesh::Mesh() : mesh_ressource(nullptr), transform(nullptr), color(255, 0, 0) {}
 
-Mesh::Mesh(const Mesh& mesh) : mesh_ressource(mesh.mesh_ressource), transform(nullptr), color(mesh.color) {}
+Mesh::Mesh(const Mesh& mesh) : mesh_ressource(mesh.mesh_ressource), transform(nullptr), color(mesh.color), offset(mesh.offset) {}
 
 Mesh& Mesh::operator=(const Mesh& mesh) {
     mesh_ressource = mesh.mesh_ressource;
     transform = nullptr;
     color = mesh.color;
+    offset = mesh.offset;
     return *this;
 }
 
-Mesh::Mesh(const MeshRessource* mesh_ressource, const Vector3& color, Matrix4* transform) : mesh_ressource(mesh_ressource), transform(transform), color(color) {}
+Mesh::Mesh(const MeshRessource* mesh_ressource, const Vector3& color, const Vector3& offset, Matrix4* transform) : mesh_ressource(mesh_ressource), transform(transform), color(color), offset(offset) {}
 
 void Mesh::set_mesh_ressource_ptr(const MeshRessource* new_mesh_ressource)
 {
@@ -67,6 +68,7 @@ void Mesh::draw()
     // Apply transform on vertices
     std::vector<Vector3> vertices = mesh_ressource->get_vertices();
     for (auto& vertex : vertices) {
+        vertex += offset;
         Vector4 tmp_vector = transform_matrix * Vector4(vertex, 1);
         vertex = Vector3(tmp_vector.x, tmp_vector.y, tmp_vector.z);
     }

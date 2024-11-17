@@ -5,6 +5,7 @@
 #include "Entity/DefaultRigidBody.hpp"
 #include "Entity/Origin.hpp"
 #include "Entity/RigidBodyFactory.hpp"
+#include "Entity/TrailParticle.hpp"
 #include <chrono>
 
 #define WINDOW_WIDTH	1600
@@ -50,6 +51,7 @@ private:
 	Arrow arrow;
 	Origin origin;
 	bool is_launched = false;
+	DefaultParticle center_g_particle;
 
 	RigidBodyType rb_types[4] = {
 		CUBE,
@@ -78,6 +80,15 @@ private:
 		positionalForce(Vector3(0, 0, 1), Vector3(-25, 100, -100),	Quaternion(0.924, -0.381, 0, 0.091))
 	};
 	int throw_force_index = 0;
+
+	Vector3 centers_of_gravity[5] = {
+		Vector3(0, 0, 0),
+		Vector3(0, 1, 0),
+		Vector3(1, 0, -1),
+		Vector3(3, 0, 0),
+		Vector3(0, 2, 0)
+	};
+	int centers_g_index = 0;
 	
 	void ResetRbAndThrowForce();
 };

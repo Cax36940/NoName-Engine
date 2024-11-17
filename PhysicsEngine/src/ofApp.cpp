@@ -57,12 +57,16 @@ void ofApp::update() {
 		cube.add_force(throw_force[throw_force_index].pos, throw_force[throw_force_index].force);
 	}
 
+	if (is_launched) {
+		center_g_particle.particle.set_position(cube.get_position());
+	}
+
 	// Register forces from physics components
 	PhysicsComponentRegistry::register_all_physics();
 
 	// Checking collisions
-	CollidersComponentRegistry::check_collisions();
-	CollisionsRegistry::solve_collisions();
+	//CollidersComponentRegistry::check_collisions();
+	//CollisionsRegistry::solve_collisions();
 
 	// Applying forces
 	if (is_launched)
@@ -117,6 +121,15 @@ void ofApp::keyPressed(int key) {
 	}
 	else if (key == 'd') {
 		throw_force_index = (throw_force_index + 1) % 5;
+		ResetRbAndThrowForce();
+	}
+
+	if (key == 'w') {
+		centers_g_index = (centers_g_index + 4) % 5;
+		ResetRbAndThrowForce();
+	}
+	else if (key == 'c') {
+		centers_g_index = (centers_g_index + 1) % 5;
 		ResetRbAndThrowForce();
 	}
 
@@ -184,11 +197,16 @@ void ofApp::dragEvent(ofDragInfo dragInfo) {
 void ofApp::ResetRbAndThrowForce()
 {
 	is_launched = false;
-	cube = RigidBodyFactory::createRigidBody(rb_types[rb_types_index], Vector3(0, 0, 30));
+	cube = RigidBodyFactory::createRigidBody(rb_types[rb_types_index], Vector3(0, 0, 30), centers_of_gravity[centers_g_index]);
 	arrow = Arrow(
 		cube.get_position() + throw_force[throw_force_index].pos, 
 		1, 
 		Vector3(255, 255, 255), 
 		throw_force[throw_force_index].direction
+	);
+
+	center_g_particle = DefaultParticle(
+		Particle(centers_of_gravity[centers_g_index] + cube.get_position(), Vector3(), Vector3(), 1),
+		Sphere(0.2, glm::vec3(0, 255, 0))
 	);
 }

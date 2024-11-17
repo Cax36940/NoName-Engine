@@ -11,7 +11,7 @@ public :
     Mesh();
     Mesh(const Mesh& mesh);
     Mesh& operator=(const Mesh& mesh);
-    Mesh(const MeshRessource* new_mesh_ressource, const Vector3& color = Vector3(255, 0, 0), Matrix4* transform = nullptr);
+    Mesh(const MeshRessource* new_mesh_ressource, const Vector3& color = Vector3(255, 0, 0), const Vector3& offset = Vector3(), Matrix4* transform = nullptr);
 
     void set_mesh_ressource_ptr(const MeshRessource* new_mesh_ressource);
     void set_transform_ptr(Matrix4* new_transform);
@@ -31,6 +31,7 @@ protected:
     const MeshRessource* mesh_ressource;
     Matrix4* transform;
     Vector3 color;
+    Vector3 offset = Vector3();
     bool isVisible = true;
 };
 

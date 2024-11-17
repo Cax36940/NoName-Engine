@@ -2,15 +2,14 @@
 #include "Component/RigidBody.hpp"
 
 
-RigidBody::RigidBody(const Vector3& pos, const float& mass, const Vector3& scale, const Quaternion& angular_position, const Vector3& center_of_gravity) :
+RigidBody::RigidBody(const Vector3& pos, const float& mass, const Vector3& scale, const Quaternion& angular_position) :
 	particle(pos, Vector3(0, 0, 0), Vector3(0, 0, 0), mass),
 	angular_position(angular_position),
 	angular_velocity(),
 	accum_torque(),
 	scale(scale),
 	inv_moment_inertia(0, 0, 0),
-	transform(Quaternion::toMatrix3(angular_position) * Matrix3(scale.x, scale.y, scale.z), pos),
-	center_of_gravity(center_of_gravity) {}
+	transform(Quaternion::toMatrix3(angular_position) * Matrix3(scale.x, scale.y, scale.z), pos) {}
 
 Vector3 RigidBody::get_position() const {
 	return particle.get_position();
@@ -71,24 +70,14 @@ void RigidBody::add_force(const Vector3& torque) {
 
 void RigidBody::add_force(const Vector3& local_position, const Vector3& force)
 {
-	Vector3 l = local_position; // Because local
-	Vector3 r = center_of_gravity; // Because local
-
-	Vector3 resultant_torque = Vector3::cross(force, r - l);
+	Vector3 resultant_torque = Vector3::cross(local_position, force);
 	accum_torque += resultant_torque;
 	
 	particle.add_force(force);
-
-	//Vector3 translation_force = Vector3::dot(r - l, force) * Vector3::normalize(r - l);
-	//Vector3 torque = (force - translation_force) * particle.get_inv_mass();
-	//
-	//particle.add_force(translation_force);
-	//accum_torque += torque;
 }
 
 void RigidBody::update(float delta) {
 	particle.update(delta);
-	//std::cout << particle.get_position().x << " " << particle.get_position().y << " " << particle.get_position().z << " " << std::endl;
 
 	// Newton second law
 	Vector3 angular_acceleration = inv_moment_inertia * accum_torque;
