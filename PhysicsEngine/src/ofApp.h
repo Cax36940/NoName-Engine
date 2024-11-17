@@ -4,6 +4,7 @@
 #include "Component/Physics/Force/GravityForce.hpp"
 #include "Entity/DefaultRigidBody.hpp"
 #include "Entity/Origin.hpp"
+#include "Entity/RigidBodyFactory.hpp"
 #include <chrono>
 
 #define WINDOW_WIDTH	1600
@@ -39,7 +40,7 @@ private:
 	GravityForce gravity;
 
 	// Setup elements
-	ofImage backgroundPicture;
+	ofImage background_picture;
 	ofTrueTypeFont myfont;
 	ofEasyCam camera;
 	ofLight sun;
@@ -48,4 +49,35 @@ private:
 	DefaultRigidBody cube;
 	Arrow arrow;
 	Origin origin;
+	bool is_launched = false;
+
+	RigidBodyType rb_types[4] = {
+		CUBE,
+		DODECAHEDRON,
+		ICOSAHEDRON,
+		OCTAHEDRON
+	};
+	int rb_types_index = 0;
+
+	struct positionalForce {
+		Vector3 pos;
+		Vector3 force;
+		Quaternion direction;
+
+		positionalForce(const Vector3& p, const Vector3& f, const Quaternion& d) {
+			pos = p;
+			force = f;
+			direction = d;
+		}
+	};
+	positionalForce throw_force[5] = {
+		positionalForce(Vector3(0, 0, 0), Vector3(0, 100, -100),	Quaternion(0.924, -0.383, 0, 0)),
+		positionalForce(Vector3(1, 0, 0), Vector3(0, 100, -100),	Quaternion(0.924, -0.383, 0, 0)),
+		positionalForce(Vector3(1, -1, 0), Vector3(0, 100, -100),	Quaternion(0.924, -0.383, 0, 0)),
+		positionalForce(Vector3(0, 0, 0), Vector3(50, 100, -50),	Quaternion(0.924, -0.191, 0, -0.191)),
+		positionalForce(Vector3(0, 0, 1), Vector3(-25, 100, -100),	Quaternion(0.924, -0.381, 0, 0.091))
+	};
+	int throw_force_index = 0;
+	
+	void ResetRbAndThrowForce();
 };

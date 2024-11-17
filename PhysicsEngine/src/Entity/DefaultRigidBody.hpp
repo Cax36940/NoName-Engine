@@ -34,6 +34,15 @@ public:
 		return rigid_body.get_position();
 	}
 
+	Mesh* get_mesh() {
+		return &mesh;
+	}
+
+	Particle* get_physical_particle()
+	{
+		return rigid_body.get_physical_particle();
+	}
+
 	void add_force(const Vector3& force) {
 		rigid_body.add_force(force);
 	}

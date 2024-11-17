@@ -46,6 +46,9 @@ bool Mesh::has_ressource() const
 
 void Mesh::draw()
 {
+    if (!isVisible)
+        return;
+
     if (mesh_ressource == nullptr) {
         std::cout << "[WARNING] Trying to draw mesh with no ressource. Mesh at address : " << this << std::endl;
         return;

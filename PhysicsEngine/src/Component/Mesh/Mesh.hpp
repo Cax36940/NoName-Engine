@@ -19,6 +19,9 @@ public :
     void set_color(const Vector3& color);
     Vector3 get_color() const;
 
+    void toggle_visibility() { isVisible = !isVisible; }
+    void set_visibility(bool visibility) { isVisible = visibility; }
+
     const Matrix3& get_moment_of_inertia() const;
     bool has_ressource() const;
 
@@ -28,5 +31,6 @@ protected:
     const MeshRessource* mesh_ressource;
     Matrix4* transform;
     Vector3 color;
+    bool isVisible = true;
 };
 

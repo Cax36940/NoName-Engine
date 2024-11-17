@@ -15,11 +15,11 @@ static struct RigidBodyArgs {
 };
 
 static RigidBodyArgs rigid_body_args_list[] = {
- {250, Vector3(15, 15, 15), Quaternion(), Vector3(255, 0, 0), &CubeMesh::get_instance()},				// CUBE
- {450, Vector3(15, 15, 15), Quaternion(), Vector3(255, 0, 0), &DodecahedronMesh::get_instance()},		// DODECAHEDRON
- {400, Vector3(15, 15, 15), Quaternion(), Vector3(255, 0, 0), &IcosahedronMesh::get_instance()},		// ICOSAHEDRON
- {300, Vector3(15, 15, 15), Quaternion(), Vector3(255, 0, 0), &OctahedronMesh::get_instance()},			// OCTAHEDRON
- {150, Vector3(15, 15, 15), Quaternion(), Vector3(255, 0, 0), &TetrahedronMesh::get_instance()},		// TETRAHEDRON
+ {2.5, Vector3(1, 1, 1), Quaternion(), Vector3(255, 0, 0), &CubeMesh::get_instance()},				// CUBE
+ {4.5, Vector3(1, 1, 1), Quaternion(), Vector3(255, 0, 0), &DodecahedronMesh::get_instance()},		// DODECAHEDRON
+ {4, Vector3(1, 1, 1), Quaternion(), Vector3(255, 0, 0), &IcosahedronMesh::get_instance()},		// ICOSAHEDRON
+ {3, Vector3(1, 1, 1), Quaternion(), Vector3(255, 0, 0), &OctahedronMesh::get_instance()},			// OCTAHEDRON
+ {1.5, Vector3(1, 1, 1), Quaternion(), Vector3(255, 0, 0), &TetrahedronMesh::get_instance()},		// TETRAHEDRON
 };
 
 DefaultRigidBody RigidBodyFactory::createRigidBody(enum RigidBodyType type, const Vector3& pos)
