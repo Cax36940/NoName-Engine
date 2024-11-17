@@ -74,8 +74,8 @@ void RigidBody::add_force(const Vector3& local_position, const Vector3& force)
 	Vector3 l = local_position; // Because local
 	Vector3 r = center_of_gravity; // Because local
 
-	Vector3 resultant_torque = Vector3::cross(l, force);
-	accum_torque += resultant_torque * 0.001f;
+	Vector3 resultant_torque = Vector3::cross(force, r - l);
+	accum_torque += resultant_torque * particle.get_inv_mass();
 	
 	particle.add_force(force);
 }

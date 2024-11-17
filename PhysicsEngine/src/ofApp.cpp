@@ -51,7 +51,7 @@ void ofApp::update() {
 		//glm::vec3 cube_mouse_vector = glm::vec3(((float)mouse_x * 2 / WINDOW_WIDTH) - 1, 1 - ((float)mouse_y * 2 / WINDOW_HEIGHT), 0) - screen_cube_position;
 		//Vector3 moment_arm(cube_mouse_vector.x * camera.getXAxis() + cube_mouse_vector.y * camera.getYAxis());
 		//cube.add_force(1000 * Vector3::cross(moment_arm, camera_facing_vector));
-		cube.add_force(Vector3(2, 4, 0), Vector3(0, 1000, -1000));
+		cube.add_force(Vector3(2, 4, 0), Vector3(0, 10000, -10000));
 	}
 
 	// Register forces from physics components
