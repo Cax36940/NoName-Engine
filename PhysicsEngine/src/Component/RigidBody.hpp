@@ -19,6 +19,8 @@ private:
 	Vector3 accum_torque;
 	Vector3 scale = Vector3(1, 1, 1);
 
+	Vector3 center_of_gravity = Vector3(0, 0, 0);
+
 	Matrix3 inv_moment_inertia;
 	Matrix4 transform;
 
@@ -30,7 +32,7 @@ public:
 	RigidBody& operator=(const RigidBody& body) = default;
 	RigidBody& operator=(RigidBody&& body) = default;
 
-	RigidBody(const Vector3& pos, const float& mass = 1.0f, const Vector3& scale = Vector3(1, 1, 1), const Quaternion& angular_position = Quaternion());
+	RigidBody(const Vector3& pos, const float& mass = 1.0f, const Vector3& scale = Vector3(1, 1, 1), const Quaternion& angular_position = Quaternion(), const Vector3& center_of_gravity = Vector3(0, 0, 0));
 
 	Vector3 get_position() const;
 	Matrix4* get_transform_ptr();
@@ -49,6 +51,7 @@ public:
 	void rotate_z(float alpha);
 
 	void add_force(const Vector3& torque);
+	void add_force(const Vector3& local_position, const Vector3& force);
 
 	void update(float delta) override;
 

@@ -31,7 +31,7 @@ void ofApp::setup() {
 	gravity = GravityForce(10);
 
 	// Setup Scene
-	cube = RigidBodyFactory::createRigidBody(CUBE, Vector3(30, 30, 30));
+	cube = RigidBodyFactory::createRigidBody(CUBE, Vector3(0, -30, 30));
 
 	arrow = Arrow(Vector3(20, 0, 0), 3, Vector3(255, 255, 255), Quaternion(0.354, -0.146, -0.854, 0.354));
 
@@ -46,11 +46,12 @@ void ofApp::update() {
 	timeLastFrame = time;
 
 	if (apply_force) {
-		Vector3 camera_facing_vector(-camera.getZAxis()); 
-		glm::vec3 screen_cube_position = camera.worldToCamera(Vector3::to_glm_vec3(cube.get_position()));
-		glm::vec3 cube_mouse_vector = glm::vec3(((float)mouse_x * 2 / WINDOW_WIDTH) - 1, 1 - ((float)mouse_y * 2 / WINDOW_HEIGHT), 0) - screen_cube_position;
-		Vector3 moment_arm(cube_mouse_vector.x * camera.getXAxis() + cube_mouse_vector.y * camera.getYAxis());
-		cube.add_force(100 * Vector3::cross(moment_arm, camera_facing_vector));
+		//Vector3 camera_facing_vector(-camera.getZAxis()); 
+		//glm::vec3 screen_cube_position = camera.worldToCamera(Vector3::to_glm_vec3(cube.get_position()));
+		//glm::vec3 cube_mouse_vector = glm::vec3(((float)mouse_x * 2 / WINDOW_WIDTH) - 1, 1 - ((float)mouse_y * 2 / WINDOW_HEIGHT), 0) - screen_cube_position;
+		//Vector3 moment_arm(cube_mouse_vector.x * camera.getXAxis() + cube_mouse_vector.y * camera.getYAxis());
+		//cube.add_force(1000 * Vector3::cross(moment_arm, camera_facing_vector));
+		cube.add_force(Vector3(2, 4, 0), Vector3(0, 1000, -1000));
 	}
 
 	// Register forces from physics components
@@ -61,7 +62,6 @@ void ofApp::update() {
 	CollisionsRegistry::solve_collisions();
 
 	// Applying forces
-
 	ParticleForceRegistry::update_forces(delta);
 
 	// Updating every object

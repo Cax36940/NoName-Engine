@@ -2,14 +2,15 @@
 #include "Component/RigidBody.hpp"
 
 
-RigidBody::RigidBody(const Vector3& pos, const float& mass, const Vector3& scale, const Quaternion& angular_position) :
+RigidBody::RigidBody(const Vector3& pos, const float& mass, const Vector3& scale, const Quaternion& angular_position, const Vector3& center_of_gravity) :
 	particle(pos, Vector3(0, 0, 0), Vector3(0, 0, 0), mass),
 	angular_position(angular_position),
 	angular_velocity(),
 	accum_torque(),
 	scale(scale),
 	inv_moment_inertia(0, 0, 0),
-	transform(Quaternion::toMatrix3(angular_position) * Matrix3(scale.x, scale.y, scale.z), pos){}
+	transform(Quaternion::toMatrix3(angular_position) * Matrix3(scale.x, scale.y, scale.z), pos),
+	center_of_gravity(center_of_gravity) {}
 
 Vector3 RigidBody::get_position() const {
 	return particle.get_position();
@@ -65,9 +66,24 @@ void RigidBody::set_scale(float x, float y, float z) {
 
 void RigidBody::add_force(const Vector3& torque) {
 	accum_torque += torque;
+	particle.add_force(torque);
+}
+
+void RigidBody::add_force(const Vector3& local_position, const Vector3& force)
+{
+	Vector3 l = local_position; // Because local
+	Vector3 r = center_of_gravity; // Because local
+
+	Vector3 resultant_torque = Vector3::cross(l, force);
+	accum_torque += resultant_torque * 0.001f;
+	
+	particle.add_force(force);
 }
 
 void RigidBody::update(float delta) {
+	particle.update(delta);
+	//std::cout << particle.get_position().x << " " << particle.get_position().y << " " << particle.get_position().z << " " << std::endl;
+
 	// Newton second law
 	Vector3 angular_acceleration = inv_moment_inertia * accum_torque;
 	accum_torque = Vector3();
@@ -81,7 +97,7 @@ void RigidBody::update(float delta) {
 		Quaternion velocity_quat(cos(angle), (sin(angle) / angle) * delta * angular_velocity);
 		angular_position = velocity_quat * angular_position;
 
-		// Update moment of inertia
+		// Update moment of inertia J = R*J-1*R-1
 		inv_moment_inertia = Quaternion::toMatrix3(angular_position) * inv_moment_inertia *
 			Quaternion::toMatrix3(Quaternion::inv(angular_position));
 	}
