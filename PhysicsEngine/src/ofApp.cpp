@@ -101,9 +101,13 @@ void ofApp::draw() {
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
-	if (key == ' ' && !is_launched) { // Space
+	if (key == ' ' && !is_launched) {
 		apply_force = true;
 		is_launched = true;
+	}
+	else if (key == ' ') {
+		ResetRbAndThrowForce();
+		is_launched = false;
 	}
 
 	if (key == 'a') {
