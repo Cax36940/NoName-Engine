@@ -38,6 +38,7 @@
     <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="src\Component\RigidBody.cpp" />
     <ClCompile Include="src\Entity\DefaultRigidBody.hpp" />
+    <ClCompile Include="src\Component\Octree.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -96,6 +97,7 @@
     <ClInclude Include="src\System\UpdatesComponentRegistry.hpp" />
     <ClInclude Include="src\Component\Mesh\MeshRessource.hpp" />
     <ClInclude Include="src\Entity\Arrow.hpp" />
+    <ClInclude Include="src\Component\Octree.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

@@ -112,6 +112,7 @@
     <ClCompile Include="src\Component\Graphics\Line.cpp" />
     <ClCompile Include="src\Component\Matrix3.cpp" />
     <ClCompile Include="src\Component\Matrix4.cpp" />
+    <ClCompile Include="src\Component\Octree.cpp" />
     <ClCompile Include="src\Component\Particle.cpp" />
     <ClCompile Include="src\Component\Physics\Collider\SphereCollider.cpp" />
     <ClCompile Include="src\Component\Physics\SpringComponent.cpp" />
@@ -157,6 +158,7 @@
     <ClInclude Include="src\Component\Graphics\Line.hpp" />
     <ClInclude Include="src\Component\Matrix3.hpp" />
     <ClInclude Include="src\Component\Matrix4.hpp" />
+    <ClInclude Include="src\Component\Octree.hpp" />
     <ClInclude Include="src\Component\Particle.hpp" />
     <ClInclude Include="src\Component\Physics\Collider\SphereCollider.hpp" />
     <ClInclude Include="src\Component\Physics\SpringComponent.hpp" />
