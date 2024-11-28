@@ -46,6 +46,11 @@ private:
 	ofEasyCam camera;
 	ofLight sun;
 
+	ofVec3f  camPosition;
+	ofVec3f  camOrientation;
+	float moveSpeed;
+	float rotationSpeed;
+
 	// Scene Entities
 	DefaultRigidBody cube;
 	Arrow arrow;

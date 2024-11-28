@@ -34,6 +34,13 @@ void ofApp::setup() {
 	//cube = RigidBodyFactory::createRigidBody(CUBE, Vector3(0, -30, 30));
 	//arrow = Arrow(Vector3(20, 0, 0), 3, Vector3(255, 255, 255), Quaternion(0.354, -0.146, -0.854, 0.354));
 
+	// first person camera
+	camPosition = ofVec3f(0, 0, 60); // initial position
+	camOrientation = ofVec3f(0, 0, 0); // pitch, yaw, roll
+	camera.disableMouseInput(); // disable default mouse movements from ofeasycam
+	moveSpeed = 1.0f;
+	rotationSpeed = 0.15f;
+
 	ResetRbAndThrowForce();
 	origin = Origin(1.0);
 }
@@ -75,6 +82,9 @@ void ofApp::update() {
 	}
 	ParticleForceRegistry::update_forces(delta);
 
+	// Update of camera position
+	camera.setPosition(camPosition);
+
 	// Updating every object
 	UpdatesComponentRegistry::update_all(delta);
 
@@ -91,6 +101,7 @@ void ofApp::draw() {
 	ofSetColor(255, 0, 0);
 	ofFill();
 	//ofDrawBox(20);
+
 
 	GraphicsComponentRegistry::draw_all();
 
@@ -140,6 +151,25 @@ void ofApp::keyPressed(int key) {
 	if (key == 'v') {
 		cube.get_mesh()->toggle_visibility();
 	}
+
+	// Movements of the camera with arrows
+
+	if (key == OF_KEY_UP) {
+		camPosition += camera.getLookAtDir() * moveSpeed;
+	}
+
+	if (key == OF_KEY_DOWN) {
+		camPosition -= camera.getLookAtDir() * moveSpeed;
+	}
+
+	if (key == OF_KEY_RIGHT) {
+		camPosition += camera.getSideDir() * moveSpeed;
+	}
+
+	if (key == OF_KEY_LEFT) {
+		camPosition -= camera.getSideDir() * moveSpeed;
+		
+	}
 }
 
 //--------------------------------------------------------------
@@ -159,6 +189,15 @@ void ofApp::mouseMoved(int x, int y) {
 void ofApp::mouseDragged(int x, int y, int button) {
 	mouse_x = x;
 	mouse_y = y;
+
+	// Rotation of the camera with the mouse
+
+	camOrientation.y += (x - ofGetPreviousMouseX()) * rotationSpeed; // yaw
+	camOrientation.x += (y - ofGetPreviousMouseY()) * rotationSpeed; // pitch
+
+	camOrientation.x = ofClamp(camOrientation.x, -90, 90);// avoid flip
+
+	camera.setOrientation(glm::vec3(camOrientation.x, camOrientation.y, camOrientation.z));
 }
 
 //--------------------------------------------------------------
