@@ -100,6 +100,11 @@ Matrix4& Matrix4::operator-=(const Matrix4& matrix) {
     return *this;
 }
 
+Matrix3 Matrix4::get_ortho_transform()
+{
+    return Matrix3(Vector3(x.x, x.y, x.z), Vector3(y.x, y.y, y.z), Vector3(z.x, z.y, z.z));
+}
+
 /*float Matrix4::determinant(const Matrix4& matrix) {
     return
         matrix.x.x * (matrix.y.y * (matrix.z.z * matrix.t.t - matrix.z.t * matrix.t.z) -

@@ -25,6 +25,8 @@ public :
     const Matrix3& get_moment_of_inertia() const;
     bool has_ressource() const;
 
+    float get_size() const;
+
     void draw() override;
 
 protected:

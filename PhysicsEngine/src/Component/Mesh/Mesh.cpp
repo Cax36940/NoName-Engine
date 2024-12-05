@@ -45,6 +45,30 @@ bool Mesh::has_ressource() const
     return mesh_ressource != nullptr;
 }
 
+float Mesh::get_size() const
+{
+    if (!mesh_ressource) {
+        return 0.0f;
+    }
+
+    Matrix3 ortho_transform = Matrix3();
+
+    if (transform) {
+        ortho_transform = transform->get_ortho_transform();
+    }
+
+    const std::vector<Vector3>& vertices = mesh_ressource->get_vertices();
+    float max_norm = 0.0f;
+    for (auto vertex : vertices) {
+        float norm = Vector3::norm2(ortho_transform * vertex);
+        if (norm > max_norm) {
+            max_norm = norm;
+        }
+    }
+
+    return sqrt(max_norm);
+}
+
 void Mesh::draw()
 {
     if (!isVisible)

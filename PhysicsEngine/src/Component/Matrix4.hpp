@@ -118,4 +118,9 @@ public:
      */
     Matrix4& operator-=(const Matrix4& matrix);
 
+    /**
+     * @brief Return the linear/orthogonal part of the transform
+    */
+    Matrix3 get_ortho_transform();
+
 };

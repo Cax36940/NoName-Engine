@@ -72,8 +72,8 @@ void ofApp::update() {
 	PhysicsComponentRegistry::register_all_physics();
 
 	// Checking collisions
-	//CollidersComponentRegistry::check_collisions();
-	//CollisionsRegistry::solve_collisions();
+	CollidersComponentRegistry::check_collisions();
+	CollisionsRegistry::solve_collisions();
 
 	// Applying forces
 	if (is_launched)
