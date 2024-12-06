@@ -71,7 +71,7 @@ float Mesh::get_size() const
 
 void Mesh::draw()
 {
-    if (!isVisible)
+    if (!visible)
         return;
 
     if (!(cached_transform == *transform)) {
@@ -111,6 +111,13 @@ void Mesh::update_mesh()
 
     const std::vector<unsigned int> indices = mesh_ressource->get_indices();
 
+    std::vector<ofDefaultVertexType> tmp_vertices;
+    std::vector<ofDefaultVertexType> tmp_indices;
+    std::vector<ofDefaultVertexType> tmp_normals;
+    tmp_vertices.reserve(indices.size());
+    tmp_indices.reserve(indices.size());
+    tmp_normals.reserve(indices.size());
+
     for (size_t i = 0; i < indices.size(); i += 3) {
         // Get indices of the face
         unsigned int i0 = indices[i];
@@ -123,14 +130,14 @@ void Mesh::update_mesh()
         ofDefaultVertexType v2 = Vector3::to_glm_vec3(vertices[i2]);
 
         // Add vertices to mesh
-        cached_mesh.addVertex(v0);
-        cached_mesh.addVertex(v1);
-        cached_mesh.addVertex(v2);
+        tmp_vertices.emplace_back(v0);
+        tmp_vertices.emplace_back(v1);
+        tmp_vertices.emplace_back(v2);
 
         // Add indices to mesh
-        cached_mesh.addIndex(i);
-        cached_mesh.addIndex(i + 1);
-        cached_mesh.addIndex(i + 2);
+        tmp_indices.emplace_back(i);
+        tmp_indices.emplace_back(i + 1);
+        tmp_indices.emplace_back(i + 2);
 
         // Calculate the face normal
         ofDefaultVertexType edge1 = v1 - v0;
@@ -138,11 +145,15 @@ void Mesh::update_mesh()
         ofDefaultVertexType face_normal = glm::normalize(glm::cross(edge1, edge2));
 
         // Add normals to mesh
-        cached_mesh.addNormal(face_normal);
-        cached_mesh.addNormal(face_normal);
-        cached_mesh.addNormal(face_normal);
+        tmp_normals.emplace_back(face_normal);
+        tmp_normals.emplace_back(face_normal);
+        tmp_normals.emplace_back(face_normal);
     }
 
+    cached_mesh.addVertices(tmp_vertices);
+    cached_mesh.addVertices(tmp_indices);
+    cached_mesh.addVertices(tmp_normals);
 
+    meshNeedsUpdate = false;
 
 }

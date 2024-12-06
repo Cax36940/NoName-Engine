@@ -40,7 +40,7 @@ void ofApp::setup() {
 	cubes.reserve(1000);
 	float min_value = -127.0;
 	float max_value = 127.0;
-	for (int i = 0; i < 1000; i++) {
+	for (int i = 0; i < 10000; i++) {
 		float rand_x = min_value + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX) / (max_value - min_value));
 		float rand_y = min_value + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX) / (max_value - min_value));
 		float rand_z = min_value + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX) / (max_value - min_value));
@@ -92,9 +92,16 @@ void ofApp::draw() {
 	// Begin rendering from the camera's perspective.
 	camera.begin();
 
+	ofDisableSmoothing();
 	ofSetColor(255, 0, 0);
 	ofFill();
 	visual_octree.draw_tree();
+
+	for (auto& cube : cubes) {
+		// cube is visible only if facing camera
+		glm::vec3 vector_to_cube = Vector3::to_glm_vec3(cube.get_position()) - camera.getGlobalPosition();
+		cube.mesh.set_visible(glm::dot(camera.getLookAtDir(), vector_to_cube) > 0);
+	}
 
 	GraphicsComponentRegistry::draw_all();
 

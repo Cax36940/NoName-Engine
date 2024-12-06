@@ -12,6 +12,7 @@ public:
 	~GraphicsComponent(){ GraphicsComponentRegistry::remove(this); };
 	
 	void set_visible(bool visible_value) { visible = visible_value; };
+	void toggle_visibility() { visible = !visible; }
 	bool is_visible() const { return visible; };
 	virtual void draw() = 0;
 

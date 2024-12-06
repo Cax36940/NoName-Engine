@@ -40,6 +40,7 @@ void CollidersComponentRegistry::check_collisions(Octree & visual_octree)
 	// Check only sphere collisions
 	for (auto i : registry) {
 		std::vector<SphereCollider*> potential_colliders;
+		potential_colliders.reserve(4);
 		collider_octree.get_overlapping_colliders(*i, potential_colliders);
 
 		for (auto j : potential_colliders) {

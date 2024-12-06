@@ -10,9 +10,13 @@ glm::vec3 Vector3::to_glm_vec3(const Vector3& vector)
     return glm::vec3(vector.x, vector.y, vector.z);
 }
 
+static bool float_eq(float a, float b, float epsilon = 1e-6f) {
+    return std::abs(a - b) < epsilon;
+}
+
 bool Vector3::operator==(const Vector3& vector)
 {
-    return (this->x == vector.x) && (this->y == vector.y) && (this->z == vector.z);
+    return float_eq(this->x, vector.x) && float_eq(this->y, vector.y) && float_eq(this->z, vector.z);
 }
 
 Vector3 Vector3::operator*(const float& alpha) const {

@@ -19,9 +19,6 @@ public :
     void set_color(const Vector3& color);
     Vector3 get_color() const;
 
-    void toggle_visibility() { isVisible = !isVisible; }
-    void set_visibility(bool visibility) { isVisible = visibility; }
-
     const Matrix3& get_moment_of_inertia() const;
     bool has_ressource() const;
 
@@ -34,7 +31,6 @@ protected:
     Matrix4* transform;
     Vector3 color;
     Vector3 offset = Vector3();
-    bool isVisible = true;
     bool meshNeedsUpdate = true;
     ofMesh cached_mesh;
     Matrix4 cached_transform;
