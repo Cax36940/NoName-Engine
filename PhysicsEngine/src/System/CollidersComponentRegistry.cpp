@@ -86,4 +86,5 @@ void CollidersComponentRegistry::check_collisions(Octree & visual_octree)
 		}
 		checked_colliders.insert(i);
 	}
+
 }

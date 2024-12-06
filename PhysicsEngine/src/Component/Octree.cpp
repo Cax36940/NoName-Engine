@@ -35,7 +35,9 @@ void Octree::split(size_t node_index, const Vector3& position, const Vector3& si
 bool Octree::add_collider_to_node(SphereCollider& collider, size_t node_index, const Vector3& position, const Vector3& size)
 {
     // Case when collider is not in the node
-    if (!intersect(collider, position, size))
+    if (!( (std::abs(collider.physical_body->get_position_ptr()->x - position.x) < size.x / 2) &&
+           (std::abs(collider.physical_body->get_position_ptr()->y - position.y) < size.y / 2) &&
+           (std::abs(collider.physical_body->get_position_ptr()->z - position.z) < size.z / 2) ))
     {
         return false;
     }
