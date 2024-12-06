@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "Component/Physics/Force/GravityForce.hpp"
+#include "Component/Octree.hpp"
 #include "Entity/DefaultRigidBody.hpp"
 #include "Entity/Origin.hpp"
 #include "Entity/RigidBodyFactory.hpp"
@@ -65,7 +66,8 @@ private:
 	Origin origin;
 	DefaultRigidBody cube;
 	DefaultRigidBody cube2;
-
+	std::vector<DefaultRigidBody> cubes;
+	Octree visual_octree;
 
 	RigidBodyType rb_types[4] = {
 		CUBE,

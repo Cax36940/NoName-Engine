@@ -1,4 +1,5 @@
 #include "Octree.hpp"
+#include "ofMain.h" // ofDrawLine
 
  bool Octree::is_node_splitted(const OctreeNode& node)
  {
@@ -17,9 +18,9 @@ void Octree::split(size_t node_index, const Vector3& position, const Vector3& si
 
     // Add 4 child nodes
     size_t firstChildIndex = tree_nodes.size();
-    tree_nodes.resize(tree_nodes.size() + 4);
+    tree_nodes.resize(tree_nodes.size() + 8);
 
-    for (int i = 0; i < 4; ++i)
+    for (int i = 0; i < 8; ++i)
     {
         tree_nodes[node_index].children_index[i] = firstChildIndex + i;
     }
@@ -107,7 +108,7 @@ void Octree::get_overlapping_colliders(const SphereCollider& collider, std::vect
             Vector3(position.x + half_new_size.x, position.y + half_new_size.y, position.z + half_new_size.z)
         };
 
-        for (int i = 0; i < 4; ++i) {
+        for (int i = 0; i < 8; ++i) {
             get_overlapping_colliders(collider, colliders_vec, tree_nodes[node_index].children_index[i], new_position[i], new_size);
         }
 
@@ -140,4 +141,64 @@ bool Octree::intersect(const SphereCollider& collider, const Vector3& position, 
 
     return distance <= collider.get_size();
 
+}
+
+void Octree::draw_tree_node(size_t node_index, const Vector3& position, const Vector3& size)
+{
+
+    // Case when node is splitted
+    if (is_node_splitted(tree_nodes[node_index]))
+    {
+        Vector3 new_size(size.x / 2, size.y / 2, size.z / 2);
+        Vector3 half_new_size(size.x / 4, size.y / 4, size.z / 4);
+
+        Vector3 new_position[8] = {
+            Vector3(position.x - half_new_size.x, position.y - half_new_size.y, position.z - half_new_size.z),
+            Vector3(position.x + half_new_size.x, position.y - half_new_size.y, position.z - half_new_size.z),
+            Vector3(position.x - half_new_size.x, position.y + half_new_size.y, position.z - half_new_size.z),
+            Vector3(position.x + half_new_size.x, position.y + half_new_size.y, position.z - half_new_size.z),
+            Vector3(position.x - half_new_size.x, position.y - half_new_size.y, position.z + half_new_size.z),
+            Vector3(position.x + half_new_size.x, position.y - half_new_size.y, position.z + half_new_size.z),
+            Vector3(position.x - half_new_size.x, position.y + half_new_size.y, position.z + half_new_size.z),
+            Vector3(position.x + half_new_size.x, position.y + half_new_size.y, position.z + half_new_size.z)
+        };
+
+        for (int i = 0; i < 8; ++i) {
+            draw_tree_node(tree_nodes[node_index].children_index[i], new_position[i], new_size);
+        }
+
+        return;
+    }
+
+    // Draw the node if not splitted
+    Vector3 half_size(size.x / 2, size.y / 2, size.z / 2);
+
+    ofVec3f  vertices[8] = {
+        ofVec3f(position.x - half_size.x, position.y - half_size.y, position.z - half_size.z),
+        ofVec3f(position.x + half_size.x, position.y - half_size.y, position.z - half_size.z),
+        ofVec3f(position.x - half_size.x, position.y + half_size.y, position.z - half_size.z),
+        ofVec3f(position.x + half_size.x, position.y + half_size.y, position.z - half_size.z),
+        ofVec3f(position.x - half_size.x, position.y - half_size.y, position.z + half_size.z),
+        ofVec3f(position.x + half_size.x, position.y - half_size.y, position.z + half_size.z),
+        ofVec3f(position.x - half_size.x, position.y + half_size.y, position.z + half_size.z),
+        ofVec3f(position.x + half_size.x, position.y + half_size.y, position.z + half_size.z)
+    };
+
+    // Draw edges
+    ofSetColor(255);
+    ofDrawLine(vertices[0], vertices[1]);
+    ofDrawLine(vertices[1], vertices[3]);
+    ofDrawLine(vertices[3], vertices[2]);
+    ofDrawLine(vertices[2], vertices[0]);
+
+    ofDrawLine(vertices[4], vertices[5]);
+    ofDrawLine(vertices[5], vertices[7]);
+    ofDrawLine(vertices[7], vertices[6]);
+    ofDrawLine(vertices[6], vertices[4]);
+
+    ofDrawLine(vertices[0], vertices[4]);
+    ofDrawLine(vertices[1], vertices[5]);
+    ofDrawLine(vertices[2], vertices[6]);
+    ofDrawLine(vertices[3], vertices[7]);
+    
 }

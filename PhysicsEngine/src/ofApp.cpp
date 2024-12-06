@@ -34,8 +34,19 @@ void ofApp::setup() {
 	cube = RigidBodyFactory::createRigidBody(CUBE, Vector3(-100, -29, 30));
 	cube2 = RigidBodyFactory::createRigidBody(CUBE, Vector3(100, -30, 30));
 
-	cube.rigid_body.set_velocity(10, 0, 0);
-	cube2.rigid_body.set_velocity(-10, 0, 0);
+	//cube.rigid_body.set_velocity(10, 0, 0);
+	//cube2.rigid_body.set_velocity(-10, 0, 0);
+
+	cubes.reserve(1000);
+	float min_value = -127.0;
+	float max_value = 127.0;
+	for (int i = 0; i < 1000; i++) {
+		float rand_x = min_value + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX) / (max_value - min_value));
+		float rand_y = min_value + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX) / (max_value - min_value));
+		float rand_z = min_value + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX) / (max_value - min_value));
+		cubes.emplace_back(RigidBodyFactory::createRigidBody(CUBE, Vector3(rand_x, rand_y, rand_z)));
+	}
+
 
 	// first person camera
 	cam_position = ofVec3f(0, -30, 100); // initial position
@@ -59,7 +70,7 @@ void ofApp::update() {
 	PhysicsComponentRegistry::register_all_physics();
 
 	// Checking collisions
-	CollidersComponentRegistry::check_collisions();
+	CollidersComponentRegistry::check_collisions(visual_octree);
 	CollisionsRegistry::solve_collisions();
 
 	// Applying forces
@@ -83,8 +94,7 @@ void ofApp::draw() {
 
 	ofSetColor(255, 0, 0);
 	ofFill();
-	//ofDrawBox(20);
-
+	visual_octree.draw_tree();
 
 	GraphicsComponentRegistry::draw_all();
 

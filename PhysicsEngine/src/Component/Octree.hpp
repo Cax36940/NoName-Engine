@@ -2,8 +2,6 @@
 #include "Vector3.hpp"
 #include "Physics/Collider/SphereCollider.hpp"
 
-class ColliderComponent;
-
 class Octree {
     /* [WARNING]
      There may be a lack of precision if colliders have a large areas
@@ -34,13 +32,15 @@ private:
 
     bool is_node_splitted(const OctreeNode& node);
 
-    void split(size_t nodeIndex, const Vector3& position, const Vector3& size);
+    void split(size_t node_index, const Vector3& position, const Vector3& size);
 
-    bool add_collider_to_node(SphereCollider& collider, size_t nodeIndex, const Vector3& position, const Vector3& size);
+    bool add_collider_to_node(SphereCollider& collider, size_t node_index, const Vector3& position, const Vector3& size);
 
-    void get_overlapping_colliders(const SphereCollider& collider, std::vector<SphereCollider*>& collidersVec, size_t nodeIndex, const Vector3& node_position, const Vector3& node_size);
+    void get_overlapping_colliders(const SphereCollider& collider, std::vector<SphereCollider*>& colliders_vec, size_t node_index, const Vector3& node_position, const Vector3& node_size);
 
     bool intersect(const SphereCollider& collider, const Vector3& position, const Vector3& size);
+
+    void draw_tree_node(size_t node_index, const Vector3& position, const Vector3& size);
 
 public:
     Octree() = default;
@@ -56,4 +56,6 @@ public:
     {
         get_overlapping_colliders(collider, overlapping_colliders, 0, position, size);
     }
+
+    void draw_tree() {draw_tree_node(0, position, size);};
 };

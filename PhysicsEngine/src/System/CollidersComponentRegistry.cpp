@@ -26,14 +26,14 @@ void CollidersComponentRegistry::remove(SphereCollider* collider)
 	}
 }
 
-void CollidersComponentRegistry::check_collisions()
+void CollidersComponentRegistry::check_collisions(Octree & visual_octree)
 {
 	
-	Octree collider_octree(registry.size(), Vector3(0, 0, 0), Vector3(1024, 1024, 1024));
+	Octree collider_octree(registry.size(), Vector3(0, 0, 0), Vector3(256, 256, 256));
 	for (auto i : registry) {
 		collider_octree.add_collider(*i);
 	}
-
+	visual_octree = collider_octree;
 
 	std::unordered_set<SphereCollider*> checked_colliders;
 
