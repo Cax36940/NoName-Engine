@@ -11,6 +11,13 @@
 #include "Entity/RigidBodyFactory.hpp"
 
 
+static float random_float_value(float min_value, float max_value) {
+	float u = static_cast<float>(rand()) / static_cast<float>(RAND_MAX); // random in [0, 1]
+	u = u * 2.0f - 1.0f; // random in [-1, 1]
+	float dense_u = u*u*u; // More dense on the center
+	return (max_value + min_value) / 2.0f + dense_u * (max_value - min_value) / 2.0f;
+}
+
 //--------------------------------------------------------------
 void ofApp::setup() {
 	ofEnableDepthTest();
@@ -37,13 +44,13 @@ void ofApp::setup() {
 	//cube.rigid_body.set_velocity(10, 0, 0);
 	//cube2.rigid_body.set_velocity(-10, 0, 0);
 
-	cubes.reserve(10000);
+	cubes.reserve(1000);
 	float min_value = -127.0;
 	float max_value = 127.0;
-	for (int i = 0; i < 10000; i++) {
-		float rand_x = min_value + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX) / (max_value - min_value));
-		float rand_y = min_value + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX) / (max_value - min_value));
-		float rand_z = min_value + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX) / (max_value - min_value));
+	for (int i = 0; i < 1000; i++) {
+		float rand_x = random_float_value(min_value, max_value);
+		float rand_y = random_float_value(min_value, max_value);
+		float rand_z = random_float_value(min_value, max_value);
 		cubes.emplace_back(Vector3(rand_x, rand_y, rand_z));
 	}
 
@@ -56,6 +63,7 @@ void ofApp::setup() {
 	rotation_speed = 0.15f;
 
 	origin = Origin(1.0);
+	octree_visible = true;
 }
 
 //--------------------------------------------------------------
@@ -95,7 +103,10 @@ void ofApp::draw() {
 	ofDisableSmoothing();
 	ofSetColor(255, 0, 0);
 	ofFill();
-	visual_octree.draw_tree();
+
+	if (octree_visible) {
+		visual_octree.draw_tree();
+	}
 
 	for (auto& cube : cubes) {
 		// cube is visible only if facing camera
@@ -136,6 +147,10 @@ void ofApp::keyPressed(int key) {
 void ofApp::keyReleased(int key) {
 	if (key == ' ') { // Space
 		apply_force = false;
+	}
+
+	if (key == 'h') { // Hide/Show octree
+		octree_visible = !octree_visible;
 	}
 
 	if (key == OF_KEY_UP) {

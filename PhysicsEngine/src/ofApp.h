@@ -68,6 +68,7 @@ private:
 	//DefaultRigidBody cube2;
 	std::vector<DefaultRigidBody> cubes;
 	Octree visual_octree;
+	bool octree_visible;
 
 	RigidBodyType rb_types[4] = {
 		CUBE,
