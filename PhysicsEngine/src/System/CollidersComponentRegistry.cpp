@@ -1,8 +1,11 @@
 #include "CollidersComponentRegistry.hpp"
 #include "CollisionsRegistry.hpp"
 #include "Component/Physics/Collider/SphereCollider.hpp"
+#include "Component/Octree.hpp"
 #include "Component/Particle.hpp"
 #include "Component/Vector3.hpp"
+
+#include <unordered_set>
 
 #define ELASTIC_COEF 0.9
 
@@ -25,16 +28,36 @@ void CollidersComponentRegistry::remove(SphereCollider* collider)
 
 void CollidersComponentRegistry::check_collisions()
 {
+	
+	Octree collider_octree(registry.size(), Vector3(0, 0, 0), Vector3(1024, 1024, 1024));
+	for (auto i : registry) {
+		collider_octree.add_collider(*i);
+	}
+
+
+	std::unordered_set<SphereCollider*> checked_colliders;
+
 	// Check only sphere collisions
-	for (auto i = registry.begin(); i != registry.end(); i++) {
-		for (auto j = i + 1; j != registry.end(); j++) {
-			const Vector3 vector_ji = (*i)->physical_body->get_position() - (*j)->physical_body->get_position();
+	for (auto i : registry) {
+		std::vector<SphereCollider*> potential_colliders;
+		collider_octree.get_overlapping_colliders(*i, potential_colliders);
+
+		for (auto j : potential_colliders) {
+			// Collider has already been checked, don't check it again
+			if (checked_colliders.find(j) != checked_colliders.end()) {
+				continue;
+			}
+
+			const Vector3 vector_ji = i->physical_body->get_position() - j->physical_body->get_position();
 			const float norm2_ij = Vector3::norm2(vector_ji);
-			const float minimal_length = (*i)->get_size() + (*j)->get_size();
+			const float minimal_length = i->get_size() + j->get_size();
 			if (norm2_ij <= minimal_length * minimal_length) {
 
-				Particle* particle1 = (*i)->physical_body;
-				Particle* particle2 = (*j)->physical_body;
+				// Register Spherical collision
+				/* TODO : check more precise collision */
+
+				Particle* particle1 = i->physical_body;
+				Particle* particle2 = j->physical_body;
 
 				const float norm_ij = std::sqrt(norm2_ij);
 				const Vector3 normal = vector_ji * (1/ norm_ij);
@@ -60,5 +83,6 @@ void CollidersComponentRegistry::check_collisions()
 				CollisionsRegistry::add(particle2, delta_position2, delta_velocity2);
 			}
 		}
+		checked_colliders.insert(i);
 	}
 }
