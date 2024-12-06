@@ -31,10 +31,19 @@ void ofApp::setup() {
 	gravity = GravityForce(-2);
 
 	// Setup Scene
-	//cube = RigidBodyFactory::createRigidBody(CUBE, Vector3(0, -30, 30));
-	//arrow = Arrow(Vector3(20, 0, 0), 3, Vector3(255, 255, 255), Quaternion(0.354, -0.146, -0.854, 0.354));
+	cube = RigidBodyFactory::createRigidBody(CUBE, Vector3(-100, -29, 30));
+	cube2 = RigidBodyFactory::createRigidBody(CUBE, Vector3(100, -30, 30));
 
-	ResetRbAndThrowForce();
+	cube.rigid_body.set_velocity(10, 0, 0);
+	cube2.rigid_body.set_velocity(-10, 0, 0);
+
+	// first person camera
+	cam_position = ofVec3f(0, -30, 100); // initial position
+	cam_orientation = ofVec3f(0, 0, 0); // pitch, yaw, roll
+	camera.disableMouseInput(); // disable default mouse movements from ofeasycam
+	move_speed = 1.0f;
+	rotation_speed = 0.15f;
+
 	origin = Origin(1.0);
 }
 
@@ -45,35 +54,19 @@ void ofApp::update() {
 	auto delta = std::chrono::duration_cast<std::chrono::milliseconds>(time - timeLastFrame).count() / 1000.; //durée de calcul d'une frame
 	timeLastFrame = time;
 
-	if (apply_force) {
-		//Vector3 camera_facing_vector(-camera.getZAxis()); 
-		//glm::vec3 screen_cube_position = camera.worldToCamera(Vector3::to_glm_vec3(cube.get_position()));
-		//glm::vec3 cube_mouse_vector = glm::vec3(((float)mouse_x * 2 / WINDOW_WIDTH) - 1, 1 - ((float)mouse_y * 2 / WINDOW_HEIGHT), 0) - screen_cube_position;
-		//Vector3 moment_arm(cube_mouse_vector.x * camera.getXAxis() + cube_mouse_vector.y * camera.getYAxis());
-		//cube.add_force(1000 * Vector3::cross(moment_arm, camera_facing_vector));
-		
-		//cube.add_force(Vector3(2, 4, 0), Vector3(0, 10000, -10000));
-
-		cube.add_force(throw_force[throw_force_index].pos, throw_force[throw_force_index].force);
-	}
-
-	if (is_launched) {
-		center_g_particle.particle.set_position(cube.get_position());
-	}
 
 	// Register forces from physics components
 	PhysicsComponentRegistry::register_all_physics();
 
 	// Checking collisions
-	//CollidersComponentRegistry::check_collisions();
-	//CollisionsRegistry::solve_collisions();
+	CollidersComponentRegistry::check_collisions();
+	CollisionsRegistry::solve_collisions();
 
 	// Applying forces
-	if (is_launched)
-	{
-		ParticleForceRegistry::add(cube.get_physical_particle(), &gravity);
-	}
 	ParticleForceRegistry::update_forces(delta);
+
+	// Update of camera position
+	moveCamera();
 
 	// Updating every object
 	UpdatesComponentRegistry::update_all(delta);
@@ -92,6 +85,7 @@ void ofApp::draw() {
 	ofFill();
 	//ofDrawBox(20);
 
+
 	GraphicsComponentRegistry::draw_all();
 
 	// End rendering form the camera's perspective.
@@ -101,44 +95,27 @@ void ofApp::draw() {
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
-	if (key == ' ' && !is_launched) {
-		apply_force = true;
-		is_launched = true;
-	}
-	else if (key == ' ') {
-		ResetRbAndThrowForce();
-		is_launched = false;
-	}
-
-	if (key == 'a') {
-		rb_types_index = (rb_types_index + 3) % 4;
-		ResetRbAndThrowForce();
-	}
-	else if (key == 'e') {
-		rb_types_index = (rb_types_index + 1) % 4;
-		ResetRbAndThrowForce();
-	}
-
-	if (key == 'q') {
-		throw_force_index = (throw_force_index + 4) % 5;
-		ResetRbAndThrowForce();
-	}
-	else if (key == 'd') {
-		throw_force_index = (throw_force_index + 1) % 5;
-		ResetRbAndThrowForce();
-	}
-
-	if (key == 'w') {
-		centers_g_index = (centers_g_index + 4) % 5;
-		ResetRbAndThrowForce();
-	}
-	else if (key == 'c') {
-		centers_g_index = (centers_g_index + 1) % 5;
-		ResetRbAndThrowForce();
-	}
 
 	if (key == 'v') {
 		cube.get_mesh()->toggle_visibility();
+	}
+
+	// Movements of the camera with arrows
+
+	if (key == OF_KEY_UP) {
+		dir_pressed |= UP_DIR;
+	}
+
+	if (key == OF_KEY_DOWN) {
+		dir_pressed |= DOWN_DIR;
+	}
+
+	if (key == OF_KEY_RIGHT) {
+		dir_pressed |= RIGHT_DIR;
+	}
+
+	if (key == OF_KEY_LEFT) {
+		dir_pressed |= LEFT_DIR;
 	}
 }
 
@@ -146,6 +123,22 @@ void ofApp::keyPressed(int key) {
 void ofApp::keyReleased(int key) {
 	if (key == ' ') { // Space
 		apply_force = false;
+	}
+
+	if (key == OF_KEY_UP) {
+		dir_pressed &= 0xFFFF ^ UP_DIR;
+	}
+
+	if (key == OF_KEY_DOWN) {
+		dir_pressed &= 0xFFFF ^ DOWN_DIR;
+	}
+
+	if (key == OF_KEY_RIGHT) {
+		dir_pressed &= 0xFFFF ^ RIGHT_DIR;
+	}
+
+	if (key == OF_KEY_LEFT) {
+		dir_pressed &= 0xFFFF ^ LEFT_DIR;
 	}
 }
 
@@ -159,6 +152,15 @@ void ofApp::mouseMoved(int x, int y) {
 void ofApp::mouseDragged(int x, int y, int button) {
 	mouse_x = x;
 	mouse_y = y;
+
+	// Rotation of the camera with the mouse
+
+	cam_orientation.y += (x - ofGetPreviousMouseX()) * rotation_speed; // yaw
+	cam_orientation.x += (y - ofGetPreviousMouseY()) * rotation_speed; // pitch
+
+	cam_orientation.x = ofClamp(cam_orientation.x, -90, 90);// avoid flip
+
+	camera.setOrientation(glm::vec3(cam_orientation.x, cam_orientation.y, cam_orientation.z));
 }
 
 //--------------------------------------------------------------
@@ -193,24 +195,30 @@ void ofApp::gotMessage(ofMessage msg) {
 
 }
 
+void ofApp::moveCamera()
+{
+	ofVec3f camVelocity(0.0f, 0.0f, 0.0f);
+	if (dir_pressed & UP_DIR) {
+		camVelocity += camera.getLookAtDir() * move_speed;
+	}
+
+	if (dir_pressed & DOWN_DIR) {
+		camVelocity -= camera.getLookAtDir() * move_speed;
+	}
+
+	if (dir_pressed & RIGHT_DIR) {
+		camVelocity += camera.getSideDir() * move_speed;
+	}
+
+	if (dir_pressed & LEFT_DIR) {
+		camVelocity -= camera.getSideDir() * move_speed;
+	}
+
+	cam_position += camVelocity;
+	camera.setPosition(cam_position);
+}
+
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo) {
 
-}
-
-void ofApp::ResetRbAndThrowForce()
-{
-	is_launched = false;
-	cube = RigidBodyFactory::createRigidBody(rb_types[rb_types_index], Vector3(0, 0, 30), centers_of_gravity[centers_g_index]);
-	arrow = Arrow(
-		cube.get_position() + throw_force[throw_force_index].pos, 
-		1, 
-		Vector3(255, 255, 255), 
-		throw_force[throw_force_index].direction
-	);
-
-	center_g_particle = DefaultParticle(
-		Particle(centers_of_gravity[centers_g_index] + cube.get_position(), Vector3(), Vector3(), 1),
-		Sphere(0.2, glm::vec3(0, 255, 0))
-	);
 }

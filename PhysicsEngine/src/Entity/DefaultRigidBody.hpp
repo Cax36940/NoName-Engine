@@ -2,17 +2,19 @@
 
 #include "Component/Mesh/Mesh.hpp"
 #include "Component/RigidBody.hpp"
+#include "Component/Physics/Collider/SphereCollider.hpp"
 
 class DefaultRigidBody {
 public:
 	RigidBody rigid_body;
 	Mesh mesh;
-	//Collider collider;
+	SphereCollider collider;
 
 	DefaultRigidBody() = default;
 	DefaultRigidBody(const DefaultRigidBody& drb) :
 		rigid_body(drb.rigid_body),
-		mesh(drb.mesh) {
+		mesh(drb.mesh),
+		collider(drb.collider.get_size(), rigid_body.get_physical_particle()) {
 		mesh.set_transform_ptr(rigid_body.get_transform_ptr());
 	}
 
@@ -20,12 +22,14 @@ public:
 		rigid_body = drb.rigid_body;
 		mesh = drb.mesh;
 		mesh.set_transform_ptr(rigid_body.get_transform_ptr());
+		collider = SphereCollider(drb.collider.get_size(), rigid_body.get_physical_particle());
 		return *this;
 	}
 
 	DefaultRigidBody(const RigidBody& rigid_body, const Mesh& mesh) :
 		rigid_body(rigid_body),
-		mesh(mesh) {
+		mesh(mesh),
+		collider(mesh.get_size(), this->rigid_body.get_physical_particle()){
 		this->mesh.set_transform_ptr(this->rigid_body.get_transform_ptr());
 		this->rigid_body.set_moment_inertia(this->mesh.get_moment_of_inertia());
 	}

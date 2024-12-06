@@ -46,12 +46,26 @@ private:
 	ofEasyCam camera;
 	ofLight sun;
 
+	ofVec3f  cam_position;
+	ofVec3f  cam_orientation;
+	float move_speed;
+	float rotation_speed;
+	void moveCamera();
+
+	// Inputs
+	enum Input {
+		UP_DIR = 1,
+		DOWN_DIR = 1 << 1,
+		RIGHT_DIR = 1 << 2,
+		LEFT_DIR = 1 << 3
+	};
+	char dir_pressed;
+
 	// Scene Entities
-	DefaultRigidBody cube;
-	Arrow arrow;
 	Origin origin;
-	bool is_launched = false;
-	DefaultParticle center_g_particle;
+	DefaultRigidBody cube;
+	DefaultRigidBody cube2;
+
 
 	RigidBodyType rb_types[4] = {
 		CUBE,
@@ -59,36 +73,5 @@ private:
 		ICOSAHEDRON,
 		OCTAHEDRON
 	};
-	int rb_types_index = 0;
 
-	struct positionalForce {
-		Vector3 pos;
-		Vector3 force;
-		Quaternion direction;
-
-		positionalForce(const Vector3& p, const Vector3& f, const Quaternion& d) {
-			pos = p;
-			force = f;
-			direction = d;
-		}
-	};
-	positionalForce throw_force[5] = {
-		positionalForce(Vector3(0, 0, 0), Vector3(0, 100, -100),	Quaternion(0.924, -0.383, 0, 0)),
-		positionalForce(Vector3(1, 0, 0), Vector3(0, 100, -100),	Quaternion(0.924, -0.383, 0, 0)),
-		positionalForce(Vector3(1, -1, 0), Vector3(0, 100, -100),	Quaternion(0.924, -0.383, 0, 0)),
-		positionalForce(Vector3(0, 0, 0), Vector3(50, 100, -50),	Quaternion(0.924, -0.191, 0, -0.191)),
-		positionalForce(Vector3(0, 0, 1), Vector3(-25, 100, -100),	Quaternion(0.924, -0.381, 0, 0.091))
-	};
-	int throw_force_index = 0;
-
-	Vector3 centers_of_gravity[5] = {
-		Vector3(0, 0, 0),
-		Vector3(0, 1, 0),
-		Vector3(1, 0, -1),
-		Vector3(3, 0, 0),
-		Vector3(0, 2, 0)
-	};
-	int centers_g_index = 0;
-	
-	void ResetRbAndThrowForce();
 };
