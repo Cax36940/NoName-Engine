@@ -74,26 +74,38 @@ void Mesh::draw()
     if (!isVisible)
         return;
 
+    if (!(cached_transform == *transform)) {
+        meshNeedsUpdate = true;
+    }
+    
+    if (meshNeedsUpdate) {
+        update_mesh();
+    }
+
+    ofSetColor(color.x, color.y, color.z);
+    cached_mesh.draw();
+}
+
+void Mesh::update_mesh()
+{
     if (mesh_ressource == nullptr) {
         std::cout << "[WARNING] Trying to draw mesh with no ressource. Mesh at address : " << this << std::endl;
         return;
     }
 
-    ofMesh mesh;
-    Matrix4 transform_matrix;
-
     if (transform == nullptr) {
         std::cout << "[WARNING] Mesh transform is nullptr. Mesh at address : " << this << std::endl;
     }
     else {
-        transform_matrix = *transform;
+        cached_transform = *transform;
     }
+    cached_mesh.clear();
 
     // Apply transform on vertices
     std::vector<Vector3> vertices = mesh_ressource->get_vertices();
     for (auto& vertex : vertices) {
         vertex += offset;
-        Vector4 tmp_vector = transform_matrix * Vector4(vertex, 1);
+        Vector4 tmp_vector = cached_transform * Vector4(vertex, 1);
         vertex = Vector3(tmp_vector.x, tmp_vector.y, tmp_vector.z);
     }
 
@@ -111,27 +123,26 @@ void Mesh::draw()
         ofDefaultVertexType v2 = Vector3::to_glm_vec3(vertices[i2]);
 
         // Add vertices to mesh
-        mesh.addVertex(v0);
-        mesh.addVertex(v1);
-        mesh.addVertex(v2);
+        cached_mesh.addVertex(v0);
+        cached_mesh.addVertex(v1);
+        cached_mesh.addVertex(v2);
 
         // Add indices to mesh
-        mesh.addIndex(i);
-        mesh.addIndex(i + 1);
-        mesh.addIndex(i + 2);
+        cached_mesh.addIndex(i);
+        cached_mesh.addIndex(i + 1);
+        cached_mesh.addIndex(i + 2);
 
         // Calculate the face normal
         ofDefaultVertexType edge1 = v1 - v0;
         ofDefaultVertexType edge2 = v2 - v0;
-        ofDefaultVertexType face_normal = glm::normalize(glm::cross(edge1,edge2));
+        ofDefaultVertexType face_normal = glm::normalize(glm::cross(edge1, edge2));
 
         // Add normals to mesh
-        mesh.addNormal(face_normal);
-        mesh.addNormal(face_normal);
-        mesh.addNormal(face_normal);
+        cached_mesh.addNormal(face_normal);
+        cached_mesh.addNormal(face_normal);
+        cached_mesh.addNormal(face_normal);
     }
 
-    ofSetColor(color.x, color.y, color.z);
-    mesh.draw();
-    
+
+
 }

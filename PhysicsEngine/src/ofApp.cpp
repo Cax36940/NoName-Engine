@@ -31,8 +31,8 @@ void ofApp::setup() {
 	gravity = GravityForce(-2);
 
 	// Setup Scene
-	cube = RigidBodyFactory::createRigidBody(CUBE, Vector3(-100, -29, 30));
-	cube2 = RigidBodyFactory::createRigidBody(CUBE, Vector3(100, -30, 30));
+	//cube = RigidBodyFactory::createRigidBody(CUBE, Vector3(-100, -29, 30));
+	//cube2 = RigidBodyFactory::createRigidBody(CUBE, Vector3(100, -30, 30));
 
 	//cube.rigid_body.set_velocity(10, 0, 0);
 	//cube2.rigid_body.set_velocity(-10, 0, 0);
@@ -44,7 +44,7 @@ void ofApp::setup() {
 		float rand_x = min_value + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX) / (max_value - min_value));
 		float rand_y = min_value + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX) / (max_value - min_value));
 		float rand_z = min_value + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX) / (max_value - min_value));
-		cubes.emplace_back(RigidBodyFactory::createRigidBody(CUBE, Vector3(rand_x, rand_y, rand_z)));
+		cubes.push_back(RigidBodyFactory::createRigidBody(CUBE, Vector3(rand_x, rand_y, rand_z)));
 	}
 
 
@@ -105,10 +105,6 @@ void ofApp::draw() {
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
-
-	if (key == 'v') {
-		cube.get_mesh()->toggle_visibility();
-	}
 
 	// Movements of the camera with arrows
 

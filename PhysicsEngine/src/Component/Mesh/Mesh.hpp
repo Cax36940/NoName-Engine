@@ -35,5 +35,10 @@ protected:
     Vector3 color;
     Vector3 offset = Vector3();
     bool isVisible = true;
+    bool meshNeedsUpdate = true;
+    ofMesh cached_mesh;
+    Matrix4 cached_transform;
+
+    void update_mesh();
 };
 
