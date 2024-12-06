@@ -87,7 +87,7 @@ void RigidBody::update(float delta) {
 	angular_velocity += angular_acceleration * delta;
 
 	// Rotate
-	float angle = Vector3::norm(delta * angular_velocity);
+	float angle = Vector3::norm(delta * angular_velocity) / 2.0f;
 	if (angle != 0) {
 		Quaternion velocity_quat(cos(angle), (sin(angle) / angle) * delta * angular_velocity);
 		angular_position = velocity_quat * angular_position;
