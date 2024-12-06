@@ -10,10 +10,6 @@ glm::vec4 Vector4::to_glm_vec4(const Vector4& vector)
     return glm::vec4(vector.x, vector.y, vector.z, vector.t);
 }
 
-static bool float_eq(float a, float b, float epsilon = 1e-6f) {
-    return std::abs(a - b) < epsilon;
-}
-
 bool Vector4::operator==(const Vector4& vector)
 {
     return (this->x == vector.x) && (this->y == vector.y) && (this->z == vector.z) && (this->t == vector.t);
