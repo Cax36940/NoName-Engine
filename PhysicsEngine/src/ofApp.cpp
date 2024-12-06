@@ -38,16 +38,18 @@ void ofApp::setup() {
 	gravity = GravityForce(-2);
 
 	// Setup Scene
-	//cube = RigidBodyFactory::createRigidBody(CUBE, Vector3(-100, -29, 30));
+	cube = RigidBodyFactory::createRigidBody(CUBE, Vector3(10, 0, 10));
 	//cube2 = RigidBodyFactory::createRigidBody(CUBE, Vector3(100, -30, 30));
 
 	//cube.rigid_body.set_velocity(10, 0, 0);
 	//cube2.rigid_body.set_velocity(-10, 0, 0);
 
+	plane = RigidBodyFactory::createRigidBody(PLANE, Vector3(0, -100, 0));
+
 	cubes.reserve(1000);
 	float min_value = -127.0;
 	float max_value = 127.0;
-	for (int i = 0; i < 1000; i++) {
+	for (int i = 0; i < 0; i++) {
 		float rand_x = random_float_value(min_value, max_value);
 		float rand_y = random_float_value(min_value, max_value);
 		float rand_z = random_float_value(min_value, max_value);
@@ -80,6 +82,10 @@ void ofApp::update() {
 	// Checking collisions
 	CollidersComponentRegistry::check_collisions(visual_octree);
 	CollisionsRegistry::solve_collisions();
+
+	for (auto& cube : cubes) {
+		ParticleForceRegistry::add(cube.get_physical_particle(), &gravity);
+	}
 
 	// Applying forces
 	ParticleForceRegistry::update_forces(delta);
@@ -146,7 +152,11 @@ void ofApp::keyPressed(int key) {
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key) {
 	if (key == ' ') { // Space
-		apply_force = false;
+		float cube_speed = 10.0f;
+		DefaultRigidBody new_cube = RigidBodyFactory::createRigidBody(CUBE, camera.getPosition());
+		new_cube.rigid_body.set_velocity(camera.getLookAtDir().x * cube_speed, camera.getLookAtDir().y * cube_speed, camera.getLookAtDir().z * cube_speed);
+		cubes.emplace_back(new_cube);
+
 	}
 
 	if (key == 'h') { // Hide/Show octree

@@ -64,8 +64,9 @@ private:
 
 	// Scene Entities
 	Origin origin;
-	//DefaultRigidBody cube;
+	DefaultRigidBody cube;
 	//DefaultRigidBody cube2;
+	DefaultRigidBody plane;
 	std::vector<DefaultRigidBody> cubes;
 	Octree visual_octree;
 	bool octree_visible;

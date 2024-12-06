@@ -45,6 +45,16 @@ bool Mesh::has_ressource() const
     return mesh_ressource != nullptr;
 }
 
+const MeshRessource& Mesh::get_mesh_ressource()
+{
+    return *mesh_ressource;
+}
+
+const Vector3& Mesh::get_offset() const
+{
+    return offset;
+}
+
 float Mesh::get_size() const
 {
     if (!mesh_ressource) {
@@ -67,6 +77,16 @@ float Mesh::get_size() const
     }
 
     return sqrt(max_norm);
+}
+
+const ofMesh& Mesh::get_cached_mesh() const
+{
+    return cached_mesh;
+}
+
+const Matrix4& Mesh::get_transform() const
+{
+    return *transform;
 }
 
 void Mesh::draw()
@@ -112,8 +132,8 @@ void Mesh::update_mesh()
     const std::vector<unsigned int> indices = mesh_ressource->get_indices();
 
     std::vector<ofDefaultVertexType> tmp_vertices;
-    std::vector<ofDefaultVertexType> tmp_indices;
-    std::vector<ofDefaultVertexType> tmp_normals;
+    std::vector<ofIndexType> tmp_indices;
+    std::vector<ofDefaultNormalType> tmp_normals;
     tmp_vertices.reserve(indices.size());
     tmp_indices.reserve(indices.size());
     tmp_normals.reserve(indices.size());
@@ -151,8 +171,8 @@ void Mesh::update_mesh()
     }
 
     cached_mesh.addVertices(tmp_vertices);
-    cached_mesh.addVertices(tmp_indices);
-    cached_mesh.addVertices(tmp_normals);
+    cached_mesh.addIndices(tmp_indices);
+    cached_mesh.addNormals(tmp_normals);
 
     meshNeedsUpdate = false;
 

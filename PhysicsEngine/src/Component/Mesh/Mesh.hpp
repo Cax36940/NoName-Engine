@@ -21,8 +21,12 @@ public :
 
     const Matrix3& get_moment_of_inertia() const;
     bool has_ressource() const;
+    const MeshRessource& get_mesh_ressource();
+    const Vector3& get_offset() const;
 
     float get_size() const;
+    const ofMesh& get_cached_mesh() const;
+    const Matrix4& get_transform() const;
 
     void draw() override;
 
@@ -33,7 +37,7 @@ protected:
     Vector3 offset = Vector3();
     bool meshNeedsUpdate = true;
     ofMesh cached_mesh;
-    Matrix4 cached_transform;
+    Matrix4 cached_transform; // Used to check if mesh needs to be updated
 
     void update_mesh();
 };

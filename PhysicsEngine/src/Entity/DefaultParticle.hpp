@@ -14,7 +14,7 @@ public:
 	DefaultParticle(const DefaultParticle& dp) : 
 		particle(dp.particle), 
 		sprite(dp.sprite), 
-		collider(dp.collider.get_size(), &particle){
+		collider(dp.collider.get_size(), &particle, nullptr){
 		sprite.set_position(particle.get_position_ptr());
 	}
 
@@ -22,14 +22,14 @@ public:
 		particle = dp.particle;
 		sprite = dp.sprite;
 		sprite.set_position(particle.get_position_ptr());
-		collider = SphereCollider(dp.collider.get_size(), &particle);
+		collider = SphereCollider(dp.collider.get_size(), &particle, nullptr);
 		return *this;
 	}
 
 	DefaultParticle(const Particle& _particle, const Sphere& sphere) : 
 		particle(_particle),
 		sprite(sphere), 
-		collider(sprite.get_size(), &particle) {
+		collider(sprite.get_size(), &particle, nullptr) {
 		sprite.set_position(particle.get_position_ptr());
 	}
 

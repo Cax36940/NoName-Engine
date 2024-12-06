@@ -4,6 +4,8 @@
 #include "Component/Octree.hpp"
 #include "Component/Particle.hpp"
 #include "Component/Vector3.hpp"
+#include "Component/Mesh/Mesh.hpp"
+
 
 #include <unordered_set>
 
@@ -25,6 +27,222 @@ void CollidersComponentRegistry::remove(SphereCollider* collider)
 		}
 	}
 }
+
+
+static void sphere_sphere_collision(SphereCollider* first_collider, SphereCollider* second_collider) {
+	
+	Particle* particle1 = first_collider->physical_body;
+	Particle* particle2 = second_collider->physical_body;
+
+	const Vector3 vector_ji = particle1->get_position() - particle2->get_position();
+	const float norm_ij = Vector3::norm(vector_ji);
+	const Vector3 normal = vector_ji * (1 / norm_ij);
+
+	// Compute the distance to separate both objects
+	const float minimal_length = first_collider->get_size() + second_collider->get_size();
+	const float collision_distance = minimal_length - norm_ij;
+
+	const float m1 = particle1->get_mass();
+	const float m2 = particle2->get_mass();
+
+	const Vector3 delta_position1 = (collision_distance * m2 / (m1 + m2)) * normal;
+	const Vector3 delta_position2 = (-collision_distance * m1 / (m1 + m2)) * normal;
+
+
+	// Compute the change in velocity for both objects
+	const Vector3 v_relative = particle1->get_velocity() - particle2->get_velocity();
+	const float k = ((ELASTIC_COEF + 1) * Vector3::dot(v_relative, normal)) / (particle1->get_inv_mass() + particle2->get_inv_mass());
+	const Vector3 delta_velocity1 = (-k * particle1->get_inv_mass()) * normal;
+	const Vector3 delta_velocity2 = (k * particle2->get_inv_mass()) * normal;
+
+
+	CollisionsRegistry::add(particle1, delta_position1, delta_velocity1);
+	CollisionsRegistry::add(particle2, delta_position2, delta_velocity2);
+}
+
+static void sphere_mesh_collision(SphereCollider* sphere, Mesh* mesh) {
+	/* TODO : check for sphere mesh collision */
+}
+
+// No hash function is defined for std::pair<unsigned int, unsigned int>
+// See : https://en.cppreference.com/w/cpp/utility/hash
+static struct EdgeHash {
+	std::size_t operator()(const std::pair<unsigned int, unsigned int>& edge) const {
+		return std::hash<unsigned int>()(edge.first) ^ std::hash<unsigned int>()(edge.second);
+	}
+};
+
+static void mesh_mesh_collision(Mesh* first_mesh, Mesh* second_mesh) {
+	// Initialize vertices
+	/* TODO : Check if vertices could be retrived easily from ofMesh */
+	std::vector<Vector3> first_vertices = first_mesh->get_mesh_ressource().get_vertices();
+	const std::vector<unsigned int>& first_indices = first_mesh->get_mesh_ressource().get_indices();
+
+	for (Vector3& vertex : first_vertices) {
+		vertex += first_mesh->get_offset();
+		Vector4 tmp_vector = first_mesh->get_transform() * Vector4(vertex, 1);
+		vertex = Vector3(tmp_vector.x, tmp_vector.y, tmp_vector.z);
+	}
+
+	std::vector<Vector3> second_vertices = second_mesh->get_mesh_ressource().get_vertices();
+	const std::vector<unsigned int>& second_indices = second_mesh->get_mesh_ressource().get_indices();
+
+	for (Vector3& vertex : second_vertices) {
+		vertex += second_mesh->get_offset();
+		Vector4 tmp_vector = second_mesh->get_transform() * Vector4(vertex, 1);
+		vertex = Vector3(tmp_vector.x, tmp_vector.y, tmp_vector.z);
+	}
+
+	// Check if a face of first_mesh define a separating plane
+	for (int i = 0; i < first_indices.size(); i+=3) {
+
+		bool is_separating_plane = true;
+		const Vector3& first_vertex = first_vertices[first_indices[i]];
+		const Vector3& second_vertex = first_vertices[first_indices[i + 1]];
+		const Vector3& third_vertex = first_vertices[first_indices[i + 2]];
+
+		const Vector3 normal = Vector3::cross(second_vertex - first_vertex, third_vertex - first_vertex);
+
+		for (const Vector3& vertex: second_vertices) {
+			if (Vector3::dot(normal, vertex - first_vertex) < 0) {
+				is_separating_plane = false;
+				break;
+			}
+		}
+
+		// If no vertex is 'behind' this plane then it is a separating plane
+		if (is_separating_plane) {
+			return;
+		}
+
+	}
+
+	// Check if a face of second_mesh define a separating plane
+	for (int i = 0; i < second_indices.size(); i += 3) {
+
+		bool is_separating_plane = true;
+		const Vector3& first_vertex = second_vertices[second_indices[i]];
+		const Vector3& second_vertex = second_vertices[second_indices[i + 1]];
+		const Vector3& third_vertex = second_vertices[second_indices[i + 2]];
+
+		const Vector3 normal = Vector3::cross(second_vertex - first_vertex, third_vertex - first_vertex);
+
+		for (const Vector3& vertex : first_vertices) {
+			if (Vector3::dot(normal, vertex - first_vertex) < 0) {
+				is_separating_plane = false;
+				break;
+			}
+		}
+
+		// If no vertex is 'behind' this plane then it is a separating plane
+		if (is_separating_plane) {
+			return;
+		}
+
+	}
+
+	std::unordered_set<std::pair<unsigned int, unsigned int>, EdgeHash> first_edges;
+	first_edges.reserve(first_indices.size() / 2);
+
+	// Iterate over all triangles
+	for (int i = 0; i < first_indices.size(); i += 3) {
+		// Insert edges into the set
+		// Hash function is symetric so no need to sort the vertices of the edge
+		first_edges.insert({ first_indices[i], first_indices[i + 1] });
+		first_edges.insert({ first_indices[i + 1], first_indices[i + 2] });
+		first_edges.insert({ first_indices[i + 2], first_indices[i] });
+	}
+
+
+	std::unordered_set<std::pair<unsigned int, unsigned int>, EdgeHash> second_edges;
+	second_edges.reserve(second_indices.size() / 2);
+
+	// Iterate over all triangles
+	for (int i = 0; i < second_indices.size(); i += 3) {
+		// Insert edges into the set
+		// Hash function is symetric so no need to sort the vertices of the edge
+		second_edges.insert({ second_indices[i], second_indices[i + 1] });
+		second_edges.insert({ second_indices[i + 1], second_indices[i + 2] });
+		second_edges.insert({ second_indices[i + 2], second_indices[i] });
+	}
+
+	// Check if edge-edge collision
+	for (const auto& first_edge : first_edges) {
+		const Vector3& first_vertex_a = first_vertices[first_edge.first];
+		const Vector3& first_vertex_b = first_vertices[first_edge.second];
+
+		for (const auto& second_edge : second_edges) {
+			const Vector3& second_vertex_a = second_vertices[second_edge.first];
+			const Vector3& second_vertex_b = second_vertices[second_edge.second];
+
+			const Vector3 normal = Vector3::cross(first_vertex_b - first_vertex_a, second_vertex_b - second_vertex_a);
+
+			if (Vector3::norm2(normal) == 0.0f) {
+				continue;
+			}
+
+			float first_min_value = FLT_MAX;
+			float first_max_value = -FLT_MAX;
+
+			for (const Vector3& vertex : first_vertices) {
+				float dot = Vector3::dot(normal, vertex);
+				
+				if (dot < first_min_value) {
+					first_min_value = dot;
+				}
+
+				if (dot > first_max_value) {
+					first_max_value = dot;
+				}
+			}
+
+			float second_min_value = FLT_MAX;
+			float second_max_value = -FLT_MAX;
+
+			for (const Vector3& vertex : second_vertices) {
+				float dot = Vector3::dot(normal, vertex);
+
+				if (dot < second_min_value) {
+					second_min_value = dot;
+				}
+
+				if (dot > second_max_value) {
+					second_max_value = dot;
+				}
+			}
+
+			// If no common projected part then a separating plane as been found
+			if (first_min_value > second_max_value || second_min_value > first_max_value) {
+				return;
+			}
+
+		}
+	}
+
+	std::cout << "Collision !" << std::endl;
+
+}
+
+static void register_collision(SphereCollider* first_collider, SphereCollider* second_collider) {
+	if (first_collider->get_mesh_ptr() == nullptr && second_collider->get_mesh_ptr() == nullptr) {
+		sphere_sphere_collision(first_collider, second_collider);
+		return;
+	}
+
+	if (first_collider->get_mesh_ptr() == nullptr) {
+		sphere_mesh_collision(first_collider, second_collider->get_mesh_ptr());
+		return;
+	}
+
+	if (second_collider->get_mesh_ptr() == nullptr) {
+		sphere_mesh_collision(second_collider, first_collider->get_mesh_ptr());
+		return;
+	}
+
+	mesh_mesh_collision(first_collider->get_mesh_ptr(), second_collider->get_mesh_ptr());
+
+}
+
 
 void CollidersComponentRegistry::check_collisions(Octree & visual_octree)
 {
@@ -53,37 +271,9 @@ void CollidersComponentRegistry::check_collisions(Octree & visual_octree)
 			const Vector3 vector_ji = i->physical_body->get_position() - j->physical_body->get_position();
 			const float norm2_ij = Vector3::norm2(vector_ji);
 			const float minimal_length = i->get_size() + j->get_size();
-			// If spheres collide
+			// If spheres collide check for more precise collision
 			if (norm2_ij <= minimal_length * minimal_length) {
-
-				// Register Spherical collision
-				/* TODO : check more precise collision */
-
-				Particle* particle1 = i->physical_body;
-				Particle* particle2 = j->physical_body;
-
-				const float norm_ij = std::sqrt(norm2_ij);
-				const Vector3 normal = vector_ji * (1/ norm_ij);
-
-				// Compute the distance to separate both objects
-				const float collision_distance = minimal_length - norm_ij;
-
-				const float m1 = particle1->get_mass();
-				const float m2 = particle2->get_mass();
-
-				const Vector3 delta_position1 = ( collision_distance * m2 / (m1 + m2)) * normal;
-				const Vector3 delta_position2 = (-collision_distance * m1 / (m1 + m2)) * normal;
-
-
-				// Compute the change in velocity for both objects
-				const Vector3 v_relative = particle1->get_velocity() - particle2->get_velocity();
-				const float k = ((ELASTIC_COEF + 1) * Vector3::dot(v_relative, normal)) / (particle1->get_inv_mass() + particle2->get_inv_mass());
-				const Vector3 delta_velocity1 = (-k * particle1->get_inv_mass()) * normal;
-				const Vector3 delta_velocity2 = ( k * particle2->get_inv_mass()) * normal;
-
-
-				CollisionsRegistry::add(particle1, delta_position1, delta_velocity1);
-				CollisionsRegistry::add(particle2, delta_position2, delta_velocity2);
+				register_collision(i, j);
 			}
 		}
 		checked_colliders.insert(i);

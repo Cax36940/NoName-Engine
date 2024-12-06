@@ -4,6 +4,7 @@
 #include "Component/Mesh/DodecahedronMesh.hpp"
 #include "Component/Mesh/IcosahedronMesh.hpp"
 #include "Component/Mesh/OctahedronMesh.hpp"
+#include "Component/Mesh/PlaneMesh.hpp"
 #include "Component/Mesh/TetrahedronMesh.hpp"
 
 static struct RigidBodyArgs {
@@ -19,6 +20,7 @@ static RigidBodyArgs rigid_body_args_list[] = {
  {4.5, Vector3(1, 1, 1), Quaternion(), Vector3(255, 0, 0), &DodecahedronMesh::get_instance()},		// DODECAHEDRON
  {4, Vector3(1, 1, 1), Quaternion(), Vector3(255, 0, 0), &IcosahedronMesh::get_instance()},		// ICOSAHEDRON
  {3, Vector3(1, 1, 1), Quaternion(), Vector3(255, 0, 0), &OctahedronMesh::get_instance()},			// OCTAHEDRON
+ {100000, Vector3(100, 1, 100), Quaternion(), Vector3(200, 200, 200), &PlaneMesh::get_instance()},			// OCTAHEDRON
  {1.5, Vector3(1, 1, 1), Quaternion(), Vector3(255, 0, 0), &TetrahedronMesh::get_instance()},		// TETRAHEDRON
 };
 

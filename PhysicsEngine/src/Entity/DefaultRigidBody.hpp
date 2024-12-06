@@ -15,7 +15,7 @@ public:
 	DefaultRigidBody(const DefaultRigidBody& drb) :
 		rigid_body(drb.rigid_body),
 		mesh(drb.mesh),
-		collider(drb.collider.get_size(), rigid_body.get_physical_particle()) {
+		collider(drb.collider.get_size(), rigid_body.get_physical_particle(), &mesh) {
 		mesh.set_transform_ptr(rigid_body.get_transform_ptr());
 	}
 
@@ -23,23 +23,25 @@ public:
 		rigid_body = drb.rigid_body;
 		mesh = drb.mesh;
 		mesh.set_transform_ptr(rigid_body.get_transform_ptr());
-		collider = SphereCollider(drb.collider.get_size(), rigid_body.get_physical_particle());
+		collider = SphereCollider(drb.collider.get_size(), rigid_body.get_physical_particle(), &mesh);
 		return *this;
 	}
 
 	DefaultRigidBody(const RigidBody& rigid_body, const Mesh& mesh) :
 		rigid_body(rigid_body),
 		mesh(mesh),
-		collider(mesh.get_size(), this->rigid_body.get_physical_particle()){
+		collider(0, this->rigid_body.get_physical_particle(), &this->mesh){
 		this->mesh.set_transform_ptr(this->rigid_body.get_transform_ptr());
+		collider.set_size(this->mesh.get_size());
 		this->rigid_body.set_moment_inertia(this->mesh.get_moment_of_inertia());
 	}
 
 	DefaultRigidBody(const Vector3& pos) : // Directly create a Cube
 		rigid_body(pos, 2.5),
 		mesh(&CubeMesh::get_instance()),
-		collider(mesh.get_size(), rigid_body.get_physical_particle()) {
+		collider(0, rigid_body.get_physical_particle(), &mesh) {
 		this->mesh.set_transform_ptr(rigid_body.get_transform_ptr());
+		collider.set_size(this->mesh.get_size());
 		this->rigid_body.set_moment_inertia(mesh.get_moment_of_inertia());
 	}
 
