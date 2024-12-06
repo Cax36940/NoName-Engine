@@ -1,6 +1,6 @@
 #pragma once
 #include "Vector3.hpp"
-
+#include "Physics/Collider/SphereCollider.hpp"
 
 class ColliderComponent;
 
@@ -24,7 +24,7 @@ private:
         union
         {
             size_t children_index[8]; // Children ordered with 0b000 and 0b111 corners opposite to each other
-            ColliderComponent* colliders[4];
+            SphereCollider* colliders[4];
         };
     };
 
@@ -36,9 +36,11 @@ private:
 
     void split(size_t nodeIndex, const Vector3& position, const Vector3& size);
 
-    bool add_collider_to_node(ColliderComponent& collider, size_t nodeIndex, const Vector3& position, const Vector3& size);
+    bool add_collider_to_node(SphereCollider& collider, size_t nodeIndex, const Vector3& position, const Vector3& size);
 
-    void get_overlapping_colliders(const ColliderComponent& collider, std::vector<ColliderComponent*>& collidersVec, size_t nodeIndex, const Vector3& node_position, const Vector3& node_size);
+    void get_overlapping_colliders(const SphereCollider& collider, std::vector<SphereCollider*>& collidersVec, size_t nodeIndex, const Vector3& node_position, const Vector3& node_size);
+
+    bool intersect(const SphereCollider& collider, const Vector3& position, const Vector3& size);
 
 public:
     Octree() = default;
@@ -48,9 +50,9 @@ public:
         tree_nodes.emplace_back();
     };
 
-    void add_collider(ColliderComponent& collider) { add_collider_to_node(collider, 0, position, size); }
+    void add_collider(SphereCollider& collider) { add_collider_to_node(collider, 0, position, size); }
 
-    void get_overlapping_colliders(const ColliderComponent& collider, std::vector<ColliderComponent*>& overlapping_colliders) 
+    void get_overlapping_colliders(const SphereCollider& collider, std::vector<SphereCollider*>& overlapping_colliders)
     {
         get_overlapping_colliders(collider, overlapping_colliders, 0, position, size);
     }

@@ -10,7 +10,7 @@
 void Octree::split(size_t node_index, const Vector3& position, const Vector3& size)
 {
     // Save colliders
-    ColliderComponent* tmpColliders[4] = {
+    SphereCollider* tmpColliders[4] = {
         tree_nodes[node_index].colliders[0], tree_nodes[node_index].colliders[1],
         tree_nodes[node_index].colliders[2], tree_nodes[node_index].colliders[3]
     };
@@ -31,11 +31,10 @@ void Octree::split(size_t node_index, const Vector3& position, const Vector3& si
     }
 }
 
-bool Octree::add_collider_to_node(ColliderComponent& collider, size_t node_index, const Vector3& position, const Vector3& size)
+bool Octree::add_collider_to_node(SphereCollider& collider, size_t node_index, const Vector3& position, const Vector3& size)
 {
     // Case when collider is not in the node
-    if (!(abs(collider.GetArea().x() - area.x()) <= area.width() &&
-        abs(collider.GetArea().y() - area.y()) <= area.height()))
+    if (!intersect(collider, position, size))
     {
         return false;
     }
@@ -83,10 +82,10 @@ bool Octree::add_collider_to_node(ColliderComponent& collider, size_t node_index
     return add_collider_to_node(collider, node_index, position, size);
 }
 
-void Octree::get_overlapping_colliders(const ColliderComponent& collider, std::vector<ColliderComponent*>& colliders_vec, size_t node_index, const Vector3& position, const Vector3& size)
+void Octree::get_overlapping_colliders(const SphereCollider& collider, std::vector<SphereCollider*>& colliders_vec, size_t node_index, const Vector3& position, const Vector3& size)
 {
     // Case when collider does not intersect the node
-    if (!collider.GetArea().Intersects(nodeArea))
+    if (!intersect(collider, position, size))
     {
         return;
     }
@@ -124,4 +123,21 @@ void Octree::get_overlapping_colliders(const ColliderComponent& collider, std::v
             colliders_vec.push_back(tree_nodes[node_index].colliders[i]);
         }
     }
+}
+
+bool Octree::intersect(const SphereCollider& collider, const Vector3& position, const Vector3& size)
+{
+    /* Intersection between a SphereCollider and a Rectangular Octree cell */
+    const Vector3 half_size(size.x / 2, size.y / 2, size.z / 2);
+
+    // Take on aach axis the coordinate of the closest point on the cube to the sphere
+    float closest_x = std::max(position.x - half_size.x, std::min(collider.physical_body->get_position_ptr()->x, position.x + half_size.x));
+    float closest_y = std::max(position.y - half_size.y, std::min(collider.physical_body->get_position_ptr()->y, position.y + half_size.y));
+    float closest_z = std::max(position.z - half_size.z, std::min(collider.physical_body->get_position_ptr()->z, position.z + half_size.z));
+
+    Vector3 closest_point(closest_x, closest_y, closest_z);
+    float distance = Vector3::norm(collider.physical_body->get_position() - closest_point);
+
+    return distance <= collider.get_size();
+
 }
