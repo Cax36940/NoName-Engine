@@ -37,14 +37,14 @@ void ofApp::setup() {
 	//cube.rigid_body.set_velocity(10, 0, 0);
 	//cube2.rigid_body.set_velocity(-10, 0, 0);
 
-	cubes.reserve(1000);
+	cubes.reserve(10000);
 	float min_value = -127.0;
 	float max_value = 127.0;
 	for (int i = 0; i < 10000; i++) {
 		float rand_x = min_value + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX) / (max_value - min_value));
 		float rand_y = min_value + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX) / (max_value - min_value));
 		float rand_z = min_value + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX) / (max_value - min_value));
-		cubes.push_back(RigidBodyFactory::createRigidBody(CUBE, Vector3(rand_x, rand_y, rand_z)));
+		cubes.emplace_back(Vector3(rand_x, rand_y, rand_z));
 	}
 
 

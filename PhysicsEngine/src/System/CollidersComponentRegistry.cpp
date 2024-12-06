@@ -37,10 +37,11 @@ void CollidersComponentRegistry::check_collisions(Octree & visual_octree)
 
 	std::unordered_set<SphereCollider*> checked_colliders;
 
+
+	std::vector<SphereCollider*> potential_colliders;
 	// Check only sphere collisions
 	for (auto i : registry) {
-		std::vector<SphereCollider*> potential_colliders;
-		potential_colliders.reserve(4);
+		potential_colliders.clear();
 		collider_octree.get_overlapping_colliders(*i, potential_colliders);
 
 		for (auto j : potential_colliders) {
@@ -52,6 +53,7 @@ void CollidersComponentRegistry::check_collisions(Octree & visual_octree)
 			const Vector3 vector_ji = i->physical_body->get_position() - j->physical_body->get_position();
 			const float norm2_ij = Vector3::norm2(vector_ji);
 			const float minimal_length = i->get_size() + j->get_size();
+			// If spheres collide
 			if (norm2_ij <= minimal_length * minimal_length) {
 
 				// Register Spherical collision

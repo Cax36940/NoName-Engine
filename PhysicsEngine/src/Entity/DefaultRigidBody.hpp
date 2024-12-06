@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Component/Mesh/Mesh.hpp"
+#include "Component/Mesh/CubeMesh.hpp" // get_instance
 #include "Component/RigidBody.hpp"
 #include "Component/Physics/Collider/SphereCollider.hpp"
 
@@ -32,6 +33,14 @@ public:
 		collider(mesh.get_size(), this->rigid_body.get_physical_particle()){
 		this->mesh.set_transform_ptr(this->rigid_body.get_transform_ptr());
 		this->rigid_body.set_moment_inertia(this->mesh.get_moment_of_inertia());
+	}
+
+	DefaultRigidBody(const Vector3& pos) : // Directly create a Cube
+		rigid_body(pos, 2.5),
+		mesh(&CubeMesh::get_instance()),
+		collider(mesh.get_size(), rigid_body.get_physical_particle()) {
+		this->mesh.set_transform_ptr(rigid_body.get_transform_ptr());
+		this->rigid_body.set_moment_inertia(mesh.get_moment_of_inertia());
 	}
 
 	Vector3 get_position() const {
