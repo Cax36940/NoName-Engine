@@ -38,10 +38,10 @@ void ofApp::setup() {
 	gravity = GravityForce(-2);
 
 	// Setup Scene
-	cube = RigidBodyFactory::createRigidBody(CUBE, Vector3(10, 0, 10));
+	cube1 = RigidBodyFactory::createRigidBody(CUBE, Vector3(10, -90, 10));
 	//cube2 = RigidBodyFactory::createRigidBody(CUBE, Vector3(100, -30, 30));
 
-	//cube.rigid_body.set_velocity(10, 0, 0);
+	//cube1.rigid_body.set_velocity(10, 0, 0);
 	//cube2.rigid_body.set_velocity(-10, 0, 0);
 
 	plane = RigidBodyFactory::createRigidBody(PLANE, Vector3(0, -100, 0));
@@ -58,7 +58,7 @@ void ofApp::setup() {
 
 
 	// first person camera
-	cam_position = ofVec3f(0, -30, 100); // initial position
+	cam_position = ofVec3f(0, -80, 50); // initial position
 	cam_orientation = ofVec3f(0, 0, 0); // pitch, yaw, roll
 	camera.disableMouseInput(); // disable default mouse movements from ofeasycam
 	move_speed = 1.0f;
@@ -86,6 +86,7 @@ void ofApp::update() {
 	for (auto& cube : cubes) {
 		ParticleForceRegistry::add(cube.get_physical_particle(), &gravity);
 	}
+	ParticleForceRegistry::add(cube1.get_physical_particle(), &gravity);
 
 	// Applying forces
 	ParticleForceRegistry::update_forces(delta);

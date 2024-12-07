@@ -9,7 +9,7 @@
 
 #include <unordered_set>
 
-#define ELASTIC_COEF 0.9
+#define ELASTIC_COEF 0.5
 
 std::vector<SphereCollider*> CollidersComponentRegistry::registry;
 
@@ -72,8 +72,16 @@ static struct EdgeHash {
 	}
 };
 
-static void mesh_mesh_collision(Mesh* first_mesh, Mesh* second_mesh) {
-	// Initialize vertices
+static void mesh_mesh_collision(SphereCollider* first_collider, SphereCollider* second_collider) {
+
+	// For resolution
+	float collision_distance = _FMAX;
+	Vector3 collision_normal(0.0f, 0.0f, 0.0f);
+
+
+	Mesh* first_mesh = first_collider->get_mesh_ptr();
+	Mesh* second_mesh = second_collider->get_mesh_ptr();
+
 	/* TODO : Check if vertices could be retrived easily from ofMesh */
 	std::vector<Vector3> first_vertices = first_mesh->get_mesh_ressource().get_vertices();
 	const std::vector<unsigned int>& first_indices = first_mesh->get_mesh_ressource().get_indices();
@@ -104,8 +112,15 @@ static void mesh_mesh_collision(Mesh* first_mesh, Mesh* second_mesh) {
 		const Vector3 normal = Vector3::cross(second_vertex - first_vertex, third_vertex - first_vertex);
 
 		for (const Vector3& vertex: second_vertices) {
-			if (Vector3::dot(normal, vertex - first_vertex) < 0) {
+			float dot = Vector3::dot(normal, vertex - first_vertex);
+			if (dot < 0) {
 				is_separating_plane = false;
+				const float norm = Vector3::norm(normal);
+				dot *= -norm;
+				if (dot < collision_distance) {
+					collision_distance = dot;
+					collision_normal = (1 / norm) * normal;
+				}
 				break;
 			}
 		}
@@ -128,8 +143,15 @@ static void mesh_mesh_collision(Mesh* first_mesh, Mesh* second_mesh) {
 		const Vector3 normal = Vector3::cross(second_vertex - first_vertex, third_vertex - first_vertex);
 
 		for (const Vector3& vertex : first_vertices) {
-			if (Vector3::dot(normal, vertex - first_vertex) < 0) {
+			float dot = Vector3::dot(normal, vertex - first_vertex);
+			if (dot < 0) {
 				is_separating_plane = false;
+				const float norm = Vector3::norm(normal);
+				dot *= -norm;
+				if (dot < collision_distance) {
+					collision_distance = dot;
+					collision_normal = (-1 / norm) * normal; // Mult -1 to Aim normal to go toward second collider
+				}
 				break;
 			}
 		}
@@ -216,10 +238,48 @@ static void mesh_mesh_collision(Mesh* first_mesh, Mesh* second_mesh) {
 				return;
 			}
 
+			bool negate_dir = false;
+			float min_dist = first_max_value - second_min_value;
+			if (second_max_value - first_min_value < min_dist) {
+				min_dist = second_max_value - first_min_value;
+				negate_dir = true;
+			}
+
+			float norm = Vector3::norm(normal);
+			min_dist *= norm;
+			if (negate_dir) { // Aim normal to go toward second collider
+				norm *= -1.0f; 
+			}
+
+			if (min_dist < collision_distance) {
+				collision_distance = min_dist;
+				collision_normal = (1 / norm) * normal;
+			}
+
 		}
 	}
 
-	std::cout << "Collision !" << std::endl;
+	// Collision resolution
+
+	Particle* particle1 = first_collider->physical_body;
+	Particle* particle2 = second_collider->physical_body;
+
+	const float m1 = particle1->get_mass();
+	const float m2 = particle2->get_mass();
+
+	const Vector3 delta_position1 = (-collision_distance * m2 / (m1 + m2)) * collision_normal;
+	const Vector3 delta_position2 = (collision_distance * m1 / (m1 + m2)) * collision_normal;
+
+
+	// Compute the change in velocity for both objects
+	const Vector3 v_relative = particle1->get_velocity() - particle2->get_velocity();
+	const float k = ((ELASTIC_COEF + 1) * Vector3::dot(v_relative, collision_normal)) / (particle1->get_inv_mass() + particle2->get_inv_mass());
+	const Vector3 delta_velocity1 = (-k * particle1->get_inv_mass()) * collision_normal;
+	const Vector3 delta_velocity2 = (k * particle2->get_inv_mass()) * collision_normal;
+
+	CollisionsRegistry::add(particle1, delta_position1, delta_velocity1);
+	CollisionsRegistry::add(particle2, delta_position2, delta_velocity2);
+
 
 }
 
@@ -239,7 +299,7 @@ static void register_collision(SphereCollider* first_collider, SphereCollider* s
 		return;
 	}
 
-	mesh_mesh_collision(first_collider->get_mesh_ptr(), second_collider->get_mesh_ptr());
+	mesh_mesh_collision(first_collider, second_collider);
 
 }
 

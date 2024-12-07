@@ -64,7 +64,7 @@ private:
 
 	// Scene Entities
 	Origin origin;
-	DefaultRigidBody cube;
+	DefaultRigidBody cube1;
 	//DefaultRigidBody cube2;
 	DefaultRigidBody plane;
 	std::vector<DefaultRigidBody> cubes;
