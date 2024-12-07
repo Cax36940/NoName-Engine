@@ -1,17 +1,27 @@
 #pragma once
 #include "ParticleForceGenerator.hpp"
 
+#define GRAVITY_VALUE -2
+
 class GravityForce : public ParticleForceGenerator
 {
 private:
-	float gravity;
+	GravityForce() = default;
 
 public:
-	GravityForce() : gravity(0.0) {}
-	GravityForce(const GravityForce&) = default;
-	GravityForce& operator=(const GravityForce&) = default;
+	GravityForce(const GravityForce&) = delete;
+	GravityForce& operator=(const GravityForce&) = delete;
 
-	GravityForce(float gravity_strength) : gravity(gravity_strength) {}
+	static GravityForce& get_instance() {
+		static GravityForce gravity;
+		return gravity;
+	}
 
-	void update_force(Particle* particle, float duration) override;
+	float get_value() {
+		return GRAVITY_VALUE;
+	}
+
+	void update_force(Particle* particle, float duration) override {
+		particle->add_force(Vector3(0, GRAVITY_VALUE * particle->get_mass(), 0));
+	};
 };

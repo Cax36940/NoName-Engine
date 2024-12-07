@@ -39,7 +39,6 @@ private:
 	int mouse_y;
 	bool mouse_pressed;
 	bool apply_force;
-	GravityForce gravity;
 
 	// Setup elements
 	ofImage background_picture;

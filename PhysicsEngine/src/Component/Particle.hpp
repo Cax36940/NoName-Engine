@@ -2,8 +2,9 @@
 
 #include "Vector3.hpp"
 #include "UpdatesComponent.hpp"
+#include "Physics/PhysicsComponent.hpp"
 
-class Particle : public UpdatesComponent {
+class Particle : public UpdatesComponent, public PhysicsComponent {
 private:
 	// Physics related
 	Vector3 position;
@@ -13,6 +14,8 @@ private:
 
 	// forces résultantes (d'Alembert)
 	Vector3 accum_force;
+	bool apply_gravity = true;
+	bool cancel_gravity = false;
 
 public:
 	Particle() = default;
@@ -30,11 +33,13 @@ public:
 
 	void update(float delta) override;
 
-
 	void add_force(const Vector3 &force);
 	void clear_accum();
 	void apply_forces_euler();
+	void set_cancel_gravity(bool new_value);
 
 	void set_position(const Vector3& new_position);
 	void set_velocity(const Vector3& new_velocity);
+	void set_apply_gravity(bool new_value);
+	void register_physics() override;
 };

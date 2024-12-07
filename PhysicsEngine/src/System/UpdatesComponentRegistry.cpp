@@ -29,6 +29,9 @@ void UpdatesComponentRegistry::clear()
 
 void UpdatesComponentRegistry::update_all(float delta)
 {
+	if (delta == 0.0f) {
+		return;
+	}
 	for (UpdatesComponent* component : registry) {
 		component->update(delta);
 	}

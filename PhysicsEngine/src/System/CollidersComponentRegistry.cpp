@@ -5,7 +5,7 @@
 #include "Component/Particle.hpp"
 #include "Component/Vector3.hpp"
 #include "Component/Mesh/Mesh.hpp"
-
+#include "Component/Physics/Force/GravityForce.hpp"
 
 #include <unordered_set>
 
@@ -274,8 +274,18 @@ static void mesh_mesh_collision(SphereCollider* first_collider, SphereCollider* 
 	// Compute the change in velocity for both objects
 	const Vector3 v_relative = particle1->get_velocity() - particle2->get_velocity();
 	const float k = ((ELASTIC_COEF + 1) * Vector3::dot(v_relative, collision_normal)) / (particle1->get_inv_mass() + particle2->get_inv_mass());
-	const Vector3 delta_velocity1 = (-k * particle1->get_inv_mass()) * collision_normal;
-	const Vector3 delta_velocity2 = (k * particle2->get_inv_mass()) * collision_normal;
+	Vector3 delta_velocity1 = (-k * particle1->get_inv_mass()) * collision_normal;
+	Vector3 delta_velocity2 = (k * particle2->get_inv_mass()) * collision_normal;
+
+
+	if (delta_velocity1.y > 0 && delta_velocity1.y < -2*GravityForce::get_instance().get_value()) {
+		delta_velocity1.y = -particle1->get_velocity().y;
+		particle1->set_cancel_gravity(true);
+	}
+	if (delta_velocity2.y > 0 && delta_velocity2.y < -2*GravityForce::get_instance().get_value()) {
+		delta_velocity2.y = -particle2->get_velocity().y;
+		particle2->set_cancel_gravity(true);
+	}
 
 	CollisionsRegistry::add(particle1, delta_position1, delta_velocity1);
 	CollisionsRegistry::add(particle2, delta_position2, delta_velocity2);

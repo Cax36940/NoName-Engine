@@ -127,7 +127,6 @@
     <ClCompile Include="src\Component\Physics\CableComponent.cpp" />
     <ClCompile Include="src\Component\Physics\Force\SpringForce.cpp" />
     <ClCompile Include="src\Component\Physics\Force\FrictionForce.cpp" />
-    <ClCompile Include="src\Component\Physics\Force\GravityForce.cpp" />
     <ClCompile Include="src\Component\Physics\Force\PullForce.cpp" />
     <ClCompile Include="src\Component\Quaternion.cpp" />
     <ClCompile Include="src\Component\RigidBody.cpp" />

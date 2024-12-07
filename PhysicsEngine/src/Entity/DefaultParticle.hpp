@@ -36,4 +36,8 @@ public:
 	Particle* get_physical_particle() {
 		return &particle;
 	}
+
+	void set_apply_gravity(bool new_value) {
+		particle.set_apply_gravity(new_value);
+	};
 };

@@ -66,4 +66,8 @@ public:
 		rigid_body.add_force(local_pos, force);
 	}
 
+	void set_apply_gravity(bool new_value) {
+		rigid_body.get_physical_particle()->set_apply_gravity(new_value);
+	};
+
 };

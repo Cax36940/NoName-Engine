@@ -35,16 +35,15 @@ void ofApp::setup() {
 	mouse_x = 0;
 	mouse_y = 0;
 
-	gravity = GravityForce(-2);
-
 	// Setup Scene
-	cube1 = RigidBodyFactory::createRigidBody(CUBE, Vector3(10, -90, 10));
+	cube1 = RigidBodyFactory::createRigidBody(CUBE, Vector3(10, -95, 10));
 	//cube2 = RigidBodyFactory::createRigidBody(CUBE, Vector3(100, -30, 30));
 
 	//cube1.rigid_body.set_velocity(10, 0, 0);
 	//cube2.rigid_body.set_velocity(-10, 0, 0);
 
 	plane = RigidBodyFactory::createRigidBody(PLANE, Vector3(0, -100, 0));
+	plane.set_apply_gravity(false);
 
 	cubes.reserve(1000);
 	float min_value = -127.0;
@@ -82,11 +81,6 @@ void ofApp::update() {
 	// Checking collisions
 	CollidersComponentRegistry::check_collisions(visual_octree);
 	CollisionsRegistry::solve_collisions();
-
-	for (auto& cube : cubes) {
-		ParticleForceRegistry::add(cube.get_physical_particle(), &gravity);
-	}
-	ParticleForceRegistry::add(cube1.get_physical_particle(), &gravity);
 
 	// Applying forces
 	ParticleForceRegistry::update_forces(delta);

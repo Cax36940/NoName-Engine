@@ -1,5 +1,8 @@
 #include <of3dGraphics.h>
 #include "Particle.hpp"
+#include "Physics/Force/GravityForce.hpp"
+#include "System/ParticleForceRegistry.hpp"
+
 
 Particle::Particle(const Vector3& pos, const Vector3& vel, const Vector3& acc, const float& mass)
 	: position(pos)
@@ -38,15 +41,15 @@ void Particle::update(float delta)
 	apply_forces_euler();
 	velocity = velocity + acceleration * delta;
 	position = position + velocity * delta;
-	if (position.y >= 900)
-	{
-		position.y = 900;
-	}
 	clear_accum();
 }
 
 void Particle::add_force(const Vector3 &force)
 {
+	if (apply_gravity && cancel_gravity && force.y == GravityForce::get_instance().get_value() * get_mass()) {
+		cancel_gravity = false;
+		return;
+	}
 	accum_force += force;
 }
 
@@ -61,6 +64,11 @@ void Particle::apply_forces_euler()
 	acceleration = accum_force * inv_mass;
 }
 
+void Particle::set_cancel_gravity(bool new_value)
+{
+	cancel_gravity = true;
+}
+
 void Particle::set_position(const Vector3& new_position)
 {
 	position = new_position;
@@ -69,5 +77,17 @@ void Particle::set_position(const Vector3& new_position)
 void Particle::set_velocity(const Vector3& new_velocity)
 {
 	velocity = new_velocity;
+}
+
+void Particle::set_apply_gravity(bool new_value)
+{
+	apply_gravity = new_value;
+}
+
+void Particle::register_physics()
+{
+	if (apply_gravity) {
+		ParticleForceRegistry::add(this, &GravityForce::get_instance());
+	}
 }
 
