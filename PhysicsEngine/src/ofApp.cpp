@@ -73,7 +73,9 @@ void ofApp::update() {
 	auto time = std::chrono::high_resolution_clock::now();
 	auto delta = std::chrono::duration_cast<std::chrono::milliseconds>(time - timeLastFrame).count() / 1000.; //durée de calcul d'une frame
 	timeLastFrame = time;
-
+	if (delta > 1) {
+		delta = 1.0f / 60.0f;
+	};
 
 	// Register forces from physics components
 	PhysicsComponentRegistry::register_all_physics();

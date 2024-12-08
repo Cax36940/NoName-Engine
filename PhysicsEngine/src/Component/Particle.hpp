@@ -15,7 +15,6 @@ private:
 	// forces résultantes (d'Alembert)
 	Vector3 accum_force;
 	bool apply_gravity = true;
-	bool cancel_gravity = false;
 
 public:
 	Particle() = default;
@@ -36,7 +35,6 @@ public:
 	void add_force(const Vector3 &force);
 	void clear_accum();
 	void apply_forces_euler();
-	void set_cancel_gravity(bool new_value);
 
 	void set_position(const Vector3& new_position);
 	void set_velocity(const Vector3& new_velocity);

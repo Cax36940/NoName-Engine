@@ -5,7 +5,6 @@
 #include "Component/Particle.hpp"
 #include "Component/Vector3.hpp"
 #include "Component/Mesh/Mesh.hpp"
-#include "Component/Physics/Force/GravityForce.hpp"
 
 #include <unordered_set>
 
@@ -115,11 +114,11 @@ static void mesh_mesh_collision(SphereCollider* first_collider, SphereCollider* 
 			float dot = Vector3::dot(normal, vertex - first_vertex);
 			if (dot < 0) {
 				is_separating_plane = false;
-				const float norm = Vector3::norm(normal);
-				dot *= -norm;
+				const float inv_norm = Vector3::inv_norm(normal);
+				dot *= -inv_norm;
 				if (dot < collision_distance) {
 					collision_distance = dot;
-					collision_normal = (1 / norm) * normal;
+					collision_normal = inv_norm * normal;
 				}
 				break;
 			}
@@ -146,11 +145,11 @@ static void mesh_mesh_collision(SphereCollider* first_collider, SphereCollider* 
 			float dot = Vector3::dot(normal, vertex - first_vertex);
 			if (dot < 0) {
 				is_separating_plane = false;
-				const float norm = Vector3::norm(normal);
-				dot *= -norm;
+				const float inv_norm = Vector3::inv_norm(normal);
+				dot *= -inv_norm;
 				if (dot < collision_distance) {
 					collision_distance = dot;
-					collision_normal = (-1 / norm) * normal; // Mult -1 to Aim normal to go toward second collider
+					collision_normal = -inv_norm * normal; // Mult -1 to Aim normal to go toward second collider
 				}
 				break;
 			}
@@ -270,25 +269,28 @@ static void mesh_mesh_collision(SphereCollider* first_collider, SphereCollider* 
 	const Vector3 delta_position1 = (-collision_distance * m2 / (m1 + m2)) * collision_normal;
 	const Vector3 delta_position2 = (collision_distance * m1 / (m1 + m2)) * collision_normal;
 
-
 	// Compute the change in velocity for both objects
 	const Vector3 v_relative = particle1->get_velocity() - particle2->get_velocity();
+
 	const float k = ((ELASTIC_COEF + 1) * Vector3::dot(v_relative, collision_normal)) / (particle1->get_inv_mass() + particle2->get_inv_mass());
 	Vector3 delta_velocity1 = (-k * particle1->get_inv_mass()) * collision_normal;
 	Vector3 delta_velocity2 = (k * particle2->get_inv_mass()) * collision_normal;
 
-
-	if (delta_velocity1.y > 0 && delta_velocity1.y < -2*GravityForce::get_instance().get_value()) {
-		delta_velocity1.y = -particle1->get_velocity().y;
-		particle1->set_cancel_gravity(true);
-	}
-	if (delta_velocity2.y > 0 && delta_velocity2.y < -2*GravityForce::get_instance().get_value()) {
-		delta_velocity2.y = -particle2->get_velocity().y;
-		particle2->set_cancel_gravity(true);
-	}
-
 	CollisionsRegistry::add(particle1, delta_position1, delta_velocity1);
 	CollisionsRegistry::add(particle2, delta_position2, delta_velocity2);
+
+
+	/*
+	
+	const Vector3 v_tangent = v_relative - (Vector3::dot(v_relative, collision_normal) * collision_normal);
+const float v_tangent_length = v_tangent.length();
+
+if (v_tangent_length > 0.0f) {
+    const Vector3 friction_impulse = -std::min(v_tangent_length, friction_coefficient * k) * v_tangent.normalized();
+    delta_velocity1 += friction_impulse * particle1->get_inv_mass();
+    delta_velocity2 -= friction_impulse * particle2->get_inv_mass();
+}
+	*/
 
 
 }

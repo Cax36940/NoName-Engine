@@ -46,10 +46,6 @@ void Particle::update(float delta)
 
 void Particle::add_force(const Vector3 &force)
 {
-	if (apply_gravity && cancel_gravity && force.y == GravityForce::get_instance().get_value() * get_mass()) {
-		cancel_gravity = false;
-		return;
-	}
 	accum_force += force;
 }
 
@@ -62,11 +58,6 @@ void Particle::apply_forces_euler()
 {
 	// F = m*a -> a = F * (1/m)
 	acceleration = accum_force * inv_mass;
-}
-
-void Particle::set_cancel_gravity(bool new_value)
-{
-	cancel_gravity = true;
 }
 
 void Particle::set_position(const Vector3& new_position)
