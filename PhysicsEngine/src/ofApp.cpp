@@ -36,14 +36,19 @@ void ofApp::setup() {
 	mouse_y = 0;
 
 	// Setup Scene
-	cube1 = RigidBodyFactory::createRigidBody(CUBE, Vector3(10, -95, 10));
-	//cube2 = RigidBodyFactory::createRigidBody(CUBE, Vector3(100, -30, 30));
 
-	//cube1.rigid_body.set_velocity(10, 0, 0);
-	//cube2.rigid_body.set_velocity(-10, 0, 0);
+	floor = RigidBodyFactory::createRigidBody(PLANE, Vector3(0, -100, 0));
+	floor.set_apply_gravity(false);
+	wall1 = RigidBodyFactory::createRigidBody(PLANE, Vector3(100, -100, 0));
+	wall1.set_apply_gravity(false);
+	wall1.rotate_z(PI/2);
 
-	plane = RigidBodyFactory::createRigidBody(PLANE, Vector3(0, -100, 0));
-	plane.set_apply_gravity(false);
+	cube1 = RigidBodyFactory::createRigidBody(CUBE, Vector3(-50, -91, 10));
+	cube2 = RigidBodyFactory::createRigidBody(CUBE, Vector3(50, -90, 10));
+	cube2.set_apply_gravity(false);
+	cube1.set_apply_gravity(false);
+	cube1.rigid_body.set_velocity(10, 0, 0);
+	cube2.rigid_body.set_velocity(-10, 0, 0);
 
 	cubes.reserve(1000);
 	float min_value = -127.0;

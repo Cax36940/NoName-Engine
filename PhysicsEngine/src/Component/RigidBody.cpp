@@ -2,6 +2,56 @@
 #include "Component/RigidBody.hpp"
 
 
+RigidBody::RigidBody(const RigidBody& body)
+	: particle(body.particle),
+	angular_position(body.angular_position),
+	angular_velocity(body.angular_velocity),
+	accum_torque(body.accum_torque),
+	scale(body.scale),
+	inv_moment_inertia(body.inv_moment_inertia),
+	transform(body.transform) {
+	UpdatesComponentRegistry::invert(this, &particle);
+}
+
+RigidBody::RigidBody(RigidBody&& body) noexcept
+	: particle(std::move(body.particle)),
+	angular_position(std::move(body.angular_position)),
+	angular_velocity(std::move(body.angular_velocity)),
+	accum_torque(std::move(body.accum_torque)),
+	scale(std::move(body.scale)),
+	inv_moment_inertia(std::move(body.inv_moment_inertia)),
+	transform(std::move(body.transform)) {
+	UpdatesComponentRegistry::invert(this, &particle);
+}
+
+RigidBody& RigidBody::operator=(const RigidBody& body)
+{
+	particle = body.particle;
+	angular_position = body.angular_position;
+	angular_velocity = body.angular_velocity;
+	accum_torque = body.accum_torque;
+	scale = body.scale;
+	inv_moment_inertia = body.inv_moment_inertia;
+	transform = body.transform;
+	UpdatesComponentRegistry::invert(this, &particle);
+	return *this;
+}
+
+RigidBody& RigidBody::operator=(RigidBody&& body) noexcept {
+	if (this != &body) { // Protect against self-assignment
+		particle = std::move(body.particle);
+		angular_position = std::move(body.angular_position);
+		angular_velocity = std::move(body.angular_velocity);
+		accum_torque = std::move(body.accum_torque);
+		scale = std::move(body.scale);
+		inv_moment_inertia = std::move(body.inv_moment_inertia);
+		transform = std::move(body.transform);
+
+		UpdatesComponentRegistry::invert(this, &particle);
+	}
+	return *this;
+}
+
 RigidBody::RigidBody(const Vector3& pos, const float& mass, const Vector3& scale, const Quaternion& angular_position) :
 	particle(pos, Vector3(0, 0, 0), Vector3(0, 0, 0), mass),
 	angular_position(angular_position),
@@ -9,7 +59,9 @@ RigidBody::RigidBody(const Vector3& pos, const float& mass, const Vector3& scale
 	accum_torque(),
 	scale(scale),
 	inv_moment_inertia(0, 0, 0),
-	transform(Quaternion::toMatrix3(angular_position) * Matrix3(scale.x, scale.y, scale.z), pos) {}
+	transform(Quaternion::toMatrix3(angular_position) * Matrix3(scale.x, scale.y, scale.z), pos) {
+		UpdatesComponentRegistry::invert(this, &particle);
+	}
 
 Vector3 RigidBody::get_position() const {
 	return particle.get_position();
@@ -31,15 +83,15 @@ void RigidBody::set_moment_inertia(const Matrix3& new_moment_inertia)
 }
 
 void RigidBody::rotate_x(float alpha) {
-	angular_position = Quaternion(cos(alpha), sin(alpha), 0, 0) * angular_position;
+	angular_position = Quaternion(cos(alpha/2), sin(alpha/2), 0, 0) * angular_position;
 }
 
 void RigidBody::rotate_y(float alpha) {
-	angular_position = Quaternion(cos(alpha), 0, sin(alpha), 0) * angular_position;
+	angular_position = Quaternion(cos(alpha/2), 0, sin(alpha/2), 0) * angular_position;
 }
 
 void RigidBody::rotate_z(float alpha) {
-	angular_position = Quaternion(cos(alpha), 0, 0, sin(alpha)) * angular_position;
+	angular_position = Quaternion(cos(alpha/2), 0, 0, sin(alpha/2)) * angular_position;
 }
 
 void RigidBody::set_velocity(float x, float y, float z)
@@ -77,7 +129,7 @@ void RigidBody::add_force(const Vector3& local_position, const Vector3& force)
 }
 
 void RigidBody::update(float delta) {
-	particle.update(delta);
+	//particle.update(delta);
 
 	// Newton second law
 	Vector3 angular_acceleration = inv_moment_inertia * accum_torque;

@@ -29,6 +29,7 @@ public:
 	Vector3 get_velocity() const;
 	float get_mass() const;
 	float get_inv_mass() const;
+	bool get_apply_gravity() const;
 
 	void update(float delta) override;
 

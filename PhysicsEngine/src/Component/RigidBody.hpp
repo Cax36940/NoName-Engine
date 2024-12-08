@@ -25,10 +25,10 @@ private:
 public:
 
 	RigidBody() = default;
-	RigidBody(const RigidBody& body) = default;
-	RigidBody(RigidBody&& body) = default;
-	RigidBody& operator=(const RigidBody& body) = default;
-	RigidBody& operator=(RigidBody&& body) = default;
+	RigidBody(const RigidBody& body);
+	RigidBody(RigidBody&& body) noexcept;
+	RigidBody& operator=(const RigidBody& body);
+	RigidBody& operator=(RigidBody&& body) noexcept;
 
 	RigidBody(const Vector3& pos, const float& mass = 1.0f, const Vector3& scale = Vector3(1, 1, 1), const Quaternion& angular_position = Quaternion());
 

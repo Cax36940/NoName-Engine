@@ -5,6 +5,8 @@
 #include "Component/Particle.hpp"
 #include "Component/Vector3.hpp"
 #include "Component/Mesh/Mesh.hpp"
+#include "Component/Physics/Force/FrictionForce.hpp"
+#include "ParticleForceRegistry.hpp"
 
 #include <unordered_set>
 
@@ -279,19 +281,12 @@ static void mesh_mesh_collision(SphereCollider* first_collider, SphereCollider* 
 	CollisionsRegistry::add(particle1, delta_position1, delta_velocity1);
 	CollisionsRegistry::add(particle2, delta_position2, delta_velocity2);
 
-
-	/*
-	
-	const Vector3 v_tangent = v_relative - (Vector3::dot(v_relative, collision_normal) * collision_normal);
-const float v_tangent_length = v_tangent.length();
-
-if (v_tangent_length > 0.0f) {
-    const Vector3 friction_impulse = -std::min(v_tangent_length, friction_coefficient * k) * v_tangent.normalized();
-    delta_velocity1 += friction_impulse * particle1->get_inv_mass();
-    delta_velocity2 -= friction_impulse * particle2->get_inv_mass();
-}
-	*/
-
+	if (particle1->get_apply_gravity()) {
+		ParticleForceRegistry::add(particle1, FrictionForce(1, 1, 0.05, -1 * collision_normal));
+	}
+	if (particle2->get_apply_gravity()) {
+		ParticleForceRegistry::add(particle2, FrictionForce(1, 1, 0.05, collision_normal));
+	}
 
 }
 

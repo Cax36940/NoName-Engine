@@ -70,4 +70,16 @@ public:
 		rigid_body.get_physical_particle()->set_apply_gravity(new_value);
 	};
 
+	void rotate_x(float alpha) {
+		rigid_body.rotate_x(alpha);
+	};
+
+	void rotate_y(float alpha) {
+		rigid_body.rotate_y(alpha);
+	};
+
+	void rotate_z(float alpha) {
+		rigid_body.rotate_z(alpha);
+	};
+
 };

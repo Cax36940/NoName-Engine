@@ -36,6 +36,11 @@ float Particle::get_inv_mass() const
 	return inv_mass;
 }
 
+bool Particle::get_apply_gravity() const
+{
+	return apply_gravity;
+}
+
 void Particle::update(float delta)
 {
 	apply_forces_euler();

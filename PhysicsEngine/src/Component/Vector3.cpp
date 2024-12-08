@@ -63,7 +63,7 @@ float Vector3::norm2(const Vector3& vector) {
 float Vector3::inv_norm(const Vector3& vector) {
     float ret = 1.0f/sqrtf(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z);
     if (std::isinf(ret)) {
-        std::cerr << "[ERROR] Invalid division by 0 in " << __FILE__ << " : " << __FUNCTION__ << "(line:" << __LINE__ << ")" << std::endl;
+         std::cerr << "[ERROR] Invalid division by 0 in " << __FILE__ << " : " << __FUNCTION__ << "(line:" << __LINE__ << ")" << std::endl;
         ret = 0; // TODO : Check what is the best thing to return in case of null vector inverse norm 
     }
     return ret;
