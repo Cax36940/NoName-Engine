@@ -78,6 +78,8 @@ static void mesh_mesh_collision(SphereCollider* first_collider, SphereCollider* 
 	// For resolution
 	float collision_distance = _FMAX;
 	Vector3 collision_normal(0.0f, 0.0f, 0.0f);
+	Vector3 first_impact_point(0.0f, 0.0f, 0.0f);
+	Vector3 second_impact_point(0.0f, 0.0f, 0.0f);
 
 
 	Mesh* first_mesh = first_collider->get_mesh_ptr();
@@ -121,6 +123,8 @@ static void mesh_mesh_collision(SphereCollider* first_collider, SphereCollider* 
 				if (dot < collision_distance) {
 					collision_distance = dot;
 					collision_normal = inv_norm * normal;
+					first_impact_point = 1. / 3. * (first_vertex + second_vertex + third_vertex) - dot * collision_normal;
+					second_impact_point = vertex + dot * collision_normal;
 				}
 				break;
 			}
@@ -152,6 +156,8 @@ static void mesh_mesh_collision(SphereCollider* first_collider, SphereCollider* 
 				if (dot < collision_distance) {
 					collision_distance = dot;
 					collision_normal = -inv_norm * normal; // Mult -1 to Aim normal to go toward second collider
+					first_impact_point = vertex - dot * collision_normal;
+					second_impact_point = 1. / 3. * (first_vertex + second_vertex + third_vertex) + dot * collision_normal;
 				}
 				break;
 			}
@@ -255,6 +261,8 @@ static void mesh_mesh_collision(SphereCollider* first_collider, SphereCollider* 
 			if (min_dist < collision_distance) {
 				collision_distance = min_dist;
 				collision_normal = (1 / norm) * normal;
+				first_impact_point = 1. / 2. * (first_vertex_a + first_vertex_b);
+				second_impact_point = 1. / 2. * (second_vertex_a + second_vertex_b);
 			}
 
 		}
@@ -278,19 +286,51 @@ static void mesh_mesh_collision(SphereCollider* first_collider, SphereCollider* 
 	Vector3 delta_velocity1 = (-k * particle1->get_inv_mass()) * collision_normal;
 	Vector3 delta_velocity2 = (k * particle2->get_inv_mass()) * collision_normal;
 
-	CollisionsRegistry::add(particle1, delta_position1, delta_velocity1);
-	CollisionsRegistry::add(particle2, delta_position2, delta_velocity2);
 
-	if (particle1->get_apply_gravity()) {
-		ParticleForceRegistry::add(particle1, FrictionForce(1, 1, 0.05, -1 * collision_normal));
+	//if (Vector3::norm2(impact_point) < 10E-6) {
+		//CollisionsRegistry::add(first_collider->get_rigibody_ptr(), delta_position1, particle1->get_position(), delta_velocity1);
+		//CollisionsRegistry::add(second_collider->get_rigibody_ptr(), delta_position2, particle2->get_position(), delta_velocity2);
+		//return;
+	//} 
+
+	/*if (particle1->get_apply_gravity()) {
+		if (std::abs(delta_velocity1.y) < 1) {
+			delta_velocity1.y = -particle1->get_velocity().y;
+		}
 	}
+
 	if (particle2->get_apply_gravity()) {
-		ParticleForceRegistry::add(particle2, FrictionForce(1, 1, 0.05, collision_normal));
+		if (std::abs(delta_velocity2.y) < 1) {
+			delta_velocity2.y = -particle2->get_velocity().y;
+		}
+	}*/
+
+	CollisionsRegistry::add(first_collider->get_rigibody_ptr(), delta_position1, first_impact_point, delta_velocity1);
+	CollisionsRegistry::add(second_collider->get_rigibody_ptr(), delta_position2, second_impact_point, delta_velocity2);
+
+	/*if (particle1->get_apply_gravity()) {
+		const Vector3 relative_impact_velocity;
+		const Vector3 p_velocity =  - Vector3::dot(, collision_normal) * (collision_normal);
+		if (Vector3::norm2(p_velocity) > 10E-6) {
+			const float velocity_magnitude = Vector3::norm(p_velocity);
+			const Vector3 f_k = -1. * Vector3::normalize(p_velocity) * (1 * velocity_magnitude + 0.05 * velocity_magnitude * velocity_magnitude);
+			first_collider->get_rigibody_ptr()->add_force(impact_point, f_k);
+		}
 	}
+
+	if (particle2->get_apply_gravity()) {
+		const Vector3 p_velocity =  - Vector3::dot(, collision_normal) * collision_normal;
+		if (Vector3::norm2(p_velocity) > 10E-6) {
+			const float velocity_magnitude = Vector3::norm(p_velocity);
+			const Vector3 f_k = -1. * Vector3::normalize(p_velocity) * (1 * velocity_magnitude + 0.05 * velocity_magnitude * velocity_magnitude);
+			second_collider->get_rigibody_ptr()->add_force(impact_point, f_k);
+		}
+	}*/
 
 }
 
 static void register_collision(SphereCollider* first_collider, SphereCollider* second_collider) {
+
 	if (first_collider->get_mesh_ptr() == nullptr && second_collider->get_mesh_ptr() == nullptr) {
 		sphere_sphere_collision(first_collider, second_collider);
 		return;
@@ -310,6 +350,12 @@ static void register_collision(SphereCollider* first_collider, SphereCollider* s
 
 }
 
+static struct ColliderPairHash {
+	std::size_t operator()(const std::pair<SphereCollider*, SphereCollider*>& edge) const {
+		return std::hash<SphereCollider*>()(edge.first) ^ std::hash<SphereCollider*>()(edge.second);
+	}
+};
+
 
 void CollidersComponentRegistry::check_collisions(Octree & visual_octree)
 {
@@ -320,7 +366,7 @@ void CollidersComponentRegistry::check_collisions(Octree & visual_octree)
 	}
 	visual_octree = collider_octree;
 
-	std::unordered_set<SphereCollider*> checked_colliders;
+	std::unordered_set<std::pair<SphereCollider*, SphereCollider*>, ColliderPairHash> checked_colliders;
 
 
 	std::vector<SphereCollider*> potential_colliders;
@@ -331,7 +377,7 @@ void CollidersComponentRegistry::check_collisions(Octree & visual_octree)
 
 		for (auto j : potential_colliders) {
 			// Collider has already been checked, don't check it again
-			if (checked_colliders.find(j) != checked_colliders.end()) {
+			if (checked_colliders.find(std::pair<SphereCollider*, SphereCollider*>(i, j)) != checked_colliders.end() || checked_colliders.find(std::pair<SphereCollider*, SphereCollider*>(j, i)) != checked_colliders.end()) {
 				continue;
 			}
 
@@ -341,9 +387,9 @@ void CollidersComponentRegistry::check_collisions(Octree & visual_octree)
 			// If spheres collide check for more precise collision
 			if (norm2_ij <= minimal_length * minimal_length) {
 				register_collision(i, j);
+				checked_colliders.insert(std::pair<SphereCollider*, SphereCollider*>(i,j));
 			}
 		}
-		checked_colliders.insert(i);
 	}
 
 }

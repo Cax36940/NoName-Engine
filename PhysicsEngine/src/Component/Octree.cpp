@@ -187,7 +187,6 @@ void Octree::draw_tree_node(size_t node_index, const Vector3& position, const Ve
     };
 
     // Draw edges
-    ofSetColor(255);
     ofDrawLine(vertices[0], vertices[1]);
     ofDrawLine(vertices[1], vertices[3]);
     ofDrawLine(vertices[3], vertices[2]);

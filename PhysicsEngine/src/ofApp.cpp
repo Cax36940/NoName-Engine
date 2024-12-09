@@ -21,7 +21,7 @@ static float random_float_value(float min_value, float max_value) {
 //--------------------------------------------------------------
 void ofApp::setup() {
 	ofEnableDepthTest();
-
+	ofSetBackgroundColor(ofColor(140, 200, 225));
 	// Inititalize environment
 	background_picture.load("images/bg_picture.png");
 	myfont.load("calibri", 20);
@@ -42,24 +42,21 @@ void ofApp::setup() {
 	wall1 = RigidBodyFactory::createRigidBody(PLANE, Vector3(100, -100, 0));
 	wall1.set_apply_gravity(false);
 	wall1.rotate_z(PI/2);
-
-	cube1 = RigidBodyFactory::createRigidBody(CUBE, Vector3(-50, -91, 10));
-	cube2 = RigidBodyFactory::createRigidBody(CUBE, Vector3(50, -90, 10));
-	cube2.set_apply_gravity(false);
-	cube1.set_apply_gravity(false);
-	cube1.rigid_body.set_velocity(10, 0, 0);
-	cube2.rigid_body.set_velocity(-10, 0, 0);
+	current_body_type = CUBE;
 
 	cubes.reserve(1000);
-	float min_value = -127.0;
-	float max_value = 127.0;
-	for (int i = 0; i < 0; i++) {
+	float min_value = -90.0;
+	float max_value = 90.0;
+	for (int i = 0; i < 10; i++) {
 		float rand_x = random_float_value(min_value, max_value);
 		float rand_y = random_float_value(min_value, max_value);
 		float rand_z = random_float_value(min_value, max_value);
 		cubes.emplace_back(Vector3(rand_x, rand_y, rand_z));
 	}
 
+	for (int i = 0; i < 0; i++) {
+		cubes.emplace_back(Vector3(10, -99 + 2 * i, 10));
+	}
 
 	// first person camera
 	cam_position = ofVec3f(0, -80, 50); // initial position
@@ -72,6 +69,7 @@ void ofApp::setup() {
 	octree_visible = true;
 }
 
+int frameCount = 0;
 //--------------------------------------------------------------
 void ofApp::update() {
 	// Calc deltaTime
@@ -79,8 +77,9 @@ void ofApp::update() {
 	auto delta = std::chrono::duration_cast<std::chrono::milliseconds>(time - timeLastFrame).count() / 1000.; //durée de calcul d'une frame
 	timeLastFrame = time;
 	if (delta > 1) {
-		delta = 1.0f / 60.0f;
+		delta = 1.0f / 60.0f; // Avoid simulation explosion when dragging the window
 	};
+
 
 	// Register forces from physics components
 	PhysicsComponentRegistry::register_all_physics();
@@ -113,6 +112,7 @@ void ofApp::draw() {
 	ofFill();
 
 	if (octree_visible) {
+		ofSetColor(224, 0, 174);
 		visual_octree.draw_tree();
 	}
 
@@ -127,10 +127,50 @@ void ofApp::draw() {
 	// End rendering form the camera's perspective.
 	camera.end();
 	sun.disable();
+
+
+	ofSetColor(255);
+
+	ofDrawBitmapString("H : " + std::string(octree_visible ? "Hide" : "Show") + " Octree", 10, 20);
+	ofDrawBitmapString("A : Previous body", 10, 40);
+	ofDrawBitmapString("E : Next body", 10, 60);
+	ofDrawBitmapString("SPACE : Launch body (Current : " + body_type_string(current_body_type) + ")", 10, 80);
+	ofDrawBitmapString("ARROWS : Move camera", 10, 100);
+	ofDrawBitmapString("Mouse : Rotate camera", 10, 120);
+
+
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
+
+	if (key == ' ') { // Space
+		float launching_speed = 20.0f;
+		DefaultRigidBody new_body = RigidBodyFactory::createRigidBody(current_body_type, camera.getPosition());
+		new_body.rigid_body.set_velocity(camera.getLookAtDir().x * launching_speed, camera.getLookAtDir().y * launching_speed, camera.getLookAtDir().z * launching_speed);
+		cubes.emplace_back(new_body);
+
+	}
+
+	if (key == 'h') { // Hide/Show octree
+		octree_visible = !octree_visible;
+	}
+
+	if (key == 'a') { // Previous body
+		current_body_type = (RigidBodyType)((int)current_body_type + 1);
+		if (current_body_type == PARTICLE_TYPE_COUNT) {
+			current_body_type = CUBE;
+		}
+	}
+
+	if (key == 'e') { // Next body
+		if (current_body_type != CUBE) {
+			current_body_type = (RigidBodyType)((int)current_body_type - 1);
+		}
+		else {
+			current_body_type = TETRAHEDRON;
+		}
+	}
 
 	// Movements of the camera with arrows
 
@@ -153,17 +193,6 @@ void ofApp::keyPressed(int key) {
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key) {
-	if (key == ' ') { // Space
-		float cube_speed = 10.0f;
-		DefaultRigidBody new_cube = RigidBodyFactory::createRigidBody(CUBE, camera.getPosition());
-		new_cube.rigid_body.set_velocity(camera.getLookAtDir().x * cube_speed, camera.getLookAtDir().y * cube_speed, camera.getLookAtDir().z * cube_speed);
-		cubes.emplace_back(new_cube);
-
-	}
-
-	if (key == 'h') { // Hide/Show octree
-		octree_visible = !octree_visible;
-	}
 
 	if (key == OF_KEY_UP) {
 		dir_pressed &= 0xFFFF ^ UP_DIR;
@@ -256,6 +285,25 @@ void ofApp::moveCamera()
 
 	cam_position += camVelocity;
 	camera.setPosition(cam_position);
+}
+
+std::string ofApp::body_type_string(RigidBodyType type)
+{
+	switch (type) {
+	case CUBE:
+		return "CUBE";
+	case DODECAHEDRON:
+		return "DODECAHEDRON";
+	case ICOSAHEDRON:
+		return "ICOSAHEDRON";
+	case OCTAHEDRON:
+		return "OCTAHEDRON";
+	case TETRAHEDRON:
+		return "TETRAHEDRON";
+	default:
+		break;
+	}
+	return "UNKNOWN";
 }
 
 //--------------------------------------------------------------

@@ -52,6 +52,8 @@ private:
 	float rotation_speed;
 	void moveCamera();
 
+	std::string body_type_string(RigidBodyType type);
+
 	// Inputs
 	enum Input {
 		UP_DIR = 1,
@@ -65,8 +67,8 @@ private:
 	Origin origin;
 	DefaultRigidBody floor;
 	DefaultRigidBody wall1;
-	DefaultRigidBody cube1;
-	DefaultRigidBody cube2;
+	RigidBodyType current_body_type;
+
 	std::vector<DefaultRigidBody> cubes;
 	Octree visual_octree;
 	bool octree_visible;

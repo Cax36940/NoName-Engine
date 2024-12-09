@@ -16,12 +16,13 @@ static struct RigidBodyArgs {
 };
 
 static RigidBodyArgs rigid_body_args_list[] = {
- {2.5, Vector3(1, 1, 1), Quaternion(), Vector3(255, 0, 0), &CubeMesh::get_instance()},				// CUBE
+ {25, Vector3(1, 1, 1), Quaternion(), Vector3(255, 0, 0), &CubeMesh::get_instance()},				// CUBE
  {4.5, Vector3(1, 1, 1), Quaternion(), Vector3(255, 0, 0), &DodecahedronMesh::get_instance()},		// DODECAHEDRON
  {4, Vector3(1, 1, 1), Quaternion(), Vector3(255, 0, 0), &IcosahedronMesh::get_instance()},		// ICOSAHEDRON
  {3, Vector3(1, 1, 1), Quaternion(), Vector3(255, 0, 0), &OctahedronMesh::get_instance()},			// OCTAHEDRON
- {100000, Vector3(100, 1, 100), Quaternion(), Vector3(200, 200, 200), &PlaneMesh::get_instance()},			// OCTAHEDRON
  {1.5, Vector3(1, 1, 1), Quaternion(), Vector3(255, 0, 0), &TetrahedronMesh::get_instance()},		// TETRAHEDRON
+ {0, Vector3(0, 0, 0), Quaternion(), Vector3(0, 0, 0), nullptr},		// UNKNOWN
+ {100000000.0f, Vector3(100, 1, 100), Quaternion(), Vector3(200, 200, 200), &PlaneMesh::get_instance()},			// PLANE
 };
 
 DefaultRigidBody RigidBodyFactory::createRigidBody(enum RigidBodyType type, const Vector3& pos, const Vector3& center_of_gravity)

@@ -120,16 +120,46 @@ void RigidBody::add_force(const Vector3& torque) {
 	particle.add_force(torque);
 }
 
-void RigidBody::add_force(const Vector3& local_position, const Vector3& force)
+void RigidBody::add_force(const Vector3& global_position, const Vector3& force)
 {
+	add_force_local(global_position - particle.get_position(), force);
+}
+
+void RigidBody::add_force_local(const Vector3& local_position, const Vector3& force)
+{
+	
+	if (Vector3::dot(local_position, force) == 0.0f) {
+		particle.add_force(force);
+		return;
+	}
+
 	Vector3 resultant_torque = Vector3::cross(local_position, force);
 	accum_torque += resultant_torque;
-	
-	particle.add_force(force);
+
+	particle.add_force(force - Vector3::cross(resultant_torque, local_position));
+}
+
+void RigidBody::add_impact(const Vector3& delta_position, const Vector3& impact_point, const Vector3& impact_velocity)
+{
+	Vector3 local_position = impact_point - particle.get_position();
+
+	if (Vector3::dot(local_position, impact_velocity) == 0.0f || impact_velocity.y < 0.5) {
+		particle.set_position(particle.get_position() + delta_position);
+		particle.set_velocity(particle.get_velocity() + impact_velocity);
+		return;
+	}
+
+	Vector3 delta_angular_velocity = inv_moment_inertia * Vector3::cross(local_position, impact_velocity);
+	angular_velocity += delta_angular_velocity;
+
+	Vector3 delta_velocity = impact_velocity - Vector3::cross(delta_angular_velocity, local_position);
+
+	particle.set_position(particle.get_position() + delta_position);
+	particle.set_velocity(particle.get_velocity() + delta_velocity);
 }
 
 void RigidBody::update(float delta) {
-	//particle.update(delta);
+	particle.set_velocity(0.99 * particle.get_velocity());
 
 	// Newton second law
 	Vector3 angular_acceleration = inv_moment_inertia * accum_torque;
@@ -139,16 +169,16 @@ void RigidBody::update(float delta) {
 	angular_velocity += angular_acceleration * delta;
 
 	// Rotate
-	float angle = Vector3::norm(angular_velocity) / 2.0f;
+	float angle = Vector3::norm(angular_velocity) * delta;
 	if (angle != 0) {
-		Quaternion velocity_quat(cos(angle), (sin(angle) * delta * angular_velocity * (0.5f / angle)));
+		Quaternion velocity_quat(cos(angle/2), (sin(angle/2) * Vector3::normalize(angular_velocity)));
 		angular_position = velocity_quat * angular_position;
 
 		// Update moment of inertia J = R*J-1*R-1
 		inv_moment_inertia = Quaternion::toMatrix3(angular_position) * inv_moment_inertia *
 			Quaternion::toMatrix3(Quaternion::inv(angular_position));
 	}
-
+	angular_velocity *= 0.992;
 	// Update transformation matrix
 	Matrix3 rotation_matrix = Quaternion::toMatrix3(angular_position);
 	rotation_matrix.x *= scale.x;

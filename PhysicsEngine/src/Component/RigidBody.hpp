@@ -49,7 +49,9 @@ public:
 	void rotate_z(float alpha);
 
 	void add_force(const Vector3& torque);
-	void add_force(const Vector3& local_position, const Vector3& force);
+	void add_force(const Vector3& global_position, const Vector3& force);
+	void add_force_local(const Vector3& local_position, const Vector3& force);
+	void add_impact(const Vector3& delta_position, const Vector3& impact_point, const Vector3& impact_velocity);
 
 	void update(float delta) override;
 

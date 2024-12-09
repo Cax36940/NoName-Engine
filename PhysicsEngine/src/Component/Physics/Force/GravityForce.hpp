@@ -1,7 +1,7 @@
 #pragma once
 #include "ParticleForceGenerator.hpp"
 
-#define GRAVITY_VALUE -2
+#define GRAVITY_VALUE -10
 
 class GravityForce : public ParticleForceGenerator
 {
