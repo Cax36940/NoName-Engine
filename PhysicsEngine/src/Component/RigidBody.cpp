@@ -1,6 +1,7 @@
 #pragma once
 #include "Component/RigidBody.hpp"
 
+bool RigidBody::enable_low_collision_gravity = true;
 
 RigidBody::RigidBody(const RigidBody& body)
 	: particle(body.particle),
@@ -143,8 +144,9 @@ void RigidBody::add_impact(const Vector3& delta_position, const Vector3& impact_
 {
 	Vector3 local_position = impact_point - particle.get_position();
 
-	if (Vector3::dot(local_position, impact_velocity) == 0.0f || impact_velocity.y < 0.5) {
-		particle.set_position(particle.get_position() + delta_position);
+	particle.set_position(particle.get_position() + delta_position);
+
+	if (Vector3::dot(local_position, impact_velocity) == 0.0f || (!enable_low_collision_gravity && impact_velocity.y < 0.5)) {
 		particle.set_velocity(particle.get_velocity() + impact_velocity);
 		return;
 	}
@@ -154,7 +156,6 @@ void RigidBody::add_impact(const Vector3& delta_position, const Vector3& impact_
 
 	Vector3 delta_velocity = impact_velocity - Vector3::cross(delta_angular_velocity, local_position);
 
-	particle.set_position(particle.get_position() + delta_position);
 	particle.set_velocity(particle.get_velocity() + delta_velocity);
 }
 

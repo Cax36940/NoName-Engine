@@ -137,6 +137,7 @@ void ofApp::draw() {
 	ofDrawBitmapString("SPACE : Launch body (Current : " + body_type_string(current_body_type) + ")", 10, 80);
 	ofDrawBitmapString("ARROWS : Move camera", 10, 100);
 	ofDrawBitmapString("Mouse : Rotate camera", 10, 120);
+	ofDrawBitmapString("G : Low collision Gravity (" + std::string(RigidBody::enable_low_collision_gravity ? "ENABLED" : "DISABLED") + ")", 10, 140);
 
 
 }
@@ -168,9 +169,16 @@ void ofApp::keyPressed(int key) {
 			current_body_type = (RigidBodyType)((int)current_body_type - 1);
 		}
 		else {
-			current_body_type = TETRAHEDRON;
+			current_body_type = OCTAHEDRON;
 		}
 	}
+
+	if (key == 'g') { // Next body
+		static bool next_value = false;
+		RigidBody::set_enable_low_collision_gravity(next_value);
+		next_value = !next_value;
+	}
+
 
 	// Movements of the camera with arrows
 
@@ -298,8 +306,8 @@ std::string ofApp::body_type_string(RigidBodyType type)
 		return "ICOSAHEDRON";
 	case OCTAHEDRON:
 		return "OCTAHEDRON";
-	case TETRAHEDRON:
-		return "TETRAHEDRON";
+	//case TETRAHEDRON:
+		//return "TETRAHEDRON";
 	default:
 		break;
 	}

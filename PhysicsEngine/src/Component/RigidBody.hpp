@@ -23,6 +23,10 @@ private:
 	Matrix4 transform;
 
 public:
+	static bool enable_low_collision_gravity; // TODO : Remove use just for demo and test
+	static void set_enable_low_collision_gravity(bool new_value) {
+		enable_low_collision_gravity = new_value;
+	}
 
 	RigidBody() = default;
 	RigidBody(const RigidBody& body);
