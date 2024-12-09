@@ -103,7 +103,9 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories);$(Solution)../of_v0.12.0_vs_release/libs</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);$(SolutionDir)obj\$(Platform)\$(Configuration)\Build\src\Component\$(Configuration)\Vector3</AdditionalDependencies>
       <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);$(SolutionDir)obj\$(Platform)\$(Configuration)\Build\src\Component\$(Configuration)\Vector4</AdditionalDependencies>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);$(SolutionDir)obj\$(Platform)\$(Configuration)\Build\src\Component\$(Configuration)\Matrix3</AdditionalDependencies>
       <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);$(SolutionDir)obj\$(Platform)\$(Configuration)\Build\src\Component\$(Configuration)\Matrix4</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
