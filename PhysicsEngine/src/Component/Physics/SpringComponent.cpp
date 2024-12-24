@@ -47,7 +47,7 @@ void SpringComponent::register_rigid_physics()
 	}
 	else {
 
-		const float norm_ij = std::sqrt(norm2_ij);
+		const float norm_ij = sqrtf(norm2_ij);
 		const Vector3 normal = vector_ji * (1 / norm_ij);
 
 		// Compute the distance to separate both objects

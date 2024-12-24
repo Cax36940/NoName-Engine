@@ -1,5 +1,5 @@
 #include "Octree.hpp"
-#include "ofMain.h" // ofDrawLine
+//#include "ofMain.h" // ofDrawLine // TODO : find a way to display octree
 
  bool Octree::is_node_splitted(const OctreeNode& node)
  {
@@ -175,7 +175,7 @@ void Octree::draw_tree_node(size_t node_index, const Vector3& position, const Ve
     // Draw the node if not splitted
     Vector3 half_size(size.x / 2, size.y / 2, size.z / 2);
 
-    ofVec3f  vertices[8] = {
+    /*ofVec3f  vertices[8] = {
         ofVec3f(position.x - half_size.x, position.y - half_size.y, position.z - half_size.z),
         ofVec3f(position.x + half_size.x, position.y - half_size.y, position.z - half_size.z),
         ofVec3f(position.x - half_size.x, position.y + half_size.y, position.z - half_size.z),
@@ -200,6 +200,6 @@ void Octree::draw_tree_node(size_t node_index, const Vector3& position, const Ve
     ofDrawLine(vertices[0], vertices[4]);
     ofDrawLine(vertices[1], vertices[5]);
     ofDrawLine(vertices[2], vertices[6]);
-    ofDrawLine(vertices[3], vertices[7]);
+    ofDrawLine(vertices[3], vertices[7]);*/
     
 }

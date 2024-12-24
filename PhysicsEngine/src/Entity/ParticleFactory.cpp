@@ -4,16 +4,16 @@ static struct ParticleArgs {
 	Vector3 velocity;
 	float mass;
 	float size;
-	glm::vec3 color;
+	Vector3 color;
 };
 
 static ParticleArgs particle_args_list[] = {
- {Vector3(100, -250, 0), 250, 20, glm::vec3(255, 100,   0)},	// FIREBALL
- {Vector3(150, -100, 0),  50, 10, glm::vec3(200, 200,   0)},	// TENNISBALL
- {Vector3(350,  -70, 0),  10,  5, glm::vec3(200, 200, 200)},	// GOLFBALL
- {Vector3(1000,  -1000, 0), 1, 15, glm::vec3(255, 0, 0)},		// LASER
- {Vector3(0, 0, 0), 1, 10, glm::vec3(255, 255, 255)},			// STATIC
- {Vector3(0, 0, 0), 10000000, 0, glm::vec3(0, 0, 0)}			// FIX
+ {Vector3(100, -250, 0), 250, 20, Vector3(255, 100,   0)},	// FIREBALL
+ {Vector3(150, -100, 0),  50, 10, Vector3(200, 200,   0)},	// TENNISBALL
+ {Vector3(350,  -70, 0),  10,  5, Vector3(200, 200, 200)},	// GOLFBALL
+ {Vector3(1000,  -1000, 0), 1, 15, Vector3(255, 0, 0)},		// LASER
+ {Vector3(0, 0, 0), 1, 10, Vector3(255, 255, 255)},			// STATIC
+ {Vector3(0, 0, 0), 10000000, 0, Vector3(0, 0, 0)}			// FIX
 };
 
 DefaultParticle ParticleFactory::createParticle(ParticleType particle_type, const Vector3& pos, const Vector3& acc) {

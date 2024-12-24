@@ -1,14 +1,11 @@
 #include <cmath>
+#include <iostream>
+
 #include "Vector4.hpp"
 
 Vector4::Vector4(const float& x, const float& y, const float& z, const float& t) : x(x), y(y), z(z), t(t) {}
 
 Vector4::Vector4(const Vector3& vector, const float& t) : x(vector.x), y(vector.y), z(vector.z), t(t) {}
-
-glm::vec4 Vector4::to_glm_vec4(const Vector4& vector)
-{
-    return glm::vec4(vector.x, vector.y, vector.z, vector.t);
-}
 
 bool Vector4::operator==(const Vector4& vector)
 {

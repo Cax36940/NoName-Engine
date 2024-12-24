@@ -34,7 +34,6 @@
     <ClCompile Include="src\System\ParticleForceRegistry.cpp" />
     <ClCompile Include="src\System\PhysicsComponentRegistry.cpp" />
     <ClCompile Include="src\System\UpdatesComponentRegistry.cpp" />
-    <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="src\Component\RigidBody.cpp" />
     <ClCompile Include="src\Entity\DefaultRigidBody.hpp" />
     <ClCompile Include="src\Component\Octree.cpp" />
@@ -45,9 +44,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\ofApp.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="src\Component\Graphics\ConvexHull.hpp" />
     <ClInclude Include="src\Component\Graphics\EyeSprite.hpp" />
     <ClInclude Include="src\Component\Graphics\GraphicsComponent.hpp" />
@@ -98,9 +94,6 @@
     <ClInclude Include="src\Entity\Arrow.hpp" />
     <ClInclude Include="src\Component\Octree.hpp" />
     <ClInclude Include="src\Component\Mesh\PlaneMesh.hpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="icon.rc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="TODO" />

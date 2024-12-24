@@ -1,5 +1,7 @@
-#include <ofMain.h>
+//#include <ofMain.h> // TODO : Redo display without of
 #include "SpringSprite.hpp"
+
+#define TWO_PI 2 * 3.141592653 // TODO : use namespace Maths
 
 void SpringSprite::set_positions(const Vector3* pos_a, const Vector3* pos_b) {
 	position_a = pos_a;
@@ -11,7 +13,7 @@ void SpringSprite::set_radius(const float& new_radius) {
 }
 
 void SpringSprite::set_color(const float& r, const float& g, const float& b) {
-	color = glm::vec3(r, g, b);
+	color = Vector3(r, g, b);
 }
 
 void SpringSprite::draw()
@@ -19,7 +21,7 @@ void SpringSprite::draw()
 	if (!visible) {
 		return;
 	}
-	ofSetColor(color.r, color.g, color.b);
+	//ofSetColor(color.r, color.g, color.b);
 
 	const Vector3 direction = *position_b - *position_a;
 
@@ -27,7 +29,7 @@ void SpringSprite::draw()
 
 	const Matrix3 pass_matrix = Matrix3::get_orthonormal_base(direction);
 	Vector3 to_draw;
-	ofPolyline line;
+	//ofPolyline line;
 	const float elongate = Vector3::norm(direction) / length;
 	float i = 0;
 
@@ -38,9 +40,9 @@ void SpringSprite::draw()
 
 		to_draw = *position_a + pass_matrix * Vector3(e, f, g);
 	
-		line.addVertex(ofVec3f(to_draw.x, to_draw.y, to_draw.z));
-		i += 0.05 * HALF_PI * 0.5;
+		//line.addVertex(ofVec3f(to_draw.x, to_draw.y, to_draw.z));
+		//i += 0.05 * HALF_PI * 0.5;
 	}
 	
-	line.draw();
+	//line.draw();
 }

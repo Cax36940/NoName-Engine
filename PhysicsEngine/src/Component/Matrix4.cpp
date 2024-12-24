@@ -1,6 +1,3 @@
-#define _USE_MATH_DEFINES // Import maths constants
-#include <cmath>
-
 #include "Matrix4.hpp"
 
 Matrix4::Matrix4() {

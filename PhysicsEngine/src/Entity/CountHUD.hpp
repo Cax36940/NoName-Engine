@@ -1,5 +1,5 @@
 #pragma once
-#include "ofMain.h"
+//#include "ofMain.h" // TODO implement character display
 #include "Entity/GravityChar.hpp"
 #include <vector>
 
@@ -9,7 +9,7 @@ private:
 	int x_pos;
 	int y_pos;
 	int value;
-	ofTrueTypeFont* font;
+	//ofTrueTypeFont* font;
 	int text_length;
 
 	std::vector<GravityChar> characters;
@@ -17,7 +17,7 @@ private:
 
 public:
 	CountHUD() = default;
-	CountHUD(int x_pos, int y_pos, int value, ofTrueTypeFont* font) : x_pos(x_pos), y_pos(y_pos), value(-1), font(font) {
+	CountHUD(int x_pos, int y_pos, int value/*, ofTrueTypeFont* font*/) : x_pos(x_pos), y_pos(y_pos), value(-1)/*, font(font)*/ {
 		characters.clear();
 		set_value(value);
 		text_length = strlen("Currently selected blob is composed of : ");

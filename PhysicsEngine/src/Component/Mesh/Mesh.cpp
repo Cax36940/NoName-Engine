@@ -1,7 +1,10 @@
-#include <ofMaterial.h>
+/*#include <ofMaterial.h>
 #include <ofMesh.h>
 #include <ofGraphics.h>
-#include <of3dGraphics.h>
+#include <of3dGraphics.h>*/
+// TODO : Redo display without of
+#include <iostream>
+
 #include "Mesh.hpp"
 
 Mesh::Mesh() : mesh_ressource(nullptr), transform(nullptr), color(255, 0, 0) {}
@@ -79,10 +82,10 @@ float Mesh::get_size() const
     return sqrt(max_norm);
 }
 
-const ofMesh& Mesh::get_cached_mesh() const
+/*const ofMesh& Mesh::get_cached_mesh() const
 {
     return cached_mesh;
-}
+}*/
 
 const Matrix4& Mesh::get_transform() const
 {
@@ -102,8 +105,8 @@ void Mesh::draw()
         update_mesh();
     }
 
-    ofSetColor(color.x, color.y, color.z);
-    cached_mesh.draw();
+    //ofSetColor(color.x, color.y, color.z);
+    //cached_mesh.draw();
 }
 
 void Mesh::update_mesh()
@@ -119,7 +122,7 @@ void Mesh::update_mesh()
     else {
         cached_transform = *transform;
     }
-    cached_mesh.clear();
+    //cached_mesh.clear();
 
     // Apply transform on vertices
     std::vector<Vector3> vertices = mesh_ressource->get_vertices();
@@ -131,7 +134,7 @@ void Mesh::update_mesh()
 
     const std::vector<unsigned int> indices = mesh_ressource->get_indices();
 
-    std::vector<ofDefaultVertexType> tmp_vertices;
+   /* std::vector<ofDefaultVertexType> tmp_vertices;
     std::vector<ofIndexType> tmp_indices;
     std::vector<ofDefaultNormalType> tmp_normals;
     tmp_vertices.reserve(indices.size());
@@ -175,5 +178,5 @@ void Mesh::update_mesh()
     cached_mesh.addNormals(tmp_normals);
 
     meshNeedsUpdate = false;
-
+    */
 }

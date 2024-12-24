@@ -1,5 +1,4 @@
 #pragma once
-#include <ofMesh.h> // Needed for glm::vec3
 
 class Vector3 {
 
@@ -42,16 +41,6 @@ public:
      * @brief Constructor from coordinates
      */
     Vector3(const float& x, const float& y, const float& z);
-
-    /**
-     * @brief Constructor from glm::vec3
-     */
-    Vector3(const glm::vec3& vector);
-
-    /**
-     * @brief Converter from Vector3 to glm::vec3
-     */
-    static glm::vec3 to_glm_vec3(const Vector3& vector);
 
     /**
      * @brief Equal operator

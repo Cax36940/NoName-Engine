@@ -1,4 +1,6 @@
 #pragma once
+#include <vector>
+
 #include "Component/Particle.hpp"
 #include "Component/Physics/Force/ParticleForceGenerator.hpp"
 #include "Component/Physics/Force/FrictionForce.hpp"

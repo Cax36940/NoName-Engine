@@ -1,6 +1,8 @@
-#include <ofGraphics.h>
-#include "ConvexHull.hpp"
+//#include <ofGraphics.h> // TODO : Redo display without of
+#include <algorithm>
 #include <stack>
+
+#include "ConvexHull.hpp"
 
 static const Vector3* anchorPoint;
 
@@ -26,7 +28,7 @@ void ConvexHull::set_positions(const std::vector<const Vector3*>& pos) {
 
 
 void ConvexHull::set_color(const float& r, const float& g, const float& b) {
-	color = glm::vec3(r, g, b);
+	color = Vector3(r, g, b);
 }
 
 void ConvexHull::set_visible_outline(bool new_visible)
@@ -82,7 +84,7 @@ void ConvexHull::draw()
         hull.pop();
     }
 
-	ofSetColor(color.r, color.g, color.b);
+	/*ofSetColor(color.r, color.g, color.b);
     ofFill();
     ofBeginShape();
     for (const Vector3* point : hullPoints) {
@@ -102,5 +104,5 @@ void ConvexHull::draw()
         }
         ofEndShape(true);  // Close the shape
         ofSetLineWidth(1);
-    }
+    }*/
 }

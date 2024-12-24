@@ -1,4 +1,3 @@
-#include <of3dGraphics.h>
 #include "Particle.hpp"
 #include "Physics/Force/GravityForce.hpp"
 #include "System/ParticleForceRegistry.hpp"

@@ -138,7 +138,7 @@ Matrix3 Matrix3::inv(const Matrix3& matrix)
     return inv;
 }
 
-Matrix3 Matrix3::get_orthonormal_base(const Vector3& vector)
+Matrix3 Matrix3::get_orthonormal_base(const Vector3& vector) // TODO : remove, used only for spring
 {
     Vector3 v2 = Vector3(M_PI, M_E, M_SQRT2);
     Vector3 v3;

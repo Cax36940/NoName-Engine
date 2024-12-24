@@ -5,6 +5,8 @@
 #include "Component/Mesh/MeshRessource.hpp"
 #include "Component/Vector3.hpp"
 
+// TODO : remove cache mesh
+
 class Mesh : public GraphicsComponent
 {
 public :
@@ -25,7 +27,7 @@ public :
     const Vector3& get_offset() const;
 
     float get_size() const;
-    const ofMesh& get_cached_mesh() const;
+    //const ofMesh& get_cached_mesh() const;
     const Matrix4& get_transform() const;
 
     void draw() override;
@@ -36,7 +38,7 @@ protected:
     Vector3 color;
     Vector3 offset = Vector3();
     bool meshNeedsUpdate = true;
-    ofMesh cached_mesh;
+    //ofMesh cached_mesh;
     Matrix4 cached_transform; // Used to check if mesh needs to be updated
 
     void update_mesh();

@@ -1,12 +1,13 @@
-#include "ofMain.h"
-#include "ofApp.h"
+// TODO change ofApp
+//#include "ofMain.h"
+//#include "ofApp.h"
 
 #include <iostream>
 
 //========================================================================
 int main( ){
 
-	//Use ofGLFWWindowSettings for more options like multi-monitor fullscreen
+	/*//Use ofGLFWWindowSettings for more options like multi-monitor fullscreen
 	ofGLWindowSettings settings;
 	settings.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 	
@@ -15,6 +16,6 @@ int main( ){
 	auto window = ofCreateWindow(settings);
 
 	ofRunApp(window, make_shared<ofApp>());
-	ofRunMainLoop();
+	ofRunMainLoop();*/
 
 }

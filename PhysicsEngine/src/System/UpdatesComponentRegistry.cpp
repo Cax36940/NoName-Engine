@@ -1,6 +1,7 @@
+#include <iostream>
+
 #include "UpdatesComponentRegistry.hpp"
 #include "Component/UpdatesComponent.hpp"
-#include <iostream>
 
 std::vector<UpdatesComponent *> UpdatesComponentRegistry::registry;
 

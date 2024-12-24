@@ -9,15 +9,15 @@ class Sphere : public GraphicsComponent
 private:
 	const Vector3* position;
 	float size;
-	glm::vec3 color;
+	Vector3 color;
 
 public:
 	Sphere() = default;
 	Sphere(const Sphere&) = default;
 	Sphere& operator=(const Sphere&) = default;
 
-	Sphere(const Vector3* pos, const float& size, const glm::vec3& color) : position(pos), size(size), color(color) {}
-	Sphere(const float& size, const glm::vec3& color) : position(nullptr), size(size), color(color) {}
+	Sphere(const Vector3* pos, const float& size, const Vector3& color) : position(pos), size(size), color(color) {}
+	Sphere(const float& size, const Vector3& color) : position(nullptr), size(size), color(color) {}
 
 	void set_position(const Vector3* pos);
 	void set_size(const float& new_size);

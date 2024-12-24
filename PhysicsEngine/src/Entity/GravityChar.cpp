@@ -1,12 +1,12 @@
 #include "GravityChar.hpp"
 #include <iostream>
 
-GravityChar::GravityChar(std::string c, float x_pos, float max_y_pos, float gravity_strength, ofTrueTypeFont* font)
+GravityChar::GravityChar(std::string c, float x_pos, float max_y_pos, float gravity_strength)//, ofTrueTypeFont* font)
 	: c(c)
 	, max_y_pos(max_y_pos)
 	, physical_body(Particle(Vector3(x_pos, max_y_pos - 200, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), 1))
 	, gravity_strength(gravity_strength)
-	, font(font)
+	//, font(font)
 {
 }
 
@@ -21,5 +21,5 @@ void GravityChar::update(float delta)
 
 void GravityChar::draw()
 {
-	font->drawString(c, physical_body.get_position().x, physical_body.get_position().y);
+	//font->drawString(c, physical_body.get_position().x, physical_body.get_position().y);
 }

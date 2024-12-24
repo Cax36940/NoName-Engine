@@ -1,6 +1,10 @@
-#include "Blob.hpp"
-#include <ofMain.h>
+#include <iostream>
 
+#include "Blob.hpp"
+//#include <ofMain.h>
+
+#define PI 3.14159265358 // TODO : make a Maths namespace
+#define TWO_PI 3.14159265358 * 2
 
 #define STIFFNESS 20
 #define DAMPING 1
@@ -27,7 +31,7 @@ void Blob::init()
 {
 	int particle_number = particles.size();
 
-	const glm::vec3 color(0.5, 0.5, 0.5);
+	const Vector3 color(0.5, 0.5, 0.5);
 
 	// Add springs
 	springs.reserve(2 * particles.size());
@@ -81,7 +85,7 @@ Blob::Blob(const Vector3& pos, int particle_number)
 	float radius = DEFAULT_LENGTH / (2 * sin(PI / particle_number));
 
 	for (int i = 0; i < particle_number; i++) {
-		particles.emplace_back(Particle(pos + Vector3(radius * cos(i*TWO_PI/particle_number), radius * sin(i*TWO_PI / particle_number), 0), Vector3(0, 0, 0), Vector3(0, 0, 0), 5), Sphere(20, glm::vec3(255, 255, 255)));
+		particles.emplace_back(Particle(pos + Vector3(radius * cos(i*TWO_PI/particle_number), radius * sin(i*TWO_PI / particle_number), 0), Vector3(0, 0, 0), Vector3(0, 0, 0), 5), Sphere(20, Vector3(255, 255, 255)));
 	}
 
 	init();

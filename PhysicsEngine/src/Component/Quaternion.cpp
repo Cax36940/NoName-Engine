@@ -1,5 +1,6 @@
 #include <cmath>
 #include <iostream>
+
 #include "Quaternion.hpp"
 #include "Matrix3.hpp"
 

@@ -1,5 +1,5 @@
-#include <ofGraphics.h>
-#include <of3dGraphics.h>
+//#include <ofGraphics.h>
+//#include <of3dGraphics.h> // TODO : Redo display without of
 #include "EyeSprite.hpp"
 
 void EyeSprite::set_position(const Vector3& pos) {
@@ -17,8 +17,8 @@ void EyeSprite::draw()
 	if (!visible) {
 		return;
 	}
-	ofSetColor(255, 255, 255);
+	/*ofSetColor(255, 255, 255);
 	ofDrawSphere(glm::vec3(position.x, position.y, position.z), 10);
 	ofSetColor(0, 0, 0);
-	ofDrawSphere(glm::vec3(position.x, position.y, position.z), 5);
+	ofDrawSphere(glm::vec3(position.x, position.y, position.z), 5);*/
 }

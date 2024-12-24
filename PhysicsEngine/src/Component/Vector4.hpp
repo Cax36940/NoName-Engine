@@ -1,5 +1,4 @@
 #pragma once
-#include <of3dGraphics.h>
 #include "Vector3.hpp"
 
 class Vector4
@@ -50,11 +49,6 @@ public:
      * @brief Constructor from Vector3 and coordinate
      */
     Vector4(const Vector3& vector, const float& t);
-
-    /**
-     * @brief Converter from Vector4 to glm::vec3
-     */
-    static glm::vec4 to_glm_vec4(const Vector4& vector);
 
     /**
      * @brief Equal operator

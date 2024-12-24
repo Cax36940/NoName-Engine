@@ -17,7 +17,7 @@ void CableComponent::register_physics()
 	const float norm2_ij = Vector3::norm2(vector_ji);
 	if (is_rigid || norm2_ij >= default_length * default_length) {
 
-		const float norm_ij = std::sqrt(norm2_ij);
+		const float norm_ij = sqrtf(norm2_ij);
 		const Vector3 normal = vector_ji * (1 / norm_ij);
 
 		// Compute the distance to separate both objects
