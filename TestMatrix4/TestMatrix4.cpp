@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "CppUnitTest.h"
-#include "Component/Vector4.hpp"
-#include "Component/Matrix4.hpp"
+#include "Vector4.hpp"
+#include "Matrix4.hpp"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 

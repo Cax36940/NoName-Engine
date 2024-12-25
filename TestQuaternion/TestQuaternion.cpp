@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "CppUnitTest.h"
 
-#include "Component/Quaternion.hpp"
+#include "Quaternion.hpp"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 

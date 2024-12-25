@@ -3,7 +3,7 @@
 #include "Component/Physics/Collider/SphereCollider.hpp"
 #include "Component/Octree.hpp"
 #include "Component/Particle.hpp"
-#include "Component/Vector3.hpp"
+#include "Vector3.hpp"
 #include "Component/Mesh/Mesh.hpp"
 #include "Component/Physics/Force/FrictionForce.hpp"
 #include "ParticleForceRegistry.hpp"

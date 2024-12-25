@@ -59,7 +59,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;$(SolutionDir)../GraphicsEngine/dept</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;$(SolutionDir)../GraphicsEngine/dept;$(SolutionDir)../Maths/include</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <ObjectFileName>$(IntDir)\Build\%(RelativeDir)\$(Configuration)\</ObjectFileName>
@@ -86,7 +86,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;$(SolutionDir)../GraphicsEngine/dept</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;$(SolutionDir)../GraphicsEngine/dept;$(SolutionDir)../Maths/include</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <ObjectFileName>$(IntDir)\Build\%(RelativeDir)\$(Configuration)\</ObjectFileName>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -116,8 +116,6 @@
     <ClCompile Include="src\Component\Graphics\Sphere.cpp" />
     <ClCompile Include="src\Component\Graphics\SpringSprite.cpp" />
     <ClCompile Include="src\Component\Graphics\Line.cpp" />
-    <ClCompile Include="src\Component\Matrix3.cpp" />
-    <ClCompile Include="src\Component\Matrix4.cpp" />
     <ClCompile Include="src\Component\Octree.cpp" />
     <ClCompile Include="src\Component\Particle.cpp" />
     <ClCompile Include="src\Component\Physics\Collider\SphereCollider.cpp" />
@@ -126,10 +124,7 @@
     <ClCompile Include="src\Component\Physics\Force\SpringForce.cpp" />
     <ClCompile Include="src\Component\Physics\Force\FrictionForce.cpp" />
     <ClCompile Include="src\Component\Physics\Force\PullForce.cpp" />
-    <ClCompile Include="src\Component\Quaternion.cpp" />
     <ClCompile Include="src\Component\RigidBody.cpp" />
-    <ClCompile Include="src\Component\Vector3.cpp" />
-    <ClCompile Include="src\Component\Vector4.cpp" />
     <ClCompile Include="src\Entity\Blob.cpp" />
     <ClCompile Include="src\Entity\CountHUD.cpp" />
     <ClCompile Include="src\Entity\DefaultRigidBody.hpp" />
@@ -161,8 +156,6 @@
     <ClInclude Include="src\Component\Graphics\Sphere.hpp" />
     <ClInclude Include="src\Component\Graphics\SpringSprite.hpp" />
     <ClInclude Include="src\Component\Graphics\Line.hpp" />
-    <ClInclude Include="src\Component\Matrix3.hpp" />
-    <ClInclude Include="src\Component\Matrix4.hpp" />
     <ClInclude Include="src\Component\Octree.hpp" />
     <ClInclude Include="src\Component\Particle.hpp" />
     <ClInclude Include="src\Component\Physics\Collider\SphereCollider.hpp" />
@@ -174,10 +167,7 @@
     <ClInclude Include="src\Component\Physics\Force\ParticleForceGenerator.hpp" />
     <ClInclude Include="src\Component\Physics\Force\PullForce.hpp" />
     <ClInclude Include="src\Component\Physics\PhysicsComponent.hpp" />
-    <ClInclude Include="src\Component\Quaternion.hpp" />
     <ClInclude Include="src\Component\UpdatesComponent.hpp" />
-    <ClInclude Include="src\Component\Vector3.hpp" />
-    <ClInclude Include="src\Component\Vector4.hpp" />
     <ClInclude Include="src\Entity\Arrow.hpp" />
     <ClInclude Include="src\Entity\Blob.hpp" />
     <ClInclude Include="src\Entity\Cable.hpp" />

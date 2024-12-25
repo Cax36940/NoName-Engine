@@ -1,6 +1,6 @@
 #pragma once
 #include "MeshRessource.hpp"
-#include "Component/Quaternion.hpp"
+#include "Quaternion.hpp"
 
 #define ARROW_LENGTH 5.0f
 

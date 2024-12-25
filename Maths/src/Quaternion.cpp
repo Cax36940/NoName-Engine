@@ -82,7 +82,11 @@ Quaternion& Quaternion::operator-=(const Quaternion& quat) {
 
 Quaternion& Quaternion::operator-()
 {
-    return Quaternion(-w, -x, -y, -z);
+    this->w = -this->w;
+    this->x = -this->x;
+    this->y = -this->y;
+    this->z = -this->z;
+    return *this;
 }
 
 Quaternion Quaternion::conj(const Quaternion& quat)

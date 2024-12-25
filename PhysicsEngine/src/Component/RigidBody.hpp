@@ -2,10 +2,10 @@
 #include "Component/Mesh/Mesh.hpp"
 
 #include "Component/Particle.hpp"
-#include "Component/Matrix3.hpp"
-#include "Component/Matrix4.hpp"
-#include "Component/Quaternion.hpp"
-#include "Component/Vector3.hpp"
+#include "Matrix3.hpp"
+#include "Matrix4.hpp"
+#include "Quaternion.hpp"
+#include "Vector3.hpp"
 
 #include "Component/UpdatesComponent.hpp"
 

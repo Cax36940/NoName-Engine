@@ -1,6 +1,6 @@
 #include "Component/Mesh/ArrowMesh.hpp"
 #include "Component/Mesh/Mesh.hpp"
-#include "Component/Matrix4.hpp"
+#include "Matrix4.hpp"
 
 class Arrow {
 public:

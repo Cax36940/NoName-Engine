@@ -48,12 +48,12 @@ public:
     /**
      * @brief Constructor from Vector3 columns
      */
-    Matrix4::Matrix4(const Vector3& x, const Vector3& y, const Vector3& z, const Vector3& t);
+    Matrix4(const Vector3& x, const Vector3& y, const Vector3& z, const Vector3& t);
 
     /**
      * @brief Constructor from a Matrix3 and a Vector3
      */
-    Matrix4::Matrix4(const Matrix3& matrix, const Vector3& vector = Vector3());
+    Matrix4(const Matrix3& matrix, const Vector3& vector = Vector3());
 
     /**
      * @brief Equal operator

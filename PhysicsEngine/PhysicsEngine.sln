@@ -8,16 +8,33 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PhysicsEngine", "PhysicsEng
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestVector3", "..\TestVector3\TestVector3.vcxproj", "{9E070002-8B2F-49B1-9B8B-F57EC6A4A9CF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9135F778-F18C-4E4B-882B-95E50FD6E22D} = {9135F778-F18C-4E4B-882B-95E50FD6E22D}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestMatrix3", "..\TestMatrix3\TestMatrix3.vcxproj", "{DE1DD361-4E35-44EC-834B-54C7371DEF43}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9135F778-F18C-4E4B-882B-95E50FD6E22D} = {9135F778-F18C-4E4B-882B-95E50FD6E22D}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestMatrix4", "..\TestMatrix4\TestMatrix4.vcxproj", "{0979F518-7AA0-4671-8B6C-9F3CCA6911AF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9135F778-F18C-4E4B-882B-95E50FD6E22D} = {9135F778-F18C-4E4B-882B-95E50FD6E22D}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestQuaternion", "..\TestQuaternion\TestQuaternion.vcxproj", "{ABE755F1-C7DB-47DD-8D2B-6CE641C7C1B9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9135F778-F18C-4E4B-882B-95E50FD6E22D} = {9135F778-F18C-4E4B-882B-95E50FD6E22D}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestVector4", "..\TestVector4\TestVector4.vcxproj", "{742BE210-633F-403E-BC52-C974CB4E32E8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9135F778-F18C-4E4B-882B-95E50FD6E22D} = {9135F778-F18C-4E4B-882B-95E50FD6E22D}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GraphicsEngine", "..\GraphicsEngine\GraphicsEngine.vcxproj", "{98E75BA1-75D5-4418-946C-B090BFEE5DC9}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Maths", "..\Maths\Maths.vcxproj", "{9135F778-F18C-4E4B-882B-95E50FD6E22D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,6 +100,14 @@ Global
 		{98E75BA1-75D5-4418-946C-B090BFEE5DC9}.Release|x64.Build.0 = Release|x64
 		{98E75BA1-75D5-4418-946C-B090BFEE5DC9}.Release|x86.ActiveCfg = Release|Win32
 		{98E75BA1-75D5-4418-946C-B090BFEE5DC9}.Release|x86.Build.0 = Release|Win32
+		{9135F778-F18C-4E4B-882B-95E50FD6E22D}.Debug|x64.ActiveCfg = Debug|x64
+		{9135F778-F18C-4E4B-882B-95E50FD6E22D}.Debug|x64.Build.0 = Debug|x64
+		{9135F778-F18C-4E4B-882B-95E50FD6E22D}.Debug|x86.ActiveCfg = Debug|Win32
+		{9135F778-F18C-4E4B-882B-95E50FD6E22D}.Debug|x86.Build.0 = Debug|Win32
+		{9135F778-F18C-4E4B-882B-95E50FD6E22D}.Release|x64.ActiveCfg = Release|x64
+		{9135F778-F18C-4E4B-882B-95E50FD6E22D}.Release|x64.Build.0 = Release|x64
+		{9135F778-F18C-4E4B-882B-95E50FD6E22D}.Release|x86.ActiveCfg = Release|Win32
+		{9135F778-F18C-4E4B-882B-95E50FD6E22D}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

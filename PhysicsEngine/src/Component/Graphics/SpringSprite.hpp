@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Component/Graphics/GraphicsComponent.hpp"
-#include "Component/Vector3.hpp"
-#include "Component/Matrix3.hpp"
+#include "Vector3.hpp"
+#include "Matrix3.hpp"
 
 
 class SpringSprite : public GraphicsComponent

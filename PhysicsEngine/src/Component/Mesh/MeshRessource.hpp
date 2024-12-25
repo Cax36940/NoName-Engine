@@ -1,6 +1,6 @@
 #pragma once
-#include "Component/Matrix3.hpp"
-#include "Component/Vector3.hpp"
+#include "Matrix3.hpp"
+#include "Vector3.hpp"
 
 class MeshRessource {
 public:

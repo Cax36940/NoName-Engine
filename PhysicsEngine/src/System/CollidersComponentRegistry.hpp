@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 
-#include "Component/Vector3.hpp"
+#include "Vector3.hpp"
 
 class SphereCollider;
 class Octree;

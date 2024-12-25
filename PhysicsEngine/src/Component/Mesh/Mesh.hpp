@@ -1,9 +1,9 @@
 #pragma once
 #include "Component/Graphics/GraphicsComponent.hpp"
-#include "Component/Matrix3.hpp"
-#include "Component/Matrix4.hpp"
+#include "Matrix3.hpp"
+#include "Matrix4.hpp"
 #include "Component/Mesh/MeshRessource.hpp"
-#include "Component/Vector3.hpp"
+#include "Vector3.hpp"
 
 // TODO : remove cache mesh
 
