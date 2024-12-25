@@ -9,6 +9,11 @@ bool Vector3::operator==(const Vector3& vector)
     return (this->x == vector.x) && (this->y == vector.y) && (this->z == vector.z);
 }
 
+bool Vector3::operator!=(const Vector3& vector)
+{
+    return (this->x != vector.x) || (this->y != vector.y) || (this->z != vector.z);
+}
+
 Vector3 Vector3::operator*(const float& alpha) const {
     return Vector3(alpha * this->x, alpha * this->y, alpha * this->z);
 }
@@ -22,6 +27,19 @@ Vector3& Vector3::operator*=(const float& alpha) {
 
 Vector3 operator*(const float& alpha, const Vector3& vector) {
     return Vector3(alpha * vector.x, alpha * vector.y, alpha * vector.z);
+}
+
+Vector3 Vector3::operator/(const float& alpha) const
+{
+    return Vector3(this->x / alpha, this->y / alpha, this->z / alpha);
+}
+
+Vector3& Vector3::operator/=(const float& alpha)
+{
+    this->x /= alpha;
+    this->y /= alpha;
+    this->z /= alpha;
+    return *this;
 }
 
 Vector3 Vector3::operator+(const Vector3& vector) const {
@@ -46,21 +64,56 @@ Vector3& Vector3::operator-=(const Vector3& vector) {
     return *this;
 }
 
+float Vector3::norm() const
+{
+    return Vector3::norm(*this);
+}
+
 float Vector3::norm(const Vector3& vector) {
     return sqrtf(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z);
+}
+
+float Vector3::norm2() const
+{
+    return Vector3::norm2(*this);
 }
 
 float Vector3::norm2(const Vector3& vector) {
     return vector.x * vector.x + vector.y * vector.y + vector.z * vector.z;
 }
 
+float Vector3::inv_norm() const
+{
+    return Vector3::inv_norm(*this);
+}
+
 float Vector3::inv_norm(const Vector3& vector) {
-    float ret = 1.0f/sqrtf(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z);
-    if (std::isinf(ret)) {
+    float norm = sqrtf(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z);
+    if (norm < std::numeric_limits<float>::epsilon()) {
          std::cerr << "[ERROR] Invalid division by 0 in " << __FILE__ << " : " << __FUNCTION__ << "(line:" << __LINE__ << ")" << std::endl;
-        ret = 0; // TODO : Check what is the best thing to return in case of null vector inverse norm 
+         return 0.0f;
     }
-    return ret;
+    return 1.0f / norm;
+}
+
+float Vector3::inv_norm2() const
+{
+    return Vector3::inv_norm2(*this);
+}
+
+float Vector3::inv_norm2(const Vector3& vector)
+{
+    float norm2 = vector.x * vector.x + vector.y * vector.y + vector.z * vector.z;
+    if (norm2 < std::numeric_limits<float>::epsilon()) {
+        std::cerr << "[ERROR] Invalid division by 0 in " << __FILE__ << " : " << __FUNCTION__ << "(line:" << __LINE__ << ")" << std::endl;
+        return 0.0f;
+    }
+    return 1.0f / norm2;
+}
+
+Vector3 Vector3::normalize() const
+{
+    return Vector3::normalize(*this);
 }
 
 Vector3 Vector3::normalize(const Vector3& vector) {
@@ -68,12 +121,27 @@ Vector3 Vector3::normalize(const Vector3& vector) {
     return inv_norm * vector;
 }
 
+Vector3 Vector3::conv(const Vector3& vector_u) const
+{
+    return Vector3::conv(*this, vector_u);
+}
+
 Vector3 Vector3::conv(const Vector3& vector_u, const Vector3& vector_v) {
     return Vector3(vector_u.x * vector_v.x, vector_u.y * vector_v.y, vector_u.z * vector_v.z);
 }
 
+float Vector3::dot(const Vector3& vector_u) const
+{
+    return Vector3::dot(*this, vector_u);
+}
+
 float Vector3::dot(const Vector3& vector_u, const Vector3& vector_v) {
     return vector_u.x * vector_v.x + vector_u.y * vector_v.y + vector_u.z * vector_v.z;
+}
+
+Vector3 Vector3::cross(const Vector3& vector_u) const
+{
+    return Vector3::cross(*this, vector_u);
 }
 
 Vector3 Vector3::cross(const Vector3& vector_u, const Vector3& vector_v) {
@@ -82,10 +150,14 @@ Vector3 Vector3::cross(const Vector3& vector_u, const Vector3& vector_v) {
         vector_u.x * vector_v.y - vector_u.y * vector_v.x);
 }
 
-Vector3 Vector3::orthogonal_projection(const Vector3& support_v, const Vector3& projected_v)
+Vector3 Vector3::project(const Vector3& support) const
 {
-    float support_norm2 = norm2(support_v);
-    Vector3 projection = dot(support_v, projected_v) * support_v * (1 / support_norm2);
+    return Vector3::project(*this, support);
+}
 
+Vector3 Vector3::project(const Vector3& projected, const Vector3& support)
+{
+    float inv_support_norm2 = inv_norm2(support);
+    Vector3 projection = (dot(support, projected) * inv_support_norm2) * support;
     return projection;
 }
