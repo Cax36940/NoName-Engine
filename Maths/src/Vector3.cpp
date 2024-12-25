@@ -53,6 +53,11 @@ Vector3& Vector3::operator+=(const Vector3& vector) {
     return *this;
 }
 
+Vector3 Vector3::operator-() const
+{
+    return Vector3(-this->x, -this->y, -this->z);
+}
+
 Vector3 Vector3::operator-(const Vector3& vector) const {
     return Vector3(this->x - vector.x, this->y - vector.y, this->z - vector.z);
 }

@@ -73,6 +73,11 @@ struct Vector3 {
 
     /**
      * @brief Vector negation
+     */
+    Vector3 operator-() const;
+
+    /**
+     * @brief Vector substraction
      * @param vector the vector to add to current vector
      */
     Vector3 operator-(const Vector3& vector) const;
