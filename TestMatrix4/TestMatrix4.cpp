@@ -1,4 +1,3 @@
-#include "pch.h"
 #include "CppUnitTest.h"
 #include "Vector4.hpp"
 #include "Matrix4.hpp"
