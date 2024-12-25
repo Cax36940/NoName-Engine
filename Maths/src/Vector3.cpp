@@ -2,7 +2,7 @@
 
 #include "Vector3.hpp"
 
-Vector3::Vector3(const float& x, const float& y, const float& z) : x(x), y(y), z(z) {}
+Vector3::Vector3(float x, float y, float z) : x(x), y(y), z(z) {}
 
 bool Vector3::operator==(const Vector3& vector)
 {
@@ -14,27 +14,27 @@ bool Vector3::operator!=(const Vector3& vector)
     return (this->x != vector.x) || (this->y != vector.y) || (this->z != vector.z);
 }
 
-Vector3 Vector3::operator*(const float& alpha) const {
+Vector3 Vector3::operator*(float alpha) const {
     return Vector3(alpha * this->x, alpha * this->y, alpha * this->z);
 }
 
-Vector3& Vector3::operator*=(const float& alpha) {
+Vector3& Vector3::operator*=(float alpha) {
     this->x *= alpha;
     this->y *= alpha;
     this->z *= alpha;
     return *this;
 }
 
-Vector3 operator*(const float& alpha, const Vector3& vector) {
+Vector3 operator*(float alpha, const Vector3& vector) {
     return Vector3(alpha * vector.x, alpha * vector.y, alpha * vector.z);
 }
 
-Vector3 Vector3::operator/(const float& alpha) const
+Vector3 Vector3::operator/(float alpha) const
 {
     return Vector3(this->x / alpha, this->y / alpha, this->z / alpha);
 }
 
-Vector3& Vector3::operator/=(const float& alpha)
+Vector3& Vector3::operator/=(float alpha)
 {
     this->x /= alpha;
     this->y /= alpha;

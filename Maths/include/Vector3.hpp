@@ -14,7 +14,7 @@ struct Vector3 {
     /**
      * @brief Constructor from coordinates
      */
-    Vector3(const float& x, const float& y, const float& z);
+    Vector3(float x, float y, float z);
 
     /**
      * @brief Equal operator
@@ -32,32 +32,32 @@ struct Vector3 {
      * @brief Scalar multiplication on the right
      * @param alpha the scalar
      */
-    Vector3 operator*(const float& alpha) const;
+    Vector3 operator*(float alpha) const;
 
     /**
      * @brief Scalar multiplication assignment
      * @param alpha the scalar
      */
-    Vector3& operator*=(const float& alpha);
+    Vector3& operator*=(float alpha);
 
     /**
      * @brief Scalar multiplication on the left
      * @param alpha the scalar
      * @param vector the vector
      */
-    friend Vector3 operator*(const float& alpha, const Vector3& vector);
+    friend Vector3 operator*(float alpha, const Vector3& vector);
 
     /**
      * @brief Scalar division on the right
      * @param alpha the scalar
      */
-    Vector3 operator/(const float& alpha) const;
+    Vector3 operator/(float alpha) const;
 
     /**
      * @brief Scalar division assignment
      * @param alpha the scalar
      */
-    Vector3& operator/=(const float& alpha);
+    Vector3& operator/=(float alpha);
 
     /**
      * @brief Vector addition (return new vector)
