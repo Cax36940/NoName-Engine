@@ -141,6 +141,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="include\Constants.hpp" />
     <ClInclude Include="include\Matrix3.hpp" />
     <ClInclude Include="include\Matrix4.hpp" />
     <ClInclude Include="include\Quaternion.hpp" />

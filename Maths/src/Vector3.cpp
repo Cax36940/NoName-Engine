@@ -1,4 +1,3 @@
-#include <cmath>
 #include <iostream>
 
 #include "Vector3.hpp"

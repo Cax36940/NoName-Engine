@@ -1,6 +1,4 @@
-#define _USE_MATH_DEFINES // Import maths constants
-#include <cmath>
-
+#include "Constants.hpp"
 #include "Matrix3.hpp"
 #include "Vector3.hpp"
 
@@ -140,7 +138,7 @@ Matrix3 Matrix3::inv(const Matrix3& matrix)
 
 Matrix3 Matrix3::get_orthonormal_base(const Vector3& vector) // TODO : remove, used only for spring
 {
-    Vector3 v2 = Vector3(M_PI, M_E, M_SQRT2);
+    Vector3 v2 = Vector3(MATHS_PI, MATHS_E, MATHS_SQRT2);
     Vector3 v3;
     Vector3 u1 = Vector3::normalize(vector);
     Vector3 u2;

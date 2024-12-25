@@ -1,0 +1,6 @@
+#pragma once
+
+#define MATHS_E			2.71828182845904523536f   // e
+#define MATHS_PI		3.14159265358979323846f   // pi
+#define MATHS_TWO_PI	6.28318530717958647692f   // 2 * pi
+#define MATHS_SQRT2		1.41421356237309504880f   // sqrt(2)

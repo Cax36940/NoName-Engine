@@ -1,4 +1,3 @@
-#include <cmath>
 #include <iostream>
 
 #include "Quaternion.hpp"
@@ -154,11 +153,11 @@ Vector3 Quaternion::toVector3(const Quaternion& quat)
 
 Matrix3 Quaternion::toMatrix3(const Quaternion& quat)
 {
-    const Vector3 x ((1 - 2 * (pow((quat.y), 2) + pow((quat.z), 2))), 2 * (quat.x * quat.y + quat.z * quat.w), 2 * (quat.x * quat.z - quat.y * quat.w));
+    const Vector3 x (1 - 2 * (quat.y * quat.y + quat.z * quat.z), 2 * (quat.x * quat.y + quat.z * quat.w), 2 * (quat.x * quat.z - quat.y * quat.w));
 
-    const Vector3 y (2 * (quat.x * quat.y - quat.z * quat.w), (1 - 2 * (pow((quat.x), 2) + pow((quat.z), 2))), 2 * (quat.y * quat.z + quat.x * quat.w));
+    const Vector3 y (2 * (quat.x * quat.y - quat.z * quat.w), 1 - 2 * (quat.x * quat.x + quat.z * quat.z), 2 * (quat.y * quat.z + quat.x * quat.w));
 
-    const Vector3 z (2 * (quat.x * quat.z + quat.y * quat.w), 2 * (quat.y * quat.z - quat.x * quat.w), (1 - 2 * (pow((quat.x), 2) + pow((quat.y), 2))));
+    const Vector3 z (2 * (quat.x * quat.z + quat.y * quat.w), 2 * (quat.y * quat.z - quat.x * quat.w), 1 - 2 * (quat.x * quat.x + quat.y * quat.y));
 
     return Matrix3(x, y, z);
 }
