@@ -3,7 +3,7 @@
 
 #include "Component/Particle.hpp"
 #include "Matrix3.hpp"
-#include "Matrix4.hpp"
+#include "Transform.hpp"
 #include "Quaternion.hpp"
 #include "Vector3.hpp"
 
@@ -20,7 +20,7 @@ private:
 	Vector3 scale = Vector3(1, 1, 1);
 
 	Matrix3 inv_moment_inertia;
-	Matrix4 transform;
+	Transform transform;
 
 public:
 	static bool enable_low_collision_gravity; // TODO : Remove use just for demo and test
@@ -37,7 +37,7 @@ public:
 	RigidBody(const Vector3& pos, const float& mass = 1.0f, const Vector3& scale = Vector3(1, 1, 1), const Quaternion& angular_position = Quaternion());
 
 	Vector3 get_position() const;
-	Matrix4* get_transform_ptr();
+	Transform* get_transform_ptr();
 	Particle* get_physical_particle();
 
 	void set_moment_inertia(const Matrix3& new_moment_inertia);

@@ -19,14 +19,14 @@ Mesh& Mesh::operator=(const Mesh& mesh) {
     return *this;
 }
 
-Mesh::Mesh(const MeshRessource* mesh_ressource, const Vector3& color, const Vector3& offset, Matrix4* transform) : mesh_ressource(mesh_ressource), transform(transform), color(color), offset(offset) {}
+Mesh::Mesh(const MeshRessource* mesh_ressource, const Vector3& color, const Vector3& offset, Transform* transform) : mesh_ressource(mesh_ressource), transform(transform), color(color), offset(offset) {}
 
 void Mesh::set_mesh_ressource_ptr(const MeshRessource* new_mesh_ressource)
 {
     mesh_ressource = new_mesh_ressource;
 }
 
-void Mesh::set_transform_ptr(Matrix4* new_transform) {
+void Mesh::set_transform_ptr(Transform* new_transform) {
     transform = new_transform;
 }
 
@@ -87,7 +87,7 @@ float Mesh::get_size() const
     return cached_mesh;
 }*/
 
-const Matrix4& Mesh::get_transform() const
+const Transform& Mesh::get_transform() const
 {
     return *transform;
 }

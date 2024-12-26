@@ -1,7 +1,7 @@
 #pragma once
 #include "Component/Graphics/GraphicsComponent.hpp"
 #include "Matrix3.hpp"
-#include "Matrix4.hpp"
+#include "Transform.hpp"
 #include "Component/Mesh/MeshRessource.hpp"
 #include "Vector3.hpp"
 
@@ -13,10 +13,10 @@ public :
     Mesh();
     Mesh(const Mesh& mesh);
     Mesh& operator=(const Mesh& mesh);
-    Mesh(const MeshRessource* new_mesh_ressource, const Vector3& color = Vector3(255, 0, 0), const Vector3& offset = Vector3(), Matrix4* transform = nullptr);
+    Mesh(const MeshRessource* new_mesh_ressource, const Vector3& color = Vector3(255, 0, 0), const Vector3& offset = Vector3(), Transform* transform = nullptr);
 
     void set_mesh_ressource_ptr(const MeshRessource* new_mesh_ressource);
-    void set_transform_ptr(Matrix4* new_transform);
+    void set_transform_ptr(Transform* new_transform);
 
     void set_color(const Vector3& color);
     Vector3 get_color() const;
@@ -28,18 +28,18 @@ public :
 
     float get_size() const;
     //const ofMesh& get_cached_mesh() const;
-    const Matrix4& get_transform() const;
+    const Transform& get_transform() const;
 
     void draw() override;
 
 protected:
     const MeshRessource* mesh_ressource;
-    Matrix4* transform;
+    Transform* transform;
     Vector3 color;
     Vector3 offset = Vector3();
     bool meshNeedsUpdate = true;
     //ofMesh cached_mesh;
-    Matrix4 cached_transform; // Used to check if mesh needs to be updated
+    Transform cached_transform; // Used to check if mesh needs to be updated
 
     void update_mesh();
 };

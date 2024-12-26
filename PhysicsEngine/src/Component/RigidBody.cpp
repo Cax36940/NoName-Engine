@@ -68,7 +68,7 @@ Vector3 RigidBody::get_position() const {
 	return particle.get_position();
 }
 
-Matrix4* RigidBody::get_transform_ptr()
+Transform* RigidBody::get_transform_ptr()
 {
 	return &transform;
 }
@@ -185,5 +185,5 @@ void RigidBody::update(float delta) {
 	rotation_matrix.x *= scale.x;
 	rotation_matrix.y *= scale.y;
 	rotation_matrix.z *= scale.z;
-	transform = Matrix4(rotation_matrix, particle.get_position());
+	transform = Transform(rotation_matrix, particle.get_position());
 }
