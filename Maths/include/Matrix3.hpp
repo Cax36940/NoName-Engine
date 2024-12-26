@@ -1,9 +1,8 @@
 #pragma once
 #include "Vector3.hpp"
 
-class Matrix3
+struct Matrix3
 {
-public:
     // Each Vector3 is a column of the Matrix3 (column-major order)
     Vector3 x;
     Vector3 y;
@@ -132,6 +131,3 @@ public:
      */
     static Matrix3 inv(const Matrix3& matrix);
 };
-
-
-

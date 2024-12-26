@@ -1,10 +1,9 @@
 #pragma once
 #include "Vector3.hpp"
 
-class Vector4
+struct Vector4
 {
 
-public:
     float x;
     float y;
     float z;
@@ -16,39 +15,14 @@ public:
     Vector4() = default;
 
     /**
-     * @brief Copy constructor
-     */
-    Vector4(const Vector4&) = default;
-
-    /**
-     * @brief Move constructor
-     */
-    Vector4(Vector4&&) = default;
-
-    /**
-     * @brief Copy assignment operator
-     */
-    Vector4& operator=(const Vector4&) = default;
-
-    /**
-     * @brief Move assignment operator
-     */
-    Vector4& operator=(Vector4&&) = default;
-
-    /**
-     * @brief Destructor
-     */
-    ~Vector4() = default;
-
-    /**
      * @brief Constructor from coordinates
      */
-    Vector4(const float& x, const float& y, const float& z, const float& t);
+    Vector4(float x, float y, float z, float t);
 
     /**
      * @brief Constructor from Vector3 and coordinate
      */
-    Vector4(const Vector3& vector, const float& t);
+    Vector4(const Vector3& vector, float t);
 
     /**
      * @brief Equal operator
@@ -57,23 +31,41 @@ public:
     bool operator==(const Vector4& vector);
 
     /**
+     * @brief Not Equal operator
+     * @param vector
+     */
+    bool operator!=(const Vector4& vector);
+
+    /**
      * @brief Scalar multiplication on the right
      * @param alpha the scalar
      */
-    Vector4 operator*(const float& alpha) const;
+    Vector4 operator*(float alpha) const;
 
     /**
      * @brief Scalar multiplication assignment
      * @param alpha the scalar
      */
-    Vector4& operator*=(const float& alpha);
+    Vector4& operator*=(float alpha);
 
     /**
      * @brief Scalar multiplication on the left
      * @param alpha the scalar
      * @param vector the vector
      */
-    friend Vector4 operator*(const float& alpha, const Vector4& vector);
+    friend Vector4 operator*(float alpha, const Vector4& vector);
+
+    /**
+     * @brief Scalar division on the right
+     * @param alpha the scalar
+     */
+    Vector4 operator/(float alpha) const;
+
+    /**
+     * @brief Scalar division assignment
+     * @param alpha the scalar
+     */
+    Vector4& operator/=(float alpha);
 
     /**
      * @brief Vector addition (return new vector)
@@ -86,6 +78,11 @@ public:
      * @param vector the vector to add to current vector
      */
     Vector4& operator+=(const Vector4& vector);
+
+    /**
+     * @brief Vector negation
+     */
+    Vector4 operator-() const;
 
     /**
      * @brief Vector subtraction (return new vector)
@@ -101,9 +98,19 @@ public:
 
     /**
      * @brief Vector euclidean norm
+     */
+    float norm() const;
+
+    /**
+     * @brief Vector euclidean norm
      * @param vector The vector from which to take the norm
      */
     static float norm(const Vector4& vector);
+
+    /**
+     * @brief Vector euclidean squared norm
+     */
+    float norm2() const;
 
     /**
      * @brief Vector euclidean squared norm
@@ -113,9 +120,30 @@ public:
 
     /**
      * @brief Inverse of vector euclidean norm
+     */
+    float inv_norm() const;
+
+    /**
+     * @brief Inverse of vector euclidean norm
      * @param vector The vector from which to take the norm
      */
     static float inv_norm(const Vector4& vector);
+
+    /**
+     * @brief Inverse of vector euclidean norm2
+     */
+    float inv_norm2() const;
+
+    /**
+     * @brief Inverse of vector euclidean norm2
+     * @param vector The vector from which to take the norm2
+     */
+    static float inv_norm2(const Vector4& vector);
+
+    /**
+     * @brief Vector normalization
+     */
+    Vector4 normalize() const;
 
     /**
      * @brief Vector normalization
@@ -126,9 +154,21 @@ public:
     /**
      * @brief Convolution between two vectors
      * @param vector_u
+     */
+    Vector4 conv(const Vector4& vector_u) const;
+
+    /**
+     * @brief Convolution between two vectors
+     * @param vector_u
      * @param vector_v
      */
     static Vector4 conv(const Vector4& vector_u, const Vector4& vector_v);
+
+    /**
+     * @brief Dot product between two vectors
+     * @param vector_u
+     */
+    float dot(const Vector4& vector_u) const;
 
     /**
      * @brief Dot product between two vectors
