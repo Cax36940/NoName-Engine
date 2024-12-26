@@ -71,7 +71,7 @@ Vector3& Vector3::operator-=(const Vector3& vector) {
 
 float Vector3::norm() const
 {
-    return Vector3::norm(*this);
+    return norm(*this);
 }
 
 float Vector3::norm(const Vector3& vector) {
@@ -80,7 +80,7 @@ float Vector3::norm(const Vector3& vector) {
 
 float Vector3::norm2() const
 {
-    return Vector3::norm2(*this);
+    return norm2(*this);
 }
 
 float Vector3::norm2(const Vector3& vector) {
@@ -89,7 +89,7 @@ float Vector3::norm2(const Vector3& vector) {
 
 float Vector3::inv_norm() const
 {
-    return Vector3::inv_norm(*this);
+    return inv_norm(*this);
 }
 
 float Vector3::inv_norm(const Vector3& vector) {
@@ -103,7 +103,7 @@ float Vector3::inv_norm(const Vector3& vector) {
 
 float Vector3::inv_norm2() const
 {
-    return Vector3::inv_norm2(*this);
+    return inv_norm2(*this);
 }
 
 float Vector3::inv_norm2(const Vector3& vector)
@@ -118,7 +118,7 @@ float Vector3::inv_norm2(const Vector3& vector)
 
 Vector3 Vector3::normalize() const
 {
-    return Vector3::normalize(*this);
+    return normalize(*this);
 }
 
 Vector3 Vector3::normalize(const Vector3& vector) {
@@ -128,7 +128,7 @@ Vector3 Vector3::normalize(const Vector3& vector) {
 
 Vector3 Vector3::conv(const Vector3& vector_u) const
 {
-    return Vector3::conv(*this, vector_u);
+    return conv(*this, vector_u);
 }
 
 Vector3 Vector3::conv(const Vector3& vector_u, const Vector3& vector_v) {
@@ -137,7 +137,7 @@ Vector3 Vector3::conv(const Vector3& vector_u, const Vector3& vector_v) {
 
 float Vector3::dot(const Vector3& vector_u) const
 {
-    return Vector3::dot(*this, vector_u);
+    return dot(*this, vector_u);
 }
 
 float Vector3::dot(const Vector3& vector_u, const Vector3& vector_v) {
@@ -146,7 +146,7 @@ float Vector3::dot(const Vector3& vector_u, const Vector3& vector_v) {
 
 Vector3 Vector3::cross(const Vector3& vector_u) const
 {
-    return Vector3::cross(*this, vector_u);
+    return cross(*this, vector_u);
 }
 
 Vector3 Vector3::cross(const Vector3& vector_u, const Vector3& vector_v) {
@@ -157,7 +157,7 @@ Vector3 Vector3::cross(const Vector3& vector_u, const Vector3& vector_v) {
 
 Vector3 Vector3::project(const Vector3& support) const
 {
-    return Vector3::project(*this, support);
+    return project(*this, support);
 }
 
 Vector3 Vector3::project(const Vector3& projected, const Vector3& support)

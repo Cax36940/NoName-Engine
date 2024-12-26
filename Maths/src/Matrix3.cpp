@@ -1,6 +1,6 @@
-#include "Constants.hpp"
+#include <iostream>
+
 #include "Matrix3.hpp"
-#include "Vector3.hpp"
 
 Matrix3::Matrix3() : x(1, 0, 0), y(0, 1, 0), z(0, 0, 1) {}
 
@@ -13,18 +13,23 @@ bool Matrix3::operator==(const Matrix3& matrix)
     return (this->x == matrix.x) && (this->y == matrix.y) && (this->z == matrix.z);
 }
 
-Matrix3 Matrix3::operator*(const float& alpha) const {
+bool Matrix3::operator!=(const Matrix3& matrix)
+{
+    return (this->x != matrix.x) || (this->y != matrix.y) || (this->z != matrix.z);
+}
+
+Matrix3 Matrix3::operator*(float alpha) const {
     return Matrix3(alpha * this->x, alpha * this->y, alpha * this->z);
 }
 
-Matrix3& Matrix3::operator*=(const float& alpha) {
+Matrix3& Matrix3::operator*=(float alpha) {
     this->x *= alpha;
     this->y *= alpha;
     this->z *= alpha;
     return *this;
 }
 
-Matrix3 operator*(const float& alpha, const Matrix3& matrix) {
+Matrix3 operator*(float alpha, const Matrix3& matrix) {
     return Matrix3(alpha * matrix.x, alpha * matrix.y, alpha * matrix.z);
 }
 
@@ -51,6 +56,19 @@ Vector3 operator*(const Matrix3& matrix, const Vector3& vector)
     return Vector3(x, y, z);
 }
 
+Matrix3 Matrix3::operator/(float alpha) const
+{
+    return Matrix3(this->x / alpha, this->y / alpha, this->z / alpha);
+}
+
+Matrix3& Matrix3::operator/=(float alpha)
+{
+    this->x /= alpha;
+    this->y /= alpha;
+    this->z /= alpha;
+    return *this;
+}
+
 Matrix3 Matrix3::operator+(const Matrix3& matrix) const {
     return Matrix3(this->x + matrix.x, this->y + matrix.y, this->z + matrix.z);
 }
@@ -60,6 +78,11 @@ Matrix3& Matrix3::operator+=(const Matrix3& matrix) {
     this->y += matrix.y;
     this->z += matrix.z;
     return *this;
+}
+
+Matrix3 Matrix3::operator-() const
+{
+    return Matrix3(-this->x, -this->y, -this->z);
 }
 
 Matrix3 Matrix3::operator-(const Matrix3& matrix) const {
@@ -73,17 +96,28 @@ Matrix3& Matrix3::operator-=(const Matrix3& matrix) {
     return *this;
 }
 
-float Matrix3::determinant(const Matrix3& matrix)
+float Matrix3::det() const
+{
+    return det(*this);
+}
+
+float Matrix3::det(const Matrix3& matrix)
 {
     return matrix.x.x * (matrix.y.y * matrix.z.z - matrix.y.z * matrix.z.y)
         - matrix.x.y * (matrix.y.x * matrix.z.z - matrix.y.z * matrix.z.x)
         + matrix.x.z * (matrix.y.x * matrix.z.y - matrix.y.y * matrix.z.x);
 }
 
+Matrix3 Matrix3::inv() const
+{
+    return inv(*this);
+}
+
 Matrix3 Matrix3::inv(const Matrix3& matrix)
 {
-    if (determinant(matrix) == 0.f) {
-        return Matrix3(Vector3(0,0,0),Vector3(0,0,0),Vector3(0,0,0));
+    if (det(matrix) == 0.0f) {
+        std::cerr << "[ERROR] Invalid matrix inverse with det = 0 " << __FILE__ << " : " << __FUNCTION__ << "(line:" << __LINE__ << ")" << std::endl;
+        return Matrix3();
     }
     Matrix3 temp = matrix;
     Matrix3 inv = Matrix3();
@@ -134,22 +168,4 @@ Matrix3 Matrix3::inv(const Matrix3& matrix)
     temp.z.y = 0;
 
     return inv;
-}
-
-Matrix3 Matrix3::get_orthonormal_base(const Vector3& vector) // TODO : remove, used only for spring
-{
-    Vector3 v2 = Vector3(MATHS_PI, MATHS_E, MATHS_SQRT2);
-    Vector3 v3;
-    Vector3 u1 = Vector3::normalize(vector);
-    Vector3 u2;
-    Vector3 u3;
-
-    u2 = v2 - Vector3::dot(u1, v2) * u1;
-    u2 = Vector3::normalize(u2);
-
-    v3 = Vector3::cross(u1, u2);
-    u3 = v3 - Vector3::dot(u1, v3) * u1 - Vector3::dot(u2, v3) * u2;
-    u3 = Vector3::normalize(u3);
-
-    return Matrix3(u1, u2, u3);
 }
