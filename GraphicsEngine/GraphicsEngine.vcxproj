@@ -130,13 +130,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)dept\GLFW\include;$(ProjectDir)dept\GLEW\include;$(ProjectDir)dept</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)dept\GLFW\include;$(ProjectDir)dept\GLEW\include;$(ProjectDir)dept;$(SolutionDir)Maths\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)dept\GLFW\lib-vc2022;$(ProjectDir)dept\GLEW\lib\Release\x64</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);opengl32.lib;$(ProjectDir)dept\GLEW\lib\Release\x64\glew32s.lib;$(ProjectDir)dept\GLFW\lib-vc2022\glfw3.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);opengl32.lib;$(ProjectDir)dept\GLEW\lib\Release\x64\glew32s.lib;$(ProjectDir)dept\GLFW\lib-vc2022\glfw3.lib;$(OutputPath)Maths.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -147,14 +147,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)dept\GLFW\include;$(ProjectDir)dept\GLEW\include;$(ProjectDir)dept</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)dept\GLFW\include;$(ProjectDir)dept\GLEW\include;$(ProjectDir)dept;$(SolutionDir)Maths\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);opengl32.lib;$(ProjectDir)dept\GLEW\lib\Release\x64\glew32s.lib;$(ProjectDir)dept\GLFW\lib-vc2022\glfw3.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);opengl32.lib;$(ProjectDir)dept\GLEW\lib\Release\x64\glew32s.lib;$(ProjectDir)dept\GLFW\lib-vc2022\glfw3.lib;$(OutputPath)Maths.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(ProjectDir)dept\GLEW\lib\Release\x64</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>

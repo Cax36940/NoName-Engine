@@ -2,7 +2,7 @@
 
 #include <string>
 #include <unordered_map>
-#include "glm/glm.hpp"
+#include "Matrix4.hpp"
 
 typedef struct ShaderSources {
 	std::string vertexShader;
@@ -23,7 +23,7 @@ public:
 	void SetUniform1i(const std::string& name, int value);
 	void SetUniform1f(const std::string& name, float value);
 	void SetUniform4f(const std::string& name, float r, float g, float b, float a);
-	void SetUniformMat4f(const std::string& name, const glm::mat4& mat);
+	void SetUniformMat4f(const std::string& name, const Matrix4& mat);
 
 private :
 	int GetUniformLocation(const std::string& name);

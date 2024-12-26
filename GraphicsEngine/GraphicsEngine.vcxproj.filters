@@ -36,10 +36,16 @@
     <ClCompile Include="src\VertexBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\extern\stb_image.cpp">
+    <ClCompile Include="dept\stb_image.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dept\stb_image.cpp">
+    <ClCompile Include="src\UtilsGL.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VertexBufferLayout.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -65,10 +71,16 @@
     <ClInclude Include="src\VertexBufferLayout.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\extern\stb_image.hpp">
+    <ClInclude Include="dept\stb_image.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dept\stb_image.hpp">
+    <ClInclude Include="src\GraphicsEngine.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UtilsGL.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Window.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

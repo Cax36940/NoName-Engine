@@ -1,5 +1,7 @@
 #include "GraphicsEngine.hpp"
 
+#include "Matrix4.hpp"
+
 int main(void)
 {
 
@@ -7,7 +9,6 @@ int main(void)
     if (window.failed()) {
         return -1;
     }
-
 
     { // Check video #13 around 20min for info on why there is a block
     // A vertex can contain more than just position (UV coord, normal...)
@@ -32,10 +33,11 @@ int main(void)
 
     IndexBuffer ib(indices, 6);
 
-    glm::mat4 proj = glm::ortho(-4.0f, 4.0f, -3.0f, 3.0f, -1.0f, 1.0f);
-    glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(-1.0f, -1.0f, 0.0f)); // translate everything to the left
+    Matrix4 proj(1.0f / 4.0f, 1.0f / 3.0f, -1.0f, 1.0f);
+    Matrix4 view;
+    view.t = Vector4(-1.0f, -1.0f, 0.0f, 1.0f); // translate to the left in x and y
 
-    glm::mat4 mvp = proj * view;
+    Matrix4 mvp = proj * view;
 
     Shader shader("res/shaders/base.shader");
     shader.Bind();

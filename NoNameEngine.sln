@@ -4,6 +4,7 @@ VisualStudioVersion = 17.8.34322.80
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PhysicsEngine", "PhysicsEngine\PhysicsEngine.vcxproj", "{7FD42DF7-442E-479A-BA76-D0022F99702A}"
 	ProjectSection(ProjectDependencies) = postProject
+		{9135F778-F18C-4E4B-882B-95E50FD6E22D} = {9135F778-F18C-4E4B-882B-95E50FD6E22D}
 		{98E75BA1-75D5-4418-946C-B090BFEE5DC9} = {98E75BA1-75D5-4418-946C-B090BFEE5DC9}
 	EndProjectSection
 EndProject
@@ -17,7 +18,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestMatrix3", "TestMatrix3\
 		{9135F778-F18C-4E4B-882B-95E50FD6E22D} = {9135F778-F18C-4E4B-882B-95E50FD6E22D}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestMatrix4", "TestMatrix4\TestMatrix4.vcxproj", "{0979F518-7AA0-4671-8B6C-9F3CCA6911AF}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestTransform", "TestMatrix4\TestMatrix4.vcxproj", "{0979F518-7AA0-4671-8B6C-9F3CCA6911AF}"
 	ProjectSection(ProjectDependencies) = postProject
 		{9135F778-F18C-4E4B-882B-95E50FD6E22D} = {9135F778-F18C-4E4B-882B-95E50FD6E22D}
 	EndProjectSection
@@ -33,6 +34,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestVector4", "TestVector4\
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GraphicsEngine", "GraphicsEngine\GraphicsEngine.vcxproj", "{98E75BA1-75D5-4418-946C-B090BFEE5DC9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9135F778-F18C-4E4B-882B-95E50FD6E22D} = {9135F778-F18C-4E4B-882B-95E50FD6E22D}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Maths", "Maths\Maths.vcxproj", "{9135F778-F18C-4E4B-882B-95E50FD6E22D}"
 EndProject

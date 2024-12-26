@@ -27,7 +27,7 @@ void SpringSprite::draw()
 
 	const float length = 10 * TWO_PI;
 
-	const Matrix3 pass_matrix = Matrix3::get_orthonormal_base(direction);
+	const Matrix3 pass_matrix; // Matrix3::get_orthonormal_base(direction);
 	Vector3 to_draw;
 	//ofPolyline line;
 	const float elongate = Vector3::norm(direction) / length;
