@@ -66,7 +66,6 @@ int Shader::GetUniformLocation(const std::string& name)
 ShaderSources Shader::ParseShader(const std::string& filepath) {
     /* Parse a shader file into two shaders, a vertex and a fragment*/
 
-
     std::ifstream stream(filepath);
 
     enum ShaderType {

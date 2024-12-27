@@ -19,9 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="dept\stb_image.cpp" />
+    <ClCompile Include="extern\stb_image.cpp" />
     <ClCompile Include="src\IndexBuffer.cpp" />
-    <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Renderer.cpp" />
     <ClCompile Include="src\Shader.cpp" />
     <ClCompile Include="src\Texture.cpp" />
@@ -32,17 +31,15 @@
     <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="dept\stb_image.hpp" />
-    <ClInclude Include="src\GraphicsEngine.hpp" />
-    <ClInclude Include="src\IndexBuffer.hpp" />
-    <ClInclude Include="src\Renderer.hpp" />
-    <ClInclude Include="src\Shader.hpp" />
-    <ClInclude Include="src\Texture.hpp" />
-    <ClInclude Include="src\UtilsGL.hpp" />
-    <ClInclude Include="src\VertexArray.hpp" />
-    <ClInclude Include="src\VertexBuffer.hpp" />
-    <ClInclude Include="src\VertexBufferLayout.hpp" />
-    <ClInclude Include="src\Window.hpp" />
+    <ClInclude Include="include\IndexBuffer.hpp" />
+    <ClInclude Include="include\Renderer.hpp" />
+    <ClInclude Include="include\Shader.hpp" />
+    <ClInclude Include="include\Texture.hpp" />
+    <ClInclude Include="include\UtilsGL.hpp" />
+    <ClInclude Include="include\VertexArray.hpp" />
+    <ClInclude Include="include\VertexBuffer.hpp" />
+    <ClInclude Include="include\VertexBufferLayout.hpp" />
+    <ClInclude Include="include\Window.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -66,13 +63,13 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -130,14 +127,18 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)dept\GLFW\include;$(ProjectDir)dept\GLEW\include;$(ProjectDir)dept;$(SolutionDir)Maths\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)extern;$(SolutionDir)Maths\include;include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)dept\GLFW\lib-vc2022;$(ProjectDir)dept\GLEW\lib\Release\x64</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);opengl32.lib;$(ProjectDir)dept\GLEW\lib\Release\x64\glew32s.lib;$(ProjectDir)dept\GLFW\lib-vc2022\glfw3.lib;$(OutputPath)Maths.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);opengl32.lib;$(SolutionDir)lib\glew32s.lib;$(SolutionDir)lib\glfw3.lib;$(OutputPath)Maths.lib</AdditionalDependencies>
     </Link>
+    <Lib>
+      <AdditionalDependencies>Shell32.lib;Gdi32.lib;User32.lib;opengl32.lib;lib\glew32s.lib;lib\glfw3.lib</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -147,16 +148,20 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)dept\GLFW\include;$(ProjectDir)dept\GLEW\include;$(ProjectDir)dept;$(SolutionDir)Maths\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)extern;$(SolutionDir)Maths\include;include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);opengl32.lib;$(ProjectDir)dept\GLEW\lib\Release\x64\glew32s.lib;$(ProjectDir)dept\GLFW\lib-vc2022\glfw3.lib;$(OutputPath)Maths.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);opengl32.lib;$(SolutionDir)lib\glew32s.lib;$(SolutionDir)lib\glfw3.lib;$(OutputPath)Maths.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(ProjectDir)dept\GLEW\lib\Release\x64</AdditionalLibraryDirectories>
     </Link>
+    <Lib>
+      <AdditionalDependencies>Shell32.lib;Gdi32.lib;User32.lib;opengl32.lib;lib\glew32s.lib;lib\glfw3.lib</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

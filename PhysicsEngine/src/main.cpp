@@ -3,7 +3,17 @@
 //#include "ofApp.h"
 
 #include <iostream>
-#include "../../GraphicsEngine/src/GraphicsEngine.hpp" // TODO : find a way to include this
+
+#include "Matrix4.hpp"
+
+#include "IndexBuffer.hpp"
+#include "Renderer.hpp"
+#include "Shader.hpp"
+#include "Texture.hpp"
+#include "VertexArray.hpp"
+#include "VertexBuffer.hpp"
+#include "VertexBufferLayout.hpp"
+#include "Window.hpp"
 
 #define WINDOW_WIDTH	1600
 #define WINDOW_HEIGHT	900
@@ -57,7 +67,7 @@ int main( ){
 
         Matrix4 mvp = proj * view;
 
-        Shader shader("res/shaders/base.shader");
+        Shader shader("res/shaders/base.shader"); // Found in PhysicsEngine\bin
         shader.Bind();
 
         Texture texture("res/textures/pomme.png");

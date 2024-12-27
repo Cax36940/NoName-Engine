@@ -28,7 +28,7 @@ void VertexArray::AddBuffer(const VertexBuffer& vb, const VertexBufferLayout& la
     Bind();
     vb.Bind();
     const auto& elements = layout.GetElements();
-    unsigned int offset = 0;
+    unsigned long long int offset = 0;
     for (int i = 0; i < elements.size(); i++) {
         const auto& element = elements[i];
 
@@ -37,7 +37,7 @@ void VertexArray::AddBuffer(const VertexBuffer& vb, const VertexBufferLayout& la
 
         // Tell OpenGL that attrib i of currently is :
         // 2 GL_FLOAT, they are not normalized, they are spaced by 8 bytes each, and the first one is at byte 0 
-        GLCall(glVertexAttribPointer(i, element.count, element.type, element.normalized, layout.GetStride(), (const void*) offset));// also links buffer with vao so only vao and index need to be bound to draw
+        GLCall(glVertexAttribPointer(i, element.count, element.type, element.normalized, layout.GetStride(), (const void *) offset));// also links buffer with vao so only vao and index need to be bound to draw
         offset += element.count * VertexBufferElement::GetSize(element.type);
     }
 
