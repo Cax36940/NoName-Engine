@@ -32,6 +32,7 @@
     <ClCompile Include="src\Component\RigidBody.cpp" />
     <ClCompile Include="src\Entity\DefaultRigidBody.hpp" />
     <ClCompile Include="src\Component\Octree.cpp" />
+    <ClCompile Include="src\Mouse.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -84,6 +85,7 @@
     <ClInclude Include="src\Entity\Arrow.hpp" />
     <ClInclude Include="src\Component\Octree.hpp" />
     <ClInclude Include="src\Component\Mesh\PlaneMesh.hpp" />
+    <ClInclude Include="src\Mouse.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="TODO" />

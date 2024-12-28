@@ -15,6 +15,8 @@
 #include "VertexBufferLayout.hpp"
 #include "Window.hpp"
 
+#include "Mouse.hpp"
+
 #define WINDOW_WIDTH	800
 #define WINDOW_HEIGHT	600
 
@@ -29,6 +31,8 @@ int main( ){
     if (window.failed()) {
         return -1;
     }
+
+    Mouse mouse(window);
 
     { // Check video #13 around 20min for info on why there is a block
     // A vertex can contain more than just position (UV coord, normal...)
