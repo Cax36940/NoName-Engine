@@ -4,8 +4,12 @@ struct GLFWwindow;
 
 class Window {
 private :
+	friend class AbstractMouse;
+
 	GLFWwindow* window;
 	int status;
+
+	Window(GLFWwindow* window) : window(window), status(0) {};
 
 public :
 	Window(int width, int height);

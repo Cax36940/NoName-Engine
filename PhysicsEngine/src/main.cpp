@@ -15,28 +15,20 @@
 #include "VertexBufferLayout.hpp"
 #include "Window.hpp"
 
-#define WINDOW_WIDTH	1600
-#define WINDOW_HEIGHT	900
+#define WINDOW_WIDTH	800
+#define WINDOW_HEIGHT	600
 
 //========================================================================
 int main( ){
 
-	/*//Use ofGLFWWindowSettings for more options like multi-monitor fullscreen
-	ofGLWindowSettings settings;
-	settings.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-	
-	settings.windowMode = OF_WINDOW; //can also be OF_FULLSCREEN
-
-	auto window = ofCreateWindow(settings);
-
+	/*
 	ofRunApp(window, make_shared<ofApp>());
 	ofRunMainLoop();*/
 
-    Window window(800, 600);
+    Window window(WINDOW_WIDTH, WINDOW_HEIGHT);
     if (window.failed()) {
         return -1;
     }
-
 
     { // Check video #13 around 20min for info on why there is a block
     // A vertex can contain more than just position (UV coord, normal...)
@@ -65,7 +57,6 @@ int main( ){
         Matrix4 view;
         view.t = Vector4(-1.0f, -1.0f, 0.0f, 1.0f); // translate to the left in x and y
 
-        Matrix4 mvp = proj * view;
 
         Shader shader("res/shaders/base.shader"); // Found in PhysicsEngine\bin
         shader.Bind();
@@ -73,7 +64,7 @@ int main( ){
         Texture texture("res/textures/pomme.png");
         texture.Bind(0);
         shader.SetUniform1i("u_Texture", 0); // Our texture is bound to slot 0
-        shader.SetUniformMat4f("u_MVP", mvp);
+
 
         Renderer renderer;
 
@@ -86,6 +77,8 @@ int main( ){
             /* Render here */
             renderer.Clear();
 
+            Matrix4 mvp = proj * view;
+            shader.SetUniformMat4f("u_MVP", mvp);
             //shader.SetUniform4f("u_Color", r, 0.3f, 0.8f, 1.0f);
 
             renderer.Draw(vao, ib, shader);
