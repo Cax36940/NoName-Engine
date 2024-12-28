@@ -33,6 +33,11 @@ protected :
 	AbstractMouse(const Window& window);
 	~AbstractMouse();
 
+	AbstractMouse(const AbstractMouse&) = delete;
+	AbstractMouse& operator=(const AbstractMouse&) = delete;
+	AbstractMouse(AbstractMouse&&) = delete;
+	AbstractMouse& operator=(AbstractMouse&&) = delete;
+
 	virtual void EventMouseMove(const Window& window, double xpos, double ypos) = 0;
 
 	virtual void EventMouseButton(const Window& window, MouseButton button, MouseAction action, MouseModFlag mods) = 0;
