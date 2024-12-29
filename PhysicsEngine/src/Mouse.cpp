@@ -1,27 +1,22 @@
-#include <iostream>
-
+#include "Camera.hpp"
 #include "Mouse.hpp"
 
-Mouse::Mouse(const Window& window) : 
-	AbstractMouse(window), x(0.0), y(0.0), pressed(false) 
+Mouse::Mouse(const Window& window, Camera& camera) :
+	AbstractMouse(window),
+	camera(camera)
 {
 }
 
 void Mouse::EventMouseMove(const Window& window, double xpos, double ypos)
 {
+	previous_x = x;
+	previous_y = y;
 	x = xpos;
 	y = ypos;
-	std::cout << x << "    " << y << std::endl;
+
 	// Rotation of the camera with the mouse
 	if (pressed) {
-		/*
-		cam_orientation.y += (x - ofGetPreviousMouseX()) * rotation_speed; // yaw
-		cam_orientation.x += (y - ofGetPreviousMouseY()) * rotation_speed; // pitch
-
-		cam_orientation.x = ofClamp(cam_orientation.x, -90, 90);// avoid flip
-
-		camera.setOrientation(glm::vec3(cam_orientation.x, cam_orientation.y, cam_orientation.z));
-		*/
+		camera.rotate_xy(y - previous_y, x - previous_x); // Moving on the x axis make the y_axis rotate
 	}
 }
 

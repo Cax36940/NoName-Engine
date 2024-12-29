@@ -15,6 +15,7 @@
 #include "VertexBufferLayout.hpp"
 #include "Window.hpp"
 
+#include "Camera.hpp"
 #include "Mouse.hpp"
 
 #define WINDOW_WIDTH	800
@@ -31,8 +32,6 @@ int main( ){
     if (window.failed()) {
         return -1;
     }
-
-    Mouse mouse(window);
 
     { // Check video #13 around 20min for info on why there is a block
     // A vertex can contain more than just position (UV coord, normal...)
@@ -58,9 +57,13 @@ int main( ){
         IndexBuffer ib(indices, 6);
 
         Matrix4 proj(1.0f / 4.0f, 1.0f / 3.0f, -1.0f, 1.0f);
-        Matrix4 view;
-        view.t = Vector4(-1.0f, -1.0f, 0.0f, 1.0f); // translate to the left in x and y
 
+        Camera camera;
+
+        Mouse mouse(window, camera);
+
+        //view.t = Vector4(-1.0f, -1.0f, 0.0f, 1.0f); // translate to the left in x and y
+        camera.translate(-1.0f, -1.0f, 0.0f);
 
         Shader shader("res/shaders/base.shader"); // Found in PhysicsEngine\bin
         shader.Bind();
@@ -81,7 +84,7 @@ int main( ){
             /* Render here */
             renderer.Clear();
 
-            Matrix4 mvp = proj * view;
+            Matrix4 mvp = proj * camera.get_view();
             shader.SetUniformMat4f("u_MVP", mvp);
             //shader.SetUniform4f("u_Color", r, 0.3f, 0.8f, 1.0f);
 

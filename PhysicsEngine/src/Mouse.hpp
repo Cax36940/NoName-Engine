@@ -1,14 +1,21 @@
 #pragma once
 #include "AbstractMouse.hpp"
 
+class Camera;
+
 class Mouse : private AbstractMouse {
 public :
-	Mouse(const Window& window);
+	Mouse(const Window& window, Camera& camera);
 
 private :
-	double x;
-	double y;
-	bool pressed; // Is left button pressed
+	Camera& camera;
+
+	double previous_x = 0.0;
+	double previous_y = 0.0;
+
+	double x = 0.0;
+	double y = 0.0;
+	bool pressed = false; // Is left button pressed
 
 	void EventMouseMove(const Window& window, double xpos, double ypos) override;
 

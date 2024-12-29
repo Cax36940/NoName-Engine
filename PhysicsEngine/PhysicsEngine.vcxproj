@@ -110,6 +110,7 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\Mouse.cpp" />
     <ClCompile Include="src\Component\Mesh\Mesh.cpp" />
     <ClCompile Include="src\Component\Graphics\ConvexHull.cpp" />
@@ -142,6 +143,7 @@
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Camera.hpp" />
     <ClInclude Include="src\Mouse.hpp" />
     <ClInclude Include="src\Component\Mesh\ArrowMesh.hpp" />
     <ClInclude Include="src\Component\Mesh\CubeMesh.hpp" />
