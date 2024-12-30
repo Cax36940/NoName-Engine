@@ -1,19 +1,24 @@
 #include <cmath>
 
-#include "Vector3.hpp"
-
 #include "Camera.hpp"
+
+Camera::Camera() : translation(0.0f, 0.0f, 0.0f)
+{
+	update_rotation();
+}
 
 void Camera::translate(const Vector3& vector)
 {
-	view.t += Vector4(vector, 0.0f);
+	translation += vector;
+	update_rotation();
 }
 
 void Camera::translate(float x, float y, float z)
 {
-	view.t.x = x;
-	view.t.y = y;
-	view.t.z = z;
+	translation.x = x;
+	translation.y = y;
+	translation.z = z;
+	update_rotation();
 }
 
 void Camera::rotate_x(float angle)
@@ -60,9 +65,9 @@ void Camera::update_rotation()
 	rotation_y.z.x = sin_y;
 	rotation_y.z.z = cos_y;
 
-	Vector4 tmp_translation = view.t;
+	Matrix4 translation_matrix;
+	translation_matrix.t = Vector4(translation, 1.0f);
 
-	view = rotation_x * rotation_y;
-	view.t = tmp_translation;
+	view = rotation_x * rotation_y * translation_matrix;
 }
 

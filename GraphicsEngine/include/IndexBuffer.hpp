@@ -5,6 +5,7 @@ private:
 	unsigned int Renderer_ID; // Internal renderer id of the object
 	unsigned int Count; // 
 public:
+	IndexBuffer() = delete;
 	IndexBuffer(const unsigned int* data, unsigned int count);
 	~IndexBuffer();
 

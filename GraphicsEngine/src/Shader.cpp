@@ -68,6 +68,10 @@ ShaderSources Shader::ParseShader(const std::string& filepath) {
 
     std::ifstream stream(filepath);
 
+    if (!stream.is_open()) {
+        std::cerr << "[ERROR] Could not open file: " << filepath << std::endl;
+    }
+
     enum ShaderType {
         NONE = -1,
         VERTEX = 0,
@@ -127,25 +131,6 @@ unsigned int Shader::CompileShader(unsigned int type, const std::string& source)
     }
 
     return id;
-}
-
-
-unsigned int Shader::CompileShader(const std::string& vertexShader, const std::string& fragmentShader)
-{
-    unsigned int program = glCreateProgram();
-    unsigned int vs = CompileShader(GL_VERTEX_SHADER, vertexShader);
-    unsigned int fs = CompileShader(GL_FRAGMENT_SHADER, fragmentShader);
-
-    GLCall(glAttachShader(program, vs));
-    GLCall(glAttachShader(program, fs));
-
-    GLCall(glLinkProgram(program));
-    GLCall(glValidateProgram(program));
-
-    GLCall(glDeleteShader(vs));
-    GLCall(glDeleteShader(fs));
-
-    return program;
 }
 
 unsigned int Shader::CreateShader(const std::string& vertexShader, const std::string& fragmentShader) {

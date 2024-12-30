@@ -1,18 +1,19 @@
 #pragma once
 #include "Matrix4.hpp"
-
-struct Vector3;
+#include "Vector3.hpp"
 
 class Camera
 {
 private:
 	Matrix4 view;
-
+	Vector3 translation;
 	constexpr static float rotation_speed = 0.015f;
 	float x_angle = 0.0f;
 	float y_angle = 0.0f;
 
 public:
+
+	Camera();
 
 	void translate(const Vector3& vector);
 	void translate(float x, float y, float z);

@@ -5,6 +5,7 @@ private:
 	unsigned int Renderer_ID; // Internal renderer id of the object
 
 public:
+	VertexBuffer() = delete;
 	VertexBuffer(const void* data, unsigned int size);
 	~VertexBuffer();
 

@@ -5,21 +5,22 @@
 // TODO : Redo display without of
 #include <iostream>
 
+#include "Renderer.hpp"
+
 #include "Mesh.hpp"
 
-Mesh::Mesh() : mesh_ressource(nullptr), transform(nullptr), color(255, 0, 0) {}
-
-Mesh::Mesh(const Mesh& mesh) : mesh_ressource(mesh.mesh_ressource), transform(nullptr), color(mesh.color), offset(mesh.offset) {}
+Mesh::Mesh(const Mesh& mesh) : mesh_ressource(mesh.mesh_ressource), transform(nullptr), color(mesh.color), offset(mesh.offset), shader(shader) {}
 
 Mesh& Mesh::operator=(const Mesh& mesh) {
     mesh_ressource = mesh.mesh_ressource;
     transform = nullptr;
     color = mesh.color;
     offset = mesh.offset;
+    shader = mesh.shader;
     return *this;
 }
 
-Mesh::Mesh(const MeshRessource* mesh_ressource, const Vector3& color, const Vector3& offset, Transform* transform) : mesh_ressource(mesh_ressource), transform(transform), color(color), offset(offset) {}
+Mesh::Mesh(const MeshRessource* mesh_ressource, const Vector3& color, const Vector3& offset, Transform* transform) : mesh_ressource(mesh_ressource), transform(transform), color(color), offset(offset), shader("res/shaders/base_cube.shader") {}
 
 void Mesh::set_mesh_ressource_ptr(const MeshRessource* new_mesh_ressource)
 {
@@ -56,6 +57,11 @@ const MeshRessource& Mesh::get_mesh_ressource()
 const Vector3& Mesh::get_offset() const
 {
     return offset;
+}
+
+Shader& Mesh::get_shader()
+{
+    return shader;
 }
 
 float Mesh::get_size() const
@@ -104,6 +110,8 @@ void Mesh::draw()
     if (meshNeedsUpdate) {
         update_mesh();
     }
+
+    Renderer::Draw(mesh_ressource->get_vertex_array(), mesh_ressource->get_index_buffer(), shader);
 
     //ofSetColor(color.x, color.y, color.z);
     //cached_mesh.draw();

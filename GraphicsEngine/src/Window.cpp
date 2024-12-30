@@ -38,6 +38,7 @@ Window::Window(int width, int height) {
     std::cout << glGetString(GL_VERSION) << std::endl;
 
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+    glEnable(GL_DEPTH_TEST);
     GLCall(glEnable(GL_BLEND));
     GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 }

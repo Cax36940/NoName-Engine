@@ -21,7 +21,6 @@
     <ClCompile Include="src\Entity\CountHUD.cpp" />
     <ClCompile Include="src\Entity\GravityChar.cpp" />
     <ClCompile Include="src\Entity\ParticleFactory.cpp" />
-    <ClCompile Include="src\Entity\RigidBodyFactory.cpp" />
     <ClCompile Include="src\Entity\TrailParticle.cpp" />
     <ClCompile Include="src\System\CollidersComponentRegistry.cpp" />
     <ClCompile Include="src\System\CollisionsRegistry.cpp" />
@@ -50,10 +49,6 @@
     <ClInclude Include="src\Component\Mesh\ArrowMesh.hpp" />
     <ClInclude Include="src\Component\Mesh\Mesh.hpp" />
     <ClInclude Include="src\Component\Mesh\CubeMesh.hpp" />
-    <ClInclude Include="src\Component\Mesh\DodecahedronMesh.hpp" />
-    <ClInclude Include="src\Component\Mesh\IcosahedronMesh.hpp" />
-    <ClInclude Include="src\Component\Mesh\OctahedronMesh.hpp" />
-    <ClInclude Include="src\Component\Mesh\TetrahedronMesh.hpp" />
     <ClInclude Include="src\Component\Particle.hpp" />
     <ClInclude Include="src\Component\Physics\Collider\SphereCollider.hpp" />
     <ClInclude Include="src\Component\Physics\CableComponent.hpp" />
@@ -73,7 +68,6 @@
     <ClInclude Include="src\Entity\Origin.hpp" />
     <ClInclude Include="src\Entity\ParticleFactory.hpp" />
     <ClInclude Include="src\Component\RigidBody.hpp" />
-    <ClInclude Include="src\Entity\RigidBodyFactory.hpp" />
     <ClInclude Include="src\Entity\Spring.hpp" />
     <ClInclude Include="src\Entity\TrailParticle.hpp" />
     <ClInclude Include="src\System\CollidersComponentRegistry.hpp" />
@@ -85,9 +79,9 @@
     <ClInclude Include="src\Component\Mesh\MeshRessource.hpp" />
     <ClInclude Include="src\Entity\Arrow.hpp" />
     <ClInclude Include="src\Component\Octree.hpp" />
-    <ClInclude Include="src\Component\Mesh\PlaneMesh.hpp" />
     <ClInclude Include="src\Mouse.hpp" />
     <ClInclude Include="src\Camera.hpp" />
+    <ClInclude Include="src\Entity\Cube.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="TODO" />

@@ -18,6 +18,8 @@
 #include "Camera.hpp"
 #include "Mouse.hpp"
 
+#include "Entity/Cube.hpp"
+
 #define WINDOW_WIDTH	800
 #define WINDOW_HEIGHT	600
 
@@ -33,7 +35,9 @@ int main( ){
         return -1;
     }
 
+
     { // Check video #13 around 20min for info on why there is a block
+        
     // A vertex can contain more than just position (UV coord, normal...)
         float tri_vertex[] = { // pos_x, pos_y, uv_x, uv_y
             -0.5f, -0.5f, 0.0f, 0.0f,        // First vertex 
@@ -56,14 +60,14 @@ int main( ){
 
         IndexBuffer ib(indices, 6);
 
-        Matrix4 proj(1.0f / 4.0f, 1.0f / 3.0f, -1.0f, 1.0f);
+        Matrix4 proj(1.0f / 4.0f, 1.0f / 3.0f, -0.5f, 1.0f);
 
         Camera camera;
 
         Mouse mouse(window, camera);
 
         //view.t = Vector4(-1.0f, -1.0f, 0.0f, 1.0f); // translate to the left in x and y
-        camera.translate(-1.0f, -1.0f, 0.0f);
+        //camera.translate(-1.0f, -1.0f, 0.0f);
 
         Shader shader("res/shaders/base.shader"); // Found in PhysicsEngine\bin
         shader.Bind();
@@ -72,24 +76,22 @@ int main( ){
         texture.Bind(0);
         shader.SetUniform1i("u_Texture", 0); // Our texture is bound to slot 0
 
-
-        Renderer renderer;
-
         float r = 0.0f;
         float increment = 0.05f;
+
+        Cube cube(0.0f, 0.0f, 0.0f);
 
         /* Loop until the user closes the window */
         while (!window.closed())
         {
             /* Render here */
-            renderer.Clear();
+            Renderer::Clear();
 
-            Matrix4 mvp = proj * camera.get_view();
-            shader.SetUniformMat4f("u_MVP", mvp);
-            //shader.SetUniform4f("u_Color", r, 0.3f, 0.8f, 1.0f);
+            Matrix4 vp = proj * camera.get_view();
+            shader.Bind();
+            shader.SetUniformMat4f("u_VP", vp);
 
-            renderer.Draw(vao, ib, shader);
-
+            /*shader.SetUniform4f("u_Color", r, 0.3f, 0.8f, 1.0f);
 
             if (r > 1) {
                 increment = -0.05f;
@@ -98,8 +100,12 @@ int main( ){
                 increment = 0.05f;
             }
 
+            r += increment;*/
 
-            r += increment;
+            //Renderer::Draw(vao, ib, shader);
+            cube.mesh.get_shader().Bind();
+            cube.mesh.get_shader().SetUniformMat4f("u_VP", vp);
+            cube.mesh.draw();
 
             window.update();
         }

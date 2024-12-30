@@ -7,7 +7,7 @@
 #include "Renderer.hpp"
 #include "UtilsGL.hpp"
 
-void Renderer::Draw(const VertexArray& va, const IndexBuffer& indices, const Shader& shader) const
+void Renderer::Draw(const VertexArray& va, const IndexBuffer& indices, const Shader& shader)
 {
 	va.Bind();
 	indices.Bind();
@@ -16,7 +16,7 @@ void Renderer::Draw(const VertexArray& va, const IndexBuffer& indices, const Sha
 
 }
 
-void Renderer::Clear() const
+void Renderer::Clear()
 {
-	GLCall(glClear(GL_COLOR_BUFFER_BIT));
+	GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 }

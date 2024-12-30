@@ -5,12 +5,14 @@
 #include "Component/Mesh/MeshRessource.hpp"
 #include "Vector3.hpp"
 
+#include "Shader.hpp"
+
 // TODO : remove cache mesh
 
 class Mesh : public GraphicsComponent
 {
 public :
-    Mesh();
+    Mesh() = delete;
     Mesh(const Mesh& mesh);
     Mesh& operator=(const Mesh& mesh);
     Mesh(const MeshRessource* new_mesh_ressource, const Vector3& color = Vector3(255, 0, 0), const Vector3& offset = Vector3(), Transform* transform = nullptr);
@@ -26,6 +28,8 @@ public :
     const MeshRessource& get_mesh_ressource();
     const Vector3& get_offset() const;
 
+    Shader& get_shader();
+
     float get_size() const;
     //const ofMesh& get_cached_mesh() const;
     const Transform& get_transform() const;
@@ -40,6 +44,8 @@ protected:
     bool meshNeedsUpdate = true;
     //ofMesh cached_mesh;
     Transform cached_transform; // Used to check if mesh needs to be updated
+
+    Shader shader;
 
     void update_mesh();
 };
