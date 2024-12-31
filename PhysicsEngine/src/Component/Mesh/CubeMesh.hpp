@@ -11,23 +11,19 @@ public:
 		return cube_mesh;
 	}
 
-    const std::vector<Vector3>& get_vertices() const override { return get_instance().vertices; }
-    const std::vector<unsigned int>& get_indices() const override { return get_instance().indices; }
-	const Matrix3& get_moment_of_inertia() const override { return get_instance().moment_of_inertia; }
-
-	const VertexArray& get_vertex_array() const { return vertex_array; }
-	const IndexBuffer& get_index_buffer() const { return index_buffer; }
+    const std::vector<Vector3>& get_vertices() const override { return vertices; }
+    const std::vector<unsigned int>& get_indices() const override { return indices; }
+	const Matrix3& get_moment_of_inertia() const override { return moment_of_inertia; }
 
 private:
-	CubeMesh() : 
-		vertex_buffer(&vertices[0], vertices.size() * sizeof(Vector3)),
-		index_buffer(&indices[0], indices.size()) 
-	{
+	CubeMesh(){
+		vertex_buffer.emplace(vertices.data(), vertices.size() * sizeof(Vector3));
+		index_buffer.emplace(indices.data(), indices.size());
 		vertex_buffer_layout.Push<float>(3); // pos_x, pos_y, pos_z
-		vertex_array.AddBuffer(vertex_buffer, vertex_buffer_layout);
-	};
+		vertex_array.AddBuffer(vertex_buffer.value(), vertex_buffer_layout);
+	}
 
-    const std::vector<Vector3> vertices{ 
+    const std::vector<Vector3> vertices{
 		Vector3(1,  1,  1),
 		Vector3(1, -1,  1),
 		Vector3(1, -1, -1),
@@ -37,7 +33,7 @@ private:
 		Vector3(-1, -1, -1),
 		Vector3(-1, -1,  1) };
 
-    const std::vector<unsigned int> indices{ 
+	const std::vector<unsigned int> indices{
 		0, 1, 2,
 		0, 2, 3,
 		4, 5, 6,
@@ -57,10 +53,4 @@ private:
 		Vector3(0, 0, 2. / 3.)
 	);
 
-	VertexBuffer vertex_buffer;
-	VertexBufferLayout vertex_buffer_layout;
-	VertexArray vertex_array;
-	IndexBuffer index_buffer;
 };
-
-

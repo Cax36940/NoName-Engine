@@ -11,12 +11,17 @@ public:
 		return octahedron_mesh;
 	}
 
-	const std::vector<Vector3>& get_vertices() const override { return get_instance().vertices; }
-	const std::vector<unsigned int>& get_indices() const override { return get_instance().indices; }
-	const Matrix3& get_moment_of_inertia() const override { return get_instance().moment_of_inertia; }
+	const std::vector<Vector3>& get_vertices() const override { return vertices; }
+	const std::vector<unsigned int>& get_indices() const override { return indices; }
+	const Matrix3& get_moment_of_inertia() const override { return moment_of_inertia; }
 
 private:
-	OctahedronMesh() = default;
+	OctahedronMesh() {
+		vertex_buffer.emplace(vertices.data(), vertices.size() * sizeof(Vector3));
+		index_buffer.emplace(indices.data(), indices.size());
+		vertex_buffer_layout.Push<float>(3); // pos_x, pos_y, pos_z
+		vertex_array.AddBuffer(vertex_buffer.value(), vertex_buffer_layout);
+	}
 
 	const std::vector<Vector3> OctahedronMesh::vertices {
 		Vector3(1, 0, 0),

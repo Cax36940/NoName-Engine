@@ -82,6 +82,11 @@
     <ClInclude Include="src\Mouse.hpp" />
     <ClInclude Include="src\Camera.hpp" />
     <ClInclude Include="src\Entity\Cube.hpp" />
+    <ClInclude Include="src\Component\Mesh\DodecahedronMesh.hpp" />
+    <ClInclude Include="src\Component\Mesh\IcosahedronMesh.hpp" />
+    <ClInclude Include="src\Component\Mesh\OctahedronMesh.hpp" />
+    <ClInclude Include="src\Component\Mesh\PlaneMesh.hpp" />
+    <ClInclude Include="src\Component\Mesh\TetrahedronMesh.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="TODO" />
