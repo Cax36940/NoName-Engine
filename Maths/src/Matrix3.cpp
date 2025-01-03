@@ -169,3 +169,10 @@ Matrix3 Matrix3::inv(const Matrix3& matrix)
 
     return inv;
 }
+
+Matrix3& Matrix3::in_place_transpose() {
+    std::swap(x.y, y.x);
+    std::swap(x.z, z.x);
+    std::swap(y.z, z.y);
+    return *this;
+};

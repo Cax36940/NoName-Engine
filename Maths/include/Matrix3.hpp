@@ -130,4 +130,9 @@ struct Matrix3
      * @param matrix the matrix to inverse
      */
     static Matrix3 inv(const Matrix3& matrix);
+
+    /**
+     * @brief Matrix transpose in place
+     */
+    Matrix3& in_place_transpose();
 };

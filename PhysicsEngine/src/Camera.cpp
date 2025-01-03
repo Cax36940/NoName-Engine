@@ -23,26 +23,32 @@ void Camera::translate(float x, float y, float z)
 
 void Camera::rotate_x(float angle)
 {
-	x_angle += angle * rotation_speed;
+	x_angle -= angle * rotation_speed;
 	update_rotation();
 }
 
 void Camera::rotate_y(float angle)
 {
-	y_angle += angle * rotation_speed;
+	y_angle -= angle * rotation_speed;
 	update_rotation();
 }
 
 void Camera::rotate_xy(float angle_x, float angle_y)
 {
-	x_angle += angle_x * rotation_speed;
-	y_angle += angle_y * rotation_speed;
+	x_angle -= angle_x * rotation_speed;
+	y_angle -= angle_y * rotation_speed;
 	update_rotation();
 }
 
 const Matrix4& Camera::get_view() const
 {
-	return view;
+	Matrix3 rotation = view.get_ortho_transform();
+	rotation.in_place_transpose();
+	
+	Vector4 tmp_translate = -view.t;
+	tmp_translate.t = 1.0f;
+
+	return Matrix4(Vector4(rotation.x, 0.0f), Vector4(rotation.y, 0.0f), Vector4(rotation.z, 0.0f), tmp_translate);
 }
 
 void Camera::update_rotation()
@@ -65,9 +71,7 @@ void Camera::update_rotation()
 	rotation_y.z.x = sin_y;
 	rotation_y.z.z = cos_y;
 
-	Matrix4 translation_matrix;
-	translation_matrix.t = Vector4(translation, 1.0f);
-
-	view = rotation_x * rotation_y * translation_matrix;
+	view =  rotation_y * rotation_x;
+	view.t = Vector4(translation, 1.0f);
 }
 

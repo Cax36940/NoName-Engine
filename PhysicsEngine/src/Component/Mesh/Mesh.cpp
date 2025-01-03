@@ -110,7 +110,7 @@ void Mesh::draw()
     if (meshNeedsUpdate) {
         update_mesh();
     }
-
+    shader.SetUniformMat4f("u_Model", *transform);
     Renderer::Draw(mesh_ressource->get_vertex_array(), mesh_ressource->get_index_buffer(), shader);
 
     //ofSetColor(color.x, color.y, color.z);

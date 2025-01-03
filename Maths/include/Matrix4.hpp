@@ -1,5 +1,7 @@
 #pragma once
 #include "Vector4.hpp"
+#include "Matrix3.hpp"
+#include "Transform.hpp"
 
 struct Matrix4
 {
@@ -23,6 +25,11 @@ struct Matrix4
      * @brief Constructor from diagonal values
      */
     Matrix4(float x, float y, float z, float t);
+
+    /**
+     * @brief Constructor from Transform
+     */
+    Matrix4(const Transform& transform);
 
     /**
      * @brief Equal operator
@@ -109,5 +116,10 @@ struct Matrix4
      * @param matrix the matrix to add to current matrix
      */
     Matrix4& operator-=(const Matrix4& matrix);
+
+    /**
+     * @brief Return the top-left 3 by 3 Matrix
+     */
+    Matrix3 get_ortho_transform() const;
 
 };

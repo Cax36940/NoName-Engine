@@ -6,6 +6,12 @@ Matrix4::Matrix4(const Vector4& x, const Vector4& y, const Vector4& z, const Vec
 
 Matrix4::Matrix4(float x, float y, float z, float t) : x(x, 0, 0, 0), y(0, y, 0, 0), z(0, 0, z, 0), t(0, 0, 0, t) {}
 
+Matrix4::Matrix4(const Transform& transform) :
+    x(transform.x.x, transform.y.x, transform.z.x, 0.0f),
+    y(transform.x.y, transform.y.y, transform.z.y, 0.0f),
+    z(transform.x.z, transform.y.z, transform.z.z, 0.0f),
+    t(transform.x.t, transform.y.t, transform.z.t, 1.0f){}
+
 bool Matrix4::operator==(const Matrix4& matrix)
 {
     return (this->x == matrix.x) && (this->y == matrix.y) && (this->z == matrix.z) && (this->t == matrix.t);
@@ -107,4 +113,9 @@ Matrix4& Matrix4::operator-=(const Matrix4& matrix) {
     this->z -= matrix.z;
     this->t -= matrix.t;
     return *this;
+}
+
+Matrix3 Matrix4::get_ortho_transform() const
+{
+    return Matrix3(Vector3(x.x, x.y, x.z), Vector3(y.x, y.y, y.z), Vector3(z.x, z.y, z.z));
 }
