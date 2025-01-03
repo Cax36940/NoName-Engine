@@ -20,7 +20,7 @@ public:
 
 	Cube(float x, float y, float z) : 
 		transform(Matrix3(), Vector3(x, y, z)),
-		mesh(&DodecahedronMesh::get_instance()) {
+		mesh(&CubeMesh::get_instance()) {
 		mesh.set_transform_ptr(&transform);
 	};
 };

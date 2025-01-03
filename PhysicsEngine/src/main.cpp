@@ -67,7 +67,7 @@ int main( ){
         Mouse mouse(window, camera);
 
         //view.t = Vector4(-1.0f, -1.0f, 0.0f, 1.0f); // translate to the left in x and y
-        //camera.translate(-1.0f, -1.0f, 0.0f);
+        camera.translate(2.0f, 0.0f, 0.0f);
 
         Shader shader("res/shaders/base.shader"); // Found in PhysicsEngine\bin
         shader.Bind();
@@ -105,6 +105,7 @@ int main( ){
             //Renderer::Draw(vao, ib, shader);
             cube.mesh.get_shader().Bind();
             cube.mesh.get_shader().SetUniformMat4f("u_VP", vp);
+            cube.mesh.get_shader().SetUniform3f("u_viewPos", camera.get_view().t.x, camera.get_view().t.y, camera.get_view().t.z);
             cube.mesh.draw();
 
             window.update();

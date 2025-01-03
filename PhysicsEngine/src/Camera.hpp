@@ -24,6 +24,7 @@ public:
 
 	const Matrix4& get_view() const;
 
+
 private:
 	void update_rotation();
 
