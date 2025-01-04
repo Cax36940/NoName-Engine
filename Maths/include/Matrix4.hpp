@@ -122,4 +122,9 @@ struct Matrix4
      */
     Matrix3 get_ortho_transform() const;
 
+    /**
+     * @brief Return a projection matrix
+     */
+    static Matrix4 projection(float fov_y, float aspect_ratio, float near, float far);
+
 };

@@ -60,14 +60,15 @@ int main( ){
 
         IndexBuffer ib(indices, 6);
 
-        Matrix4 proj(1.0f / 4.0f, 1.0f / 3.0f, -0.5f, 1.0f);
+        Matrix4 proj = Matrix4::projection(45.0f, 4.0f/3.0f, 0.1f, 10000.0f);
 
         Camera camera;
 
         Mouse mouse(window, camera);
 
         //view.t = Vector4(-1.0f, -1.0f, 0.0f, 1.0f); // translate to the left in x and y
-        camera.translate(0.0f, 0.0f, 0.0f);
+        camera.translate(0.0f, 0.0f, 10.0f);
+        camera.rotate_y(-100.0f);
 
         Shader shader("res/shaders/base.shader"); // Found in PhysicsEngine\bin
         shader.Bind();

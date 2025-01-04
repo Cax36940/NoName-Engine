@@ -1,3 +1,5 @@
+#include <cmath>
+
 #include "Matrix4.hpp"
 
 Matrix4::Matrix4() : x(1, 0, 0, 0), y(0, 1, 0, 0), z(0, 0, 1, 0), t(0, 0, 0, 1) {}
@@ -118,4 +120,19 @@ Matrix4& Matrix4::operator-=(const Matrix4& matrix) {
 Matrix3 Matrix4::get_ortho_transform() const
 {
     return Matrix3(Vector3(x.x, x.y, x.z), Vector3(y.x, y.y, y.z), Vector3(z.x, z.y, z.z));
+}
+
+Matrix4 Matrix4::projection(float fov_y, float aspect_ratio, float near, float far)
+{
+    const float DEG2RAD = acos(-1.0f) / 180;
+
+    float tangent =  tan(fov_y / 2 * DEG2RAD);
+    float top = near * tangent;
+    float right = top * aspect_ratio;
+
+    // params: left, right, bottom, top, near(front), far(back)
+    Matrix4 matrix(near / right, near / top, -(far + near) / (far - near), 0.0f);
+    matrix.z.t = -1.0f;
+    matrix.t.z = -(2.0f * far * near) / (far - near);
+    return matrix;
 }
