@@ -7,10 +7,10 @@ Matrix4::Matrix4(const Vector4& x, const Vector4& y, const Vector4& z, const Vec
 Matrix4::Matrix4(float x, float y, float z, float t) : x(x, 0, 0, 0), y(0, y, 0, 0), z(0, 0, z, 0), t(0, 0, 0, t) {}
 
 Matrix4::Matrix4(const Transform& transform) :
-    x(transform.x.x, transform.y.x, transform.z.x, 0.0f),
-    y(transform.x.y, transform.y.y, transform.z.y, 0.0f),
-    z(transform.x.z, transform.y.z, transform.z.z, 0.0f),
-    t(transform.x.t, transform.y.t, transform.z.t, 1.0f){}
+    x(transform.rotation.x, 0.0f),
+    y(transform.rotation.y, 0.0f),
+    z(transform.rotation.z, 0.0f),
+    t(transform.translation, 1.0f){}
 
 bool Matrix4::operator==(const Matrix4& matrix)
 {

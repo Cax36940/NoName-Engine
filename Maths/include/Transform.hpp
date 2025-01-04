@@ -5,45 +5,13 @@ class Transform
 {
 public:
 
-	// row-major order 
-    Vector4 x;
-    Vector4 y;
-    Vector4 z;
+    Matrix3 rotation;
+    Vector3 translation;
 
     /**
      * @brief Default constructor
      */
     Transform();
-
-    /**
-     * @brief Copy constructor
-     */
-    Transform(const Transform&) = default;
-
-    /**
-     * @brief Move constructor
-     */
-    Transform(Transform&&) = default;
-
-    /**
-     * @brief Copy assignment operator
-     */
-    Transform& operator=(const Transform&) = default;
-
-    /**
-     * @brief Move assignment operator
-     */
-    Transform& operator=(Transform&&) = default;
-
-    /**
-     * @brief Destructor
-     */
-    ~Transform() = default;
-
-    /**
-     * @brief Constructor from Vector4 rows
-     */
-    Transform(const Vector4& x, const Vector4& y, const Vector4& z);
 
     /**
      * @brief Constructor from Vector3 columns
@@ -59,7 +27,13 @@ public:
      * @brief Equal operator
      * @param vector
      */
-    bool operator==(const Transform& matrix);
+    bool operator==(const Transform& transform);
+
+    /**
+     * @brief Not Equal operator
+     * @param vector
+     */
+    bool operator!=(const Transform& transform);
 
     /**
      * @brief Scalar multiplication on the right
@@ -78,7 +52,7 @@ public:
      * @param alpha the scalar
      * @param matrix the matrix
      */
-    friend Transform operator*(const float& alpha, const Transform& matrix);
+    friend Transform operator*(const float& alpha, const Transform& transform);
 
     /**
      * @brief Matrix multiplication
@@ -92,35 +66,57 @@ public:
      * @param vector the vector
      * @param matrix the matrix
      */
-    friend Vector4 operator*(const Transform& matrix, const Vector4& vector);
+    friend Vector4 operator*(const Transform& transform, const Vector4& vector);
+
+    /**
+     * @brief Scalar division on the right
+     * @param alpha the scalar
+     */
+    Transform operator/(float alpha) const;
+
+    /**
+     * @brief Scalar division assignment
+     * @param alpha the scalar
+     */
+    Transform& operator/=(float alpha);
 
     /**
      * @brief Matrix addition (return new matrix)
      * @param matrix the matrix to add to current matrix
      */
-    Transform operator+(const Transform& matrix) const;
+    Transform operator+(const Transform& transform) const;
 
     /**
      * @brief Matrix addition assignment
      * @param matrix the matrix to add to current matrix
      */
-    Transform& operator+=(const Transform& matrix);
+    Transform& operator+=(const Transform& transform);
+
+    /**
+     * @brief Matrix negate
+     */
+    Transform operator-() const;
 
     /**
      * @brief Matrix subtraction (return new matrix)
      * @param matrix the matrix to add to current matrix
      */
-    Transform operator-(const Transform& matrix) const;
+    Transform operator-(const Transform& transform) const;
 
     /**
      * @brief Matrix subtraction assignment
      * @param matrix the matrix to add to current matrix
      */
-    Transform& operator-=(const Transform& matrix);
+    Transform& operator-=(const Transform& transform);
 
     /**
      * @brief Return the linear/orthogonal part of the transform
     */
-    Matrix3 get_ortho_transform();
+    Matrix3 get_ortho_transform() const;
+
+    /**
+     * @brief Return the invert transform
+    */
+    Transform inv(const Transform& transform) const;
 
 };
