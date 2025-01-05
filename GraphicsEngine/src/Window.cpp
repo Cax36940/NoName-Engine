@@ -3,6 +3,8 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
+
+#include "Renderer.hpp"
 #include "UtilsGL.hpp"
 #include "Window.hpp"
 
@@ -64,5 +66,7 @@ void Window::update()
     glfwSwapBuffers(window);
 
     /* Poll for and process events */
-    glfwPollEvents(); // TODO : Make input handler
+    glfwPollEvents();
+
+    Renderer::Clear();
 }
