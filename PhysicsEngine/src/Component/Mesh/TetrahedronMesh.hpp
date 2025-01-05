@@ -17,10 +17,7 @@ public:
 
 private:
 	TetrahedronMesh() {
-		vertex_buffer.emplace(vertices.data(), vertices.size() * sizeof(Vector3));
-		index_buffer.emplace(indices.data(), indices.size());
-		vertex_buffer_layout.Push<float>(3); // pos_x, pos_y, pos_z
-		vertex_array.AddBuffer(vertex_buffer.value(), vertex_buffer_layout);
+		init_ressource();
 	}
 
 	const std::vector<Vector3> TetrahedronMesh::vertices {	
