@@ -69,8 +69,8 @@ int main( ){
         Keyboard keyboard(window, camera);
 
         //view.t = Vector4(-1.0f, -1.0f, 0.0f, 1.0f); // translate to the left in x and y
-        camera.translate(0.0f, 0.0f, 10.0f);
-        camera.rotate_y(-100.0f);
+        camera.translate(0.0f, 0.0f, 5.0f);
+        //camera.rotate_y(-100.0f);
 
         Shader shader("res/shaders/base.shader"); // Found in PhysicsEngine\bin
         shader.Bind();

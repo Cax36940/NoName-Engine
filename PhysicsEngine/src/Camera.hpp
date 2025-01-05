@@ -1,13 +1,12 @@
 #pragma once
 #include "Matrix4.hpp"
+#include "Transform.hpp"
 #include "Vector3.hpp"
 
 class Camera
 {
 private:
-	Matrix4 view;
-	Vector3 translation;
-	constexpr static float rotation_speed = 0.015f;
+	Transform transform;
 	float x_angle = 0.0f;
 	float y_angle = 0.0f;
 	char dir_pressed;
@@ -30,7 +29,7 @@ public:
 	void rotate_y(float angle);
 	void rotate_xy(float angle_x, float angle_y);
 
-	const Matrix4& get_view() const;
+	Matrix4 get_view() const;
 
 	void press_direction(Direction direction);
 	void release_direction(Direction direction);
