@@ -9,7 +9,7 @@ private:
 	Transform transform;
 	float x_angle = 0.0f;
 	float y_angle = 0.0f;
-	char dir_pressed;
+	char dir_pressed = 0;
 
 public:
 

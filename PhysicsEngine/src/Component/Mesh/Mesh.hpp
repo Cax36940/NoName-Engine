@@ -7,8 +7,6 @@
 
 #include "Shader.hpp"
 
-// TODO : remove cache mesh
-
 class Mesh : public GraphicsComponent
 {
 public :
@@ -23,7 +21,7 @@ public :
     void set_color(const Vector3& color);
     Vector3 get_color() const;
 
-    const Matrix3& get_moment_of_inertia() const;
+    const Matrix3& get_moment_of_inertia() const; // TODO : remove moment of inertia from mesh, put it in rigid body
     bool has_ressource() const;
     const MeshRessource& get_mesh_ressource();
     const Vector3& get_offset() const;
@@ -31,7 +29,6 @@ public :
     Shader& get_shader();
 
     float get_size() const;
-    //const ofMesh& get_cached_mesh() const;
     const Transform& get_transform() const;
 
     void draw() override;
@@ -39,14 +36,9 @@ public :
 protected:
     const MeshRessource* mesh_ressource;
     Transform* transform;
-    Vector3 color;
+    Vector3 color; // TODO : Have a Material class
     Vector3 offset = Vector3();
-    bool meshNeedsUpdate = true;
-    //ofMesh cached_mesh;
-    Transform cached_transform; // Used to check if mesh needs to be updated
 
     Shader shader;
-
-    void update_mesh();
 };
 

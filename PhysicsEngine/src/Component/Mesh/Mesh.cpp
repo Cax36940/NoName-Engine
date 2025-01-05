@@ -1,8 +1,3 @@
-/*#include <ofMaterial.h>
-#include <ofMesh.h>
-#include <ofGraphics.h>
-#include <of3dGraphics.h>*/
-// TODO : Redo display without of
 #include <iostream>
 
 #include "Renderer.hpp"
@@ -88,11 +83,6 @@ float Mesh::get_size() const
     return sqrt(max_norm);
 }
 
-/*const ofMesh& Mesh::get_cached_mesh() const
-{
-    return cached_mesh;
-}*/
-
 const Transform& Mesh::get_transform() const
 {
     return *transform;
@@ -103,88 +93,8 @@ void Mesh::draw()
     if (!visible)
         return;
 
-    if (!(cached_transform == *transform)) {
-        meshNeedsUpdate = true;
-    }
-    
-    if (meshNeedsUpdate) {
-        update_mesh();
-    }
     shader.SetUniformMat4f("u_Model", *transform);
     Renderer::Draw(mesh_ressource->get_vertex_array(), mesh_ressource->get_index_buffer(), shader);
 
     //ofSetColor(color.x, color.y, color.z);
-    //cached_mesh.draw();
-}
-
-void Mesh::update_mesh()
-{
-    if (mesh_ressource == nullptr) {
-        std::cout << "[WARNING] Trying to draw mesh with no ressource. Mesh at address : " << this << std::endl;
-        return;
-    }
-
-    if (transform == nullptr) {
-        std::cout << "[WARNING] Mesh transform is nullptr. Mesh at address : " << this << std::endl;
-    }
-    else {
-        cached_transform = *transform;
-    }
-    //cached_mesh.clear();
-
-    // Apply transform on vertices
-    std::vector<Vector3> vertices = mesh_ressource->get_vertices();
-    for (auto& vertex : vertices) {
-        vertex += offset;
-        Vector4 tmp_vector = cached_transform * Vector4(vertex, 1);
-        vertex = Vector3(tmp_vector.x, tmp_vector.y, tmp_vector.z);
-    }
-
-    const std::vector<unsigned int> indices = mesh_ressource->get_indices();
-
-   /* std::vector<ofDefaultVertexType> tmp_vertices;
-    std::vector<ofIndexType> tmp_indices;
-    std::vector<ofDefaultNormalType> tmp_normals;
-    tmp_vertices.reserve(indices.size());
-    tmp_indices.reserve(indices.size());
-    tmp_normals.reserve(indices.size());
-
-    for (size_t i = 0; i < indices.size(); i += 3) {
-        // Get indices of the face
-        unsigned int i0 = indices[i];
-        unsigned int i1 = indices[i + 1];
-        unsigned int i2 = indices[i + 2];
-
-        // Get vertices of the face
-        ofDefaultVertexType v0 = Vector3::to_glm_vec3(vertices[i0]);
-        ofDefaultVertexType v1 = Vector3::to_glm_vec3(vertices[i1]);
-        ofDefaultVertexType v2 = Vector3::to_glm_vec3(vertices[i2]);
-
-        // Add vertices to mesh
-        tmp_vertices.emplace_back(v0);
-        tmp_vertices.emplace_back(v1);
-        tmp_vertices.emplace_back(v2);
-
-        // Add indices to mesh
-        tmp_indices.emplace_back(i);
-        tmp_indices.emplace_back(i + 1);
-        tmp_indices.emplace_back(i + 2);
-
-        // Calculate the face normal
-        ofDefaultVertexType edge1 = v1 - v0;
-        ofDefaultVertexType edge2 = v2 - v0;
-        ofDefaultVertexType face_normal = glm::normalize(glm::cross(edge1, edge2));
-
-        // Add normals to mesh
-        tmp_normals.emplace_back(face_normal);
-        tmp_normals.emplace_back(face_normal);
-        tmp_normals.emplace_back(face_normal);
-    }
-
-    cached_mesh.addVertices(tmp_vertices);
-    cached_mesh.addIndices(tmp_indices);
-    cached_mesh.addNormals(tmp_normals);
-
-    meshNeedsUpdate = false;
-    */
 }
