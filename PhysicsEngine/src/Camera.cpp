@@ -51,6 +51,16 @@ const Matrix4& Camera::get_view() const
 	return Matrix4(Vector4(rotation.x, 0.0f), Vector4(rotation.y, 0.0f), Vector4(rotation.z, 0.0f), tmp_translate);
 }
 
+void Camera::press_direction(Direction direction)
+{
+	dir_pressed |= direction;
+}
+
+void Camera::release_direction(Direction direction)
+{
+	dir_pressed &= 0xFFFF ^ direction;
+}
+
 void Camera::update_rotation()
 {
 	Matrix4 rotation_x;
@@ -75,3 +85,30 @@ void Camera::update_rotation()
 	view.t = Vector4(translation, 1.0f);
 }
 
+void Camera::update_position()
+{
+	if (!dir_pressed) {
+		return;
+	}
+
+	const float move_speed = 0.01;
+	Vector3 velocity(0.0f, 0.0f, 0.0f);
+	if (dir_pressed & UP_DIR) {
+		velocity += view.get_ortho_transform() * Vector3(0.0f, 0.0f, -1.0f) * move_speed;
+	}
+
+	if (dir_pressed & DOWN_DIR) {
+		velocity -= view.get_ortho_transform() * Vector3(0.0f, 0.0f, -1.0f) * move_speed;
+	}
+
+	if (dir_pressed & RIGHT_DIR) {
+		velocity += Vector3(1.0f, 0.0f, 0.0f) * move_speed;
+	}
+
+	if (dir_pressed & LEFT_DIR) {
+		velocity -= view.get_ortho_transform() * Vector3(1.0f, 0.0f, 0.0f) * move_speed;
+	}
+
+	translation += velocity;
+	view.t = Vector4(translation, 1.0f);
+}

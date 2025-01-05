@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="extern\stb_image.cpp" />
+    <ClCompile Include="src\AbstractKeyboard.cpp" />
     <ClCompile Include="src\AbstractMouse.cpp" />
     <ClCompile Include="src\IndexBuffer.cpp" />
     <ClCompile Include="src\Renderer.cpp" />
@@ -32,6 +33,7 @@
     <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\AbstractKeyboard.hpp" />
     <ClInclude Include="include\AbstractMouse.hpp" />
     <ClInclude Include="include\IndexBuffer.hpp" />
     <ClInclude Include="include\Renderer.hpp" />

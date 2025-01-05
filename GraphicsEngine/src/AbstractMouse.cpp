@@ -50,7 +50,7 @@ void AbstractMouse::SetModeNormal(const Window& window)
 void AbstractMouse::SetAsCurrent(const Window& window)
 {
 	glfwSetCursorPosCallback(window.window, [](GLFWwindow* window, double xpos, double ypos) {AbstractMouse::mouse_instance->EventMouseMove(window, xpos, ypos); });
-	glfwSetMouseButtonCallback(window.window, [](GLFWwindow* window, int button, int action, int mods) {AbstractMouse::mouse_instance->EventMouseButton(window, (MouseButton)button, (MouseAction)action, (MouseModFlag)mods); });
+	glfwSetMouseButtonCallback(window.window, [](GLFWwindow* window, int button, int action, int mods) {AbstractMouse::mouse_instance->EventMouseButton(window, (MouseButton)button, (MouseAction)action, mods); });
 	glfwSetScrollCallback(window.window, [](GLFWwindow* window, double xoffset, double yoffset) {AbstractMouse::mouse_instance->EventMouseScroll(window, xoffset, yoffset); });
 	glfwSetCursorEnterCallback(window.window, [](GLFWwindow* window, int entered) {AbstractMouse::mouse_instance->EventEnterWindow(window, entered); });
 }

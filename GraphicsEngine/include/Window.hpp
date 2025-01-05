@@ -5,6 +5,7 @@ struct GLFWwindow;
 class Window {
 private :
 	friend class AbstractMouse;
+	friend class AbstractKeyboard;
 
 	GLFWwindow* window;
 	int status;

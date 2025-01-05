@@ -16,6 +16,7 @@
 #include "Window.hpp"
 
 #include "Camera.hpp"
+#include "Keyboard.hpp"
 #include "Mouse.hpp"
 
 #include "Entity/Cube.hpp"
@@ -65,6 +66,7 @@ int main( ){
         Camera camera;
 
         Mouse mouse(window, camera);
+        Keyboard keyboard(window, camera);
 
         //view.t = Vector4(-1.0f, -1.0f, 0.0f, 1.0f); // translate to the left in x and y
         camera.translate(0.0f, 0.0f, 10.0f);
@@ -85,6 +87,7 @@ int main( ){
         /* Loop until the user closes the window */
         while (!window.closed())
         {
+            camera.update_position();
             /* Render here */
             Renderer::Clear();
             Matrix4 view_matrix = camera.get_view();

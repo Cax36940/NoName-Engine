@@ -20,7 +20,7 @@ void Mouse::EventMouseMove(const Window& window, double xpos, double ypos)
 	}
 }
 
-void Mouse::EventMouseButton(const Window& window, MouseButton button, MouseAction action, MouseModFlag mods)
+void Mouse::EventMouseButton(const Window& window, MouseButton button, MouseAction action, int mods)
 {
 	if (button == MOUSE_BUTTON_LEFT) {
 		if(action == MOUSE_ACTION_PRESSED) {
@@ -36,6 +36,3 @@ void Mouse::EventMouseScroll(const Window& window, double xoffset, double yoffse
 {
 }
 
-void Mouse::EventEnterWindow(const Window& window, bool entered)
-{
-}

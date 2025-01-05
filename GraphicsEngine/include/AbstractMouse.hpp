@@ -38,13 +38,14 @@ protected :
 	AbstractMouse(AbstractMouse&&) = delete;
 	AbstractMouse& operator=(AbstractMouse&&) = delete;
 
-	virtual void EventMouseMove(const Window& window, double xpos, double ypos) = 0;
+	virtual void EventMouseMove(const Window& window, double xpos, double ypos) {};
 
-	virtual void EventMouseButton(const Window& window, MouseButton button, MouseAction action, MouseModFlag mods) = 0;
+	// mods is an OR of several MouseModFlag
+	virtual void EventMouseButton(const Window& window, MouseButton button, MouseAction action, int mods) {};
 	
-	virtual void EventMouseScroll(const Window& window, double xoffset, double yoffset) = 0;
+	virtual void EventMouseScroll(const Window& window, double xoffset, double yoffset) {};
 
-	virtual void EventEnterWindow(const Window& window, bool entered) = 0;
+	virtual void EventEnterWindow(const Window& window, bool entered) {};
 
 
 	static void GetPos(const Window& window, double& xpos, double& ypos);
