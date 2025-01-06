@@ -77,11 +77,6 @@ Transform& Transform::operator-=(const Transform& transform) {
     return *this;
 }
 
-Matrix3 Transform::get_ortho_transform() const
-{
-    return rotation;
-}
-
 Transform Transform::inv(const Transform& transform) const {
     Matrix3 local_rotation(transform.rotation);
     local_rotation.in_place_transpose();

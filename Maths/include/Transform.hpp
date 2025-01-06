@@ -1,9 +1,9 @@
 #pragma once
 #include "Vector4.hpp"
 #include "Matrix3.hpp"
-class Transform
+
+struct Transform
 {
-public:
 
     Matrix3 rotation;
     Vector3 translation;
@@ -108,11 +108,6 @@ public:
      * @param matrix the matrix to add to current matrix
      */
     Transform& operator-=(const Transform& transform);
-
-    /**
-     * @brief Return the linear/orthogonal part of the transform
-    */
-    Matrix3 get_ortho_transform() const;
 
     /**
      * @brief Return the invert transform

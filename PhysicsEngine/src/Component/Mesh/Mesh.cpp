@@ -65,16 +65,10 @@ float Mesh::get_size() const
         return 0.0f;
     }
 
-    Matrix3 ortho_transform = Matrix3();
-
-    if (transform) {
-        ortho_transform = transform->get_ortho_transform();
-    }
-
     const std::vector<Vector3>& vertices = mesh_ressource->get_vertices();
     float max_norm = 0.0f;
     for (auto vertex : vertices) {
-        float norm = Vector3::norm2(ortho_transform * vertex);
+        float norm = Vector3::norm2(vertex);
         if (norm > max_norm) {
             max_norm = norm;
         }
