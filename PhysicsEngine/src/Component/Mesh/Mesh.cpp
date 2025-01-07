@@ -4,18 +4,17 @@
 
 #include "Mesh.hpp"
 
-Mesh::Mesh(const Mesh& mesh) : mesh_ressource(mesh.mesh_ressource), transform(nullptr), color(mesh.color), offset(mesh.offset), shader(shader) {}
+Mesh::Mesh(const Mesh& mesh) : mesh_ressource(mesh.mesh_ressource), transform(nullptr), offset(mesh.offset), shader(shader) {}
 
 Mesh& Mesh::operator=(const Mesh& mesh) {
     mesh_ressource = mesh.mesh_ressource;
     transform = nullptr;
-    color = mesh.color;
     offset = mesh.offset;
     shader = mesh.shader;
     return *this;
 }
 
-Mesh::Mesh(const MeshRessource* mesh_ressource, const Vector3& color, const Vector3& offset, Transform* transform) : mesh_ressource(mesh_ressource), transform(transform), color(color), offset(offset), shader("res/shaders/base_cube.shader") {}
+Mesh::Mesh(const MeshRessource* mesh_ressource, const std::string& shader_path, const Vector3& offset, Transform* transform) : mesh_ressource(mesh_ressource), transform(transform), offset(offset), shader(shader_path) {}
 
 void Mesh::set_mesh_ressource_ptr(const MeshRessource* new_mesh_ressource)
 {
@@ -25,10 +24,6 @@ void Mesh::set_mesh_ressource_ptr(const MeshRessource* new_mesh_ressource)
 void Mesh::set_transform_ptr(Transform* new_transform) {
     transform = new_transform;
 }
-
-void Mesh::set_color(const Vector3& color) { this->color = color; }
-
-Vector3 Mesh::get_color() const { return color; }
 
 const Matrix3& Mesh::get_moment_of_inertia() const
 {

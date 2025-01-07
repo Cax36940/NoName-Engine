@@ -30,6 +30,7 @@ public:
 	void rotate_xy(float angle_x, float angle_y);
 
 	Matrix4 get_view() const;
+	Vector3 get_world_position() const;
 
 	void press_direction(Direction direction);
 	void release_direction(Direction direction);

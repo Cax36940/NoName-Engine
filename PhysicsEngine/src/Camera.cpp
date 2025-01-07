@@ -53,6 +53,11 @@ Matrix4 Camera::get_view() const
 	return Matrix4(Transform(rotation, -tmp_translation));
 }
 
+Vector3 Camera::get_world_position() const
+{
+	return transform.translation;
+}
+
 void Camera::press_direction(Direction direction)
 {
 	dir_pressed |= direction;
