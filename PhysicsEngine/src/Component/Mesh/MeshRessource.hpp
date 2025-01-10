@@ -1,6 +1,4 @@
 #pragma once
-#include <optional>
-
 #include "Matrix3.hpp"
 #include "Vector3.hpp"
 
@@ -16,7 +14,7 @@ public:
     virtual const Matrix3& get_moment_of_inertia() const = 0;
 
     const VertexArray& get_vertex_array() const { return vertex_array; }
-    const IndexBuffer& get_index_buffer() const { return index_buffer.value(); }
+    const IndexBuffer& get_index_buffer() const { return index_buffer; }
 
     void init_ressource() {
 
@@ -59,18 +57,18 @@ public:
 
         }
 
-        vertex_buffer.emplace(tmp_vertices.data(), tmp_vertices.size() * sizeof(Vector3));
-        index_buffer.emplace(tmp_indices.data(), tmp_indices.size());
+        vertex_buffer.Setup(tmp_vertices.data(), tmp_vertices.size() * sizeof(Vector3));
+        index_buffer.Setup(tmp_indices.data(), tmp_indices.size());
         vertex_buffer_layout.Push<float>(3); // pos_x, pos_y, pos_z
         vertex_buffer_layout.Push<float>(3); // norm_x, norm_y, norm_z
-        vertex_array.AddBuffer(vertex_buffer.value(), vertex_buffer_layout);
+        vertex_array.AddBuffer(vertex_buffer, vertex_buffer_layout);
     };
 
 protected:
     MeshRessource() = default;
 
-    std::optional<VertexBuffer> vertex_buffer; // std::optional used to differ initialisation because it needs  of the child class
+    VertexBuffer vertex_buffer;
     VertexBufferLayout vertex_buffer_layout;
     VertexArray vertex_array;
-    std::optional<IndexBuffer> index_buffer;
+    IndexBuffer index_buffer;
 };
