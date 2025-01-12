@@ -11,8 +11,8 @@ class Mesh : public GraphicsComponent
 {
 public :
     Mesh() = delete;
+    ~Mesh();
     Mesh(const Mesh& mesh);
-    Mesh& operator=(const Mesh& mesh);
     Mesh(const MeshRessource* new_mesh_ressource, const std::string& shader_path = "res/shaders/base.shader", const Vector3& offset = Vector3(), Transform* transform = nullptr);
 
     void set_mesh_ressource_ptr(const MeshRessource* new_mesh_ressource);
@@ -35,6 +35,6 @@ protected:
     Transform* transform;
     Vector3 offset = Vector3();
 
-    Shader shader;
+    Shader& shader;
 };
 

@@ -14,8 +14,13 @@ private:
 	unsigned int Renderer_ID; // Internal renderer id of the object
 	std::unordered_map<std::string, int> UniformLocationCache;
 public:
-	Shader(const std::string& filepath);
+	Shader() = delete;
+	Shader(const ShaderSources& sources);
+	Shader(Shader&& shader) noexcept;
+	Shader& operator=(Shader&& shader) noexcept;
 	~Shader();
+
+	bool operator==(const Shader& shader) const;
 
 	void Bind() const;
 	void Unbind() const;
@@ -28,7 +33,7 @@ public:
 
 private :
 	int GetUniformLocation(const std::string& name);
-	ShaderSources ParseShader(const std::string& filepath);
+	
 	unsigned int CompileShader(unsigned int type, const std::string& source);
 	unsigned int CreateShader(const std::string& vertexShader, const std::string& fragmentShader);
 

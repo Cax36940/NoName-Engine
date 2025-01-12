@@ -3,18 +3,16 @@
 #include "Renderer.hpp"
 
 #include "Mesh.hpp"
+#include "Component/Shader/ShaderManager.hpp"
 
-Mesh::Mesh(const Mesh& mesh) : mesh_ressource(mesh.mesh_ressource), transform(nullptr), offset(mesh.offset), shader(shader) {}
-
-Mesh& Mesh::operator=(const Mesh& mesh) {
-    mesh_ressource = mesh.mesh_ressource;
-    transform = nullptr;
-    offset = mesh.offset;
-    shader = mesh.shader;
-    return *this;
+Mesh::~Mesh()
+{
+    ShaderManager::remove_shader(shader);
 }
 
-Mesh::Mesh(const MeshRessource* mesh_ressource, const std::string& shader_path, const Vector3& offset, Transform* transform) : mesh_ressource(mesh_ressource), transform(transform), offset(offset), shader(shader_path) {}
+Mesh::Mesh(const Mesh& mesh) : mesh_ressource(mesh.mesh_ressource), transform(nullptr), offset(mesh.offset), shader(mesh.shader) {}
+
+Mesh::Mesh(const MeshRessource* mesh_ressource, const std::string& shader_path, const Vector3& offset, Transform* transform) : mesh_ressource(mesh_ressource), transform(transform), offset(offset), shader(ShaderManager::get_shader_ref(shader_path)) {}
 
 void Mesh::set_mesh_ressource_ptr(const MeshRessource* new_mesh_ressource)
 {

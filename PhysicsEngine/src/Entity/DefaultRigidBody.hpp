@@ -19,14 +19,6 @@ public:
 		mesh.set_transform_ptr(rigid_body.get_transform_ptr());
 	}
 
-	DefaultRigidBody& operator=(const DefaultRigidBody& drb) {
-		rigid_body = drb.rigid_body;
-		mesh = drb.mesh;
-		mesh.set_transform_ptr(rigid_body.get_transform_ptr());
-		collider = SphereCollider(drb.collider.get_size(), rigid_body.get_physical_particle(), &mesh, &rigid_body);
-		return *this;
-	}
-
 	DefaultRigidBody(const RigidBody& rigid_body, const Mesh& mesh) :
 		rigid_body(rigid_body),
 		mesh(mesh),

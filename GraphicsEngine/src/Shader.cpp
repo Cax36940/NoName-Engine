@@ -1,19 +1,38 @@
 #include <iostream>
-#include <fstream>
-#include <sstream>
 
 #include "Shader.hpp"
 #include "UtilsGL.hpp"
 
-Shader::Shader(const std::string& filepath) : Renderer_ID(0)
+Shader::Shader(const ShaderSources& sources) : Renderer_ID(UINT32_MAX)
 {
-    const ShaderSources source = ParseShader(filepath);
-    Renderer_ID = CreateShader(source.vertexShader, source.fragmentShader);
+    Renderer_ID = CreateShader(sources.vertexShader, sources.fragmentShader);
+}
+
+Shader::Shader(Shader&& shader) noexcept : Renderer_ID(shader.Renderer_ID)
+{
+    shader.Renderer_ID = UINT32_MAX;
+}
+
+Shader& Shader::operator=(Shader&& shader) noexcept
+{
+    if (Renderer_ID != UINT32_MAX) {
+        GLCall(glDeleteProgram(Renderer_ID));
+    }
+    Renderer_ID = shader.Renderer_ID;
+    shader.Renderer_ID = UINT32_MAX;
+    return *this;
 }
 
 Shader::~Shader()
 {
-    GLCall(glDeleteProgram(Renderer_ID));
+    if (Renderer_ID != UINT32_MAX) {
+        GLCall(glDeleteProgram(Renderer_ID));
+    }
+}
+
+bool Shader::operator==(const Shader& shader) const
+{
+    return Renderer_ID == shader.Renderer_ID;
 }
 
 void Shader::Bind() const
@@ -66,46 +85,6 @@ int Shader::GetUniformLocation(const std::string& name)
 
 
     return location;
-}
-
-ShaderSources Shader::ParseShader(const std::string& filepath) {
-    /* Parse a shader file into two shaders, a vertex and a fragment*/
-
-    std::ifstream stream(filepath);
-
-    if (!stream.is_open()) {
-        std::cerr << "[ERROR] Could not open file: " << filepath << std::endl;
-    }
-
-    enum ShaderType {
-        NONE = -1,
-        VERTEX = 0,
-        FRAGMENT = 1
-    };
-
-
-    std::string line;
-    std::stringstream ss[2];
-    ShaderType type = ShaderType::NONE;
-
-
-    while (getline(stream, line)) {
-        if (line.find("#shader") != std::string::npos) {
-            if (line.find("vertex") != std::string::npos) {
-                type = ShaderType::VERTEX;
-            }
-            else if (line.find("fragment") != std::string::npos) {
-                type = ShaderType::FRAGMENT;
-            }
-        }
-        else {
-
-            ss[(int)type] << line << std::endl;
-        }
-    }
-
-    return { ss[VERTEX].str(), ss[FRAGMENT].str() };
-
 }
 
 unsigned int Shader::CompileShader(unsigned int type, const std::string& source) {

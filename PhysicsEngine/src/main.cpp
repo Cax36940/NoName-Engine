@@ -9,6 +9,7 @@
 #include "Keyboard.hpp"
 #include "Mouse.hpp"
 
+#include "Component/Shader/ShaderManager.hpp"
 #include "Entity/Cube.hpp"
 
 #define WINDOW_WIDTH	800
@@ -81,6 +82,8 @@ int main(){
 
             window.update();
         }
+
+        ShaderManager::clear();
     }
     window.terminate();
 
