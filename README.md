@@ -1,14 +1,14 @@
-# 3DPhysicsEngine
+# NoName Engine
 
-## 
+This is a small game engine derived from a physics engine school project: [PhysicsEngineSrc](https://github.com/Boubounech/PhysicsEngineSrc)
+The goal is not to create a fully functional game engine but rather to experiment and learn.
 
-- First you need to download OpenFrameworks Windows version 0.12.0 for MVS : [Download](https://github.com/openframeworks/openFrameworks/releases/download/0.12.0/of_v0.12.0_vs_release.zip)
-- Unzip it
-- Clone this repository in an empty folder
-- Move the `of_v0.12.0_vs_release` directory to the root of the project repository
+The project has been reset compared to the original version, and the graphics part is being entirely redone.
 
 ## Project
 
+- This is a Microsoft Visual Studio 2022 project for now
+- Open NoNameEngine.sln
 - Build the solution using Ctrl + Shift + B or Right Click on the solution and select Build
 - Launch the project using F5
 
